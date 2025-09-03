@@ -1,10 +1,10 @@
-import * as React from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import * as React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
 
-import Layout from "../components/layout"
-import PublicationTable from "../components/publication_table"
+import Layout from '../components/layout'
+import PublicationTable from '../components/publication_table'
 
-const PublicationsPage = ({ children }) => {
+const PublicationsPage = () => {
   const data = useStaticQuery(graphql`
     query CsvQuery {
       allPapersCsv {

@@ -5,19 +5,23 @@
  * Updated to use Gatsby Head API instead of react-helmet
  */
 
-import * as React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import * as React from 'react'
+import PropTypes from 'prop-types'
+import { useStaticQuery, graphql } from 'gatsby'
 
 // Component for use with Gatsby Head API
-export const Head = ({ title, description, lang, meta }) => <Seo 
-  title={title}
-  description={description}
-  lang={lang}
-  meta={meta}
-/>
+export const Head = ({ title, description, lang, meta }) => (
+  <Seo title={title} description={description} lang={lang} meta={meta} />
+)
 
-function Seo({ description, lang, meta, title }) {
+Head.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  lang: PropTypes.string,
+  meta: PropTypes.arrayOf(PropTypes.object),
+}
+
+function Seo({ description = '', lang = 'en', meta = [], title }) {
   const { site } = useStaticQuery(graphql`
     query {
       site {
@@ -45,23 +49,16 @@ function Seo({ description, lang, meta, title }) {
       <meta name="twitter:creator" content={site.siteMetadata?.author || ``} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={metaDescription} />
-      <meta
-        name="viewport"
-        content="width=device-width,initial-scale=1.0"
-      />
-      {meta.map(({ name, content, property }) => (
-        property ? 
-          <meta key={property} property={property} content={content} /> :
+      <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+      {meta.map(({ name, content, property }) =>
+        property ? (
+          <meta key={property} property={property} content={content} />
+        ) : (
           <meta key={name} name={name} content={content} />
-      ))}
+        )
+      )}
     </>
   )
-}
-
-Seo.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
 }
 
 Seo.propTypes = {

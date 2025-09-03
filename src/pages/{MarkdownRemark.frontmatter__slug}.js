@@ -1,17 +1,20 @@
-import { graphql, navigate } from "gatsby"
-import * as React from "react"
-import PropTypes from "prop-types"
-import Layout from "../components/layout"
-import "../components/project_page.css"
-import "katex/dist/katex.min.css"
-import "../components/software_list.css"
+import { graphql, navigate } from 'gatsby'
+import * as React from 'react'
+import PropTypes from 'prop-types'
+import DOMPurify from 'isomorphic-dompurify'
+import Layout from '../components/layout'
+import '../components/project_page.css'
+import 'katex/dist/katex.min.css'
+import '../components/software_list.css'
 
 const SponsorsTemplate = ({ data: { markdownRemark } }) => {
   const { frontmatter, html } = markdownRemark
-  
+
   const handleGoBack = () => {
     // Check if we can go back in history
+    /* eslint-disable-next-line no-undef */
     if (typeof window !== 'undefined' && window.history.length > 1) {
+      /* eslint-disable-next-line no-undef */
       window.history.back()
     } else {
       // Fallback to home page
@@ -39,13 +42,13 @@ const SponsorsTemplate = ({ data: { markdownRemark } }) => {
               gap: '0.5rem',
               transition: 'color var(--transition-fast)',
             }}
-            onMouseEnter={(e) => e.target.style.color = 'var(--color-primary-dark)'}
-            onMouseLeave={(e) => e.target.style.color = 'var(--color-primary)'}
+            onMouseEnter={e => (e.target.style.color = 'var(--color-primary-dark)')}
+            onMouseLeave={e => (e.target.style.color = 'var(--color-primary)')}
           >
             ← Back
           </button>
           <h1>{frontmatter.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: html }} />
+          <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />
         </div>
       </div>
     </Layout>
@@ -54,27 +57,29 @@ const SponsorsTemplate = ({ data: { markdownRemark } }) => {
 
 const DefaultTemplate = ({ data: { markdownRemark } }) => {
   const { frontmatter, html } = markdownRemark
-  
+
   const handleGoBack = () => {
     // Check if we can go back in history
+    /* eslint-disable-next-line no-undef */
     if (typeof window !== 'undefined' && window.history.length > 1) {
+      /* eslint-disable-next-line no-undef */
       window.history.back()
     } else {
       // Fallback to projects section on home page
       navigate('/#projects')
     }
   }
-  
+
   return (
     <Layout>
       <div
         className="project-page-class"
         id="project-page"
         style={{
-          background: "white",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          background: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           textAlign: `left`,
         }}
       >
@@ -104,8 +109,8 @@ const DefaultTemplate = ({ data: { markdownRemark } }) => {
               gap: '0.5rem',
               transition: 'color var(--transition-fast)',
             }}
-            onMouseEnter={(e) => e.target.style.color = 'var(--color-primary-dark)'}
-            onMouseLeave={(e) => e.target.style.color = 'var(--color-primary)'}
+            onMouseEnter={e => (e.target.style.color = 'var(--color-primary-dark)')}
+            onMouseLeave={e => (e.target.style.color = 'var(--color-primary)')}
           >
             ← Back to Projects
           </button>
@@ -118,14 +123,14 @@ const DefaultTemplate = ({ data: { markdownRemark } }) => {
               margin: `auto`,
               paddingBottom: `1.0rem`,
               paddingTop: `2.0rem`,
-              marginBottom: "1rem",
+              marginBottom: '1rem',
             }}
           >
             {frontmatter.title}
           </h4>
           <div
             className="post-body"
-            dangerouslySetInnerHTML={{ __html: html }}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }}
           />
         </div>
       </div>
@@ -136,7 +141,7 @@ const DefaultTemplate = ({ data: { markdownRemark } }) => {
 export default function ProjectTemplate({ data }) {
   const { markdownRemark } = data
 
-  if (markdownRemark.frontmatter.title === "Sponsors") {
+  if (markdownRemark.frontmatter.title === 'Sponsors') {
     return <SponsorsTemplate data={data} />
   } else {
     return <DefaultTemplate data={data} />

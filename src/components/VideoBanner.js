@@ -8,7 +8,7 @@ import PauseIcon from '@mui/icons-material/Pause'
 import LaunchIcon from '@mui/icons-material/Launch'
 import './VideoBanner.css'
 
-const VideoBanner = ({ videos }) => {
+const VideoBanner = ({ videos = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [loadedVideos, setLoadedVideos] = useState(new Set([0])) // Preload first video
@@ -147,10 +147,6 @@ VideoBanner.propTypes = {
       projectLink: PropTypes.string,
     })
   ),
-}
-
-VideoBanner.defaultProps = {
-  videos: [],
 }
 
 export default VideoBanner

@@ -1,5 +1,6 @@
-import * as React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import * as React from 'react'
+import PropTypes from 'prop-types'
+import { useStaticQuery, graphql } from 'gatsby'
 
 // Create a context for site metadata
 export const SiteContext = React.createContext({})
@@ -10,7 +11,7 @@ export const SiteContext = React.createContext({})
  */
 export const SiteProvider = ({ children }) => {
   const [errorState, setErrorState] = React.useState(null)
-  
+
   // Always call useStaticQuery at the top level, never conditionally
   const data = useStaticQuery(graphql`
     query SiteMetadataQuery {
@@ -55,53 +56,56 @@ export const SiteProvider = ({ children }) => {
       }
     }
   `)
-  
+
   // Create a fallback object in case of errors
-  const fallbackData = React.useMemo(() => ({
-    site: {
-      siteMetadata: {
-        title: "Computational Visualization Center",
-        description: "A cross-disciplinary effort at UT Austin",
-        menuLinks: [],
-        softwareProjects: [],
-        projectTiles: [],
-        peopleCards: [],
-        newsTiles: []
-      }
-    }
-  }), [])
-  
+  const fallbackData = React.useMemo(
+    () => ({
+      site: {
+        siteMetadata: {
+          title: 'Computational Visualization Center',
+          description: 'A cross-disciplinary effort at UT Austin',
+          menuLinks: [],
+          softwareProjects: [],
+          projectTiles: [],
+          peopleCards: [],
+          newsTiles: [],
+        },
+      },
+    }),
+    []
+  )
+
   // Handle potential errors
   React.useEffect(() => {
     try {
       // Check if data is valid
       if (!data || !data.site || !data.site.siteMetadata) {
-        throw new Error("Invalid site metadata")
+        throw new Error('Invalid site metadata')
       }
     } catch (error) {
-      console.error("Error processing site metadata:", error)
       setErrorState(error)
     }
   }, [data])
 
   const contextValue = React.useMemo(() => {
     // Use data if available, otherwise use fallback
-    const siteData = (data && data.site && data.site.siteMetadata) 
-      ? data.site.siteMetadata 
-      : fallbackData.site.siteMetadata
-    
+    const siteData =
+      data && data.site && data.site.siteMetadata
+        ? data.site.siteMetadata
+        : fallbackData.site.siteMetadata
+
     return {
       ...siteData,
       hasError: errorState !== null,
-      errorMessage: errorState ? errorState.message : null
+      errorMessage: errorState ? errorState.message : null,
     }
   }, [data, errorState, fallbackData.site.siteMetadata])
 
-  return (
-    <SiteContext.Provider value={contextValue}>
-      {children}
-    </SiteContext.Provider>
-  )
+  return <SiteContext.Provider value={contextValue}>{children}</SiteContext.Provider>
+}
+
+SiteProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 }
 
 /**
@@ -109,10 +113,10 @@ export const SiteProvider = ({ children }) => {
  */
 export const useSiteMetadata = () => {
   const context = React.useContext(SiteContext)
-  
+
   if (context === undefined) {
-    throw new Error("useSiteMetadata must be used within a SiteProvider")
+    throw new Error('useSiteMetadata must be used within a SiteProvider')
   }
-  
+
   return context
 }
