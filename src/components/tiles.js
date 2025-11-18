@@ -27,12 +27,26 @@ const Tiles = ({ projectTiles }) => {
     return projectTiles.slice().sort((a, b) => new Date(b.date) - new Date(a.date))
   }, [projectTiles])
 
-  const filteredTiles = React.useMemo(() => {
+  const { currentProjects, pastProjects } = React.useMemo(() => {
+    const cutoffDate = new Date('2023-01-01')
+    const current = sortedProjectTiles.filter(tile => new Date(tile.date) >= cutoffDate)
+    const past = sortedProjectTiles.filter(tile => new Date(tile.date) < cutoffDate)
+    return { currentProjects: current, pastProjects: past }
+  }, [sortedProjectTiles])
+
+  const filteredCurrentProjects = React.useMemo(() => {
     if (activeTab === 'All') {
-      return sortedProjectTiles
+      return currentProjects
     }
-    return sortedProjectTiles.filter(tile => tile.tags.includes(activeTab))
-  }, [sortedProjectTiles, activeTab])
+    return currentProjects.filter(tile => tile.tags.includes(activeTab))
+  }, [currentProjects, activeTab])
+
+  const filteredPastProjects = React.useMemo(() => {
+    if (activeTab === 'All') {
+      return pastProjects
+    }
+    return pastProjects.filter(tile => tile.tags.includes(activeTab))
+  }, [pastProjects, activeTab])
 
   return (
     <div className="tiles-container" id="projects">
@@ -57,26 +71,59 @@ const Tiles = ({ projectTiles }) => {
           </Tabs>
         </div>
 
-        <div className="projects-grid">
-          {filteredTiles.map(tile => (
-            <div key={tile.name}>
-              {tile.link.startsWith('http') ? (
-                <a
-                  href={tile.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ textDecoration: 'none' }}
-                >
-                  <ProjectCard tile={tile} />
-                </a>
-              ) : (
-                <Link to={tile.link} style={{ textDecoration: 'none' }}>
-                  <ProjectCard tile={tile} />
-                </Link>
-              )}
+        {/* Current Projects Section */}
+        {filteredCurrentProjects.length > 0 && (
+          <>
+            <h3 className="subsection-title">Current Projects</h3>
+            <div className="projects-grid">
+              {filteredCurrentProjects.map(tile => (
+                <div key={tile.name}>
+                  {tile.link.startsWith('http') ? (
+                    <a
+                      href={tile.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <ProjectCard tile={tile} />
+                    </a>
+                  ) : (
+                    <Link to={tile.link} style={{ textDecoration: 'none' }}>
+                      <ProjectCard tile={tile} />
+                    </Link>
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
+
+        {/* Past Projects Section */}
+        {filteredPastProjects.length > 0 && (
+          <>
+            <h3 className="subsection-title">Past Projects</h3>
+            <div className="projects-grid">
+              {filteredPastProjects.map(tile => (
+                <div key={tile.name}>
+                  {tile.link.startsWith('http') ? (
+                    <a
+                      href={tile.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <ProjectCard tile={tile} />
+                    </a>
+                  ) : (
+                    <Link to={tile.link} style={{ textDecoration: 'none' }}>
+                      <ProjectCard tile={tile} />
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </Container>
     </div>
   )

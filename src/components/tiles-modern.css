@@ -59,7 +59,9 @@
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-md);
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -172,15 +174,26 @@
   max-width: 800px;
 }
 
+.subsection-title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--ut-charcoal);
+  margin-top: var(--spacing-8);
+  margin-bottom: var(--spacing-6);
+  padding-bottom: var(--spacing-2);
+  border-bottom: 2px solid var(--ut-burnt-orange);
+  display: inline-block;
+}
+
 @media (max-width: 768px) {
   .project-card-image {
     height: 140px;
   }
-  
+
   .project-card-content {
     padding: 1rem;
   }
-  
+
   .project-card-title {
     font-size: 0.9rem;
   }

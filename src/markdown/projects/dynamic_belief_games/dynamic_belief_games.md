@@ -1,12 +1,12 @@
 ---
-title: "Dynamic Belief Games"
-slug: "/projects/dynamic-belief-games"
-date: "2024-09-12"
+title: 'Dynamic Belief Games'
+slug: '/projects/dynamic-belief-games'
+date: '2024-09-12'
 ---
 
 ![Diagram](../../../images/projects/dynamic_belief_games/dynamic_belief_games_diagram.png)
 ![drone-swarm.jpg](../../../images/projects/dynamic_belief_games/drone-swarm.jpg)
-*Figure: A visual of our DBG gym, demonstrating a drone swarm scenario.*
+_Figure: A visual of our DBG gym, demonstrating a drone swarm scenario._
 
 ## What are we trying to do?
 
@@ -73,6 +73,13 @@ This project is funded by the Army.
 
 - Chandrajit Bajaj (Principal Investigator) [(website)](https://www.cs.utexas.edu/~bajaj/cvc/index.shtml)
 - Ryan Farell (Lead Research Scientist) [(website)](https://rfarell.github.io/index.html)
-- Luke McLennan (PhD Student)
-- Aaron Dominick (PhD Student)
-- Matthew Kim (Technical Staff)
+- Andrew Farell
+- Logan Kronfrost
+- Brian Kim
+- Callihan Bertley
+
+### Alumni
+
+- Luke McLennan
+- Aaron Dominick
+- Matthew Kim
