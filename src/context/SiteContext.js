@@ -51,6 +51,7 @@ export const SiteProvider = ({ children }) => {
             category
             link
             date
+            featured
           }
         }
       }
