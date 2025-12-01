@@ -10,7 +10,7 @@ const softwareData = require('./src/data/site/software')
 const menuData = require('./src/data/site/menu')
 
 module.exports = {
-  pathPrefix: '/cvc-website',
+  pathPrefix: '/',
   siteMetadata: {
     title: `Computational Visualization Center`,
     peopleCards: peopleData,
