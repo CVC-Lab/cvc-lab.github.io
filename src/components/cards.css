@@ -1,106 +1,108 @@
 @import url('../styles/design-system.css');
 
-.MuiGridList-root{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-lg);
+.MuiGridList-root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
 }
 
-.MuiGridListTile-root{
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    background: var(--color-bg-primary);
-    transition: all var(--transition-base);
-    padding: var(--space-md);
+.MuiGridListTile-root {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  background: var(--color-bg-primary);
+  transition: all var(--transition-base);
+  padding: var(--space-md);
 }
 
-.MuiGridListTile-root:hover{
-    box-shadow: var(--shadow-md);
-    transform: translateY(-1px);
+.MuiGridListTile-root:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
-.image-container img{
-    background: var(--color-white);
-    width: 80px;
-    height: 80px;
-    border-radius: var(--radius-full);
-    padding: var(--space-xs);
-    border: 2px solid var(--color-primary);
-    display:block;
-    margin: 0 auto var(--space-sm);
-    object-fit: cover;
+.image-container img {
+  background: var(--color-white);
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  padding: var(--space-xs);
+  border: 2px solid var(--color-primary);
+  display: block;
+  margin: 0 auto var(--space-sm);
+  object-fit: cover;
 }
 
-.lower-container{
-    text-align: center;
-    font-family: inherit;
+.lower-container {
+  text-align: center;
+  font-family: inherit;
 }
 
-.lower-container h3, h4, p{
-    margin: 0;
-    padding: 0;
+.lower-container h3,
+h4,
+p {
+  margin: 0;
+  padding: 0;
 }
 
-.lower-container h3{
-    color: var(--color-text-primary);
-    font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-base);
-    margin-bottom: var(--space-xs);
+.lower-container h3 {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  margin-bottom: var(--space-xs);
 }
 
-.lower-container h4{
-    color: var(--color-text-secondary);
-    font-weight: var(--font-weight-medium);
-    font-size: var(--font-size-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    margin-bottom: var(--space-sm);
+.lower-container h4 {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-sm);
 }
 
-.lower-container p{
-    margin: 0;
-    color: var(--color-text-muted);
-    font-weight: var(--font-weight-light);
-    font-size: var(--font-size-sm);
-    text-align: center;
-    line-height: var(--line-height-relaxed);
+.lower-container p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  line-height: var(--line-height-relaxed);
 }
 
 .people-class {
-    background: var(--color-bg-secondary);
-    padding: var(--space-3xl) 0;
+  background: var(--ut-white);
+  padding: var(--spacing-8) 0;
 }
-  
+
 .people-container {
-    margin: 0 auto;
-    max-width: var(--max-width-content);
-    padding: 0 var(--space-lg);
+  margin: 0 auto;
+  max-width: var(--container-max-width);
+  padding: 0 var(--spacing-6);
 }
-  
+
 .header-subtitle {
-    color: var(--color-text-muted);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-semibold);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0 0 var(--space-xl);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 var(--space-xl);
 }
 
 .member-grid-item {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .student-titles {
-    padding: 1rem 1rem;
+  padding: 1rem 1rem;
 }
 
 .title-grid {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .title-header {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
 }

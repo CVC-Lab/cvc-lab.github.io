@@ -8,6 +8,11 @@ date: '2024-10-20'
 
 We are developing advanced computational methods for modeling and visualizing subsurface flow dynamics, with applications to groundwater management, environmental remediation, and hydrocarbon reservoir simulation. Our research combines high-performance computing, machine learning, and innovative visualization techniques to provide accurate predictions of fluid behavior in complex geological formations.
 
+<video width="100%" controls autoplay muted loop style="border-radius: 8px; margin: 1.5rem 0;">
+  <source src="./hydro6A80.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 ## What is the problem?
 
 Subsurface flow modeling presents unique challenges due to the heterogeneous nature of geological media, the multi-scale physics involved, and the uncertainty in subsurface properties. Traditional numerical methods often struggle with:
@@ -38,10 +43,6 @@ Our recent achievements include:
 - Creation of an immersive VR visualization system for exploring 3D subsurface flow patterns
 - Successful application to real-world groundwater contamination scenarios with improved prediction accuracy
 
-![](https://i.imgur.com/subsurface_flow_viz.png)
-
-The video showcased in our research highlights demonstrates the dynamic evolution of subsurface flow patterns, revealing complex interactions between geological heterogeneity and fluid movement that are crucial for environmental and energy applications.
-
 ## Collaborators
 
 - Department of Petroleum and Geosystems Engineering, UT Austin
@@ -50,6 +51,8 @@ The video showcased in our research highlights demonstrates the dynamic evolutio
 
 ## Publications
 
-1. "GPU-Accelerated Subsurface Flow Simulation with Adaptive Mesh Refinement" - Journal of Computational Physics, 2024
-2. "Physics-Informed Deep Learning for Multiphase Flow in Porous Media" - Water Resources Research, 2023
-3. "Interactive Visualization of Uncertainty in Subsurface Flow Predictions" - IEEE Transactions on Visualization and Computer Graphics, 2023
+1. R. Farell, J. Eric Bickel, C. Bajaj. "Bayesian Port–Hamiltonian Surrogate for Three-Phase Reservoir Flow Simulation." _SPE Middle East Oil and Gas Show and Conference_, D021S043R002, 2025.
+
+2. L. McLennan, Y. Wang, R. Farell, M. Nguyen, C. Bajaj. "Learning Generalized Hamiltonian Dynamics with Stability from Noisy Trajectory Data." _arXiv preprint arXiv:2509.07280_, 2025.
+
+3. R. Farell, J.E. Bickel, C. Bajaj. "Field-Scale Bayesian Production Forecasting via Spectral Gaussian-Process Mixtures." _SPE/AAPG/SEG Unconventional Resources Technology Conference_, D021S035R003, 2025.

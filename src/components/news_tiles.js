@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import './tiles.css'
+import './tiles-modern.css'
 
 const NewsTiles = ({ newsTiles }) => {
   // Always declare hooks at the top level

@@ -1,200 +1,185 @@
-/* CVC Design System - Modern, Minimal, Sharp */
+/*
+ * CVC Design System - Unified with UT Austin Brand
+ * This file bridges the design-system tokens with variables.css
+ */
+
+@import './variables.css';
 
 :root {
-  /* Core Brand Colors */
-  --color-primary: #bf5700;           /* UT Burnt Orange */
-  --color-primary-dark: #9e4600;      /* Darker variant */
-  --color-primary-light: #ff6f00;     /* Lighter, more vibrant */
-  
-  /* Neutral Palette - More contrast, cleaner */
-  --color-black: #0a0a0a;             /* Near black for text */
-  --color-gray-900: #1a1a1a;
-  --color-gray-800: #2d2d2d;
+  /* Map design-system tokens to UT brand variables */
+
+  /* Core Brand Colors - mapped from variables.css */
+  --color-primary: var(--ut-burnt-orange);
+  --color-primary-dark: var(--ut-burnt-orange-dark);
+  --color-primary-light: var(--ut-burnt-orange-light);
+
+  /* Neutral Palette - mapped from variables.css */
+  --color-black: var(--ut-charcoal-dark);
+  --color-gray-900: var(--ut-charcoal);
+  --color-gray-800: var(--ut-charcoal-light);
   --color-gray-700: #404040;
-  --color-gray-600: #525252;
-  --color-gray-500: #737373;
+  --color-gray-600: var(--ut-dark-gray);
+  --color-gray-500: var(--ut-medium-gray);
   --color-gray-400: #a3a3a3;
-  --color-gray-300: #d4d4d4;
-  --color-gray-200: #e5e5e5;
-  --color-gray-100: #f5f5f5;
-  --color-white: #ffffff;
-  
+  --color-gray-300: var(--ut-limestone);
+  --color-gray-200: var(--ut-limestone-light);
+  --color-gray-100: var(--ut-off-white);
+  --color-white: var(--ut-white);
+
   /* Semantic Colors */
-  --color-text-primary: var(--color-gray-900);
-  --color-text-secondary: var(--color-gray-600);
-  --color-text-muted: var(--color-gray-500);
-  --color-text-inverse: var(--color-white);
-  
-  --color-bg-primary: var(--color-white);
-  --color-bg-secondary: var(--color-gray-100);
-  --color-bg-tertiary: var(--color-gray-200);
-  --color-bg-inverse: var(--color-gray-900);
-  
-  /* Accent Colors - Modern, tech-focused */
-  --color-accent-blue: #0066cc;
-  --color-accent-green: #00a86b;
-  --color-accent-purple: #6b46c1;
-  
-  /* Spacing - More compact, consistent */
-  --space-xs: 0.25rem;    /* 4px */
-  --space-sm: 0.5rem;     /* 8px */
-  --space-md: 1rem;       /* 16px */
-  --space-lg: 1.5rem;     /* 24px */
-  --space-xl: 2rem;       /* 32px */
-  --space-2xl: 3rem;      /* 48px */
-  --space-3xl: 4rem;      /* 64px */
-  
-  /* Typography Scale - Tighter, more modern */
-  --font-size-xs: 0.75rem;    /* 12px */
-  --font-size-sm: 0.875rem;   /* 14px */
-  --font-size-base: 1rem;     /* 16px */
-  --font-size-lg: 1.125rem;   /* 18px */
-  --font-size-xl: 1.25rem;    /* 20px */
-  --font-size-2xl: 1.5rem;    /* 24px */
-  --font-size-3xl: 1.875rem;  /* 30px */
-  --font-size-4xl: 2.25rem;   /* 36px */
-  --font-size-5xl: 3rem;      /* 48px */
-  
-  /* Font Weights */
-  --font-weight-light: 300;
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  
-  /* Line Heights - Tighter for headings */
-  --line-height-tight: 1.1;
-  --line-height-snug: 1.25;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.625;
-  
-  /* Border Radius - Subtle, modern */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.75rem;
-  --radius-full: 9999px;
-  
-  /* Shadows - Subtle depth */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  
-  /* Transitions */
-  --transition-fast: 150ms ease;
-  --transition-base: 200ms ease;
-  --transition-slow: 300ms ease;
-  
-  /* Max Width */
-  --max-width-content: 1280px;
+  --color-text-primary: var(--ut-charcoal);
+  --color-text-secondary: var(--ut-dark-gray);
+  --color-text-muted: var(--ut-medium-gray);
+  --color-text-inverse: var(--ut-white);
+
+  --color-bg-primary: var(--ut-white);
+  --color-bg-secondary: var(--ut-off-white);
+  --color-bg-tertiary: var(--ut-limestone-light);
+  --color-bg-inverse: var(--ut-charcoal);
+
+  /* Accent Colors */
+  --color-accent-blue: var(--ut-blue);
+  --color-accent-green: var(--ut-green);
+  --color-accent-yellow: var(--ut-yellow);
+
+  /* Spacing - mapped from variables.css */
+  --space-xs: var(--spacing-1);
+  --space-sm: var(--spacing-2);
+  --space-md: var(--spacing-4);
+  --space-lg: var(--spacing-6);
+  --space-xl: var(--spacing-8);
+  --space-2xl: var(--spacing-10);
+  --space-3xl: var(--spacing-12);
+
+  /* Typography Scale - mapped from variables.css */
+  --font-size-xs: var(--text-xs);
+  --font-size-sm: var(--text-sm);
+  --font-size-base: var(--text-base);
+  --font-size-lg: var(--text-lg);
+  --font-size-xl: var(--text-xl);
+  --font-size-2xl: var(--text-2xl);
+  --font-size-3xl: var(--text-3xl);
+  --font-size-4xl: var(--text-4xl);
+  --font-size-5xl: 3.5rem;
+
+  /* Line Heights - mapped from variables.css */
+  --line-height-tight: var(--leading-tight);
+  --line-height-snug: var(--leading-snug);
+  --line-height-normal: var(--leading-normal);
+  --line-height-relaxed: var(--leading-relaxed);
+
+  /* Border Radius - mapped from variables.css */
+  --radius-sm: var(--border-radius-sm);
+  --radius-md: var(--border-radius-md);
+  --radius-lg: var(--border-radius-lg);
+  --radius-xl: var(--border-radius-xl);
+  --radius-full: var(--border-radius-full);
+
+  /* Shadows - use from variables.css */
+
+  /* Transitions - mapped from variables.css */
+  --transition-fast: var(--transition-fast);
+  --transition-base: var(--transition-normal);
+  --transition-slow: var(--transition-slow);
+
+  /* Max Width - mapped from variables.css */
+  --max-width-content: var(--container-max-width);
   --max-width-narrow: 800px;
   --max-width-wide: 1400px;
 }
 
-/* Font Face - Consider using a more modern sans-serif */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-/* Global Resets with new system */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
+/* Use Libre Franklin as primary font (UT Austin brand) */
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-normal);
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-primary);
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--ut-charcoal);
+  background-color: var(--ut-white);
 }
 
-/* Headings - Tighter, more impactful */
-h1, h2, h3, h4, h5, h6 {
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-tight);
-  margin-bottom: var(--space-md);
-  color: var(--color-text-primary);
+  line-height: var(--leading-tight);
+  margin-bottom: var(--spacing-4);
+  color: var(--ut-charcoal);
 }
 
-h1 { 
-  font-size: var(--font-size-4xl);
+h1 {
+  font-size: var(--text-4xl);
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.02em;
 }
 
-h2 { 
-  font-size: var(--font-size-3xl);
+h2 {
+  font-size: var(--text-3xl);
   letter-spacing: -0.01em;
 }
 
-h3 { 
-  font-size: var(--font-size-2xl);
+h3 {
+  font-size: var(--text-2xl);
 }
 
-h4 { 
-  font-size: var(--font-size-xl);
+h4 {
+  font-size: var(--text-xl);
   font-weight: var(--font-weight-medium);
 }
 
-h5 { 
-  font-size: var(--font-size-lg);
+h5 {
+  font-size: var(--text-lg);
   font-weight: var(--font-weight-medium);
 }
 
-h6 { 
-  font-size: var(--font-size-base);
+h6 {
+  font-size: var(--text-base);
   font-weight: var(--font-weight-medium);
 }
 
-/* Paragraphs - Better readability */
+/* Paragraphs */
 p {
-  margin-bottom: var(--space-md);
-  line-height: var(--line-height-relaxed);
-  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-4);
+  line-height: var(--leading-relaxed);
+  color: var(--ut-dark-gray);
 }
 
-/* Links - Subtle, modern */
+/* Links */
 a {
-  color: var(--color-primary);
+  color: var(--ut-burnt-orange);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 a:hover {
-  color: var(--color-primary-dark);
-  text-decoration: underline;
+  color: var(--ut-burnt-orange-dark);
 }
 
 /* Utility Classes */
 .container {
-  max-width: var(--max-width-content);
+  max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 var(--space-lg);
+  padding: 0 var(--spacing-6);
 }
 
 .section {
-  padding: var(--space-3xl) 0;
+  padding: var(--spacing-12) 0;
 }
 
 .section--compact {
-  padding: var(--space-2xl) 0;
+  padding: var(--spacing-8) 0;
 }
 
-/* Card styles - Modern, clean */
+/* Card styles */
 .card {
-  background: var(--color-bg-primary);
-  border-radius: var(--radius-lg);
+  background: var(--ut-white);
+  border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
-  padding: var(--space-lg);
-  transition: all var(--transition-base);
+  padding: var(--spacing-6);
+  transition: all var(--transition-normal);
 }
 
 .card:hover {
@@ -202,16 +187,16 @@ a:hover {
   transform: translateY(-2px);
 }
 
-/* Button styles - Clean, modern */
+/* Button styles */
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-sm) var(--space-lg);
-  font-size: var(--font-size-sm);
+  padding: var(--spacing-2) var(--spacing-6);
+  font-size: var(--text-sm);
   font-weight: var(--font-weight-medium);
   line-height: 1;
-  border-radius: var(--radius-md);
+  border-radius: var(--border-radius-md);
   transition: all var(--transition-fast);
   cursor: pointer;
   border: none;
@@ -219,27 +204,27 @@ a:hover {
 }
 
 .button--primary {
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  background-color: var(--ut-burnt-orange);
+  color: var(--ut-white);
 }
 
 .button--primary:hover {
-  background-color: var(--color-primary-dark);
+  background-color: var(--ut-burnt-orange-dark);
 }
 
 .button--secondary {
-  background-color: var(--color-gray-100);
-  color: var(--color-text-primary);
+  background-color: var(--ut-limestone-light);
+  color: var(--ut-charcoal);
 }
 
 .button--secondary:hover {
-  background-color: var(--color-gray-200);
+  background-color: var(--ut-limestone);
 }
 
-/* Grid System - Responsive, modern */
+/* Grid System */
 .grid {
   display: grid;
-  gap: var(--space-lg);
+  gap: var(--spacing-6);
 }
 
 .grid--2 {
@@ -257,16 +242,16 @@ a:hover {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   :root {
-    --font-size-4xl: 2rem;
-    --font-size-3xl: 1.5rem;
-    --font-size-2xl: 1.25rem;
+    --text-4xl: 2rem;
+    --text-3xl: 1.5rem;
+    --text-2xl: 1.25rem;
   }
-  
+
   .container {
-    padding: 0 var(--space-md);
+    padding: 0 var(--spacing-4);
   }
-  
+
   .section {
-    padding: var(--space-2xl) 0;
+    padding: var(--spacing-8) 0;
   }
 }

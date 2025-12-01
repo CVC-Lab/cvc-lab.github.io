@@ -2,8 +2,8 @@
 @import '../styles/variables.css';
 
 .about-section {
-  background-color: var(--ut-white);
-  padding: var(--spacing-16) 0;
+  background-color: var(--ut-off-white);
+  padding: var(--spacing-8) 0 var(--spacing-10);
 }
 
 .about-container {
@@ -84,7 +84,7 @@
   .logo-container-centered {
     gap: var(--spacing-4);
   }
-  
+
   .logo-image {
     max-width: 180px;
   }

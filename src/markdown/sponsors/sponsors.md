@@ -1,6 +1,6 @@
 ---
-title: "Sponsors"
-slug: "/sponsors"
+title: 'Sponsors'
+slug: '/sponsors'
 ---
 
 The Computational Visualization Center (CVC) is a cross disciplinary effort whose mission is to develop and improve the core technologies for comprehensive computational modeling, simulation, analysis, and visualization of natural and synthetic phenomena, and then utilize them as an integrated tool for rapid discovery. CVC receives support from various organizations, and would like to express its gratitude to our sponsors.
@@ -11,7 +11,9 @@ The Computational Visualization Center (CVC) is a cross disciplinary effort whos
 
 **Army Futures Command**
 
-- [Intelligent Machine Learning for Real-Time Processing of Hyperspectral Video Streams- Army Futures Command-DOD-ARMY (09/30/2020-09/30/2021)](https://cvc-lab.github.io/afc-website/)
+- [Dynamic Belief Games: Optimally Controlled Reinforced Training/Testing Framework for Predictive Intelligent Networking](/projects/dbg) - AFC UTDD (C5ISR) (04/2024 - 01/2027)
+
+- [Intelligent Machine Learning for Real-Time Processing of Hyperspectral Video Streams](https://cvc-lab.github.io/afc-website/) (09/2020 - 09/2021)
 
 **National Health Institute**
 

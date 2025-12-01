@@ -4,7 +4,7 @@
 .footer {
   background-color: var(--ut-charcoal);
   color: var(--ut-white);
-  padding: var(--spacing-16) 0 var(--spacing-8);
+  padding: var(--spacing-10) 0 var(--spacing-6);
   position: relative;
 }
 
@@ -176,7 +176,7 @@
     grid-template-columns: repeat(1, 1fr);
     gap: var(--spacing-8);
   }
-  
+
   .footer-logo-column,
   .footer-contact-column,
   .footer-links-column {

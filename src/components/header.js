@@ -1,38 +1,21 @@
-import * as React from "react"
-import PropTypes from "prop-types"
-import { Link } from "gatsby"
-import Navigation from "./navigation"
-import { StaticImage } from "gatsby-plugin-image"
+import * as React from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'gatsby'
+import Navigation from './navigation'
+import { StaticImage } from 'gatsby-plugin-image'
+import './header.css'
 
-const Header = ({ 
-  siteTitle = "", 
-  siteDescription = "", 
-  menuLinks = [] 
-}) => (
-  <header
-    style={{
-      paddingLeft: `var(--space-lg)`,
-      paddingRight: `var(--space-lg)`,
-      background: `var(--color-primary)`,
-      boxShadow: `var(--shadow-md)`,
-    }}
-  >
-    <div style={{ margin: `0 auto`, maxWidth: `var(--max-width-content)`, paddingBottom: `var(--space-xl)` }}>
-      <div
-        className="headerFlexContainer"
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Link to="/" style={{ flexShrink: 0 }}>
+const Header = ({ siteTitle = '', siteDescription = '', menuLinks = [] }) => (
+  <header className="site-header">
+    <div className="header-inner">
+      <div className="header-flex-container">
+        <Link to="/" className="header-logo-link">
           <StaticImage
             className="headerlogo"
             src="../images/knockout_university_formal_horizontal.png"
-            width={300}
+            width={280}
             quality={95}
-            formats={["auto", "webp", "avif"]}
+            formats={['auto', 'webp', 'avif']}
             alt="UT Austin Logo"
             placeholder="none"
             loading="eager"
@@ -41,39 +24,11 @@ const Header = ({
         <Navigation menuLinks={menuLinks} />
       </div>
       <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-            padding: `0rem`,
-            margin: `0rem`,
-          }}
-        >
-          <div
-            style={{
-              paddingBottom: `var(--space-md)`,
-              fontSize: `var(--font-size-4xl)`,
-              fontWeight: `var(--font-weight-bold)`,
-              letterSpacing: `-0.02em`,
-              margin: `0`,
-            }}
-          >
-            {siteTitle}
-          </div>
+        <Link to="/" className="site-title-link">
+          <div className="site-title">{siteTitle}</div>
         </Link>
       </h1>
-      <h2
-        style={{
-          margin: 0,
-          color: `var(--color-white)`,
-          fontSize: `var(--font-size-xl)`,
-          fontWeight: `var(--font-weight-normal)`,
-          opacity: 0.9,
-        }}
-      >
-        {siteDescription}
-      </h2>
+      <h2 className="site-description">{siteDescription}</h2>
     </div>
   </header>
 )

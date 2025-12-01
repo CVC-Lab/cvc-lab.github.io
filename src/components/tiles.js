@@ -13,7 +13,14 @@ const projectTabs = [
   'Health AI/ML',
 ]
 
-const Tiles = ({ projectTiles }) => {
+// Featured project names - these are shown in the FeaturedResearch carousel on homepage
+const FEATURED_PROJECTS = [
+  'Dynamic Belief Games',
+  "Actionable Intelligence for Combating Parkinson's Disease",
+  'Subsurface Flow Modeling',
+]
+
+const Tiles = ({ projectTiles, showAllProjects = false }) => {
   const [activeTab, setActiveTab] = React.useState('All')
 
   const handleTabChange = (event, newValue) => {
@@ -27,12 +34,20 @@ const Tiles = ({ projectTiles }) => {
     return projectTiles.slice().sort((a, b) => new Date(b.date) - new Date(a.date))
   }, [projectTiles])
 
+  // On dedicated projects page, show all projects; on homepage, exclude featured ones
+  const regularProjects = React.useMemo(() => {
+    if (showAllProjects) {
+      return sortedProjectTiles
+    }
+    return sortedProjectTiles.filter(tile => !FEATURED_PROJECTS.includes(tile.name))
+  }, [sortedProjectTiles, showAllProjects])
+
   const { currentProjects, pastProjects } = React.useMemo(() => {
     const cutoffDate = new Date('2023-01-01')
-    const current = sortedProjectTiles.filter(tile => new Date(tile.date) >= cutoffDate)
-    const past = sortedProjectTiles.filter(tile => new Date(tile.date) < cutoffDate)
+    const current = regularProjects.filter(tile => new Date(tile.date) >= cutoffDate)
+    const past = regularProjects.filter(tile => new Date(tile.date) < cutoffDate)
     return { currentProjects: current, pastProjects: past }
-  }, [sortedProjectTiles])
+  }, [regularProjects])
 
   const filteredCurrentProjects = React.useMemo(() => {
     if (activeTab === 'All') {
@@ -51,10 +66,10 @@ const Tiles = ({ projectTiles }) => {
   return (
     <div className="tiles-container" id="projects">
       <Container maxWidth="lg">
-        <h2 className="section-title">Innovative Research</h2>
+        <h2 className="section-title">{showAllProjects ? 'All Projects' : 'Research'}</h2>
         <p className="section-subtitle">
-          Discover our groundbreaking projects at the intersection of computation, visualization,
-          and applied science at the Oden Institute.
+          Advancing computational methods at the intersection of machine learning, visualization,
+          and scientific computing at the Oden Institute.
         </p>
 
         <div className="tabs-container">
@@ -100,7 +115,7 @@ const Tiles = ({ projectTiles }) => {
 
         {/* Past Projects Section */}
         {filteredPastProjects.length > 0 && (
-          <>
+          <div className="past-projects-section">
             <h3 className="subsection-title">Past Projects</h3>
             <div className="projects-grid">
               {filteredPastProjects.map(tile => (
@@ -122,14 +137,14 @@ const Tiles = ({ projectTiles }) => {
                 </div>
               ))}
             </div>
-          </>
+          </div>
         )}
       </Container>
     </div>
   )
 }
 
-// Separate ProjectCard component for better organization
+// Standard Project Card
 const ProjectCard = ({ tile }) => {
   return (
     <div className="project-card">
@@ -174,6 +189,7 @@ Tiles.propTypes = {
       image: PropTypes.object,
     })
   ).isRequired,
+  showAllProjects: PropTypes.bool,
 }
 
 ProjectCard.propTypes = {

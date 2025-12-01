@@ -1,23 +1,23 @@
 @import url('../styles/design-system.css');
 
 .video-banner {
-  background: var(--color-bg-secondary);
-  padding: var(--space-3xl) 0;
-  margin: var(--space-3xl) 0;
+  background: var(--ut-off-white);
+  padding: var(--spacing-8) 0;
+  margin: var(--spacing-4) 0;
 }
 
 .video-banner-container {
-  max-width: var(--max-width-content);
+  max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 var(--space-lg);
+  padding: 0 var(--spacing-6);
 }
 
 .video-banner-title {
   text-align: center;
-  color: var(--color-text-primary);
-  font-size: var(--font-size-3xl);
+  color: var(--ut-charcoal);
+  font-size: var(--text-2xl);
   font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--spacing-6);
   position: relative;
   display: inline-block;
   width: 100%;
@@ -26,12 +26,12 @@
 .video-banner-title::after {
   content: '';
   position: absolute;
-  bottom: -10px;
+  bottom: -8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
-  height: 4px;
-  background-color: var(--color-primary);
+  width: 50px;
+  height: 3px;
+  background-color: var(--ut-burnt-orange);
 }
 
 .video-showcase {
