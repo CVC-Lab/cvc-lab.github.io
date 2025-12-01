@@ -45,31 +45,6 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `Computational Visualization Center at the University of Texas at Austin`,
-        short_name: `CVC`,
-        start_url: `/`,
-        background_color: `#bf5700`,
-        theme_color: `#bf5700`,
-        display: `minimal-ui`,
-        icon: `src/favicons/favicon.png`, // This must be a local file path
-        icons: [
-          {
-            src: `src/favicons/favicon-16x16.png`, // Use absolute path not relative
-            sizes: `16x16`,
-            type: `image/png`,
-          },
-          {
-            src: `src/favicons/android-chrome-192x192.png`, // Use absolute path not relative
-            sizes: `192x192`,
-            type: `image/png`,
-          },
-        ],
-        cache_busting_mode: 'none', // Ensure filenames don't have hash
-      },
-    },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `markdown`,
