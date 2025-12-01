@@ -10,7 +10,7 @@ module.exports = [
       'Solving Forward and Inverse Problems using Controlled Hamiltonian Flow-Based Generative Models (via Transformer Neural Processes). Followed by Thanksgiving lunch. Time: 10:30 AM - 12 PM.',
     category: 'seminars',
     link: null,
-    date: '2024-11-26',
+    date: '2025-11-21',
   },
   {
     name: 'Fall 2021 Seminar Series #1',
@@ -66,7 +66,8 @@ module.exports = [
     name: 'CVC talked to Bill Gates',
     category: 'news',
     link: '/bill-gates',
-    date: '2021-03-13',
+    date: '2013-03-13',
+    featured: true,
   },
   {
     name: 'Journal paper accepted for publication in Mathematics for Computation, 2013',
@@ -361,5 +362,6 @@ module.exports = [
     category: 'news',
     link: 'https://dra.utexas.edu/trainingAI',
     date: '2024-05-13',
+    featured: true,
   },
 ]

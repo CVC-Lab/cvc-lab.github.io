@@ -99,19 +99,33 @@ const NewsTiles = ({ newsTiles }) => {
             const isExternalLink =
               tile.link && (tile.link.startsWith('http://') || tile.link.startsWith('https://'))
 
+            const isFeatured = tile.featured === true
+
             return (
-              <div key={tile.name} style={{ display: 'flex', marginBottom: '1.5rem' }}>
+              <div
+                key={tile.name}
+                style={{
+                  display: 'flex',
+                  marginBottom: '1.5rem',
+                  padding: isFeatured ? '1rem' : '0',
+                  background: isFeatured
+                    ? 'linear-gradient(135deg, #fff8f0 0%, #fff 100%)'
+                    : 'transparent',
+                  borderLeft: isFeatured ? '4px solid #bf5700' : 'none',
+                  borderRadius: isFeatured ? '4px' : '0',
+                }}
+              >
                 <div
                   className="lower-container-pubs"
                   style={{ width: '120px', textAlign: 'right' }}
                 >
-                  <h3>{dateString}</h3>
+                  <h3 style={{ color: isFeatured ? '#bf5700' : undefined }}>{dateString}</h3>
                 </div>
                 <div style={{ flexBasis: '80%' }}>
                   {isExternalLink ? (
                     <a
                       style={{
-                        color: `#333f48`,
+                        color: isFeatured ? '#bf5700' : '#333f48',
                         textDecoration: `none`,
                         fontSize: `.73rem`,
                       }}
@@ -120,21 +134,21 @@ const NewsTiles = ({ newsTiles }) => {
                       rel="noopener noreferrer"
                     >
                       <div className="lower-container-pubs">
-                        <h3>{tile.name}</h3>
+                        <h3 style={{ fontWeight: isFeatured ? '700' : undefined }}>{tile.name}</h3>
                         {tile.description && <h4>{tile.description}</h4>}
                       </div>
                     </a>
                   ) : (
                     <Link
                       style={{
-                        color: `#333f48`,
+                        color: isFeatured ? '#bf5700' : '#333f48',
                         textDecoration: `none`,
                         fontSize: `.73rem`,
                       }}
                       to={tile.link || '#'}
                     >
                       <div className="lower-container-pubs">
-                        <h3>{tile.name}</h3>
+                        <h3 style={{ fontWeight: isFeatured ? '700' : undefined }}>{tile.name}</h3>
                         {tile.description && <h4>{tile.description}</h4>}
                       </div>
                     </Link>
@@ -174,6 +188,7 @@ NewsTiles.propTypes = {
       date: PropTypes.string,
       link: PropTypes.string,
       description: PropTypes.string,
+      featured: PropTypes.bool,
     })
   ),
 }
