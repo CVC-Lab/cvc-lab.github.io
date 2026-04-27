@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Radio Signal Flow Overview</title>
+  <style>
+    :root{
+      --bg:#0b1020; --panel:#111a33; --panel2:#0f1730; --text:#eaf0ff; --muted:#a9b7e6;
+      --accent:#7aa2ff; --good:#3ddc97; --bad:#ff5c7a; --warn:#ffcc66;
+      --border: rgba(255,255,255,.12);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text); background: radial-gradient(1200px 600px at 20% -10%, #1b2a66, transparent 60%),
+                         radial-gradient(900px 500px at 110% 30%, #2b1a55, transparent 55%),
+                         var(--bg);
+      min-height:100vh;
+    }
+    header{
+      padding:16px 16px 10px;
+      position: sticky; top:0; z-index:10;
+      backdrop-filter: blur(8px);
+      background: linear-gradient(to bottom, rgba(11,16,32,.8), rgba(11,16,32,.6));
+      border-bottom: 1px solid var(--border);
+    }
+    .headerTop{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;}
+    h1{margin:0; font-size:16px; font-weight:700; letter-spacing:.2px}
+    .navLinks{display:flex; gap:8px; flex-wrap:wrap;}
+    .navBtn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:8px 14px; border-radius:999px; font-size:12px; font-weight:600;
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      color:var(--text); text-decoration:none;
+      transition: border .2s, background .2s;
+    }
+    .navBtn:hover{border-color:rgba(122,162,255,.8);}
+    .navBtn.active{
+      border-color:rgba(122,162,255,.8);
+      background: linear-gradient(180deg, rgba(122,162,255,.32), rgba(122,162,255,.12));
+    }
+    main{padding:16px; max-width:1100px; margin:0 auto 40px;}
+    .panel{
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(17,26,51,.75), rgba(12,18,40,.62));
+      border-radius:18px;
+      padding:20px;
+      margin-bottom:16px;
+    }
+    h2{margin:0 0 12px; font-size:20px; letter-spacing:.3px}
+    h3{margin:18px 0 6px; font-size:15px; letter-spacing:.2px; color:var(--accent)}
+    p{margin:0 0 10px; color:#dfe6ff; line-height:1.5; font-size:14px;}
+    .muted{color:var(--muted); font-size:13px;}
+    .grid2{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap:16px;
+    }
+    .stage-list{display:flex; flex-direction:column; gap:12px; margin-top:12px;}
+    .stage{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px;
+      background: rgba(10,16,33,.72);
+      position:relative;
+    }
+    .stage::before{
+      content:attr(data-label);
+      position:absolute;
+      top:-10px; left:12px;
+      font-size:11px; letter-spacing:.2px;
+      padding:2px 8px;
+      border-radius:999px;
+      border:1px solid rgba(122,162,255,.4);
+      color:var(--muted);
+      background: rgba(7,12,25,.9);
+    }
+    ul{padding-left:16px; margin:6px 0 0;}
+    li{margin-bottom:4px; font-size:13px; color:#cfd6ff;}
+    .flow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+      justify-content:center;
+      margin-top:16px;
+    }
+    .flow .blk{
+      min-width:130px;
+      text-align:center;
+      padding:12px 10px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(8,12,25,.65);
+      font-size:12px;
+      color:var(--muted);
+      position:relative;
+    }
+    .flow .blk strong{display:block; color:var(--text); margin-bottom:4px;}
+    .flow .arrow{font-size:18px; color:rgba(234,240,255,.55);}
+    .callout{
+      border-left:3px solid var(--accent);
+      padding-left:14px;
+    }
+    .packet-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+    .packet-card{
+      border:1px dashed rgba(122,162,255,.6);
+      border-radius:14px;
+      padding:12px;
+      background: rgba(10,16,33,.7);
+      font-size:13px;
+    }
+    .packet-card b{color:var(--text);}
+    .timeline{
+      margin-top:12px;
+      border-radius:14px;
+      padding:14px;
+      background: rgba(8,12,25,.65);
+      border:1px solid var(--border);
+    }
+    .timeline-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      font-size:13px;
+      margin-bottom:8px;
+    }
+    .timeline-row span{
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.04);
+    }
+    @media (max-width:700px){
+      h2{font-size:18px;}
+      .flow .blk{min-width:110px;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="headerTop">
+      <h1>Radio Signal Flow: Top-down Overview</h1>
+      <nav class="navLinks">
+        <a class="navBtn" href="index.html">Live Demo</a>
+        <a class="navBtn active" href="overview.html">Top-down Overview</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Where voice becomes “radio”</h2>
+      <p>Your voice never “becomes RF.” A radio really performs two separate jobs:</p>
+      <ul style="color:#dfe6ff; font-size:14px; line-height:1.5; padding-left:18px; margin:8px 0 14px;">
+        <li><b>Job 1 – Air → baseband:</b> convert sound pressure into a clean low-frequency electrical signal (roughly 300–3000&nbsp;Hz for voice).</li>
+        <li><b>Job 2 – Baseband → RF carrier:</b> use that signal to modulate (control) a high-frequency electromagnetic carrier that the antenna can radiate. The receiver demodulates the carrier back into audio (or bits).</li>
+      </ul>
+    </section>
+
+    <div class="grid2">
+      <section class="panel">
+        <h2>Transmitter (TX) innards</h2>
+        <p class="muted">Everything that readies your voice for RF.</p>
+        <div class="stage-list">
+          <div class="stage" data-label="Audio front end">
+            <ul>
+              <li><b>Mic element → preamp:</b> air pressure becomes a tiny voltage that is boosted to a usable level.</li>
+              <li><b>High/low-pass filters:</b> remove rumble and limit bandwidth so you stay inside your licensed channel.</li>
+              <li><b>Compressor/limiter:</b> keeps loud speech from clipping later stages; FM transmitters often hard-limit because amplitude won’t matter at the receiver.</li>
+              <li><b>Pre-emphasis (FM voice):</b> boosts high audio frequencies so the receiver can de-emphasize and reduce hiss.</li>
+            </ul>
+          </div>
+          <div class="stage" data-label="RF generation & modulation">
+            <ul>
+              <li><b>Frequency synthesizer / LO:</b> provides a rock-solid RF carrier (PLL locked to the channel).</li>
+              <li><b>Modulator:</b> AM varies carrier amplitude, FM varies instantaneous frequency, and digital modulators map bits into phase/frequency/amplitude states (FSK/QPSK/QAM).</li>
+            </ul>
+          </div>
+          <div class="stage" data-label="Power & emission">
+            <ul>
+              <li><b>Driver → power amplifier:</b> raises the RF envelope to the wattage you need.</li>
+              <li><b>Output filtering:</b> cleans harmonics so you only radiate the assigned band.</li>
+              <li><b>T/R switch + antenna:</b> routes the antenna to TX during PTT and launches the wave into space.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Receiver (RX) innards</h2>
+        <p class="muted">Reverse the process to bring the audio back.</p>
+        <div class="stage-list">
+          <div class="stage" data-label="RF front end">
+            <ul>
+              <li><b>Antenna + preselector:</b> captures microvolts and rejects out-of-band energy.</li>
+              <li><b>LNA:</b> adds gain with minimal noise.</li>
+              <li><b>Mixer + LO:</b> shifts the desired channel to an intermediate frequency (IF) or straight to baseband.</li>
+              <li><b>IF / channel filter:</b> defines your 12.5&nbsp;kHz (or similar) bandwidth and rejects adjacent chatter.</li>
+              <li><b>AGC:</b> automatically rides gain so weak and strong signals both land in the codec’s sweet spot.</li>
+            </ul>
+          </div>
+          <div class="stage" data-label="Demodulation & audio">
+            <ul>
+              <li><b>Demodulator:</b> envelope detector for AM, discriminator/PLL for FM, clock recovery + demap for digital symbols.</li>
+              <li><b>De-emphasis + filtering:</b> restores natural tone and reduces hiss.</li>
+              <li><b>Audio amp → speaker:</b> drives the cone back into air pressure waves.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="panel">
+      <h2>Analog vs digital mindset</h2>
+      <div class="grid2">
+        <div>
+          <h3>Analog voice (AM/FM)</h3>
+          <p>Continuous modulation—no packets, no framing. Your voice directly controls carrier amplitude or frequency.</p>
+          <ul>
+            <li>Visualize with the RF waveform card in the live demo.</li>
+            <li>Noise shows up as hiss or fades; there’s no CRC or FEC to save you.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Digital / packet voice</h3>
+          <p>Voice is sampled, quantized, compressed, framed, and then modulated as bits.</p>
+          <ul>
+            <li>Packets/frames make sense only here.</li>
+            <li>Channel tricks: FEC, interleaving, CRC, jitter buffers.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flow">
+        <div class="blk">
+          <strong>Mic</strong>
+          air → volts
+        </div>
+        <div class="arrow">→</div>
+        <div class="blk">
+          <strong>ADC</strong>
+          samples voice
+        </div>
+        <div class="arrow">→</div>
+        <div class="blk">
+          <strong>Codec</strong>
+          compresses
+        </div>
+        <div class="arrow">→</div>
+        <div class="blk">
+          <strong>Framer</strong>
+          add seq/CRC
+        </div>
+        <div class="arrow">→</div>
+        <div class="blk">
+          <strong>Modulator</strong>
+          bits → symbols
+        </div>
+        <div class="arrow">→</div>
+        <div class="blk">
+          <strong>Channel</strong>
+          loss/jitter/fades
+        </div>
+        <div class="arrow">→</div>
+        <div class="blk">
+          <strong>RX chain</strong>
+          demod + decode
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Digital voice pipeline (voice → bits → RF → bits → voice)</h2>
+      <p>The digital story is a repeatable eight-step loop. This is exactly what your demo animates.</p>
+      <ol style="color:#dfe6ff; font-size:14px; line-height:1.5; margin:0 0 14px 18px;">
+        <li><b>Mic + ADC:</b> capture PCM samples (e.g., 8&nbsp;kHz, 16-bit → 128&nbsp;kbps raw).</li>
+        <li><b>Frame slicer:</b> cut the stream into 20&nbsp;ms windows (160 samples at 8&nbsp;kHz).</li>
+        <li><b>Codec/vocoder:</b> compress each frame to fewer bits (e.g., 8&nbsp;kbps ⇒ 160 bits per 20&nbsp;ms).</li>
+        <li><b>Packetizer:</b> group <code>framesPerPacket</code> codec frames into one payload and add header metadata (seq#, timestamp, length, type).</li>
+        <li><b>Error protection:</b> append CRC32 for detection and (optionally) add FEC + interleaving for correction.</li>
+        <li><b>Modulator:</b> map bits into RF symbols (FSK/QPSK/etc.) and generate the RF burst.</li>
+        <li><b>Channel:</b> delay, jitter, noise, fading, drops. This is where your sliders inject reality.</li>
+        <li><b>Receiver chain:</b> detect preamble/sync, demap symbols, deinterleave/FEC, CRC check, jitter buffer, codec decode, DAC → speaker.</li>
+      </ol>
+    </section>
+
+    <section class="panel">
+      <h2>What makes a “packet” in digital radio?</h2>
+      <p>Many standards call them frames, but mentally you can treat them like packets. Each one has predictable fields:</p>
+      <div class="packet-grid">
+        <div class="packet-card">
+          <b>Preamble</b><br />
+          Known pattern so the receiver sees “a signal is here,” settles AGC, and aligns timing.
+        </div>
+        <div class="packet-card">
+          <b>Sync word</b><br />
+          A unique marker that says “frame starts now.”
+        </div>
+        <div class="packet-card">
+          <b>Header</b><br />
+          Version, type, addressing, color codes, slot info … whatever the protocol needs.
+        </div>
+        <div class="packet-card">
+          <b>Payload</b><br />
+          Codec bits (e.g., 20 ms of voice), optional signaling data.
+        </div>
+        <div class="packet-card">
+          <b>Error protection</b><br />
+          CRC for detection, FEC/interleaving for correction.
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>What’s in a packet, step by step?</h2>
+      <p>Here’s the exact journey for one 20&nbsp;ms frame of speech in this project’s demo. Change the frame size or codec and the math changes, but the structure stays the same.</p>
+      <ol style="margin:0 0 14px 18px; color:#dfe6ff; line-height:1.45; font-size:14px;">
+        <li><b>Sample &amp; capture (20&nbsp;ms @ 48&nbsp;kHz):</b> 960 audio samples enter the encoder.</li>
+        <li><b>Codec compresses:</b> µ-law = 960 bytes (7.68&nbsp;kbit), PCM16 = 1920 bytes (15.36&nbsp;kbit).</li>
+        <li><b>Framer builds header:</b> 12 bytes with version, codec flags, sequence number, timestamp, payload length.</li>
+        <li><b>CRC-16:</b> calculated across header+payload so the receiver can detect corruption.</li>
+        <li><b>Packet conversion rate:</b> 20&nbsp;ms frames → 50 packets per second while PTT is down.</li>
+        <li><b>Modulation mapping:</b> payload bits are turned into AM/FM/BPSK symbols for display (or real radios use FSK/QPSK/etc.).</li>
+        <li><b>Over the air:</b> sender adds channel impairments (delay, jitter, loss). Receiver performs the inverse order: detect → CRC check → jitter buffer → decode → audio.</li>
+      </ol>
+      <div class="timeline">
+        <div class="timeline-row">
+          <span>960 samples</span>
+          <span>→ codec bytes</span>
+          <span>→ header+CRC</span>
+          <span>→ modulation</span>
+          <span>→ RF channel</span>
+          <span>→ jitter buffer</span>
+          <span>→ speaker</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Packet math &amp; rate cheat sheet</h2>
+      <div class="grid2">
+        <div>
+          <h3>Packets per second</h3>
+          <ul>
+            <li>Frames per second = <code>1 / frameDuration</code>. With 20&nbsp;ms frames → 50 fps.</li>
+            <li>Packets per second = <code>fps / framesPerPacket</code>. With 2 frames/packet → 25 pps.</li>
+            <li>Packets for a burst lasting <code>T</code> seconds ≈ <code>ceil((T / frameDuration) / framesPerPacket)</code>.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Bit budget &amp; overhead</h3>
+          <ul>
+            <li>Payload bits = <code>framesPerPacket × codecBitrate × frameDuration</code>.</li>
+            <li>Overhead bits = preamble (64) + sync (32) + header (96) + CRC (32) = 224 bits in this demo.</li>
+            <li>Total bits/packet = payload + overhead (×2 if FEC code rate = 1/2).</li>
+            <li>Required on-air bitrate = <code>totalBitsPerPacket / (framesPerPacket × frameDuration)</code> (≥13.6&nbsp;kbps with the defaults).</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Latency vs efficiency</h3>
+          <ul>
+            <li>More frames per packet → lower overhead %, higher latency, worse burst loss.</li>
+            <li>Fewer frames per packet → higher overhead %, lower latency, better resilience.</li>
+            <li>Show this in the live demo by adjusting “Frame size” and “frames per packet” (if you expose that control).</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Rate waterfall (teach the conversion)</h3>
+          <ul>
+            <li>Raw PCM rate: e.g., 48&nbsp;kHz × 16-bit mono = 768&nbsp;kbps or 8&nbsp;kHz ×16-bit = 128&nbsp;kbps.</li>
+            <li>Codec rate: configured (e.g., 64&nbsp;kbps µ-law, 8&nbsp;kbps toy vocoder).</li>
+            <li>On-air rate: codec bits + overhead + FEC. Show all three so learners see “where the bits go.”</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>How many packets/frames when Andrew says “This is Andrew, how copy, over?”</h2>
+      <p>Assume you’re using 20 ms codec frames (a common choice). That means 50 frames per second while PTT is down.</p>
+      <div class="timeline">
+        <div class="timeline-row">
+          <span>Codec frame = 20 ms</span>
+          <span>Frames per second = 50</span>
+          <span>Duration = ~3 s speech</span>
+        </div>
+        <div class="timeline-row">
+          <span>Total frames ≈ 50 × 3 = 150</span>
+          <span>Each frame → 1 RF packet (plus overhead)</span>
+        </div>
+        <p class="muted">Digital radios often glue multiple codec frames into a larger over-the-air frame, but this math keeps the story intuitive: “Hold PTT for 3 seconds? Expect roughly 150 packets marching through the live packet canvas.”</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Use this overview with the live demo</h2>
+      <ul>
+        <li>Start a recording on the live page, narrate what each highlighted block here represents.</li>
+        <li>Manipulate the channel controls while pointing to the “Channel” block above to explain jitter/loss.</li>
+        <li>Toggle RF visualizations (AM/FM/BPSK) to contrast the analog vs digital sections.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

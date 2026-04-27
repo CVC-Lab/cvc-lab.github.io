@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Systems &amp; Protocols — DBG Internal</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="systems-protocols">
+  <div id="gate" class="gate">
+    <div class="gate-card" role="dialog" aria-labelledby="gate-title" aria-modal="true">
+      <div class="gate-eyebrow">Locked Internal Page</div>
+      <h2 id="gate-title">Systems &amp; Protocols</h2>
+      <p>Enter the collaborator password to continue. This is a convenience gate, not strong access control.</p>
+      <form id="gate-form" autocomplete="off">
+        <label for="gate-pw">Password</label>
+        <input id="gate-pw" name="password" type="password" autocomplete="current-password" />
+        <div class="gate-actions">
+          <button class="btn" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <main id="protected" class="wrap" hidden>
+    <a class="back" href="index.html">&larr; Internal Workstreams</a>
+    <div class="eyebrow">Locked Internal Page</div>
+    <h1>Systems &amp; Protocols</h1>
+    <p class="lede">
+      Radio simulation, PIN control overlays, SDR and AR integration, cross-autonomy baselines, and cross-repo
+      engineering work.
+    </p>
+
+    <div class="meta">
+      <span><strong>Owner:</strong> Andrew Farell</span>
+      <span><strong>Status:</strong> Active</span>
+      <span><strong>Repos:</strong> radio_sim, dbg-radios</span>
+    </div>
+
+    <section class="section">
+      <h3>radio_sim — RF packet visualizer</h3>
+      <p>
+        Browser-based interactive demo of the full voice transport chain: microphone capture, frame slicing,
+        G.711 &micro;-law or PCM16 codec, header + CRC-16 packetization, a configurable channel (delay, jitter,
+        loss, per-byte bit-flip), AM/FM/BPSK RF preview, jitter buffer, and playback — with live TX/RX
+        waveforms, spectra, a packet grid, and an animated signal pipeline so you can watch individual
+        packets traverse each stage.
+      </p>
+      <p>
+        Useful for narrating how a single spoken frame becomes bytes on the air and back again, and for
+        injecting failures (drops, corruption) to see CRC rejection, reordering, and packet-loss
+        concealment in real time.
+      </p>
+      <div class="cta-row">
+        <a class="btn" href="radio_sim/index.html">Check it out in action &rarr;</a>
+        <a class="btn-ghost" href="radio_sim/overview.html">Read the overview</a>
+      </div>
+      <p class="note">
+        Microphone capture requires a secure origin. Serve the repo root over localhost
+        (<code>python3 -m http.server 8000</code>) rather than opening via <code>file://</code>.
+      </p>
+    </section>
+
+    <section class="section">
+      <h3>dbg-radios — PIN control &amp; MAC protocol stack</h3>
+      <p>
+        Rust + PyO3 radio emulator and research workspace for local PIN (Predictive Intelligent Network)
+        control overlays. Covers CSMA/CA-style local control for Silvus-like behavior and TDMA/TSM-style
+        barrage alignment, with a conformance harness, experiment notebooks, and artifacts that measure
+        packet delivery ratio (PDR) and latency over scenario life.
+      </p>
+      <div class="cta-row">
+        <a class="btn" href="./protocol-docs/" target="_blank" rel="noopener">Read about the protocols &rarr;</a>
+      </div>
+      <ul class="doc-list">
+        <li>
+          <a href="./protocol-docs/pin_controller_api/" target="_blank" rel="noopener">PIN controller API</a>
+          <span class="doc-desc">— interface and integration points for the PIN overlay</span>
+        </li>
+        <li>
+          <a href="./protocol-docs/mac_csma_implementation/" target="_blank" rel="noopener">CSMA MAC deep dive</a>
+          <span class="doc-desc">— CSMA/CA-style local control, Silvus-like behavior</span>
+        </li>
+        <li>
+          <a href="./protocol-docs/mac_tdma_implementation/" target="_blank" rel="noopener">TDMA MAC deep dive</a>
+          <span class="doc-desc">— TDMA/TSM-style barrage alignment and constraints</span>
+        </li>
+        <li>
+          <a href="./protocol-docs/pin_optimal_control_experiment/" target="_blank" rel="noopener">PIN optimal-control experiment runbook</a>
+          <span class="doc-desc">— reproducible PDR/latency experiment</span>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="gate.js"></script>
+</body>
+</html>

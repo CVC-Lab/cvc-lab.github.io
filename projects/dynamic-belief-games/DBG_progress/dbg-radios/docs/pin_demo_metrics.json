@@ -1,0 +1,495 @@
+{
+  "config": {
+    "control_interval_ms": 250.0,
+    "train_episodes": 2,
+    "eval_seeds": [
+      201,
+      202
+    ],
+    "objective": "Latency-first with high-priority PDR floor"
+  },
+  "baseline": [
+    {
+      "seed": 201,
+      "high_pdr": 0.7017608217168012,
+      "high_p95_latency_ms": 8.567988,
+      "overall_pdr": 0.8156084136033025,
+      "overall_p95_latency_ms": 37.653734
+    },
+    {
+      "seed": 202,
+      "high_pdr": 0.6972312117943186,
+      "high_p95_latency_ms": 9.399126,
+      "overall_pdr": 0.8229579698651863,
+      "overall_p95_latency_ms": 36.125866
+    }
+  ],
+  "controlled": [
+    {
+      "seed": 201,
+      "high_pdr": 0.6948019801980198,
+      "high_p95_latency_ms": 9.224488,
+      "overall_pdr": 0.8140896245458216,
+      "overall_p95_latency_ms": 31.884888
+    },
+    {
+      "seed": 202,
+      "high_pdr": 0.7010334054313867,
+      "high_p95_latency_ms": 9.674956,
+      "overall_pdr": 0.83984375,
+      "overall_p95_latency_ms": 30.61933
+    }
+  ],
+  "baseline_mean": {
+    "high_pdr_mean": 0.69949601675556,
+    "high_p95_latency_ms_mean": 8.983557000000001,
+    "overall_pdr_mean": 0.8192831917342445,
+    "overall_p95_latency_ms_mean": 36.8898
+  },
+  "controlled_mean": {
+    "high_pdr_mean": 0.6979176928147033,
+    "high_p95_latency_ms_mean": 9.449722,
+    "overall_pdr_mean": 0.8269666872729108,
+    "overall_p95_latency_ms_mean": 31.252109
+  },
+  "delta": {
+    "high_pdr_mean": -0.001578323940856663,
+    "high_p95_latency_ms_mean": 0.4661649999999984,
+    "overall_pdr_mean": 0.007683495538666318,
+    "overall_p95_latency_ms_mean": -5.637691
+  },
+  "seed_scenarios": [
+    {
+      "seed": 201,
+      "baseline_metrics": {
+        "seed": 201,
+        "high_pdr": 0.7017608217168012,
+        "high_p95_latency_ms": 8.567988,
+        "overall_pdr": 0.8156084136033025,
+        "overall_p95_latency_ms": 37.653734
+      },
+      "controlled_metrics": {
+        "seed": 201,
+        "high_pdr": 0.6948019801980198,
+        "high_p95_latency_ms": 9.224488,
+        "overall_pdr": 0.8140896245458216,
+        "overall_p95_latency_ms": 31.884888
+      },
+      "delta": {
+        "high_pdr": -0.006958841518781456,
+        "high_p95_latency_ms": 0.6564999999999994,
+        "overall_pdr": -0.0015187890574809293,
+        "overall_p95_latency_ms": -5.768846
+      },
+      "baseline_trace": [
+        {
+          "time_ms": 249.99931,
+          "high_pdr": 0.7301587301587301,
+          "high_p95_latency_ms": 7.447286,
+          "overall_pdr": 0.7065404475043029,
+          "overall_p95_latency_ms": 44.29227,
+          "high_queue_mean": 0.5,
+          "best_effort_queue_mean": 4.5,
+          "high_drops": 329,
+          "best_effort_drops": 506,
+          "cca_busy_mean": 0.8397074666918574,
+          "backoff_mean": 6.631217307192312
+        },
+        {
+          "time_ms": 499.99798,
+          "high_pdr": 0.6583333333333333,
+          "high_p95_latency_ms": 8.63161,
+          "overall_pdr": 0.6905982905982906,
+          "overall_p95_latency_ms": 48.022798,
+          "high_queue_mean": 0.5,
+          "best_effort_queue_mean": 4.25,
+          "high_drops": 367,
+          "best_effort_drops": 612,
+          "cca_busy_mean": 0.8513545179737562,
+          "backoff_mean": 6.462091603686064
+        },
+        {
+          "time_ms": 749.9933,
+          "high_pdr": 0.6814345991561181,
+          "high_p95_latency_ms": 8.98001,
+          "overall_pdr": 0.6885813148788927,
+          "overall_p95_latency_ms": 53.063556,
+          "high_queue_mean": 0.0,
+          "best_effort_queue_mean": 5.125,
+          "high_drops": 435,
+          "best_effort_drops": 641,
+          "cca_busy_mean": 0.8451300023165993,
+          "backoff_mean": 6.653905020212929
+        },
+        {
+          "time_ms": 999.992946,
+          "high_pdr": 0.6921296296296297,
+          "high_p95_latency_ms": 8.444788,
+          "overall_pdr": 0.696551724137931,
+          "overall_p95_latency_ms": 60.399824,
+          "high_queue_mean": 0.25,
+          "best_effort_queue_mean": 4.625,
+          "high_drops": 427,
+          "best_effort_drops": 559,
+          "cca_busy_mean": 0.8496957773538386,
+          "backoff_mean": 6.5330302627225105
+        },
+        {
+          "time_ms": 1249.991596,
+          "high_pdr": 0.7207792207792207,
+          "high_p95_latency_ms": 9.332182,
+          "overall_pdr": 0.7098175499565595,
+          "overall_p95_latency_ms": 48.953696,
+          "high_queue_mean": 0.125,
+          "best_effort_queue_mean": 4.125,
+          "high_drops": 393,
+          "best_effort_drops": 644,
+          "cca_busy_mean": 0.8454854576350865,
+          "backoff_mean": 6.626609191173281
+        },
+        {
+          "time_ms": 1499.988328,
+          "high_pdr": 0.7322654462242563,
+          "high_p95_latency_ms": 6.519332,
+          "overall_pdr": 0.7046232876712328,
+          "overall_p95_latency_ms": 49.414478,
+          "high_queue_mean": 0.25,
+          "best_effort_queue_mean": 4.5,
+          "high_drops": 434,
+          "best_effort_drops": 596,
+          "cca_busy_mean": 0.853552861358492,
+          "backoff_mean": 6.647566356412322
+        },
+        {
+          "time_ms": 1500.0,
+          "high_pdr": 0.0,
+          "high_p95_latency_ms": 0.0,
+          "overall_pdr": 0.0,
+          "overall_p95_latency_ms": 0.0,
+          "high_queue_mean": 0.25,
+          "best_effort_queue_mean": 4.5,
+          "high_drops": 0,
+          "best_effort_drops": 0,
+          "cca_busy_mean": 0.875,
+          "backoff_mean": 1.25
+        }
+      ],
+      "controlled_trace": [
+        {
+          "time_ms": 249.99865,
+          "high_pdr": 0.6891701828410689,
+          "high_p95_latency_ms": 8.038504,
+          "overall_pdr": 0.7075555555555556,
+          "overall_p95_latency_ms": 38.643664,
+          "high_queue_mean": 0.0,
+          "best_effort_queue_mean": 1.5,
+          "high_drops": 8,
+          "best_effort_drops": 945,
+          "cca_busy_mean": 0.8262053283304588,
+          "backoff_mean": 12.25576257870908
+        },
+        {
+          "time_ms": 499.994634,
+          "high_pdr": 0.7057728119180633,
+          "high_p95_latency_ms": 11.075886,
+          "overall_pdr": 0.7047619047619048,
+          "overall_p95_latency_ms": 44.524948,
+          "high_queue_mean": 0.625,
+          "best_effort_queue_mean": 3.25,
+          "high_drops": 243,
+          "best_effort_drops": 686,
+          "cca_busy_mean": 0.8488915313065979,
+          "backoff_mean": 7.621755849417273
+        },
+        {
+          "time_ms": 749.989206,
+          "high_pdr": 0.6934097421203438,
+          "high_p95_latency_ms": 10.582552,
+          "overall_pdr": 0.6972639011473963,
+          "overall_p95_latency_ms": 61.096206,
+          "high_queue_mean": 0.25,
+          "best_effort_queue_mean": 3.25,
+          "high_drops": 121,
+          "best_effort_drops": 992,
+          "cca_busy_mean": 0.8329889313089798,
+          "backoff_mean": 9.869087995925664
+        },
+        {
+          "time_ms": 999.98418,
+          "high_pdr": 0.6745810055865922,
+          "high_p95_latency_ms": 9.224488,
+          "overall_pdr": 0.6886543535620053,
+          "overall_p95_latency_ms": 60.452316,
+          "high_queue_mean": 0.375,
+          "best_effort_queue_mean": 2.125,
+          "high_drops": 69,
+          "best_effort_drops": 990,
+          "cca_busy_mean": 0.8444064980052898,
+          "backoff_mean": 11.181635295745611
+        },
+        {
+          "time_ms": 1249.98195,
+          "high_pdr": 0.7046783625730995,
+          "high_p95_latency_ms": 10.172246,
+          "overall_pdr": 0.7256637168141593,
+          "overall_p95_latency_ms": 53.417894,
+          "high_queue_mean": 0.25,
+          "best_effort_queue_mean": 2.875,
+          "high_drops": 103,
+          "best_effort_drops": 925,
+          "cca_busy_mean": 0.8344903708877782,
+          "backoff_mean": 10.38045843128949
+        },
+        {
+          "time_ms": 1499.980596,
+          "high_pdr": 0.7056277056277056,
+          "high_p95_latency_ms": 7.981518,
+          "overall_pdr": 0.7114035087719298,
+          "overall_p95_latency_ms": 60.341626,
+          "high_queue_mean": 0.25,
+          "best_effort_queue_mean": 3.5,
+          "high_drops": 109,
+          "best_effort_drops": 958,
+          "cca_busy_mean": 0.836241138587671,
+          "backoff_mean": 10.477123158299632
+        },
+        {
+          "time_ms": 1500.0,
+          "high_pdr": 0.0,
+          "high_p95_latency_ms": 0.0,
+          "overall_pdr": 0.0,
+          "overall_p95_latency_ms": 0.0,
+          "high_queue_mean": 0.125,
+          "best_effort_queue_mean": 3.5,
+          "high_drops": 0,
+          "best_effort_drops": 0,
+          "cca_busy_mean": 0.875,
+          "backoff_mean": 7.0625
+        }
+      ],
+      "controlled_action_counts": [
+        15,
+        10,
+        0,
+        31
+      ]
+    },
+    {
+      "seed": 202,
+      "baseline_metrics": {
+        "seed": 202,
+        "high_pdr": 0.6972312117943186,
+        "high_p95_latency_ms": 9.399126,
+        "overall_pdr": 0.8229579698651863,
+        "overall_p95_latency_ms": 36.125866
+      },
+      "controlled_metrics": {
+        "seed": 202,
+        "high_pdr": 0.7010334054313867,
+        "high_p95_latency_ms": 9.674956,
+        "overall_pdr": 0.83984375,
+        "overall_p95_latency_ms": 30.61933
+      },
+      "delta": {
+        "high_pdr": 0.0038021936370681297,
+        "high_p95_latency_ms": 0.27582999999999913,
+        "overall_pdr": 0.016885780134813677,
+        "overall_p95_latency_ms": -5.5065360000000005
+      },
+      "baseline_trace": [
+        {
+          "time_ms": 249.998984,
+          "high_pdr": 0.7155555555555555,
+          "high_p95_latency_ms": 7.229938,
+          "overall_pdr": 0.7036395147313691,
+          "overall_p95_latency_ms": 42.777704,
+          "high_queue_mean": 0.25,
+          "best_effort_queue_mean": 5.125,
+          "high_drops": 368,
+          "best_effort_drops": 580,
+          "cca_busy_mean": 0.8454503772901156,
+          "backoff_mean": 6.563143107825167
+        },
+        {
+          "time_ms": 499.996314,
+          "high_pdr": 0.7062634989200864,
+          "high_p95_latency_ms": 6.591768,
+          "overall_pdr": 0.6963667820069204,
+          "overall_p95_latency_ms": 55.537828,
+          "high_queue_mean": 0.375,
+          "best_effort_queue_mean": 4.25,
+          "high_drops": 397,
+          "best_effort_drops": 675,
+          "cca_busy_mean": 0.843977408285503,
+          "backoff_mean": 6.795096554121223
+        },
+        {
+          "time_ms": 749.993324,
+          "high_pdr": 0.691358024691358,
+          "high_p95_latency_ms": 11.67913,
+          "overall_pdr": 0.6845238095238095,
+          "overall_p95_latency_ms": 47.47649,
+          "high_queue_mean": 0.25,
+          "best_effort_queue_mean": 4.5,
+          "high_drops": 425,
+          "best_effort_drops": 572,
+          "cca_busy_mean": 0.846247982957169,
+          "backoff_mean": 6.6795436242250315
+        },
+        {
+          "time_ms": 999.991314,
+          "high_pdr": 0.6997742663656885,
+          "high_p95_latency_ms": 13.820402,
+          "overall_pdr": 0.6914335664335665,
+          "overall_p95_latency_ms": 47.563558,
+          "high_queue_mean": 0.625,
+          "best_effort_queue_mean": 4.375,
+          "high_drops": 442,
+          "best_effort_drops": 669,
+          "cca_busy_mean": 0.8454946392867726,
+          "backoff_mean": 6.546596966902689
+        },
+        {
+          "time_ms": 1249.989978,
+          "high_pdr": 0.6941964285714286,
+          "high_p95_latency_ms": 9.2867,
+          "overall_pdr": 0.7083700440528634,
+          "overall_p95_latency_ms": 47.001914,
+          "high_queue_mean": 0.375,
+          "best_effort_queue_mean": 3.75,
+          "high_drops": 402,
+          "best_effort_drops": 565,
+          "cca_busy_mean": 0.8453801913502583,
+          "backoff_mean": 6.608869946804054
+        },
+        {
+          "time_ms": 1499.987964,
+          "high_pdr": 0.6782077393075356,
+          "high_p95_latency_ms": 9.923082,
+          "overall_pdr": 0.7026086956521739,
+          "overall_p95_latency_ms": 45.999514,
+          "high_queue_mean": 0.375,
+          "best_effort_queue_mean": 5.0,
+          "high_drops": 385,
+          "best_effort_drops": 537,
+          "cca_busy_mean": 0.8467008992973819,
+          "backoff_mean": 6.543714439576217
+        },
+        {
+          "time_ms": 1500.0,
+          "high_pdr": 0.0,
+          "high_p95_latency_ms": 0.0,
+          "overall_pdr": 0.0,
+          "overall_p95_latency_ms": 0.0,
+          "high_queue_mean": 0.375,
+          "best_effort_queue_mean": 5.0,
+          "high_drops": 0,
+          "best_effort_drops": 0,
+          "cca_busy_mean": 0.0,
+          "backoff_mean": 5.375
+        }
+      ],
+      "controlled_trace": [
+        {
+          "time_ms": 249.997692,
+          "high_pdr": 0.7410071942446043,
+          "high_p95_latency_ms": 11.714766,
+          "overall_pdr": 0.7346189164370982,
+          "overall_p95_latency_ms": 33.192772,
+          "high_queue_mean": 0.25,
+          "best_effort_queue_mean": 1.375,
+          "high_drops": 0,
+          "best_effort_drops": 1048,
+          "cca_busy_mean": 0.8445837601983737,
+          "backoff_mean": 12.633986147119733
+        },
+        {
+          "time_ms": 499.995132,
+          "high_pdr": 0.6703296703296703,
+          "high_p95_latency_ms": 11.928028,
+          "overall_pdr": 0.6692573402417962,
+          "overall_p95_latency_ms": 45.9752,
+          "high_queue_mean": 0.25,
+          "best_effort_queue_mean": 2.375,
+          "high_drops": 77,
+          "best_effort_drops": 1033,
+          "cca_busy_mean": 0.8406638066374315,
+          "backoff_mean": 10.090625154706228
+        },
+        {
+          "time_ms": 749.995108,
+          "high_pdr": 0.7065217391304348,
+          "high_p95_latency_ms": 8.408826,
+          "overall_pdr": 0.6960698689956332,
+          "overall_p95_latency_ms": 51.884266,
+          "high_queue_mean": 0.375,
+          "best_effort_queue_mean": 2.875,
+          "high_drops": 203,
+          "best_effort_drops": 825,
+          "cca_busy_mean": 0.8387263800852341,
+          "backoff_mean": 9.031412145595086
+        },
+        {
+          "time_ms": 999.992936,
+          "high_pdr": 0.6878453038674033,
+          "high_p95_latency_ms": 10.964662,
+          "overall_pdr": 0.710455764075067,
+          "overall_p95_latency_ms": 46.288564,
+          "high_queue_mean": 0.875,
+          "best_effort_queue_mean": 3.0,
+          "high_drops": 69,
+          "best_effort_drops": 1045,
+          "cca_busy_mean": 0.8387527613696407,
+          "backoff_mean": 10.73944498506048
+        },
+        {
+          "time_ms": 1249.98823,
+          "high_pdr": 0.7043740573152338,
+          "high_p95_latency_ms": 9.674956,
+          "overall_pdr": 0.6954585930543188,
+          "overall_p95_latency_ms": 51.859034,
+          "high_queue_mean": 0.25,
+          "best_effort_queue_mean": 2.375,
+          "high_drops": 100,
+          "best_effort_drops": 917,
+          "cca_busy_mean": 0.82958930582425,
+          "backoff_mean": 10.456200260643504
+        },
+        {
+          "time_ms": 1499.9878,
+          "high_pdr": 0.6987270155586988,
+          "high_p95_latency_ms": 9.077248,
+          "overall_pdr": 0.6977777777777778,
+          "overall_p95_latency_ms": 66.475366,
+          "high_queue_mean": 0.75,
+          "best_effort_queue_mean": 2.375,
+          "high_drops": 71,
+          "best_effort_drops": 928,
+          "cca_busy_mean": 0.831306252720395,
+          "backoff_mean": 10.822565678224858
+        },
+        {
+          "time_ms": 1500.0,
+          "high_pdr": 0.0,
+          "high_p95_latency_ms": 0.0,
+          "overall_pdr": 0.0,
+          "overall_p95_latency_ms": 0.0,
+          "high_queue_mean": 0.75,
+          "best_effort_queue_mean": 2.375,
+          "high_drops": 0,
+          "best_effort_drops": 0,
+          "cca_busy_mean": 0.0,
+          "backoff_mean": 0.25
+        }
+      ],
+      "controlled_action_counts": [
+        12,
+        15,
+        0,
+        29
+      ]
+    }
+  ],
+  "highlight_seed": 202,
+  "highlight_reason": "Selected seed 202 due to strongest combined high-priority PDR gain and overall latency reduction."
+}
