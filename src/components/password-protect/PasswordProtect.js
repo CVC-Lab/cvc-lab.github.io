@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
-import { usePassword } from './PasswordContext'
+import {
+  getRoutePasswordForPath,
+  PENDING_REDIRECT_KEY,
+  usePassword,
+} from './PasswordContext'
 
 const styles = {
   wrapper: {
@@ -37,6 +41,12 @@ const styles = {
     color: 'red',
     marginTop: '10px',
   },
+  helperText: {
+    color: '#6b6b6b',
+    marginTop: '10px',
+    fontSize: '14px',
+    textAlign: 'center',
+  },
 }
 
 const PasswordProtect = ({ location }) => {
@@ -45,13 +55,24 @@ const PasswordProtect = ({ location }) => {
   const [error, setError] = useState('')
   const { login } = usePassword()
 
-  const redirectTo = location?.state?.redirectTo || '/internal'
+  const pendingRedirect =
+    typeof window !== 'undefined' ? window.sessionStorage.getItem(PENDING_REDIRECT_KEY) : null
+  const redirectTo = location?.state?.redirectTo || pendingRedirect || '/internal'
+  const allowEmptyPassword = Boolean(location?.state?.allowEmptyPassword)
+  const routePassword = location?.state?.routePassword || getRoutePasswordForPath(redirectTo)
 
   const onSubmit = event => {
     event.preventDefault()
-    const success = login(password)
+    const success = login(password, {
+      allowEmptyPassword,
+      routePassword,
+      transientPath: allowEmptyPassword || routePassword ? redirectTo : undefined,
+    })
 
     if (success) {
+      if (typeof window !== 'undefined') {
+        window.sessionStorage.removeItem(PENDING_REDIRECT_KEY)
+      }
       navigate(redirectTo)
     } else {
       setError('Incorrect password. Please try again.')
@@ -84,6 +105,9 @@ const PasswordProtect = ({ location }) => {
         </button>
 
         {error && <p style={styles.errorMessage}>{error}</p>}
+        {allowEmptyPassword && (
+          <p style={styles.helperText}>Temporary gate: press Enter to continue.</p>
+        )}
       </form>
     </div>
   )
@@ -93,6 +117,8 @@ PasswordProtect.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
       redirectTo: PropTypes.string,
+      allowEmptyPassword: PropTypes.bool,
+      routePassword: PropTypes.string,
     }),
   }),
 }

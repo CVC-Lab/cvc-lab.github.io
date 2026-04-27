@@ -45,7 +45,7 @@ ThemeSelector.propTypes = {
       summary: PropTypes.string.isRequired,
     })
   ).isRequired,
-  activeThemeId: PropTypes.string.isRequired,
+  activeThemeId: PropTypes.string,
   onSelectTheme: PropTypes.func.isRequired,
 }
 

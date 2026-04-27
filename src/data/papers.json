@@ -10050,7 +10050,7 @@
     "Abstract": "",
     "RegisterDate": "",
     "sortOrder": "",
-    "ProjectLink": "",
+    "ProjectLink": "https://cvc-lab.github.io/projects/differential-and-pointwise-control-rl",
     "OtherAuthors": ""
   },
   {
@@ -10072,7 +10072,7 @@
     "Abstract": "",
     "RegisterDate": "",
     "sortOrder": "",
-    "ProjectLink": "",
+    "ProjectLink": "/projects/scalable-robust-bayesian-co-clustering",
     "OtherAuthors": ""
   },
   {
@@ -10116,7 +10116,7 @@
     "Abstract": "",
     "RegisterDate": "",
     "sortOrder": "",
-    "ProjectLink": "",
+    "ProjectLink": "https://cvc-lab.github.io/projects/subsurface-modeling",
     "OtherAuthors": ""
   },
   {
@@ -10138,7 +10138,7 @@
     "Abstract": "",
     "RegisterDate": "",
     "sortOrder": "",
-    "ProjectLink": "",
+    "ProjectLink": "https://cvc-lab.github.io/projects/pathway-anchored-pd-clustering",
     "OtherAuthors": ""
   },
   {
@@ -10160,7 +10160,7 @@
     "Abstract": "",
     "RegisterDate": "",
     "sortOrder": "",
-    "ProjectLink": "",
+    "ProjectLink": "https://cvc-lab.github.io/projects/integrated-pd-precision-stratification",
     "OtherAuthors": ""
   },
   {
@@ -10204,7 +10204,7 @@
     "Abstract": "",
     "RegisterDate": "",
     "sortOrder": "",
-    "ProjectLink": "",
+    "ProjectLink": "https://cvc-lab.github.io/projects/subsurface-modeling",
     "OtherAuthors": ""
   },
   {
@@ -10226,7 +10226,7 @@
     "Abstract": "",
     "RegisterDate": "",
     "sortOrder": "",
-    "ProjectLink": "",
+    "ProjectLink": "https://cvc-lab.github.io/projects/subsurface-modeling",
     "OtherAuthors": ""
   },
   {
@@ -10242,13 +10242,13 @@
     "PublicationType": "Conference Presentations & Publications",
     "PublishedDateMonth": "1",
     "PublishedDateYear": "2025",
-    "PDFLink": "NULL",
+    "PDFLink": "https://openreview.net/pdf?id=W2TVe58Rp2",
     "LocalPDFLink": "",
     "PSLink": "",
     "Abstract": "",
     "RegisterDate": "",
     "sortOrder": "",
-    "ProjectLink": "",
+    "ProjectLink": "https://cvc-lab.github.io/projects/theoretical-bound",
     "OtherAuthors": ""
   },
   {
@@ -10270,7 +10270,7 @@
     "Abstract": "",
     "RegisterDate": "",
     "sortOrder": "",
-    "ProjectLink": "",
+    "ProjectLink": "https://cvc-lab.github.io/projects/scalable-risk-averse-well-placement",
     "OtherAuthors": ""
   },
   {
@@ -10281,7 +10281,7 @@
     "CatID4": "",
     "CatID_gen": "",
     "Authors": "Chandrajit Bajaj",
-    "Title": "Computer Algebra Meets Hamiltonian Geometry: A Tribute to Laureano Gonz\u00e1lez-Vega on his 60th Birthday",
+    "Title": "Computer Algebra Meets Hamiltonian Geometry",
     "Location": "Maple Transactions, 2026",
     "PublicationType": "Journal Publications",
     "PublishedDateMonth": "3",
@@ -10292,7 +10292,7 @@
     "Abstract": "",
     "RegisterDate": "",
     "sortOrder": "",
-    "ProjectLink": "",
+    "ProjectLink": "/projects/computer-algebra-hamiltonian-geometry",
     "OtherAuthors": ""
   },
   {
@@ -10314,7 +10314,7 @@
     "Abstract": "",
     "RegisterDate": "",
     "sortOrder": "",
-    "ProjectLink": "",
+    "ProjectLink": "https://cvc-lab.github.io/projects/phast",
     "OtherAuthors": ""
   },
   {

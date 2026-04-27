@@ -234,6 +234,24 @@ module.exports = [
     date: '2026-01-01',
   },
   {
+    name: 'Computer Algebra Meets Hamiltonian Geometry',
+    description:
+      'Symbolic computation for deriving, simplifying, and visualizing Hamiltonian and Lie-Poisson dynamical systems.',
+    img_name: 'publications/PUB_Computer Algebra',
+    link: '/projects/computer-algebra-hamiltonian-geometry',
+    tags: ['Scientific ML'],
+    date: '2025-11-15',
+  },
+  {
+    name: 'Scalable Robust Bayesian Co-Clustering',
+    description:
+      'Variational co-clustering for discovering robust row and column structure in noisy, sparse, and high-dimensional data.',
+    img_name: 'publications/PUB_Compositional ELBOs',
+    link: '/projects/scalable-robust-bayesian-co-clustering',
+    tags: ['Scientific ML'],
+    date: '2025-04-08',
+  },
+  {
     name: 'Differential and Pointwise Control RL',
     description:
       'Sample-efficient reinforcement learning that combines differential control updates with pointwise trajectory corrections.',

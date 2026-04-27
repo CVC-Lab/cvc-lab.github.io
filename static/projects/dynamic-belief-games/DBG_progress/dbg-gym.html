@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DBG Gym &amp; Visualization — DBG Internal</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="dbg-gym">
+  <div id="gate" class="gate">
+    <div class="gate-card" role="dialog" aria-labelledby="gate-title" aria-modal="true">
+      <div class="gate-eyebrow">Locked Internal Page</div>
+      <h2 id="gate-title">DBG Gym &amp; Visualization</h2>
+      <p>Enter the collaborator password to continue. This is a convenience gate, not strong access control.</p>
+      <form id="gate-form" autocomplete="off">
+        <label for="gate-pw">Password</label>
+        <input id="gate-pw" name="password" type="password" autocomplete="current-password" />
+        <div class="gate-actions">
+          <button class="btn" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <main id="protected" class="wrap" hidden>
+    <a class="back" href="index.html">&larr; Internal Workstreams</a>
+    <div class="eyebrow">Locked Internal Page</div>
+    <h1>DBG Gym &amp; Visualization</h1>
+    <p class="lede">
+      3D simulation, digital-twin views, terrain/material controls, and interactive scenario visualization.
+    </p>
+
+    <div class="meta">
+      <span><strong>Owners:</strong> Brian Kim / Logan Kronfrost</span>
+      <span><strong>Status:</strong> Active</span>
+    </div>
+
+    <section class="section">
+      <h3>Scope</h3>
+      <ul>
+        <li>3D simulation environment and scene graph</li>
+        <li>Digital-twin views for live and replayed scenarios</li>
+        <li>Terrain and material controls</li>
+        <li>Interactive scenario visualization and playback</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h3>Current progress</h3>
+      <p>Placeholder — add the latest build notes, screenshots, and demo links here.</p>
+    </section>
+
+    <section class="section">
+      <h3>References</h3>
+      <p>Placeholder — link design docs, asset pipelines, and relevant tickets here.</p>
+    </section>
+  </main>
+
+  <script src="gate.js"></script>
+</body>
+</html>

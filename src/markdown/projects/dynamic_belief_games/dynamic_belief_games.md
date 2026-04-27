@@ -1,6 +1,6 @@
 ---
-title: 'Dynamic Belief Games'
-slug: '/projects/dynamic-belief-games'
+title: 'Dynamic Belief Games (Archive)'
+slug: '/projects/dynamic-belief-games-archive'
 date: '2024-09-12'
 ---
 
@@ -74,7 +74,7 @@ This project is funded by the Army.
 - Chandrajit Bajaj (Principal Investigator) [(website)](https://www.cs.utexas.edu/~bajaj/cvc/index.shtml)
 - Ryan Farell (Lead Research Scientist) [(website)](https://rfarell.github.io/index.html)
 - Andrew Farell
-- Logan Kronfrost
+- Logan Kronforst
 - Brian Kim
 - Callihan Bertley
 

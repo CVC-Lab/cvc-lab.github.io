@@ -14,6 +14,6 @@ export default ResearchThemesPage
 export const Head = () => (
   <Seo
     title="Research Themes"
-    description="Experimental CVC homepage prototype focused on Healthcare AI, World Models, AI for Science, Scientific Simulation, Computational Imaging, interpretable modeling, multimodal learning, and dynamic systems."
+    description="Experimental CVC homepage prototype focused on Healthcare AI, World Models, AI for Science, interpretable modeling, multimodal learning, scientific simulation, computational imaging, and dynamic systems."
   />
 )

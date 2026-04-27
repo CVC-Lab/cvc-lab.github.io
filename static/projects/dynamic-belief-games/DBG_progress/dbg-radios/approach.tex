@@ -1,0 +1,534 @@
+\documentclass[doc.tex]{subfiles}
+\begin{document}
+
+% ===== Revized mathematical_framework.tex ===============================
+\section{Dynamic Belief Games Framework}
+\label{sec:mathematical_framework}
+
+Here we formalize the \emph{Dynamic Belief Games (DBG)} that govern
+a \textbf{single–waveform} TrellisWare Technologies (TSM) radio MANET equipped
+with the proprietary \emph{Barrage Relay} mechanism
+and an eight‑hop relay budget. Three hierarchical agents interact over
+this network:
+
+\begin{enumerate}
+  \item \textbf{NetTop.}  
+        Receives belief states ${b_k^{(i)}}$ from Obs
+        and issues \emph{overlay} actions
+        $A^{\mathrm{NetTop}}_k=\{\Delta p_k,\;\pi_k\}$ at each
+        decision epoch $k=0,1,\dots,T{-}1$.
+        %
+        \begin{itemize}
+          \item $\Delta p_k$ — micro‑repositioning vectors that move
+                a selectable subset of nodes within the mission
+                envelope (e.g.\ $\lVert\Delta p_k\rVert \le v_{\max}\Delta t$).
+          \item $\pi_k$ — queue‑priority weights (or drop policies)
+                that reorder each radio’s application‑layer transmit
+                queue so mission‑critical traffic seizes the next
+                available TDMA slot.
+        \end{itemize}
+        %
+        Because link formation is implicit in the firmware, NetTop
+        \emph{cannot} add or delete links directly; it instead
+        bends the connectivity graph through geometry and traffic
+        shaping.
+
+  \item \textbf{Obs.}  
+        Chooses sensing actions $a^{\mathrm{sense}}_k$ (e.g.\ activate
+        an RSSI sniffer, query queue depths) that trade energy or
+        bandwidth cost for higher-fidelity belief states $b_k^{(i)}$. A
+        Bayesian filter assimilates observations
+        $o_{k+1}\!\sim\!Z(\,\cdot\mid s_{k+1})$ into a
+        robust POMDP belief vector.
+
+  \item \textbf{ScenarioGen.}  
+        Acts as the Stackelberg \emph{Leader}, selecting adversarial
+        parameters
+$\theta_k=$ \{jamming power, traffic mix, mobility profile, GPS error\}
+        every $H$ steps to maximize a regret‑style training objective
+        and expose the followers to worst‑case conditions.
+\end{enumerate}
+
+The interaction forms a tri‑level Stackelberg game (training reduces the physical tri‑level interaction to a two‑level Leader–Follower optimization by treating Obs + NetTop as a composite follower): the ScenarioGen (Leader) commits to $\{\theta_k\}_{k=0}^{T-1}$; Obs the set of decentralized Obs Agents (collectively Follower 1) best‑respond with their respective sensing actions $\{a_k^{\mathrm{sense}(i)}\}_{i=1}^N$ (and prediction fidelity actions $\{a_\tau^{\text{pred}(i)}\}_{i=1}^N$); finally, given their local beliefs $b_k^{(i)}$ and prediction bundles $\mathcal{B}_k^{(i)}$, the set of NetTop Agents (collectively Follower 2) select their actions $\{\{\Delta p_k^{(i)}, \pi_k^{(i)}\}\}_{i=1}^N$ to maximize mission utility subject to TSM constraints.
+
+\subsection{TSM MANET Model}
+\label{sec:tsm_model}
+
+Let $G_k=(V,E_k)$ be the connectivity graph induced at time $k$ by the
+TSM radios’ fixed TDMA plan:
+
+\begin{itemize}
+  \item $V$ — static set of radios carried by soldiers or UAV relays.
+  \item $(i,j)\in E_k$ iff the Euclidean separation
+        $d_{ij}(p_k)\le d_{\max}$ \emph{and} line‑of‑sight is not
+        obstructed ($\mathrm{LOS}_{ij}=1$).
+\item $\rho_k = (\text{\# TDMA slots used at }k)/S$.
+\end{itemize}
+
+Each packet may traverse at most $H_{\max}=8$ hops and must compete for
+$S$ TDMA slots per frame. The state tuple at epoch $k$ is
+$S_k=\{p_k,q_k\}$, where $p_k\in\mathbb{R}^{2|V|}$ denotes node
+positions and $q_k$ the vector of per‑flow queue occupancies.
+
+% ------------------------------------------------------------------
+% Updated NetTop sub–section (units clarified)
+% ------------------------------------------------------------------
+
+\paragraph{NetTop optimization problem}
+
+\vspace*{-1.5ex}
+\begin{equation}
+\label{eq:nettop_opt}
+\boxed{
+\begin{aligned}
+\max_{\Delta p_k,\;\pi_k}\;
+&\sum_{k=0}^{T-1}
+  \Bigl[
+      U(q_k)
+      -\gamma_1\,\|\Delta p_k\|_1
+      -\gamma_2\,\mathrm{Cost}_{\text{queue}}(\pi_k)
+  \Bigr] \\[4pt]
+\text{s.t.}\quad
+&\Delta p_k^{(i)} \in \mathcal{P}^{(i)}
+  =\{\Delta p:\|\Delta p\|_2\le v_{\max}\Delta t\},                       \\[2pt]
+&\pi_k^{(i)}      \in \Delta^{F}\subset[0,1]^{F+1},                       \\[2pt]
+&\rho_k\le\rho_{\max},\qquad
+  \mathrm{Hops}(s,t\mid G_k)\le 8,                                        \\[2pt]
+&p_{k+1}=p_k+\Delta p_k,\qquad
+  G_{k+1}=G(p_{k+1}),\qquad
+  k=0,\dots,T-1.
+\end{aligned}}
+\end{equation}
+
+Here \(U(q_k)=\mathbb{E}\bigl[\text{priority pkts frame}^{-1}\,|\,q_k,G_k,\pi_k\bigr]\)
+is the expected \emph{per-frame} priority throughput,  
+\(\|\Delta p_k\|_1\) is the aggregate displacement applied during epoch~\(k\),
+and \(\mathrm{Cost}_{\text{queue}}(\pi_k)\) penalizes re-ordering or dropping traffic.
+
+\medskip
+\noindent\textbf{Dimensional consistency.}  
+Because \(U(q_k)\) carries units \(\text{pkts}\,\text{frame}^{-1}\),
+every term in the bracket must share those units:
+
+\begin{itemize}
+\setlength\itemsep{2pt}
+  \item \(\|\Delta p_k\|_1\) has units \(\text{m}\);
+        therefore \(\gamma_1\) must have units
+        \(\text{pkts}\,\text{frame}^{-1}\,\text{m}^{-1}\).
+  \item If \(\mathrm{Cost}_{\text{queue}}(\pi_k)\) is normalized
+        as a \emph{per-frame} loss in packets,
+        it already has units \(\text{pkts}\,\text{frame}^{-1}\);
+        hence \(\gamma_2\) is dimensionless.%
+        \footnote{If your implementation instead measures
+                 \(\mathrm{Cost}_{\text{queue}}\) in raw packets
+                 (stock, not rate), then set
+                 \(\gamma_2\) to \(\text{frame}^{-1}\).}
+\end{itemize}
+
+With these conventions the bracketed expression is expressed in
+\(\text{pkts}\,\text{frame}^{-1}\); summing over \(T\) frames yields an
+objective in \(\text{pkts}\), i.e.\ \emph{total net packet-equivalent
+utility} over the mission horizon.  This quantity is physically
+interpretable but not dimensionless; a dimensionless objective would
+require further normalization (e.g.\ division by a reference throughput).
+
+\medskip
+\noindent\textbf{Penalty interpretation.}  
+The hop-count constraint is non-convex; during training we relax it with
+a smooth barrier term
+\(\eta\,\mathrm{ReLU}\!\bigl(\mathrm{Hops}(s,t)-8\bigr)\)
+and project the final solution back onto the feasible set
+\(\{\mathrm{Hops}\!\le 8\}\).
+
+
+\paragraph{Observability and Scenario-Generator objectives}
+
+For each radio \(i\) the local Obs agent solves
+\[
+  \max_{a^{\mathrm{sense}(i)}_k}
+  \sum_{k=0}^{T-1}
+  \Bigl[
+    \lambda\,Q\bigl(b_k^{(i)}\bigr)
+    -\delta\,\mathrm{Cost}_{\mathrm{sense}}\!\bigl(a^{\mathrm{sense}(i)}_k\bigr)
+  \Bigr],
+  \quad
+  a^{\mathrm{sense}(i)}_k \in \mathcal{A}_{\mathrm{sense}}^{(i)}(S_k),
+\]
+while the centralized Scenario Generator selects
+\(\{\theta_k\}\) to maximize the adversarial reward
+\(\alpha\,\mathcal{E}_{\mathrm{train}}+\beta\,\mathcal{A}_{\mathrm{test}}\)
+subject to \(\theta_k\in\Theta\).
+
+\subsection{Stackelberg Game Interpretation}
+
+The tri‑level program
+\[
+  \text{Leader}(\theta)
+  \;\triangleright\;
+  \{\text{Obs Agent}^{(i)}(a_k^{\text{sense}(i)}, a_\tau^{\text{pred}(i)};\theta)\}_{i=1}^N
+  \;\triangleright\;
+  \{\text{NetTop Agent}^{(i)}(\Delta p_k^{(i)},\pi_k^{(i)}\!;\,b_k^{(i)}, \mathcal{B}_k^{(i)})\}_{i=1}^N
+\]
+admits a \emph{Stackelberg Equilibrium} in which
+
+\begin{enumerate*}[label=(\alph*)]
+  \item the Scenario Generator cannot improve its adversarial payoff by
+        perturbing $\theta$,
+  \item each Observability Agent$^{(i)}$ attains maximum local belief fidelity given
+        $\theta$ and its chosen sensing/prediction actions, 
+  \item the decentralized NetTop Agents collectively attain maximum network utility, with each NetTop Agent$^{(i)}$ acting based on its local belief $b_k^{(i)}$ and local prediction bundle $\mathcal{B}_k^{(i)}$. 
+\end{enumerate*}
+
+Under mild regularity (convex action sets, Lipschitz utilities), an SE
+exists and can be approximated by nested gradient‑descent/ascent with
+implicit‑differentiation of the lower‑level KKT systems
+\parencite{fazel2021implicit}. Hop‑count constraint non‑convexity is relaxed with a differentiable penalty; projection enforces \( \text{Hops}\le 8 \) post‑optimization. Key regularity conditions (convexity, Lipschitz gradients, compact action sets) follow \parencite[Fazel et al., 2021, Assumptions 2–4]{fazel2021implicit}.
+
+\subsection{Agent Definitions and Local Decision Processes}
+\label{sec:agent_defs}
+
+We cast the DBG architecture as a \emph{decentralized partially‑observable Markov decision process} (Dec‑POMDP) executed by
+$N=|V|$ TSM radios. Each radio $i\!\in\!\{1,\dots,N\}$ runs an independent \textit{local NetTop policy} $\pi_\theta^{(i)}$\footnote{While the core decision-making framework detailed here relies on beliefs ($b_k^{(i)}$) and prediction bundles ($\mathcal{B}_k^{(i)}$) generated locally by each agent based on its own observations and internal models, this does not preclude the possibility of opportunistic information exchange. Radios may share compressed summaries of their beliefs or predictions to enhance broader situational awareness or to support specific cooperative functions. However, the fundamental policy execution and strategic decision-making (e.g., for sensing or network topology actions) remain decentralized and are primarily driven by these locally derived information sources.}. Policies interact only through the shared wireless medium and a lightweight message bus (e.g.\ TDMA‑slot beacons); no central controller exists at run time. During training, however, we employ \textbf{centralized training, decentralized execution (CTDE)}: a global critic evaluates fleet‑level utility and back‑propagates gradients to every $\pi_\theta^{(i)}$.
+
+\vspace{0.4em}
+\paragraph{Global state and local observations}
+
+\begin{itemize}
+  \item \textbf{State}\;
+        $S_k=\{p_k,\,q_k\}\in\mathcal{S}$ collects node positions
+        $p_k\!\in\!\mathbb{R}^{2N}$ and per‑flow queue occupancies
+        $q_k\!\in\!\mathbb{R}^{N\times F}$.
+  \item \textbf{Local observation}\;
+        $o_k^{(i)}=\mathcal{H}^{(i)}(S_k,\xi_k^{(i)})\in\mathcal{O}^{(i)}$
+        comprises (i) the radio’s own queue vector $q_k^{(i,:)}$,
+        (ii) RSSI/preamble metrics from neighbors, and
+        (iii) optional two‑hop summaries broadcast each TDMA frame.
+  \item \textbf{Local belief}\;
+        \[
+          b_k^{(i)}(s)\approx\sum_{m=1}^{M}w_k^{(i,m)}\delta\!\bigl(s-s_k^{(i,m)}\bigr)\quad(\text{particle filter})
+        \]
+        is updated on‑board via a Rao–Blackwellized particle or variational filter.
+\end{itemize}
+
+\vspace{0.4em}
+\paragraph{Local action space}
+
+\[
+a_k^{(i)}=\bigl(\Delta p_k^{(i)},\,\pi_k^{(i)}\bigr)
+  \in\mathcal{A}^{(i)}
+  =\underbrace{\{\Delta p:\|\Delta p\|\le v_{\max}\Delta t\}}_{\mathcal{P}}
+   \times
+   \underbrace{\Delta^{F}}_{\mathcal{Q}},
+\]
+where
+\begin{enumerate*}[label=(\roman*)]
+  \item $\Delta p_k^{(i)}\in\mathbb{R}^2$ is a displacement bounded by the mobility envelope, and
+  \item $\pi_k^{(i)}$ assigns weights to the $F$ traffic classes plus a drop ratio for non‑priority packets.
+\end{enumerate*}
+
+\vspace{0.4em}
+\paragraph{Fleet‑level objective (centralized critic)}
+
+\begin{equation}
+\label{eq:dec_pomdp_objective}
+\boxed{
+\max_{\pi^{(1)},\dots,\pi^{(N)}}\;
+\mathbb{E}\!\Biggl[
+   \sum_{k=0}^{T-1}
+     \Bigl(
+       U(q_{k+1})
+       -\!\sum_{i=1}^N
+          \bigl[
+            \gamma_1\lVert\Delta p_k^{(i)}\rVert_1
+            +\gamma_2\,\mathrm{Cost}_{\text{queue}}\!\bigl(\pi_k^{(i)}\bigr)
+          \bigr]
+     \Bigr)
+   \,\Bigm|\,S_0\Biggr]
+}
+\end{equation}
+
+subject to waveform‑level constraints
+\[
+  \rho_k\le\rho_{\max},
+  \qquad
+  \mathrm{Hops}(s,t\!\mid\!G_k)\le 8
+  \quad\forall s,t\!\in\!V,\;k,
+  \quad\text{with }G_k=G(p_k).
+\]
+
+Here \(U(q_{k+1})\) is the expected priority throughput per TDMA frame \emph{after} applying queue actions, \(\rho_k\) is slot utilization, and
+\[
+\mathrm{Cost}_{\text{queue}}(\pi)=\sum_{f}(1-\pi_f)\,q_f
+\]
+penalizes divergence from FIFO and packet drops.
+
+% ---------------------------------------------------------------------
+\subsubsection*{(a) Local NetTop Agent \(\pi^{(i)}_{\theta}\)}
+
+\begin{itemize}
+  \item \emph{Policy:}\;
+        $a_k^{(i)}=\pi^{(i)}_{\theta}\bigl(b_k^{(i)},\,\mathcal{B}_k^{(i)}\bigr)$,
+        where $\mathcal{B}_k^{(i)}=\{b_k^{\text{mob}(i)},b_k^{\text{traf}(i)},b_k^{\text{pl}(i)}\}$ is a three‑component prediction bundle shared with all radios.
+  \item \emph{Learning:}\;
+        gradients from the global critic optimizing
+        \eqref{eq:dec_pomdp_objective} (e.g.\ QMIX or MAPPO).
+  \item \emph{Execution:}\;
+        fully decentralized; each radio uses
+        \(b_k^{(i)}\), the shared \(\mathcal{B}_k^{(i)}\),
+        and a 1‑hop beacon carrying neighbors’ queue‑hashes (~8 bytes per frame). Actions are timestamped and applied at the frame boundary, matching TSM slot alignment and preserving causality.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+\subsubsection*{(b) Obs Agent (Follower 1)}
+
+Each local Observability (Obs) Agent on radio $i$ maintains its own composite predictive belief bundle
+\[
+  \mathcal{B}_k^{(i)}=\bigl\{
+      b_k^{\text{mob}(i)},\;
+      b_k^{\text{traf}(i)},\;
+      b_k^{\text{pl}(i)}
+  \bigr\},
+\]
+updated every macro step \(\tau\) via three sub‑models:
+
+\begin{enumerate}[label=(\roman*)]
+  \item \textbf{Node‑mobility predictor}\;
+        Kalman ensemble filter on GPS/IMU beacons; horizon
+        \(H_{\text{mob}}\).
+  \item \textbf{Traffic‑demand predictor}\;
+        Transformer/LSTM fed by recent queue telemetry; horizon
+        \(H_{\text{traf}}\).
+  \item \textbf{Path‑loss octree}\;
+        Online‑pruned octree storing $(x,y,z)\!\mapsto\!\hat{PL}(d)$ and updated with Bayesian ridge on opportunistic SNR reports.
+\end{enumerate}
+
+At each macro tick, each local Obs agent $i$ selects a fidelity vector \(a_\tau^{\text{pred}(i)}\in\{0,1,2\}^3\) (resolution levels for its three sub‑models) by solving:
+\[
+\boxed{
+  \max_{a_\tau^{\text{pred}(i)}}
+      \lambda\,Q\!\bigl(\mathcal{B}_{\tau+1}^{(i)}\bigr)
+      -\delta\,\mathrm{Cost}_{\text{pred}}\!\bigl(a_\tau^{\text{pred}(i)}\bigr),
+}
+\]
+where \(Q\) is a weighted CRPS of its forecasts and
+\[
+  \mathrm{Cost}_{\text{pred}}(a^{\text{pred}(i)})=\text{CPU}^{a^{\text{pred}(i)}_1}+\text{RF}^{a^{\text{pred}(i)}_2} 
+\]
+tallies its local CPU/RF overhead. The resulting local prediction bundle $\mathcal{B}_k^{(i)}$ is then used by the NetTop policy on the same radio $i$.
+
+% ---------------------------------------------------------------------
+\subsubsection*{(c) Local Belief Filter}
+
+Embedded in every radio, this module refines \(b_k^{(i)}\) using kernels:
+\[
+  T(s'|s,A_k)=\Pr(S_{k+1}\!=\!s'\mid S_k\!=\!s,A_k),\quad
+  Z(o|s)=\Pr(o_{k+1}\!=\!o\mid S_{k+1}\!=\!s).
+\]
+
+Optional two‑hop summaries afford limited data fusion without a central server.
+
+% ---------------------------------------------------------------------
+\subsubsection*{(d) Scenario‑Generator (training‑time leader)}
+
+During \emph{training only}, a central server samples
+\(\theta_k=\bigl(P_{\text{jam}},\,\text{mobility\_seed},\,
+                 \text{traffic\_mix}\bigr)\)
+and drives the environment simulator \(\mathcal{M}(\theta_k)\) to craft
+an adversarial curriculum.  No leader exists during live deployment.
+
+\subsection{Stackelberg Game Formulation}
+\label{sec:stackelberg_formulation}
+
+During \emph{training} the three agents interact in a two–level
+\emph{Stackelberg game}. At each macro step
+\(\tau=0,1,\dots,K{-}1\) the move order is  
+
+\[
+  \underbrace{\text{Scenario Generator}}_{\textbf{Leader}}
+  \;\longrightarrow\;
+  \underbrace{\text{Obs Agent}}_{\textbf{Follower 1}}
+  \;\longrightarrow\;
+  \underbrace{\text{NetTop policies on }N\text{ radios}}_{\textbf{Follower 2}}.
+\]
+
+The micro‑level per‑frame actions of the NetTop policies unfold inside
+the environment simulator \(\mathcal{M}\) for the next \(H\) steps
+after each Leader move.
+
+\subsubsection{Game structure}
+
+Figure \ref{fig:stackelberg-hierarchy} shows the information flow.
+Solid black arrows indicate top‑down influence; the dashed red arrow
+aggregates the fleet‑level return \( \mathcal{R}(\theta_\tau) \) back to
+the Leader.
+
+\subsubsection{Mathematical formulation}
+
+Let \(\theta_\tau\in\Theta\) be the adversarial parameters chosen by the
+Scenario Generator for macro epoch \(\tau\), and let  \(\mathcal{R}(\theta_\tau)\) denote the sum of mission utilities
+generated by the follower policies during the ensuing simulator
+roll‑out of length \(H\):
+
+\[
+  \mathcal{R}(\theta_\tau)=\sum_{k=\tau H}^{(\tau+1)H-1}\bigl[U(q_k)-\gamma_1\|\Delta p_k\|_1-\gamma_2 \mathrm{Cost}_{\text{queue}}(\pi_k)\bigr].
+\]
+
+\vspace{0.4em}
+\paragraph{Leader (Scenario Generator)}
+
+\[
+\boxed{
+  \max_{\theta_0,\dots,\theta_{K-1}}
+      \sum_{\tau=0}^{K-1}
+        \Bigl[
+          \alpha\,\mathbb{V}\!\bigl[\mathcal{R}(\theta_\tau)\bigr]
+          +\beta\,\mathbb{E}\!\bigl[-\mathcal{R}(\theta_\tau)\bigr]
+        \Bigr],
+  \qquad
+  \theta_\tau\in\Theta,
+}
+\]
+where the variance term drives curriculum diversity and the expectation
+term seeks worst‑case episodes. Variance and mean are estimated over \(M\) simulator roll‑outs per \(\theta_\tau\).
+
+\vspace{0.4em}
+\paragraph{Follower 1 (Decentralized Obs Agents)} 
+
+Given \(\theta_\tau\), each decentralized Observability Agent $i \in \{1, \dots, N\}$ (collectively Follower 1) selects a fidelity vector
+\(a_\tau^{\text{pred}(i)}\in\{0,1,2\}^3\) for its local mobility, traffic, and
+path‑loss predictors by solving: 
+
+\[
+\boxed{
+  \max_{a_\tau^{\text{pred}(i)}}
+    \lambda\,Q\!\bigl(\mathcal{B}_{\tau+1}^{(i)}\bigr) 
+    -\delta\,\mathrm{Cost}_{\text{pred}}\!\bigl(a_\tau^{\text{pred}(i)}\bigr), 
+}
+\]
+producing its local prediction bundle \(\mathcal{B}_{\tau+1}^{(i)}\).
+
+\vspace{0.4em}
+\paragraph{Follower 2 (decentralized NetTop policies)}
+
+Conditioned on \(\theta_\tau\), and their respective local beliefs $b_k^{(i)}$ (derived from $a_k^{\text{sense}(i)}$) and local prediction bundles $\mathcal{B}_k^{(i)}$ (derived from $a_k^{\text{pred}(i)}$), the set of
+per‑radio policies \(\{\{\pi_k^{(i)}, \Delta p_k^{(i)}\}\}_{i=1}^N\) (collectively Follower 2) maximizes the fleet‑level 
+objective of Eq. \eqref{eq:dec_pomdp_objective} inside the simulator:
+
+\[
+\boxed{
+  \{\{\pi_k^{(i)}, \Delta p_k^{(i)}\}\}_{i=1}^N
+  =\arg\max_{\{\pi^{(1)}, \Delta p^{(1)}\},\dots,\{\pi^{(N)}, \Delta p^{(N)}\}} 
+    \mathbb{E}_{\mathcal{M}(\theta_\tau)}
+      \bigl[\mathcal{R}(\theta_\tau)\bigr].
+}
+\]
+
+\vspace{0.4em}
+\paragraph{Tri‑level optimization view}
+
+Collecting all levels, the game reads 
+\[
+  \theta
+  \;\triangleright\;
+  \{a_\tau^{\text{pred}(i)}(\theta)\}_{i=1}^N 
+  \;\triangleright\;
+  \{\{\pi_k^{(i)}, \Delta p_k^{(i)}\}(\theta, \{a_\tau^{\text{pred}(j)}\}_{j=1}^N, b_k^{(i)}, \mathcal{B}_k^{(i)})\}_{i=1}^N, 
+\]
+where each lower‑level block is the best response to the levels above.
+
+\subsubsection{Stackelberg equilibrium}
+
+A \emph{Stackelberg equilibrium} (SE) is a tuple
+\(\bigl(\theta^\star, \{a^{\text{pred}(i)\star}\}_{i=1}^N, \{\{\pi_k^{(i)\star}, \Delta p_k^{(i)\star}\}\}_{i=1}^N \bigr)\) 
+such that  
+
+\begin{enumerate*}[label=(\roman*)]
+  \item the Scenario Generator cannot improve its objective by deviating
+        from \(\theta^\star\) given the followers’ best responses,
+  \item each decentralized Observability Agent$^{(i)}$ (acting as Follower 1) maximizes its local prediction fidelity
+        at minimal cost given \(\theta^\star\) by choosing \(a^{\text{pred}(i)\star}\), producing \(\mathcal{B}_k^{(i)\star}\),
+  \item the fleet of decentralized NetTop policies (acting as Follower 2) maximizes mission utility given
+        \(\theta^\star\) and the set of resulting local beliefs and prediction bundles \(\{b_k^{(i)\star}, \mathcal{B}_k^{(i)\star}\}_{i=1}^N\).
+\end{enumerate*}
+
+Under convex action sets and Lipschitz utilities an SE exists and can
+be approached by nested gradient descent/ascent with implicit
+differentiation of the lower‑level KKT systems
+\parencite{fazel2021implicit}. In practice, we alternate one
+meta‑gradient on \(\theta_\tau\) with multiple CTDE updates on the two
+follower layers, yielding a robust curriculum without requiring an
+explicit bi‑level optimizer.
+
+The complete KKT system for the lower‑level CTDE optimizer is provided in Appendix~A.
+
+\clearpage
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{draft-20250417/figures/DBG-Gym-V2-2025-04-15-Training.jpg}
+    \caption[Stackelberg Game Architecture]{%
+      \textbf{Stackelberg Game Architecture.}%
+      \ A centralized \emph{Scenario Generator} (\textbf{Leader}) crafts the training
+      curriculum. Each TSM radio hosts two local policies—%
+      an \emph{Obs Agent} and a \emph{NetTop Agent}—which together form
+      the decentralized \textbf{Followers}.%
+      \ The local Obs Agent on each radio maintains its predictive belief \(b^{\text{obs}}\) (representing its local belief $b_k^{(i)}$) and generates its local prediction bundle \(\mathcal{B}^{(i)}\); the local NetTop Agent uses these to maintain its operational belief \(b^{\text{net}}\) and issues
+      movement \(\Delta p^{(i)}\) \& queue \(\pi^{(i)}\) actions.%
+      \ Black arrows show top–down
+      influence during training; the dashed red arrow brings aggregated
+      utility back to the Leader. Ellipsis indicates the architecture
+      scales to an arbitrary number of radios, ending with \emph{Radio N}.%
+    }
+    \label{fig:stackelberg-hierarchy}
+\end{figure}
+
+\clearpage
+\begin{table}[htbp]
+\caption{Principal notation used in Sections~\ref{sec:mathematical_framework}–\ref{sec:stackelberg_formulation}.}
+\centering
+\renewcommand{\arraystretch}{1.15} % Increased arraystretch slightly for better spacing
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{3.2cm}% Adjusted column width slightly
+                                 X%
+                                 >{\raggedright\arraybackslash}p{3.6cm}@{}}% Adjusted column width slightly
+\toprule
+\textbf{Symbol} & \textbf{Meaning} & \textbf{Units / Domain} \\
+\midrule
+$V$                     & Set of radio nodes (soldiers, UAV relays)             & $\lvert V\rvert=N$ \\
+$E_k$                   & Link set at epoch $k$; $(i,j)\!\in\!E_k$ iff LOS and range & — \\
+$G_k=(V,E_k)$           & Connectivity graph induced by TSM firmware            & — \\
+$p_k\in\mathbb{R}^{2N}$ & Concatenated $(x,y)$ positions of all nodes           & m \\
+$q_k\in\mathbb{R}^{N\times F}$ & Queue occupancies per node $\times$ traffic class & packets \\
+$S_k=\{p_k,q_k\}$       & Physical system state at epoch $k$                    & — \\
+$b_k^{(i)}$             & Local belief state for radio $i$ (posterior over $S_k$) & probability simplex \\
+$\mathcal{B}_k^{(i)}$   & Local prediction bundle for radio $i$ (mobility, traffic, path-loss) & Varies (see text) \\
+$\Delta p_k$            & NetTop‑recommended node displacements (collection for nodes) & m \\
+$\pi_k$                 & Queue‑weight / drop vector (collection for nodes)     & $[0,1]^{F+1}$ per node \\
+$A_k^{\text{NetTop}}=\{\Delta p_k,\pi_k\}$ & NetTop action tuple (fleet-level)   & — \\
+$a^{\text{sense}(i)}_k$ & Sensing action chosen by local Obs Agent on radio $i$ & categorical \\
+$\theta_k$              & Scenario parameters (jamming power, traffic mix, …)   & (see text) \\
+$d_{ij}(\cdot)$         & Euclidean distance between nodes $i$ and $j$          & m \\
+$d_{\max}$              & Radio range for link existence                        & m \\
+$H_{\max}$              & Maximum hop budget (TSM Barrage Relay)                & $8$ hops \\
+$S$                     & TDMA slots per frame                                  & slots frame$^{-1}$ \\
+$\rho_k$                & Slot‑utilization ratio at epoch $k$                   & $[0,1]$ \\
+$\rho_{\max}$           & Utilization ceiling                                   & $[0,1]$ \\
+$v_{\max}$              & Mobility speed limit during repositioning             & m s$^{-1}$ \\
+$\Delta t$              & Duration of a decision epoch                          & s \\
+$U(q_k)$                & Expected priority packets delivered per frame         & packets frame$^{-1}$ \\
+$\mathrm{Cost}_{\text{queue}}(\pi_k)$ & Penalty for re‑ordering / drops (per-frame or total, see text) & packets or pkts frame$^{-1}$ \\
+$\gamma_1$              & Trade‑off weight for mobility cost                    & $\text{pkts}\cdot\text{frame}^{-1}\cdot\text{m}^{-1}$ (see Sec.~\ref{sec:tsm_model}) \\
+$\gamma_2$              & Trade‑off weight for queue cost                       & (see Sec.~\ref{sec:tsm_model} \& dimensional consistency) \\ % Corrected & to \&
+$\lambda,\delta$        & Weights in local Obs‑agent objective                  & dimensionless \\
+$\alpha,\beta$          & Scenario‑generator curriculum weights                 & dimensionless \\
+$\mathcal{T},\mathcal{R},Z$ & POMDP transition, reward, observation kernels     & — \\
+$T$                     & Number of micro-epochs (frames)                       & integer \\
+$H$                     & Roll-out length after each Leader move                & integer \\
+$K$                     & Number of macro epochs                                & integer \\
+$F$                     & Number of traffic classes (excluding drop)            & integer \\
+$\theta,\phi$           & Policy and critic parameters                          & (see text) \\
+$M$                     & Simulator roll‑outs used to estimate mean/variance    & integer \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\end{document}

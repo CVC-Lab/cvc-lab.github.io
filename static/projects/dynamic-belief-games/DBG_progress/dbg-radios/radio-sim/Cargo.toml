@@ -1,0 +1,3 @@
+[workspace]
+members = ["crates/radio-sim-core", "crates/radio-sim-py"]
+resolver = "2"

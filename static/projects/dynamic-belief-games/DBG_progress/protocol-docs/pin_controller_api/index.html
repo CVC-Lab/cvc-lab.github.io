@@ -1,0 +1,2022 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Tactical radio emulator documentation (CSMA, TDMA/TSM, local control overlay)">
+      
+      
+        <meta name="author" content="DBG Radios">
+      
+      
+      
+        <link rel="prev" href="../API_interface/">
+      
+      
+        <link rel="next" href="../pin_marl_formulation/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>PIN Controller API - radio-sim</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pin-controller-api" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="radio-sim" class="md-header__button md-logo" aria-label="radio-sim" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            radio-sim
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PIN Controller API
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href=".." class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../getting_started/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../architecture_overview/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../protocols/" class="md-tabs__link">
+          
+  
+  
+  Protocol Stack
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../environment_propagation/" class="md-tabs__link">
+          
+  
+  
+  Environment
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../performance_optimizations/" class="md-tabs__link">
+          
+  
+  
+  Performance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../conformance/" class="md-tabs__link">
+          
+  
+  
+  Validation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../known_issues/" class="md-tabs__link">
+          
+  
+  
+  Maintenance
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="radio-sim" class="md-nav__button md-logo" aria-label="radio-sim" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    radio-sim
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation_workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../API_interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PIN Controller API
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PIN Controller API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-radio-sees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Radio Sees
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contract-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contract Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-facing-learner-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training-Facing Learner Contract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#episode-objective-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Episode Objective Boundary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable-overlay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable Overlay
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end-loop-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End-to-End Loop (Recommended)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observation-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observation Schema
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#action-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Action Schema
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#action-effects-in-csma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Action Effects in CSMA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#edge-cases-and-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Edge Cases and Pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimal-reference-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimal Reference Loop
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pin_marl_formulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PIN MARL Formulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pin_learning_algorithm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PIN Learning Algorithm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../technical_specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Specification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocol Stack
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Protocol Stack
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protocols/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocol Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mac_csma_implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CSMA/CA MAC Deep Dive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mac_tdma_implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TDMA/TSM MAC Deep Dive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Environment
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../environment_propagation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Channel & Propagation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Performance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../performance_optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance Optimizations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../conformance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conformance Harness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pin_optimal_control_experiment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PIN Optimal-Control Experiment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maintenance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Maintenance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../known_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-radio-sees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Radio Sees
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contract-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contract Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-facing-learner-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training-Facing Learner Contract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#episode-objective-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Episode Objective Boundary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable-overlay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable Overlay
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end-loop-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End-to-End Loop (Recommended)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observation-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observation Schema
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#action-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Action Schema
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#action-effects-in-csma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Action Effects in CSMA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#edge-cases-and-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Edge Cases and Pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimal-reference-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimal Reference Loop
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="pin-controller-api">PIN Controller API<a class="headerlink" href="#pin-controller-api" title="Permanent link">&para;</a></h1>
+<p>This page defines the runtime contract for external PIN controllers interacting with <code>radio_sim</code>.</p>
+<p>This page covers the concrete runtime API surface. For the broader distributed PIN/MARL framing, richer observation model, and red-text status split, see <a href="../pin_marl_formulation/">PIN MARL Formulation</a>.
+For the recommended v1 learning algorithm and Stackelberg training setup, see <a href="../pin_learning_algorithm/">PIN Learning Algorithm</a>.</p>
+<p>Implementation surfaces:</p>
+<ul>
+<li><code>crates/radio-sim-py/src/sim.rs</code></li>
+<li><code>crates/radio-sim-core/src/control.rs</code></li>
+<li><code>crates/radio-sim-core/src/sim/runner.rs</code></li>
+</ul>
+<h2 id="what-the-radio-sees">What the Radio Sees<a class="headerlink" href="#what-the-radio-sees" title="Permanent link">&para;</a></h2>
+<p>The controller receives one interval-aggregated <code>LocalObservation</code> per node every control interval. The CSMA observation surface covers seven axes (full schema in <a href="#observation-schema">Observation Schema</a> below): queue state, backoff state, sender-local interval counters, destination-side delivery summaries, node-level contention indicators, the set of streams currently queued, and per-neighbor RSSI/PDR topology hints.</p>
+<p>Beyond the radio's own boundary, the broader PIN sensing pipeline can layer in scenario- and scene-derived signals that the radio itself cannot measure:</p>
+<ul>
+<li><span class="status-planned">own position and recent motion history</span></li>
+<li><span class="status-planned">terrain, building, road, or other 3D scene summaries</span></li>
+<li><span class="status-planned">traffic, role, and mission-context features</span></li>
+</ul>
+<p>Those broader channels are not part of the per-radio runtime API; they enter through scenario and feature-pipeline integrations described in <a href="../pin_marl_formulation/">PIN MARL Formulation</a>.</p>
+<h2 id="contract-summary">Contract Summary<a class="headerlink" href="#contract-summary" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Controller runs outside the core simulator.</li>
+<li>Control is per-node local action only.</li>
+<li>Caller owns cadence (step timing + when observations and actions are exchanged).</li>
+<li>Action and observation field names are the canonical CSMA control surface defined in <a href="../mac_csma_implementation/#local-control-surface">CSMA/CA MAC Deep Dive — Local Control Surface</a>. This page describes the runtime API shape; that page describes the surface itself.</li>
+</ul>
+<h2 id="training-facing-learner-contract">Training-Facing Learner Contract<a class="headerlink" href="#training-facing-learner-contract" title="Permanent link">&para;</a></h2>
+<p>For the first learning milestone, the runtime API does not need to change. The learner lives outside the simulator and owns the state needed to turn the existing observation stream into a recurrent policy input.</p>
+<p>The learner/controller owns:</p>
+<ul>
+<li>a per-node observation history buffer over several recent <code>LocalObservation</code> windows</li>
+<li>the previous action taken at each node</li>
+<li>recurrent hidden state for each radio policy</li>
+<li>feature stacking and normalization before the policy forward pass</li>
+<li>a bounded action transform that maps policy outputs back into <code>LocalAction</code></li>
+</ul>
+<p>The flow is:</p>
+<pre class="mermaid"><code>flowchart LR
+    O[LocalObservation windows] --&gt; H[history buffer]
+    H --&gt; E[feature stack and normalize]
+    A[previous actions] --&gt; E
+    E --&gt; R[recurrent encoder]
+    R --&gt; P[policy head]
+    P --&gt; T[bound and rescale]
+    T --&gt; L[LocalAction]</code></pre>
+<p>Practical interpretation:</p>
+<ul>
+<li><code>LocalObservation</code> stays the runtime boundary.</li>
+<li>The controller appends its own history and hidden state on the client side.</li>
+<li>Action outputs can be continuous inside the learner, but they must be projected back into the bounded per-axis ranges of <code>LocalAction</code> (EDCA tuning, queue management, admission, stream-level, PHY tuning, and routing — see <a href="#action-schema">Action Schema</a>) before calling <code>apply_local_actions(...)</code>.</li>
+<li>A learner that only uses the EDCA-tuning axis does not need richer simulator hooks for the first pass.</li>
+</ul>
+<p>For the algorithmic details behind this controller-side learner, see <a href="../pin_learning_algorithm/">PIN Learning Algorithm</a>.</p>
+<h2 id="episode-objective-boundary">Episode Objective Boundary<a class="headerlink" href="#episode-objective-boundary" title="Permanent link">&para;</a></h2>
+<p>The runtime API is intentionally not the same thing as the training objective.</p>
+<p>At runtime, the controller gets:</p>
+<ul>
+<li>one <code>LocalObservation</code> per radio per control interval</li>
+<li>one <code>LocalAction</code> per radio to apply at that interval</li>
+</ul>
+<p>At training time, the learner must additionally maintain episode-level state that does not live inside the simulator API:</p>
+<ul>
+<li>per-radio history buffers and recurrent hidden state</li>
+<li>rollout storage for actor/critic updates</li>
+<li>per-radio episode reward accumulators for mission packet IDs and latency samples</li>
+</ul>
+<p>That split matters because the canonical MARL reward in the theory docs is:</p>
+<div class="arithmatex">\[
+R_i(\xi)
+=
+w_{\mathrm{pdr}} \, \mathrm{PDR}_i^{\mathrm{mission}}(\xi)
+- w_{\mathrm{lat}} \, \bar{L}_{95,i}^{\mathrm{mission}}(\xi)
+\]</div>
+<p>which is computed over the full gameplay episode, not from one <code>LocalObservation</code> alone.</p>
+<p>Practical consequence:</p>
+<ul>
+<li><code>get_local_observations()</code> is the step-level policy input</li>
+<li><code>apply_local_actions(...)</code> is the step-level control output</li>
+<li><span class="arithmatex">\(R_i\)</span> is a trainer-side episode-end computation layered on top of rollout data</li>
+</ul>
+<p>The current Python bindings expose global run summaries and per-step local telemetry. A future trainer can compute exact per-radio <span class="arithmatex">\(R_i\)</span> either from packet/event accounting or from an extended episode-summary binding, but that computation should remain conceptually outside the runtime action API.</p>
+<h2 id="enable-overlay">Enable Overlay<a class="headerlink" href="#enable-overlay" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">radio_sim</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">radio_sim</span><span class="o">.</span><span class="n">SimConfig</span><span class="p">()</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">set_csma_mac</span><span class="p">()</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">set_control_overlay_enabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">set_control_observation_interval_ms</span><span class="p">(</span><span class="mf">250.0</span><span class="p">)</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">radio_sim</span><span class="o">.</span><span class="n">Simulation</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+</code></pre></div>
+<p>Notes:</p>
+<ul>
+<li><code>observation_interval_ms</code> is validated metadata; it does not auto-schedule steps.</li>
+<li><code>run_until_ms(...)</code> uses absolute simulation time.</li>
+</ul>
+<h2 id="end-to-end-loop-recommended">End-to-End Loop (Recommended)<a class="headerlink" href="#end-to-end-loop-recommended" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>sequenceDiagram
+    participant C as Controller
+    participant S as Simulation
+    participant M as MAC[i]
+
+    loop until S.is_finished()
+        C-&gt;&gt;S: run_until_ms(current_time_ms + dt)
+        S--&gt;&gt;C: time advanced
+        C-&gt;&gt;S: get_local_observations()
+        S-&gt;&gt;M: snapshot counters + queue lengths
+        S--&gt;&gt;C: observations list (interval deltas)
+        C-&gt;&gt;C: policy(observations)
+        C-&gt;&gt;S: apply_local_actions(actions[])
+        S-&gt;&gt;M: apply actions up to min(actions, nodes)
+    end</code></pre>
+<h2 id="observation-schema">Observation Schema<a class="headerlink" href="#observation-schema" title="Permanent link">&para;</a></h2>
+<p><code>get_local_observations()</code> returns one <code>LocalObservation</code> per node every control interval. Per-AC fields are dictionaries keyed by <code>vo / vi / be / bk</code>. Counters are interval deltas over the observation window.</p>
+<p>The seven observation axes (canonical names defined in <a href="../mac_csma_implementation/#observation-axes">CSMA/CA MAC Deep Dive — Observation axes</a>):</p>
+<div class="highlight"><pre><span></span><code>{
+  node_id,
+  time_ns,
+
+  # 1. Per-AC queue state.
+  queue_len:            {vo, vi, be, bk},
+  head_of_line_age_ns:  {vo, vi, be, bk},
+  retry_count:          {vo, vi, be, bk},
+
+  # 2. Per-AC backoff state.
+  backoff_stage:        {vo, vi, be, bk},
+  backoff_slots:        {vo, vi, be, bk},
+  current_cw_exp:       {vo, vi, be, bk},
+
+  # 3. Per-AC interval counters (sender-local).
+  tx_attempts:          {vo, vi, be, bk},
+  tx_success:           {vo, vi, be, bk},
+  retries:              {vo, vi, be, bk},
+  ack_timeouts:         {vo, vi, be, bk},
+  drops:                {vo, vi, be, bk},
+  internal_collisions:  {vo, vi, be, bk},
+  txop_grants:          {vo, vi, be, bk},
+  txop_uses:            {vo, vi, be, bk},
+
+  # 4. Per-AC interval delivery (destination-side).
+  deliveries:           {vo, vi, be, bk},
+  p95_latency_ns:       {vo, vi, be, bk},
+
+  # 5. Node-level.
+  collisions,
+  cca_busy_fraction,
+  mean_backoff_slots,
+
+  # 6. Stream-level.
+  streams_present:      {stream_id: bool, ...},
+
+  # 7. Topology hints.
+  neighbor_rssi_dbm:    {neighbor_id: float, ...},
+  link_pdr:             {neighbor_id: float, ...},
+}
+</code></pre></div>
+<p>Important measurement note:</p>
+<ul>
+<li><code>tx_attempts</code>, <code>tx_success</code>, <code>retries</code>, <code>ack_timeouts</code>, and <code>drops</code> are node-local MAC interval counters.</li>
+<li><code>deliveries</code> and <code>p95_latency_ns</code> are destination-side interval delivery statistics for that node.</li>
+</ul>
+<p>A sender-centric reward should not assume every field has identical sender/receiver semantics.</p>
+<p>Observation behavior:</p>
+<pre class="mermaid"><code>flowchart TD
+    A[take_local_observations] --&gt; B{overlay enabled?}
+    B -- no --&gt; Z[return empty list]
+    B -- yes --&gt; C[snapshot MAC counters]
+    C --&gt; D[compute deltas vs previous snapshot]
+    D --&gt; E[collect queue + deliveries + p95 latency]
+    E --&gt; F[emit LocalObservation per node]
+    F --&gt; G[reset interval stats]</code></pre>
+<h2 id="action-schema">Action Schema<a class="headerlink" href="#action-schema" title="Permanent link">&para;</a></h2>
+<p><code>apply_local_actions(actions)</code> expects one <code>LocalAction</code> dictionary per node. The full schema covers all six action axes from the canonical surface:</p>
+<div class="highlight"><pre><span></span><code>{
+  # 1. EDCA tuning, per access category. Deltas around the configured baseline.
+  aifsn_delta:          {vo, vi, be, bk},
+  cw_min_exp_delta:     {vo, vi, be, bk},
+  cw_max_exp_delta:     {vo, vi, be, bk},
+  txop_limit_us_delta:  {vo, vi, be, bk},
+
+  # 2. Queue management, per access category. Counts and ms thresholds.
+  purge_oldest:         {vo, vi, be, bk},
+  purge_older_than_ms:  {vo, vi, be, bk},
+  head_bypass:          {vo, vi, be, bk},
+
+  # 3. Admission control, per access category.
+  max_queue_len:        {vo, vi, be, bk},
+  rate_cap_pps:         {vo, vi, be, bk},
+
+  # 4. Stream-level controls (cross-cuts AC).
+  pause_stream:         [stream_id, ...],
+  resume_stream:        [stream_id, ...],
+  drop_stream:          [stream_id, ...],
+  reclassify_stream:    {stream_id: target_ac, ...},
+
+  # 5. PHY tuning, per node (slow-cadence).
+  tx_power_w,
+  mcs_lock:             {vo, vi, be, bk},
+
+  # 6. Routing and topology, per node.
+  neighbor_blacklist:   [neighbor_id, ...],
+  link_cost_override:   {neighbor_id: cost, ...},
+  next_hop_pref:        {dest_id: neighbor_id, ...},
+}
+</code></pre></div>
+<p>Action behavior:</p>
+<pre class="mermaid"><code>flowchart LR
+    A[apply_local_actions] --&gt; B{overlay enabled?}
+    B -- no --&gt; N[Python ValueError or core no-op]
+    B -- yes --&gt; C[apply for each index up to min count]
+    C --&gt; D{MAC type}
+    D -- CSMA --&gt; E[apply CSMA local action]
+    D -- TDMA --&gt; T[apply TDMA local action]</code></pre>
+<h2 id="action-effects-in-csma">Action Effects in CSMA<a class="headerlink" href="#action-effects-in-csma" title="Permanent link">&para;</a></h2>
+<p>Effects of each axis on the CSMA MAC behavior:</p>
+<ul>
+<li><strong>EDCA tuning.</strong> <code>aifsn_delta</code> changes how soon each AC contends after the medium becomes idle. <code>cw_min_exp_delta</code> and <code>cw_max_exp_delta</code> change the initial and maximum EDCAF contention windows. <code>txop_limit_us_delta</code> changes how long the winning AC may continue transmitting inside a granted TXOP.</li>
+<li><strong>Queue management.</strong> <code>purge_oldest</code> and <code>purge_older_than_ms</code> remove queued packets without transmitting them; the runtime emits per-AC drop events for each purged packet so the agent's next observation reflects the new state. <code>head_bypass</code> re-orders the front of the AC queue once.</li>
+<li><strong>Admission control.</strong> <code>max_queue_len</code> re-checks the AC queue on next enqueue and rejects new arrivals over the cap; <code>rate_cap_pps</code> gates new arrivals through a token bucket.</li>
+<li><strong>Stream-level controls.</strong> <code>pause_stream</code> blocks new arrivals tagged with that <code>stream_id</code>; <code>drop_stream</code> flushes already-queued packets for the stream; <code>reclassify_stream</code> changes the AC mapping for subsequent enqueues from that stream.</li>
+<li><strong>PHY tuning.</strong> <code>tx_power_w</code> updates the transmit power used for subsequent TX events; <code>mcs_lock</code> caps the data-rate selection per AC.</li>
+<li><strong>Routing.</strong> Becomes live alongside the multi-hop CSMA routing layer; today CSMA is single-hop and these fields are accepted but inert.</li>
+</ul>
+<p>Internal bounds and clamps are documented per axis in <a href="../mac_csma_implementation/#action-axes">CSMA/CA MAC Deep Dive — Action axes</a>.</p>
+<h2 id="implementation-status">Implementation Status<a class="headerlink" href="#implementation-status" title="Permanent link">&para;</a></h2>
+<p>What currently ships in the runtime:</p>
+<ul>
+<li>Action axes 1–4: EDCA tuning, queue management, admission control, and stream-level controls are all wired in <code>crates/radio-sim-core/src/mac/csma/csma_mac.rs</code>. Each agent-induced drop emits a <code>MetricEvent::Drop</code> with a reason like <code>agent_purge_oldest</code>, <code>agent_purge_older_than</code>, <code>agent_drop_stream</code>.</li>
+<li>Observation axes 1–6: populated by <code>crates/radio-sim-core/src/sim/runner.rs::take_local_observations</code> and surfaced in Python by <code>crates/radio-sim-py/src/sim.rs::get_local_observations</code>. Axis 6 is the <code>streams_present</code> list of stream IDs currently queued at this node.</li>
+<li><code>action_outcomes</code> block in every observation: per-axis interval counts of how many times each control action actually fired (e.g., <code>purged_oldest</code>, <code>admission_drops</code>, <code>rate_cap_drops</code>, <code>stream_paused_drops</code>). Lets the agent verify its actions took effect.</li>
+<li>Partial actions: the Python <code>apply_local_actions</code> parser accepts dicts with any subset of action keys. Missing keys leave that axis at its <code>LocalAction::default()</code> no-op value, so a controller can send only the axes it wants to touch each tick.</li>
+</ul>
+<p>Being built (the schema lists the fields; the runtime catches up incrementally):</p>
+<ul>
+<li>Action axis 5 (PHY tuning: <code>tx_power_w</code>, <code>mcs_lock</code>).</li>
+<li>Action axis 6 (routing) waits on the multi-hop CSMA routing layer.</li>
+<li>Observation axis 7 (topology hints: <code>neighbor_rssi_dbm</code>, <code>link_pdr</code>).</li>
+<li>TDMA: the action and observation schemas are the same shape, but the TDMA MAC currently treats <code>apply_local_action</code> as a no-op. The TDMA control surface gets its own design pass.</li>
+</ul>
+<p>Baseline guarantee: when <code>control_overlay.enabled = false</code>, the runtime never calls <code>apply_local_action</code> and the radio behaves exactly as the baseline emulator. When the overlay is enabled but the controller sends <code>LocalAction::default()</code> every tick, behavior is byte-identical to the baseline (pinned by the <code>overlay_silent_matches_baseline</code> integration test).</p>
+<p>The doc describes the surface a PIN/RL controller targets. Code drift against this surface should be reported as a bug or filed as a follow-up implementation step.</p>
+<h2 id="edge-cases-and-pitfalls">Edge Cases and Pitfalls<a class="headerlink" href="#edge-cases-and-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Overlay disabled: <code>get_local_observations()</code> returns empty; Python <code>apply_local_actions()</code> raises <code>ValueError</code>.</li>
+<li>Action count mismatch: only first <code>min(len(actions), num_nodes)</code> entries are applied.</li>
+<li>First observation immediately after init typically has zero counter deltas.</li>
+<li>A useful controller should retain several recent observation windows and previous actions on its own side; the runtime API does not store that history.</li>
+</ul>
+<h2 id="minimal-reference-loop">Minimal Reference Loop<a class="headerlink" href="#minimal-reference-loop" title="Permanent link">&para;</a></h2>
+<p>The full action schema is dense, so most controllers fill in only the axes they use. Unset axes default to neutral (no change). The example below sets a small EDCA bias plus one stream-level action:</p>
+<div class="highlight"><pre><span></span><code><span class="n">NEUTRAL_AC</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;vo&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;vi&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;be&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;bk&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+<span class="k">while</span> <span class="ow">not</span> <span class="n">sim</span><span class="o">.</span><span class="n">is_finished</span><span class="p">():</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">run_until_ms</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">current_time_ms</span><span class="p">()</span> <span class="o">+</span> <span class="mf">250.0</span><span class="p">)</span>
+    <span class="n">obs</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">get_local_observations</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">obs</span><span class="p">:</span>
+        <span class="k">continue</span>
+
+    <span class="n">actions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ob</span> <span class="ow">in</span> <span class="n">obs</span><span class="p">:</span>
+        <span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="c1"># EDCA tuning: deprioritize BE one AIFS slot, give VO 1 ms more TXOP.</span>
+                <span class="s2">&quot;aifsn_delta&quot;</span><span class="p">:</span>         <span class="p">{</span><span class="s2">&quot;vo&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;vi&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;be&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;bk&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+                <span class="s2">&quot;cw_min_exp_delta&quot;</span><span class="p">:</span>    <span class="n">NEUTRAL_AC</span><span class="p">,</span>
+                <span class="s2">&quot;cw_max_exp_delta&quot;</span><span class="p">:</span>    <span class="n">NEUTRAL_AC</span><span class="p">,</span>
+                <span class="s2">&quot;txop_limit_us_delta&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;vo&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&quot;vi&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;be&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;bk&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+
+                <span class="c1"># Stream-level: pause a stalled background stream by id.</span>
+                <span class="s2">&quot;pause_stream&quot;</span><span class="p">:</span>        <span class="p">[</span><span class="mi">42</span><span class="p">]</span> <span class="k">if</span> <span class="n">ob</span><span class="p">[</span><span class="s2">&quot;queue_len&quot;</span><span class="p">][</span><span class="s2">&quot;bk&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">8</span> <span class="k">else</span> <span class="p">[],</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">apply_local_actions</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="../javascripts/mermaid-init.js"></script>
+      
+    
+  </body>
+</html>

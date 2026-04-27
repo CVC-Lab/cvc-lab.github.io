@@ -26,3 +26,11 @@ export const wrapRootElement = ({ element }) => {
 export const wrapPageElement = ({ element, props }) => {
   return <ProtectedRoute {...props}>{element}</ProtectedRoute>
 }
+
+// Reset scroll to top on every route change, but preserve in-page anchor
+// navigation so hash links like #dbg-gym on the microsite still work.
+export const shouldUpdateScroll = ({ routerProps: { location } }) => {
+  if (location.hash) return true
+  window.scrollTo(0, 0)
+  return false
+}

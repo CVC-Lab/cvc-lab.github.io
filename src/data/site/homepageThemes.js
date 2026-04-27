@@ -29,76 +29,48 @@ const homepageThemes = [
     id: 'world-models',
     title: 'World Models',
     summary:
-      'Structured models of evolving environments for prediction, reasoning, and decision-making.',
+      'Structured models and simulations of evolving systems for prediction, reasoning, and decision-making.',
     description:
-      'We build structured models of systems that change over time, helping researchers and intelligent agents forecast dynamics, reason under uncertainty, and make better decisions in complex environments.',
-    useCases: ['Dynamic environments', 'Temporal inference', 'Planning', 'Structured forecasting'],
+      'We build structured models of systems that change over time, including simulation-oriented methods for physical systems, stability, forecasting, planning, and decision-making in complex environments.',
+    useCases: ['Dynamic environments', 'Temporal inference', 'Planning', 'Scientific simulation'],
     impact:
-      'Developing robust models for systems that evolve over time and require prediction, planning, and decision-making.',
+      'Developing robust models for systems that evolve over time and require prediction, planning, simulation, and decision-making.',
     ctaLabel: 'Browse World Models research',
     ctaHref: '/projects',
-    projectNames: ['PHAST', 'GRL-SNAM', 'Dynamic Belief Games'],
+    projectNames: [
+      'PHAST',
+      'GRL-SNAM',
+      'Dynamic Belief Games',
+      'Subsurface Flow Modeling',
+      'Scalable Risk-Averse Well-Placement',
+    ],
   },
   {
     id: 'ai-for-science',
     title: 'AI for Science',
     summary:
-      'Machine learning methods for scientific data, simulations, latent structure, and interpretable analysis.',
+      'Machine learning methods for scientific data, imaging, simulations, latent structure, and interpretable analysis.',
     description:
-      'We apply machine learning to scientific data and simulation pipelines to help researchers model complex systems, discover latent structure, and accelerate analysis while preserving interpretability.',
+      'We apply machine learning to scientific data, imaging, sensing, and simulation pipelines to help researchers recover structure, discover latent patterns, and accelerate analysis while preserving interpretability.',
     useCases: [
       'Scientific machine learning',
       'Multimodal modeling',
+      'Computational imaging',
       'Simulation-guided inference',
-      'Interpretable analysis',
     ],
     impact:
-      'Building structure-aware computational methods that help researchers simulate, analyze, and interpret complex systems.',
+      'Building structure-aware computational methods that help researchers sense, simulate, analyze, and interpret complex systems.',
     ctaLabel: 'Explore AI for Science projects',
     ctaHref: '/projects',
     projectNames: [
       'Differential and Pointwise Control RL',
+      'Scalable Robust Bayesian Co-Clustering',
       'Scalable Risk-Averse Well-Placement',
       'Subsurface Flow Modeling',
+      'Night-time Aerial Material Segmentation',
+      'Adversarial Cloaking',
+      'DEDRECON',
     ],
-  },
-  {
-    id: 'scientific-simulation',
-    title: 'Scientific Simulation',
-    summary:
-      'Computational approaches for modeling physical systems with stability, structure, and efficiency.',
-    description:
-      'We develop simulation-oriented computational methods for physical systems and complex phenomena, with emphasis on stability, structure preservation, computational efficiency, and decision support.',
-    useCases: [
-      'Physical modeling',
-      'Subsurface systems',
-      'Dynamical forecasting',
-      'Computational science',
-    ],
-    impact:
-      'Connecting foundational computational research to real-world translational impact across medicine, science, and engineering.',
-    ctaLabel: 'View Scientific Simulation projects',
-    ctaHref: '/projects',
-    projectNames: ['PHAST', 'Subsurface Flow Modeling', 'Scalable Risk-Averse Well-Placement'],
-  },
-  {
-    id: 'computational-imaging',
-    title: 'Computational Imaging',
-    summary:
-      'Methods for extracting structured information from images, spatial data, and scientific sensing pipelines.',
-    description:
-      'We advance methods for recovering reliable structure from images, spatial measurements, and sensing systems, with applications spanning aerial, medical, and scientific imaging.',
-    useCases: [
-      'Medical imaging',
-      'Scientific imaging',
-      'Geometric perception',
-      'Spatial inference',
-    ],
-    impact:
-      'Advancing imaging and sensing pipelines that turn raw observations into structured, usable information.',
-    ctaLabel: 'Browse Computational Imaging projects',
-    ctaHref: '/projects',
-    projectNames: ['Night-time Aerial Material Segmentation', 'Adversarial Cloaking', 'DEDRECON'],
   },
 ]
 

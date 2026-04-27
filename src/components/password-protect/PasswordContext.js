@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useContext } from 'react'
+import React, { createContext, useState, useEffect, useContext, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import Cookies from 'js-cookie'
 import { navigate } from 'gatsby'
@@ -13,7 +13,18 @@ import { navigate } from 'gatsby'
 // Current implementation stores passwords in plain text in cookies.
 
 const COOKIE_NAME = 'password-protect'
+export const PENDING_REDIRECT_KEY = 'password-protect-redirect'
 const PASSWORD = process.env.GATSBY_INTERNAL_LINKS_PASSWORD
+const normalizePassword = value => (typeof value === 'string' ? value.trim().toLowerCase() : '')
+const configuredPassword = normalizePassword(PASSWORD)
+const hasConfiguredPassword = configuredPassword.length > 0
+const DBG_INTERNAL_PASSWORD = 'dbg2026'
+export const normalizeRoutePath = value =>
+  typeof value === 'string' ? value.replace(/\/+$/, '') || '/' : '/'
+const isDbgInternalPage = pathname =>
+  normalizeRoutePath(pathname).startsWith('/projects/dynamic-belief-games/internal')
+export const getRoutePasswordForPath = pathname =>
+  isDbgInternalPage(pathname) ? DBG_INTERNAL_PASSWORD : undefined
 
 // Create context
 const PasswordContext = createContext()
@@ -21,33 +32,50 @@ const PasswordContext = createContext()
 // Provider component
 export const PasswordProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [transientPath, setTransientPath] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Check if user is already authenticated
+    // Only trust a stored password when a real password is configured.
     const storedPassword = Cookies.get(COOKIE_NAME)
-    if (storedPassword === PASSWORD) {
+    if (hasConfiguredPassword && normalizePassword(storedPassword) === configuredPassword) {
       setIsAuthenticated(true)
     }
     setIsLoading(false)
   }, [])
 
-  const login = passwordCandidate => {
-    if (passwordCandidate === PASSWORD) {
-      Cookies.set(COOKIE_NAME, passwordCandidate)
+  const login = useCallback((passwordCandidate, options = {}) => {
+    const allowEmptyPassword = Boolean(options.allowEmptyPassword)
+    const routePassword = normalizePassword(options.routePassword)
+    const normalizedCandidate = normalizePassword(passwordCandidate)
+    const hasRoutePassword = routePassword.length > 0
+    const routePasswordMatches = routePassword.length > 0 && normalizedCandidate === routePassword
+    const configuredPasswordMatches =
+      hasConfiguredPassword && normalizedCandidate === configuredPassword
+    const canAuthenticate =
+      allowEmptyPassword ||
+      routePasswordMatches ||
+      (!hasRoutePassword && (!hasConfiguredPassword || configuredPasswordMatches))
+
+    if (canAuthenticate) {
+      if (configuredPasswordMatches && !routePasswordMatches && !allowEmptyPassword) {
+        Cookies.set(COOKIE_NAME, configuredPassword)
+      }
+      setTransientPath(options.transientPath ? normalizeRoutePath(options.transientPath) : null)
       setIsAuthenticated(true)
       return true
     }
     return false
-  }
+  }, [])
 
-  const logout = () => {
+  const logout = useCallback(() => {
     Cookies.remove(COOKIE_NAME)
+    setTransientPath(null)
     setIsAuthenticated(false)
-  }
+  }, [])
 
   return (
-    <PasswordContext.Provider value={{ isAuthenticated, isLoading, login, logout }}>
+    <PasswordContext.Provider value={{ isAuthenticated, isLoading, login, logout, transientPath }}>
       {children}
     </PasswordContext.Provider>
   )
@@ -68,14 +96,16 @@ export const usePassword = () => {
 
 // Helper function to check if a page is protected
 export const isProtectedPage = (pathname, pagePaths, partialMatching = false) => {
+  const normalizedPathname = normalizeRoutePath(pathname)
   const isProtected = pagePaths.find(path => {
-    const isIndexPage = pathname === '/'
+    const normalizedPath = normalizeRoutePath(path)
+    const isIndexPage = normalizedPathname === '/'
 
     if (partialMatching && !isIndexPage) {
-      return pathname.startsWith(path)
+      return normalizedPathname === normalizedPath || normalizedPathname.startsWith(`${normalizedPath}/`)
     }
 
-    return path === pathname
+    return normalizedPath === normalizedPathname
   })
 
   return Boolean(isProtected)
@@ -85,20 +115,53 @@ export const isProtectedPage = (pathname, pagePaths, partialMatching = false) =>
 export const ProtectedRoute = ({
   children,
   location,
-  pagePaths = ['/internal', '/internal/', '/cvc-website/internal', '/cvc-website/internal/'],
+  pagePaths = [
+    '/internal',
+    '/internal/',
+    '/cvc-website/internal',
+    '/cvc-website/internal/',
+    '/projects/dynamic-belief-games/internal',
+    '/projects/dynamic-belief-games/internal/',
+  ],
   partialMatching = true,
 }) => {
-  const { isAuthenticated, isLoading } = usePassword()
+  const { isAuthenticated, isLoading, logout, transientPath } = usePassword()
+  const pathname = location.pathname
+  const isProtected = isProtectedPage(pathname, pagePaths, partialMatching)
+  const dbgInternalPage = isDbgInternalPage(pathname)
+  const hasRouteAccess =
+    isAuthenticated &&
+    (!dbgInternalPage || normalizeRoutePath(transientPath) === normalizeRoutePath(pathname))
+
+  useEffect(() => {
+    const normalizedPathname = normalizeRoutePath(pathname)
+    if (!isLoading && !isProtected && normalizedPathname !== '/password-protect' && isAuthenticated) {
+      logout()
+    }
+  }, [isAuthenticated, isLoading, isProtected, logout, pathname])
+
+  const shouldRedirectToPassword = !isLoading && isProtected && !hasRouteAccess
+
+  useEffect(() => {
+    if (!shouldRedirectToPassword) return
+
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.setItem(PENDING_REDIRECT_KEY, pathname)
+    }
+
+    navigate('/password-protect', {
+      state: {
+        redirectTo: pathname,
+        routePassword: getRoutePasswordForPath(pathname),
+      },
+    })
+  }, [pathname, shouldRedirectToPassword])
 
   if (isLoading) {
     return <div>Loading...</div>
   }
 
-  const pathname = location.pathname
-  const isProtected = isProtectedPage(pathname, pagePaths, partialMatching)
-
-  if (isProtected && !isAuthenticated) {
-    navigate('/password-protect', { state: { redirectTo: pathname } })
+  if (shouldRedirectToPassword) {
     return null
   }
 

@@ -1,0 +1,2052 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Tactical radio emulator documentation (CSMA, TDMA/TSM, local control overlay)">
+      
+      
+        <meta name="author" content="DBG Radios">
+      
+      
+      
+        <link rel="prev" href="../pin_marl_formulation/">
+      
+      
+        <link rel="next" href="../technical_specification/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>PIN Learning Algorithm - radio-sim</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pin-learning-algorithm" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="radio-sim" class="md-header__button md-logo" aria-label="radio-sim" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            radio-sim
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PIN Learning Algorithm
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href=".." class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../getting_started/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../architecture_overview/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../protocols/" class="md-tabs__link">
+          
+  
+  
+  Protocol Stack
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../environment_propagation/" class="md-tabs__link">
+          
+  
+  
+  Environment
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../performance_optimizations/" class="md-tabs__link">
+          
+  
+  
+  Performance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../conformance/" class="md-tabs__link">
+          
+  
+  
+  Validation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../known_issues/" class="md-tabs__link">
+          
+  
+  
+  Maintenance
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="radio-sim" class="md-nav__button md-logo" aria-label="radio-sim" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    radio-sim
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation_workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../API_interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pin_controller_api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PIN Controller API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pin_marl_formulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PIN MARL Formulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PIN Learning Algorithm
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PIN Learning Algorithm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-is-the-right-simplification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this is the right simplification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v1-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v1 formulation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="v1 formulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-this-is-a-stackelberg-game" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this is a Stackelberg game
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reward-and-credit-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reward and credit assignment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actor-and-critic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actor and critic
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actor and critic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optional-auxiliary-losses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional auxiliary losses
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training loop
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-level-stackelberg-training-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two-level Stackelberg training algorithm
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-schedule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update schedule
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-in-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is in scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-not-in-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is not in scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related pages
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../technical_specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Specification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocol Stack
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Protocol Stack
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protocols/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocol Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mac_csma_implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CSMA/CA MAC Deep Dive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mac_tdma_implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TDMA/TSM MAC Deep Dive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Environment
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../environment_propagation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Channel & Propagation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Performance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../performance_optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance Optimizations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../conformance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conformance Harness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pin_optimal_control_experiment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PIN Optimal-Control Experiment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maintenance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Maintenance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../known_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-is-the-right-simplification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this is the right simplification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v1-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v1 formulation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="v1 formulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-this-is-a-stackelberg-game" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this is a Stackelberg game
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reward-and-credit-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reward and credit assignment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actor-and-critic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actor and critic
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actor and critic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optional-auxiliary-losses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional auxiliary losses
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training loop
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-level-stackelberg-training-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two-level Stackelberg training algorithm
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-schedule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update schedule
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-in-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is in scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-not-in-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is not in scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related pages
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="pin-learning-algorithm">PIN Learning Algorithm<a class="headerlink" href="#pin-learning-algorithm" title="Permanent link">&para;</a></h1>
+<p>This page specifies the recommended v1 learning algorithm for the PIN overlay in <code>radio-sim</code>.</p>
+<p>The goal is to keep the learning story aligned with the current codebase:</p>
+<ul>
+<li>leader: a training-time <code>Env Agent</code> (<code>ScenarioGen</code>) that samples or sculpts scenario parameters</li>
+<li>follower: a distributed radio team trained with shared-parameter recurrent MAPPO under CTDE</li>
+<li>runtime scope: the current CSMA local action surface only</li>
+</ul>
+<p>TDMA learning is not part of v1 because TDMA local actions are still a no-op in the runtime API.</p>
+<p>For the problem definition and the red-text observation split, see <a href="../pin_marl_formulation/">PIN MARL Formulation</a>.</p>
+<h2 id="why-this-is-the-right-simplification">Why this is the right simplification<a class="headerlink" href="#why-this-is-the-right-simplification" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Simplification Rationale</p>
+<p>The full hierarchy in <code>approach.tex</code> distinguishes ScenarioGen, Obs agents, and NetTop agents as three separate levels. That structure is useful mathematically, but too heavy for the first implementable learner. The clean v1 simplification preserves the leader-follower hierarchy while folding the Obs layer into the follower encoder.</p>
+</div>
+<p>The clean v1 simplification is:</p>
+<ul>
+<li>keep the leader-follower hierarchy</li>
+<li>treat the environment or scenario generator as the training-time leader</li>
+<li>fold the Obs layer into the follower encoder and optional auxiliary prediction losses</li>
+<li>train only against the implemented CSMA action surface</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Core Design Decision</p>
+<p><strong>The canonical v1 learning view is a two-level Stackelberg game.</strong></p>
+<p><strong>The leader commits to the scenario first. The distributed PIN agents then best-respond within that realized world.</strong></p>
+<p><strong>Because the leader shapes the scenario before the follower policies act, this is naturally a Stackelberg learning problem rather than a simultaneous-move MARL problem.</strong></p>
+</div>
+<p>In other words, v1 is a two-level Stackelberg system with richer follower internals, not a full tri-level optimizer.</p>
+<pre class="mermaid"><code>flowchart TD
+    L["Env Agent / ScenarioGen&lt;br/&gt;adversarial scenario sampler"]
+    F["Distributed radio team&lt;br/&gt;shared-parameter recurrent MAPPO"]
+    O["Obs features&lt;br/&gt;history encoder + auxiliary losses"]
+    C["CSMA action surface&lt;br/&gt;per-AC AIFSN, CWmin/CWmax, TXOP deltas"]
+
+    L --&gt; F
+    O --&gt; F
+    F --&gt; C</code></pre>
+<h2 id="v1-formulation">v1 formulation<a class="headerlink" href="#v1-formulation" title="Permanent link">&para;</a></h2>
+<p>Let <span class="arithmatex">\(\theta\)</span> denote a sampled scenario specification and let <span class="arithmatex">\(q_\phi(\theta)\)</span> be the leader distribution over admissible scenarios.</p>
+<p>The leader does not control radios directly. Instead, it commits to scenario properties that determine what environment the followers must handle. In this project, those scenario controls can include:</p>
+<ul>
+<li>building layout and removals</li>
+<li>elevation or terrain adjustments</li>
+<li>traffic patterns, burstiness, and class mix</li>
+<li>scenario metadata such as mobility or other mission-context settings</li>
+</ul>
+<p>Those edits matter because they alter the RF regime indirectly through the physical world and traffic program. The leader therefore controls the difficulty of the propagation and congestion conditions without becoming a radio controller.</p>
+<p>For each episode:</p>
+<div class="arithmatex">\[
+\theta \sim q_{\phi}(\theta), \qquad
+\tau \sim \mathcal{M}(\theta)
+\]</div>
+<p>where <span class="arithmatex">\(\mathcal{M}\)</span> is the rollout induced by the selected scenario.</p>
+<p>Each radio <code>i</code> uses a shared-parameter recurrent policy:</p>
+<div class="arithmatex">\[
+a_t^{(i)} \sim \pi_{\psi}\!\left(a_t^{(i)} \mid h_t^{(i)}\right)
+\]</div>
+<p>with history</p>
+<div class="arithmatex">\[
+h_t^{(i)} = \left(o_0^{(i)}, a_0^{(i)}, \ldots, o_t^{(i)}\right)
+\]</div>
+<p>where <code>o_t^{(i)}</code> is the current <code>LocalObservation</code> stream from the runtime API.</p>
+<p>Training uses CTDE, with the follower team solving the inner problem induced by the leader through episode-level mission outcomes:</p>
+<div class="arithmatex">\[
+R_{\mathrm{team}}(\xi)
+=
+\frac{1}{N}\sum_{i=1}^{N} R_i(\xi)
+\]</div>
+<div class="arithmatex">\[
+J_{\mathrm{follower}}(\psi; \theta)
+=
+\mathbb{E}_{\xi \sim \mathcal{M}(\theta), \pi_\psi}
+\left[
+R_{\mathrm{team}}(\xi)
+\right]
+\]</div>
+<p>The centralized critic may condition on pooled fleet features:</p>
+<div class="arithmatex">\[
+V_{\omega}(s_t, z_t), \qquad
+z_t = \mathrm{pool}\left(e_t^{(1)}, \ldots, e_t^{(N)}\right)
+\]</div>
+<p>where <code>e_t^{(i)}</code> is the recurrent embedding for radio <code>i</code>.</p>
+<p>The leader objective is adversarial curriculum design:</p>
+<div class="arithmatex">\[
+J_{\mathrm{leader}}(\phi)
+=
+\mathbb{E}_{\theta \sim q_{\phi}}\left[-J_{\mathrm{follower}}(\psi;\theta)\right]
++ \beta \, \mathcal{D}(\theta)
+\]</div>
+<p>The diversity term <span class="arithmatex">\(\mathcal{D}(\theta)\)</span> discourages degenerate repetition of the same easy scenario and rewards curriculum breadth or coverage. In practice, this can be as simple as a seed-diversity penalty, a bounded scenario reuse count, or an explicit coverage score over scenario families.</p>
+<h3 id="why-this-is-a-stackelberg-game">Why this is a Stackelberg game<a class="headerlink" href="#why-this-is-a-stackelberg-game" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Defining Asymmetry</p>
+<p><strong>The leader moves first</strong> by choosing the scenario distribution or the realized scenario instance.</p>
+<p><strong>The followers then act inside</strong> that realized scenario with no ability to change the scenario itself.</p>
+<p><strong>The leader's utility is defined through</strong> the follower's induced performance, which is the defining leader-follower asymmetry of a Stackelberg game.</p>
+</div>
+<p>That asymmetry is the key modeling point. The Env Agent is not just another MARL player acting simultaneously with the radios. It is a scenario-setting leader whose commitment determines the world in which the follower team must perform.</p>
+<h2 id="reward-and-credit-assignment">Reward and credit assignment<a class="headerlink" href="#reward-and-credit-assignment" title="Permanent link">&para;</a></h2>
+<p>The canonical v1 objective should be defined from gameplay-long PDR and latency, not from a step-local heuristic reward.</p>
+<p>For gameplay episode <span class="arithmatex">\(\xi\)</span>, let <span class="arithmatex">\(\mathcal{P}_i^{\mathrm{mission}}(\xi)\)</span> be the mission-relevant packets for radio <span class="arithmatex">\(i\)</span> over the full episode and let <span class="arithmatex">\(\mathcal{D}_i^{\mathrm{mission}}(\xi)\)</span> be the subset that achieves at least one confirmed delivery.</p>
+<p>Then:</p>
+<div class="arithmatex">\[
+\mathrm{PDR}_i^{\mathrm{mission}}(\xi)
+=
+\frac{\left|\mathcal{D}_i^{\mathrm{mission}}(\xi)\right|}{\max\!\left(\left|\mathcal{P}_i^{\mathrm{mission}}(\xi)\right|, 1\right)}
+\]</div>
+<div class="arithmatex">\[
+L_{95,i}^{\mathrm{mission}}(\xi)
+=
+\begin{cases}
+Q_{0.95}\!\left(\left\{\ell(p) : p \in \mathcal{D}_i^{\mathrm{mission}}(\xi)\right\}\right),
+&amp; \left|\mathcal{D}_i^{\mathrm{mission}}(\xi)\right| &gt; 0 \\
+L_{\mathrm{fail}},
+&amp; \left|\mathcal{D}_i^{\mathrm{mission}}(\xi)\right| = 0
+\end{cases}
+\]</div>
+<div class="arithmatex">\[
+\bar{L}_{95,i}^{\mathrm{mission}}(\xi)
+=
+\min\!\left(
+\frac{L_{95,i}^{\mathrm{mission}}(\xi)}{L_{\mathrm{ref}}},
+L_{\mathrm{clip}}
+\right)
+\]</div>
+<div class="arithmatex">\[
+R_i(\xi)
+=
+w_{\mathrm{pdr}} \, \mathrm{PDR}_i^{\mathrm{mission}}(\xi)
+- w_{\mathrm{lat}} \, \bar{L}_{95,i}^{\mathrm{mission}}(\xi)
+\]</div>
+<p>This means:</p>
+<ul>
+<li><span class="arithmatex">\(R_i\)</span> is a per-radio terminal reward computed once from the full gameplay.</li>
+<li>The team objective is the mean of those per-radio rewards.</li>
+<li><span class="arithmatex">\(L_{\mathrm{ref}}\)</span> is the latency budget used to normalize units, and <span class="arithmatex">\(L_{\mathrm{clip}}\)</span> caps extreme latency failures.</li>
+<li>Sender-confirmed PDR semantics carry over directly: unique mission packets with at least one confirmed delivery divided by unique mission packets sent by that radio over the episode.</li>
+<li>A dense shaping reward <span class="arithmatex">\(r_t^{(i)}\)</span> can still be added during optimization, but it should be treated as a surrogate for <span class="arithmatex">\(R_i\)</span> rather than the definition of mission success.</li>
+</ul>
+<h2 id="actor-and-critic">Actor and critic<a class="headerlink" href="#actor-and-critic" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">v1 Follower Architecture</p>
+<ul>
+<li>A <strong>recurrent encoder</strong> over recent <code>LocalObservation</code> windows and prior actions</li>
+<li>A <strong>shared actor head</strong> that emits bounded CSMA control outputs</li>
+<li>A <strong>centralized critic</strong> trained from complete rollout data (CTDE)</li>
+</ul>
+</div>
+<p>The actor output maps to the current action tuple:</p>
+<div class="arithmatex">\[
+a_t^{(i)} =
+\left(
+\mathrm{service\_bias}_t^{(i)},
+\mathrm{admission\_threshold}_t^{(i)},
+\mathrm{cw\_aggressiveness}_t^{(i)}
+\right)
+\]</div>
+<p>with the existing runtime clamp ranges applied after decoding.</p>
+<h3 id="optional-auxiliary-losses">Optional auxiliary losses<a class="headerlink" href="#optional-auxiliary-losses" title="Permanent link">&para;</a></h3>
+<p>The simplified Obs layer becomes optional auxiliary supervision on top of the follower encoder:</p>
+<div class="arithmatex">\[
+\mathcal{L}_{\mathrm{aux}}
+=
+\lambda_1 \mathcal{L}_{\mathrm{queue\_pred}}
++ \lambda_2 \mathcal{L}_{\mathrm{loss\_pred}}
++ \lambda_3 \mathcal{L}_{\mathrm{congestion\_pred}}
+\]</div>
+<p>This is not a separate online agent in v1. It is a training-time helper that can improve representation quality when richer observation channels are added later.</p>
+<h2 id="training-loop">Training loop<a class="headerlink" href="#training-loop" title="Permanent link">&para;</a></h2>
+<p><img alt="Training Loop Timeline" src="../assets/training_loop.png" /></p>
+<div class="highlight"><pre><span></span><code>for each outer iteration:
+    sample a batch of scenarios from the leader q_phi(theta)
+    for each scenario:
+        realize the scenario into geometry, propagation, traffic, and other rollout conditions
+        roll out radio-sim with the current follower policy pi_psi
+        compute gameplay-long PDR and latency for each radio, then form R_i and R_team
+        collect trajectories, episode rewards, and constraint metrics
+    update follower psi with recurrent MAPPO
+    update leader phi with adversarial curriculum gradients
+</code></pre></div>
+<p>More concretely:</p>
+<ol>
+<li>Sample <span class="arithmatex">\(\theta\)</span> from the leader.</li>
+<li>Realize that scenario into geometry, RF, traffic, and mission conditions for the rollout.</li>
+<li>Roll out the distributed follower team for <span class="arithmatex">\(T\)</span> control steps.</li>
+<li>Compute gameplay-long mission PDR and latency for each radio, then construct <span class="arithmatex">\(R_i\)</span> and the team reward.</li>
+<li>Update the follower with recurrent MAPPO on the collected trajectories.</li>
+<li>Update the leader against the measured follower return plus diversity or coverage pressure.</li>
+<li>Repeat until validation stops improving or the training budget is exhausted.</li>
+</ol>
+<h2 id="two-level-stackelberg-training-algorithm">Two-level Stackelberg training algorithm<a class="headerlink" href="#two-level-stackelberg-training-algorithm" title="Permanent link">&para;</a></h2>
+<p>The practical algorithm is alternating optimization of a parameterized leader and follower. This should be read as an approximate training procedure for the Stackelberg problem, not as an exact equilibrium solver.</p>
+<details class="example">
+<summary>Detailed training algorithm (click to expand)</summary>
+<div class="highlight"><pre><span></span><code>initialize leader distribution q_phi(theta)
+initialize shared recurrent follower policy pi_psi and critic V_omega
+
+repeat:
+    sample a batch of scenario controls theta from q_phi
+    episodes = []
+
+    for theta in batch:
+        scenario = realize(theta)
+        episode = rollout_distributed_followers(scenario, pi_psi)
+        compute per-radio episode rewards R_i from gameplay PDR and latency
+        episodes.append(episode)
+
+    update follower actor and critic with recurrent MAPPO under CTDE
+    compute leader signal from negative follower return plus diversity pressure
+    update q_phi using that leader signal
+
+    evaluate on fixed held-out validation scenarios
+until converged
+</code></pre></div>
+</details>
+<details class="example">
+<summary>Compact pseudocode (click to expand)</summary>
+<div class="highlight"><pre><span></span><code>initialize leader q_phi(theta)
+initialize shared recurrent actor pi_psi and critic V_omega
+
+repeat:
+    scenarios = sample(q_phi)
+    trajectories = []
+
+    for theta in scenarios:
+        realized_scenario = realize(theta)
+        episode = rollout_radio_sim(realized_scenario, pi_psi)
+        compute per-radio episode rewards R_i from gameplay PDR and latency
+        trajectories.append(episode)
+
+    follower_batch = build_mappo_batch(trajectories)
+    update(pi_psi, V_omega, follower_batch)
+
+    leader_signal = compute_adversarial_signal(trajectories)
+    update(q_phi, leader_signal)
+until converged
+</code></pre></div>
+</details>
+<h2 id="update-schedule">Update schedule<a class="headerlink" href="#update-schedule" title="Permanent link">&para;</a></h2>
+<p>The clean v1 schedule is:</p>
+<ul>
+<li>leader updates at episode or macro-episode granularity</li>
+<li>follower actions occur every control interval inside each rollout</li>
+<li>follower updates happen every rollout batch</li>
+<li>critic updates happen on the same batch as the follower</li>
+<li>auxiliary losses update with the actor encoder</li>
+</ul>
+<p>This keeps the hierarchy explicit without forcing a brittle nested optimizer into the first implementation.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant L as Leader
+    participant E as radio-sim
+    participant F as Follower
+
+    L-&gt;&gt;E: sample and realize theta
+    E-&gt;&gt;F: rollout trajectories
+    F-&gt;&gt;F: update recurrent actor and critic
+    F--&gt;&gt;L: mission return and constraint metrics
+    L-&gt;&gt;L: update adversarial curriculum</code></pre>
+<h2 id="what-is-in-scope">What is in scope<a class="headerlink" href="#what-is-in-scope" title="Permanent link">&para;</a></h2>
+<ul>
+<li>CSMA per-AC EDCA control</li>
+<li>CSMA AIFS and CW tuning</li>
+<li>CSMA TXOP behavior</li>
+<li>shared-parameter decentralized execution</li>
+<li>centralized training over scenario diversity</li>
+</ul>
+<h2 id="what-is-not-in-scope">What is not in scope<a class="headerlink" href="#what-is-not-in-scope" title="Permanent link">&para;</a></h2>
+<ul>
+<li>TDMA learning</li>
+<li>new runtime observations</li>
+<li>full tri-level online Obs/NetTop/ScenarioGen execution</li>
+<li>direct topology control beyond the current action tuple</li>
+</ul>
+<h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../pin_marl_formulation/">PIN MARL Formulation</a></li>
+<li><a href="../pin_controller_api/">PIN Controller API</a></li>
+<li><a href="../pin_optimal_control_experiment/">PIN Optimal-Control Experiment</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="../javascripts/mermaid-init.js"></script>
+      
+    
+  </body>
+</html>

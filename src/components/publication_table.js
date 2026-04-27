@@ -1,5 +1,6 @@
 import * as React from 'react'
 import DOMPurify from 'isomorphic-dompurify'
+import { Link } from 'gatsby'
 import { FaFilePdf, FaExternalLinkAlt, FaArrowUp } from 'react-icons/fa'
 import PropTypes from 'prop-types'
 import './publication_table.css'
@@ -62,11 +63,10 @@ const publicationThumbnailMap = {
       src: scalableRiskAverseThumbnail,
       alt: 'Scalable Risk-Averse Well-Placement Optimization publication thumbnail',
     },
-  'Computer Algebra Meets Hamiltonian Geometry: A Tribute to Laureano González-Vega on his 60th Birthday':
-    {
-      src: computerAlgebraThumbnail,
-      alt: 'Computer Algebra Meets Hamiltonian Geometry publication thumbnail',
-    },
+  'Computer Algebra Meets Hamiltonian Geometry': {
+    src: computerAlgebraThumbnail,
+    alt: 'Computer Algebra Meets Hamiltonian Geometry publication thumbnail',
+  },
   'PHAST: Port-Hamiltonian Architecture for Structured Temporal Dynamics Forecasting': {
     src: phastThumbnail,
     alt: 'PHAST publication thumbnail',
@@ -119,6 +119,36 @@ const publicationThumbnailMap = {
       src: rapidMultiKernelThumbnail,
       alt: 'Rapid multi-kernel estimation publication thumbnail',
     },
+}
+
+const CVC_SITE_ORIGIN = 'https://cvc-lab.github.io'
+
+const resolveProjectLink = projectLink => {
+  if (!projectLink || projectLink === 'NULL') return null
+
+  if (projectLink.startsWith(CVC_SITE_ORIGIN)) {
+    const internalPath = projectLink.slice(CVC_SITE_ORIGIN.length)
+    return {
+      to: internalPath || '/',
+      isInternal: true,
+    }
+  }
+
+  if (projectLink.startsWith('/')) {
+    return {
+      to: projectLink,
+      isInternal: true,
+    }
+  }
+
+  if (projectLink.startsWith('http://') || projectLink.startsWith('https://')) {
+    return {
+      to: projectLink,
+      isInternal: false,
+    }
+  }
+
+  return null
 }
 
 const scrollToYear = yearId => {
@@ -241,20 +271,36 @@ const PublicationTable = ({ publicationData = [] }) => {
                                     PDF
                                   </a>
                                 )}
-                              {publication.ProjectLink &&
-                                publication.ProjectLink !== 'NULL' &&
-                                (publication.ProjectLink.startsWith('http://') ||
-                                  publication.ProjectLink.startsWith('https://')) && (
+                              {(() => {
+                                const projectLink = resolveProjectLink(publication.ProjectLink)
+
+                                if (!projectLink) return null
+
+                                const content = (
+                                  <>
+                                    <FaExternalLinkAlt className="pub-link-icon" />
+                                    Project Page
+                                  </>
+                                )
+
+                                return projectLink.isInternal ? (
+                                  <Link
+                                    to={projectLink.to}
+                                    className="pub-link-btn pub-link-project"
+                                  >
+                                    {content}
+                                  </Link>
+                                ) : (
                                   <a
-                                    href={publication.ProjectLink}
+                                    href={projectLink.to}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="pub-link-btn pub-link-project"
                                   >
-                                    <FaExternalLinkAlt className="pub-link-icon" />
-                                    Project Page
+                                    {content}
                                   </a>
-                                )}
+                                )
+                              })()}
                             </div>
                           </div>
                         </div>
