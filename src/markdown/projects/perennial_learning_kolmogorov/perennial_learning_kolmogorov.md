@@ -9,9 +9,9 @@ slug: '/projects/perennial-learning-kolmogorov'
 
 **Chandrajit Bajaj**
 
-_Entropy, 2026. Special Issue dedicated to Professor Paul Vitányi._
+_Entropy, 2026, 28(5), 551. Special Issue dedicated to Professor Paul Vitányi._
 
-[[Paper PDF]](/papers/perennial-learning-kolmogorov-final-april2026.pdf)
+[[Article]](https://www.mdpi.com/1099-4300/28/5/551) &nbsp; [[PDF]](https://www.mdpi.com/1099-4300/28/5/551/pdf)
 
 ---
 
