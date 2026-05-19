@@ -23,6 +23,7 @@ import threePhaseReservoirThumbnail from '../images/publications/PUB_Three-Phase
 import fieldScaleBayesianThumbnail from '../images/publications/PUB_Field-Scale Bayesian.png'
 import roughPathThumbnail from '../images/publications/PUB_A Rough Path Approach.png'
 import rapidMultiKernelThumbnail from '../images/publications/PUB_Rapid Multi-kernel Estimation.png'
+import triModalGeneTherapyThumbnail from '../images/publications/PUB_Tri-Modal Gene Therapy.png'
 
 const publicationTypeOrder = [
   'Journal Publications',
@@ -92,6 +93,11 @@ const publicationThumbnailMap = {
       src: grlSnamThumbnail,
       alt: 'GRL-SNAM publication thumbnail',
     },
+  'A Novel Tri-Modal Viral–Ultrasound Gene-Delivery Therapy Protocol for Lysosomal Neurodegeneration via Stochastic Model Optimization with Uncertainty Quantification and Generalizability':
+    {
+      src: triModalGeneTherapyThumbnail,
+      alt: 'Tri-modal viral ultrasound gene-delivery therapy publication thumbnail',
+    },
   'Scalable Robust Bayesian Co-Clustering with Compositional ELBOs': {
     src: compositionalElbosThumbnail,
     alt: 'Compositional ELBOs publication thumbnail',
@@ -138,6 +144,22 @@ const publicationThumbnailMap = {
 }
 
 const CVC_SITE_ORIGIN = 'https://cvc-lab.github.io'
+
+const resolvePdfLink = pdfLink => {
+  if (!pdfLink || pdfLink === 'NULL') return null
+
+  const normalizedPdfLink = pdfLink.trim()
+
+  if (
+    normalizedPdfLink.startsWith('http://') ||
+    normalizedPdfLink.startsWith('https://') ||
+    normalizedPdfLink.startsWith('/')
+  ) {
+    return normalizedPdfLink
+  }
+
+  return null
+}
 
 const resolveProjectLink = projectLink => {
   if (!projectLink || projectLink === 'NULL') return null
@@ -264,6 +286,7 @@ const PublicationTable = ({ publicationData = [] }) => {
                       <h4 className="type-header">{type}</h4>
                       {types[type].map((publication, index) => {
                         const thumbnail = publicationThumbnailMap[publication.Title]
+                        const pdfLink = resolvePdfLink(publication.PDFLink)
 
                         return (
                           <div
@@ -297,20 +320,17 @@ const PublicationTable = ({ publicationData = [] }) => {
                                 ></h4>
                               )}
                               <div className="pub-links">
-                                {publication.PDFLink &&
-                                  publication.PDFLink !== 'NULL' &&
-                                  (publication.PDFLink.startsWith('http://') ||
-                                    publication.PDFLink.startsWith('https://')) && (
-                                    <a
-                                      href={publication.PDFLink}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="pub-link-btn pub-link-pdf"
-                                    >
-                                      <FaFilePdf className="pub-link-icon" />
-                                      PDF
-                                    </a>
-                                  )}
+                                {pdfLink && (
+                                  <a
+                                    href={pdfLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="pub-link-btn pub-link-pdf"
+                                  >
+                                    <FaFilePdf className="pub-link-icon" />
+                                    PDF
+                                  </a>
+                                )}
                                 {(() => {
                                   const projectLink = resolveProjectLink(publication.ProjectLink)
 

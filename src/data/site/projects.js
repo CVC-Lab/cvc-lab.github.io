@@ -5,6 +5,8 @@
 
 const perennialLearningTitle =
   'The Physics, Information, and Computation of Perennial Learning: Kolmogorov Complexity, Information Distance and Port-Hamiltonian Thermodynamics'
+const triModalGeneTherapyTitle =
+  'A Novel Tri-Modal Viral–Ultrasound Gene-Delivery Therapy Protocol for Lysosomal Neurodegeneration via Stochastic Model Optimization with Uncertainty Quantification and Generalizability'
 
 module.exports = [
   {
@@ -238,6 +240,16 @@ module.exports = [
     tags: ['Scientific ML'],
     themes: ['World Models', 'AI for Science'],
     date: '2026-04-01',
+  },
+  {
+    name: triModalGeneTherapyTitle,
+    description:
+      'Computationally optimized tri-modal AAV-T4, SP2, and focused ultrasound protocol for lysosomal neurodegeneration with stochastic uncertainty quantification.',
+    img_name: 'project_tiles/tri_modal_gene_therapy',
+    link: '/projects/tri-modal-gene-therapy',
+    tags: ['Health AI/ML', 'Scientific ML'],
+    themes: ['Healthcare AI', 'AI for Science'],
+    date: '2026-05-19',
   },
   {
     name: 'Scalable Risk-Averse Well-Placement',
