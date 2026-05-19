@@ -6,6 +6,9 @@
  * for the temporary /research-themes route.
  */
 
+const triModalGeneTherapyTitle =
+  'A Novel Tri-Modal Viral–Ultrasound Gene-Delivery Therapy Protocol for Lysosomal Neurodegeneration via Stochastic Model Optimization with Uncertainty Quantification and Generalizability'
+
 const homepageThemes = [
   {
     id: 'healthcare-ai',
@@ -23,6 +26,7 @@ const homepageThemes = [
       "Actionable Intelligence for Combating Parkinson's Disease",
       'Integrated PD Precision Stratification',
       'Pathway-Anchored PD Clustering',
+      triModalGeneTherapyTitle,
     ],
   },
   {
