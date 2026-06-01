@@ -175,6 +175,7 @@
    FEATURED PROJECTS - Hero Section
    ============================================= */
 .featured-section {
+  margin-top: var(--spacing-2);
   margin-bottom: var(--spacing-8);
 }
 
@@ -203,9 +204,36 @@
   gap: var(--spacing-5);
 }
 
+.featured-projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-4);
+}
+
+.featured-projects-grid .project-card {
+  border-color: rgba(191, 87, 0, 0.24);
+  box-shadow:
+    var(--shadow-sm),
+    0 0 0 1px rgba(191, 87, 0, 0.05);
+}
+
+.featured-projects-grid .project-card-image {
+  min-height: 176px;
+}
+
+.project-card-link--featured {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+}
+
 @media (min-width: 768px) {
   .featured-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .featured-projects-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

@@ -47,6 +47,14 @@ const FEATURED_PROJECTS = [
   'Subsurface Flow Modeling',
 ]
 
+const PROJECTS_PAGE_FEATURED_PROJECTS = [
+  'PHAST',
+  'GRL-SNAM',
+  "Actionable Intelligence for Combating Parkinson's Disease",
+]
+
+const projectsPageFeaturedProjectNames = new Set(PROJECTS_PAGE_FEATURED_PROJECTS)
+
 const useDebounce = (value, delay) => {
   const [debouncedValue, setDebouncedValue] = React.useState(value)
   React.useEffect(() => {
@@ -54,6 +62,22 @@ const useDebounce = (value, delay) => {
     return () => clearTimeout(timer)
   }, [value, delay])
   return debouncedValue
+}
+
+const ProjectCardLink = ({ tile, children, className = 'project-card-link' }) => {
+  if (tile.link.startsWith('http')) {
+    return (
+      <a href={tile.link} target="_blank" rel="noopener noreferrer" className={className}>
+        {children}
+      </a>
+    )
+  }
+
+  return (
+    <Link to={tile.link} className={className}>
+      {children}
+    </Link>
+  )
 }
 
 const Tiles = ({ projectTiles, showAllProjects = false }) => {
@@ -93,6 +117,15 @@ const Tiles = ({ projectTiles, showAllProjects = false }) => {
     return { currentProjects: current, pastProjects: past }
   }, [regularProjects])
 
+  const featuredProjects = React.useMemo(() => {
+    if (!showAllProjects) {
+      return []
+    }
+
+    const projectsByName = new Map(sortedProjectTiles.map(tile => [tile.name, tile]))
+    return PROJECTS_PAGE_FEATURED_PROJECTS.map(name => projectsByName.get(name)).filter(Boolean)
+  }, [showAllProjects, sortedProjectTiles])
+
   const matchesSearch = React.useCallback(
     tile => {
       if (!debouncedSearch) return true
@@ -126,6 +159,23 @@ const Tiles = ({ projectTiles, showAllProjects = false }) => {
   const totalVisibleProjects = filteredCurrentProjects.length + filteredPastProjects.length
   const hasActiveFilters = activeTab !== 'All' || hasSearchInput
   const activeSearchLabel = debouncedSearch.trim()
+  const showFeaturedProjects = showAllProjects && !hasActiveFilters && featuredProjects.length > 0
+
+  const gridCurrentProjects = React.useMemo(() => {
+    if (!showFeaturedProjects) {
+      return filteredCurrentProjects
+    }
+
+    return filteredCurrentProjects.filter(tile => !projectsPageFeaturedProjectNames.has(tile.name))
+  }, [filteredCurrentProjects, showFeaturedProjects])
+
+  const gridPastProjects = React.useMemo(() => {
+    if (!showFeaturedProjects) {
+      return filteredPastProjects
+    }
+
+    return filteredPastProjects.filter(tile => !projectsPageFeaturedProjectNames.has(tile.name))
+  }, [filteredPastProjects, showFeaturedProjects])
 
   const resultsSummary = React.useMemo(() => {
     if (hasActiveFilters) {
@@ -224,26 +274,34 @@ const Tiles = ({ projectTiles, showAllProjects = false }) => {
           <div className="tabs-container">{tabsMarkup}</div>
         )}
 
+        {showFeaturedProjects && (
+          <section className="featured-section" aria-labelledby="featured-projects-title">
+            <h3 id="featured-projects-title" className="featured-title">
+              Featured Projects
+            </h3>
+            <div className="featured-projects-grid">
+              {featuredProjects.map(tile => (
+                <ProjectCardLink
+                  key={tile.name}
+                  tile={tile}
+                  className="project-card-link project-card-link--featured"
+                >
+                  <ProjectCard tile={tile} />
+                </ProjectCardLink>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Current Projects Section */}
-        {filteredCurrentProjects.length > 0 && (
+        {gridCurrentProjects.length > 0 && (
           <>
             <div className="projects-grid">
-              {filteredCurrentProjects.map(tile => (
+              {gridCurrentProjects.map(tile => (
                 <div key={tile.name}>
-                  {tile.link.startsWith('http') ? (
-                    <a
-                      href={tile.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-card-link"
-                    >
-                      <ProjectCard tile={tile} />
-                    </a>
-                  ) : (
-                    <Link to={tile.link} className="project-card-link">
-                      <ProjectCard tile={tile} />
-                    </Link>
-                  )}
+                  <ProjectCardLink tile={tile}>
+                    <ProjectCard tile={tile} />
+                  </ProjectCardLink>
                 </div>
               ))}
             </div>
@@ -251,26 +309,15 @@ const Tiles = ({ projectTiles, showAllProjects = false }) => {
         )}
 
         {/* Past Projects Section */}
-        {filteredPastProjects.length > 0 && (
+        {gridPastProjects.length > 0 && (
           <div className="past-projects-section">
             <h3 className="subsection-title">Past Projects</h3>
             <div className="projects-grid">
-              {filteredPastProjects.map(tile => (
+              {gridPastProjects.map(tile => (
                 <div key={tile.name}>
-                  {tile.link.startsWith('http') ? (
-                    <a
-                      href={tile.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-card-link"
-                    >
-                      <ProjectCard tile={tile} />
-                    </a>
-                  ) : (
-                    <Link to={tile.link} className="project-card-link">
-                      <ProjectCard tile={tile} />
-                    </Link>
-                  )}
+                  <ProjectCardLink tile={tile}>
+                    <ProjectCard tile={tile} />
+                  </ProjectCardLink>
                 </div>
               ))}
             </div>
@@ -342,6 +389,14 @@ Tiles.propTypes = {
     })
   ).isRequired,
   showAllProjects: PropTypes.bool,
+}
+
+ProjectCardLink.propTypes = {
+  tile: PropTypes.shape({
+    link: PropTypes.string.isRequired,
+  }).isRequired,
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 }
 
 ProjectCard.propTypes = {
