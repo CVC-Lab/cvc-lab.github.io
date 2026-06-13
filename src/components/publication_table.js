@@ -18,6 +18,7 @@ import differentialPointwiseThumbnail from '../images/publications/PUB_Different
 import fourDreconsThumbnail from '../images/publications/PUB_4drecons.png'
 import hamiltonianNoisyTrajectoryThumbnail from '../images/publications/PUB_Hamiltonian_noisyTrajectory.png'
 import pathwayAnchoredThumbnail from '../images/publications/PUB_Pathway Anchored Multimodal.png'
+import posteriorAwarePhenotypingThumbnail from '../images/publications/PUB_Posterior-Aware Phenotyping.png'
 import wearableSensorBiomarkersThumbnail from '../images/publications/PUB_Wearable Sensor Biomarkers.png'
 import threePhaseReservoirThumbnail from '../images/publications/PUB_Three-Phase Reservoir.png'
 import fieldScaleBayesianThumbnail from '../images/publications/PUB_Field-Scale Bayesian.png'
@@ -118,6 +119,10 @@ const publicationThumbnailMap = {
   'Pathway Anchored Multimodal Clustering Reveals Circuit Level Signatures in Parkinsons Disease': {
     src: pathwayAnchoredThumbnail,
     alt: 'Pathway anchored multimodal clustering publication thumbnail',
+  },
+  'Posterior-Aware Phenotyping with Imaging Validation in Parkinson Disease': {
+    src: posteriorAwarePhenotypingThumbnail,
+    alt: 'Posterior-aware phenotyping with imaging validation publication thumbnail',
   },
   'Integrated Genetic, Molecular, and Wearable Sensor Biomarkers Enable Bayesian Machine Learning-Driven Precision Stratification in Parkinson’s Disease: A Comprehensive Multi-Cohort Validation Study':
     {

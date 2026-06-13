@@ -10426,5 +10426,27 @@
     "sortOrder": "",
     "ProjectLink": "https://cvc-lab.github.io/projects/grl-snam",
     "OtherAuthors": ""
+  },
+  {
+    "PaperID": "",
+    "CatID": "",
+    "CatID2": "",
+    "CatID3": "",
+    "CatID4": "",
+    "CatID_gen": "",
+    "Authors": "Harsh Milind Tirhekar, Priyanshi Yadav, and Chandrajit Bajaj",
+    "Title": "Posterior-Aware Phenotyping with Imaging Validation in Parkinson Disease",
+    "Location": "29th International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI 2026)",
+    "PublicationType": "Conference Presentations & Publications",
+    "PublishedDateMonth": "NULL",
+    "PublishedDateYear": "2026",
+    "PDFLink": "/papers/posterior-aware-phenotyping-miccai-2026.pdf",
+    "LocalPDFLink": "",
+    "PSLink": "",
+    "Abstract": "",
+    "RegisterDate": "",
+    "sortOrder": "",
+    "ProjectLink": "",
+    "OtherAuthors": ""
   }
 ]
