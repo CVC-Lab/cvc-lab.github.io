@@ -205,6 +205,24 @@ module.exports = [
     date: '2020-09-01',
   },
   {
+    name: 'DiDi: Data Intensive Display Intensive Computing',
+    description:
+      'Archived CVC project on data-intensive, display-intensive visualization for very large scientific datasets and multi-tiled display environments.',
+    img_name: 'project_tiles/angstrom',
+    link: 'https://web.archive.org/web/20061118080456/http://cvcweb.ices.utexas.edu:80/cvc/projects/DiDi/index.php',
+    tags: ['Scientific ML', 'Computer Vision'],
+    date: '2004-01-01',
+  },
+  {
+    name: 'VisualEyes',
+    description:
+      'Archived CVC project on visual environments, domain modeling, auralization, and interrogative visualization for scientific data.',
+    img_name: 'project_tiles/shastra',
+    link: 'https://web.archive.org/web/20061118080859/http://cvcweb.ices.utexas.edu:80/cvc/projects/VisualEyes/index.php',
+    tags: ['Scientific ML', 'Computer Vision'],
+    date: '2004-01-01',
+  },
+  {
     name: 'Subsurface Flow Modeling',
     description:
       'Computational models for simulating and visualizing subsurface flow in complex geological formations.',
