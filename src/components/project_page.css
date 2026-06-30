@@ -64,3 +64,27 @@
 .project-page-projects-grl-snam .post-body table:first-of-type .gatsby-resp-image-wrapper {
   width: 100%;
 }
+
+@media (max-width: 640px) {
+  .project-page-projects-pathway-anchored-pd-clustering > div {
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+    width: calc(100% - 2rem) !important;
+  }
+
+  .project-page-projects-pathway-anchored-pd-clustering .header-subtitle,
+  .project-page-projects-pathway-anchored-pd-clustering .post-body h1 {
+    hyphens: auto;
+    overflow-wrap: anywhere;
+  }
+
+  .project-page-projects-pathway-anchored-pd-clustering .post-body {
+    max-width: 100%;
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  .project-page-projects-pathway-anchored-pd-clustering .post-body .gatsby-resp-image-wrapper {
+    max-width: 100% !important;
+  }
+}

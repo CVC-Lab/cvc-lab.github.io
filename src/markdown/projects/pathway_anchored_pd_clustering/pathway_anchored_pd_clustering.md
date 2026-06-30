@@ -16,9 +16,9 @@ Department of Computer Science, Amrita Vishwa Vidyapeetham, Coimbatore, India
 
 ---
 
-![Pathway-anchored ROI organization and workflow](../../../images/projects/pathway_anchored_pd_clustering/fig1_pathway_overview.jpg)
+![Pathway-anchored multimodal framework for circuit-level Parkinson's disease imaging analysis](../../../images/projects/pathway_anchored_pd_clustering/fig1_pathway_multimodal_framework.jpg)
 
-**Figure 1.** Pathway-anchored ROI organization and pathway-analysis workflow for Parkinson's disease circuits.
+**Figure 1.** Pathway-anchored multimodal framework for circuit-level Parkinson's disease imaging analysis. **(A)** Six PD-relevant pathway families are mapped onto color-coded brain regions and linked through known cross-system interactions. Solid lines indicate anatomical localization, double-headed arrows indicate pathway interactions, and dashed arrows indicate the modifying influence of microvascular burden. Insets highlight deep nuclei, white-matter hyperintensity burden, and cerebellar structures. **(B)** T1 MRI, diffusion MRI-derived microstructural measures, and DaT-SPECT provide ROI-level structural, microstructural, and dopaminergic features. These features are assembled into a subject-by-feature matrix, mapped to predefined pathway bins, feature-wise z-scored, and summarized as Multimodal Pathway Integrity Scores (MPIS). **(C)** SRVCC co-clustering identifies imaging-derived patient groups and feature modules. Pathway-level MPIS profiles are then associated with motor, cognitive, and behavioral measures, supporting circuit-level interpretation of patient heterogeneity.
 
 ---
 
@@ -48,9 +48,13 @@ The subject-by-feature matrix is then analyzed with Scalable Robust Variational 
 
 **Figure 2.** Structural MRI defines the reference space, diffusion MRI and DaT-SPECT are aligned into it, and regional pathway features are extracted for downstream co-clustering.
 
-![Frontostriatal and nigrostriatal pathway schematics](../../../images/projects/pathway_anchored_pd_clustering/fig4_motor_pathways.jpg)
+![Cerebello-thalamo-cortical, limbic, microvascular, and sensory pathway schematics](../../../images/projects/pathway_anchored_pd_clustering/fig5_extended_pathway_schematics.jpg)
 
-**Figure 4.** Motor- and executive-relevant pathways used to anchor multimodal feature construction.
+**Figure 5.** Pathway schematics for **(A)** cerebello-thalamo-cortical, **(B)** limbic/mesolimbic, **(C)** microvascular-burden, and **(D)** sensory/visual-auditory/visuospatial-attention pathways.
+
+![Frontostriatal and nigrostriatal pathway schematics](../../../images/projects/pathway_anchored_pd_clustering/fig6_frontostriatal_nigrostriatal_schematics.jpg)
+
+**Figure 6.** Pathway schematics of **(A)** frontostriatal (cognitive/executive/attention) and **(B)** nigrostriatal (motor basal ganglia-thalamo-cortical).
 
 ---
 
@@ -65,11 +69,11 @@ The subject-by-feature matrix is then analyzed with Scalable Robust Variational 
 
 ![Nigrostriatal MPIS versus motor burden](../../../images/projects/pathway_anchored_pd_clustering/fig5_nigrostriatal_results.jpg)
 
-**Figure 5.** Nigrostriatal pathway results: lower MPIS aligns with worse motor burden and strong separation across imaging-defined clusters.
+**Figure 7.** Nigrostriatal pathway results: lower MPIS aligns with worse motor burden and strong separation across imaging-defined clusters.
 
 ![Sensory-visuospatial MPIS versus cognition](../../../images/projects/pathway_anchored_pd_clustering/fig6_sensory_results.jpg)
 
-**Figure 6.** Sensory/visuospatial pathway results: higher MPIS aligns with better global cognition and strong cluster separation.
+**Figure 8.** Sensory/visuospatial pathway results: higher MPIS aligns with better global cognition and strong cluster separation.
 
 ---
 
