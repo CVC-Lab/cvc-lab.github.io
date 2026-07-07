@@ -317,9 +317,19 @@ module.exports = [
     name: 'Pathway-Anchored PD Clustering',
     description:
       "Multimodal Parkinson's clustering that links imaging patterns to interpretable brain pathways.",
-    img_name: 'publications/PUB_Pathway Anchored Multimodal',
+    img_name: 'projects/pathway_anchored_pd_clustering/pathway_annotated_thumbnail',
     link: '/projects/pathway-anchored-pd-clustering',
     tags: ['Health AI/ML', 'Scientific ML'],
     date: '2025-12-15',
+  },
+  {
+    name: 'Posterior-Aware PD Phenotyping',
+    description:
+      "Posterior-aware Bayesian motor-state phenotyping for Parkinson's disease with DaTSCAN and structural MRI validation.",
+    img_name: 'publications/PUB_Posterior-Aware Phenotyping',
+    link: '/projects/posterior-aware-pd-phenotyping',
+    tags: ['Health AI/ML', 'Scientific ML'],
+    themes: ['Healthcare AI', 'AI for Science'],
+    date: '2026-06-12',
   },
 ]

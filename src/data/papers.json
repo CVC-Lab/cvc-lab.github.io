@@ -10440,13 +10440,13 @@
     "PublicationType": "Conference Presentations & Publications",
     "PublishedDateMonth": "NULL",
     "PublishedDateYear": "2026",
-    "PDFLink": "/papers/posterior-aware-phenotyping-miccai-2026.pdf",
+    "PDFLink": "https://www.biorxiv.org/content/10.64898/2026.06.12.732003v1.full.pdf",
     "LocalPDFLink": "",
     "PSLink": "",
     "Abstract": "",
     "RegisterDate": "",
     "sortOrder": "",
-    "ProjectLink": "",
+    "ProjectLink": "/projects/posterior-aware-pd-phenotyping",
     "OtherAuthors": ""
   }
 ]

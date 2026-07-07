@@ -14,9 +14,9 @@ Computational Visualization Center, Oden Institute for Computational Engineering
 
 ---
 
-![Integrated multimodal precision medicine framework](../../../images/projects/integrated_pd_precision_stratification/fig1_precision_framework.jpg)
+![Integrated genetic, molecular, wearable, and prodromal biomarker streams mapped through the body](../../../images/projects/integrated_pd_precision_stratification/fig1_integrated_body_biomarkers.png)
 
-**Figure 1.** The project integrates genetic, molecular, wearable, and prodromal biomarker streams through Bayesian clustering and calibrated risk modeling.
+**Figure 1.** Integrated biomarker streams mapped onto a body-centered Parkinson's disease precision-stratification concept. Genetic profiling, molecular biomarkers, wearable IMU sensors, and prodromal markers feed into Bayesian machine-learning models that support genetic risk stratification, continuous monitoring, therapeutic targeting, and early detection.
 
 ---
 
@@ -40,13 +40,21 @@ The study integrates two complementary cohorts. PPMI contributes 4,775 patients 
 
 Within this framework, the paper combines four biomarker streams: LRRK2 G2019S carrier status, molecular assays tied to kinase activity and synuclein pathology, wearable IMU-derived gait markers, and prodromal clinical markers such as UPSIT and RBD screening. Bayesian Gaussian mixture modeling is then used for uncertainty-aware clustering, while a separate penalized logistic model is used for calibrated risk prediction in the tri-modal cognitive subset.
 
+![Integrated multimodal precision medicine framework](../../../images/projects/integrated_pd_precision_stratification/fig1_precision_framework.jpg)
+
+**Figure 2.** The project integrates genetic, molecular, wearable, and prodromal biomarker streams through Bayesian clustering and calibrated risk modeling.
+
+![Side-profile Bayesian biomarker model for Parkinson's disease precision stratification](../../../images/projects/integrated_pd_precision_stratification/fig3_side_profile_bayesian_model.png)
+
+**Figure 3.** Side-profile concept view of the Bayesian model connecting LRRK2 genetics, molecular assays, wearable IMU gait measures, prodromal markers, risk stratification, continuous monitoring, therapeutic targeting, and early detection.
+
 ![LRRK2 genetic risk and motor severity](../../../images/projects/integrated_pd_precision_stratification/fig2_lrrk2_genetics.jpg)
 
-**Figure 2.** Person-level LRRK2 G2019S association results: higher Parkinson's prevalence in carriers and higher baseline motor burden among affected carriers.
+**Figure 4.** Person-level LRRK2 G2019S association results: higher Parkinson's prevalence in carriers and higher baseline motor burden among affected carriers.
 
 ![Wearable IMU biomarker validation](../../../images/projects/integrated_pd_precision_stratification/fig3_wearable_imu.jpg)
 
-**Figure 3.** Wearable IMU-derived gait biomarkers capture both passive asymmetry and active dual-task interference in Parkinson's motor assessment.
+**Figure 5.** Wearable IMU-derived gait biomarkers capture both passive asymmetry and active dual-task interference in Parkinson's motor assessment.
 
 ---
 
@@ -62,11 +70,11 @@ Within this framework, the paper combines four biomarker streams: LRRK2 G2019S c
 
 ![Bayesian clustering validation](../../../images/projects/integrated_pd_precision_stratification/fig5_bayesian_clustering.jpg)
 
-**Figure 5.** Bayesian Gaussian mixture clustering identifies a stable motor-phenotype structure, with the main signal reflecting mild versus moderate-severe burden plus a small number of outliers.
+**Figure 6.** Bayesian Gaussian mixture clustering identifies a stable motor-phenotype structure, with the main signal reflecting mild versus moderate-severe burden plus a small number of outliers.
 
 ![Tri-modal risk stratification](../../../images/projects/integrated_pd_precision_stratification/fig6_risk_stratification.jpg)
 
-**Figure 6.** The risk model is presented as a calibrated cognitive-impairment model in the tri-modal subset, not as a general Parkinson's diagnostic classifier.
+**Figure 7.** The risk model is presented as a calibrated cognitive-impairment model in the tri-modal subset, not as a general Parkinson's diagnostic classifier.
 
 ---
 

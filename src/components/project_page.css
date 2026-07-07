@@ -65,6 +65,46 @@
   width: 100%;
 }
 
+.project-page-projects-posterior-aware-pd-phenotyping .post-body table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 1rem;
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+.project-page-projects-posterior-aware-pd-phenotyping .post-body table th,
+.project-page-projects-posterior-aware-pd-phenotyping .post-body table td {
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  vertical-align: top;
+  background: var(--color-bg-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.project-page-projects-posterior-aware-pd-phenotyping .post-body table th {
+  font-weight: var(--font-weight-normal);
+}
+
+.project-page-projects-posterior-aware-pd-phenotyping .post-body table .gatsby-resp-image-wrapper {
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+.project-page-projects-posterior-aware-pd-phenotyping .post-body table img {
+  display: block;
+  margin-bottom: 0;
+  border-radius: calc(var(--radius-md) - 2px);
+}
+
+.project-page-projects-posterior-aware-pd-phenotyping .post-body table p {
+  margin-top: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
 @media (max-width: 640px) {
   .project-page-projects-pathway-anchored-pd-clustering > div {
     margin-left: 1rem !important;
@@ -86,5 +126,24 @@
 
   .project-page-projects-pathway-anchored-pd-clustering .post-body .gatsby-resp-image-wrapper {
     max-width: 100% !important;
+  }
+
+  .project-page-projects-posterior-aware-pd-phenotyping .post-body table,
+  .project-page-projects-posterior-aware-pd-phenotyping .post-body table thead,
+  .project-page-projects-posterior-aware-pd-phenotyping .post-body table tbody,
+  .project-page-projects-posterior-aware-pd-phenotyping .post-body table tr,
+  .project-page-projects-posterior-aware-pd-phenotyping .post-body table th,
+  .project-page-projects-posterior-aware-pd-phenotyping .post-body table td {
+    display: block;
+    width: 100%;
+  }
+
+  .project-page-projects-posterior-aware-pd-phenotyping .post-body table {
+    border-spacing: 0;
+  }
+
+  .project-page-projects-posterior-aware-pd-phenotyping .post-body table th,
+  .project-page-projects-posterior-aware-pd-phenotyping .post-body table td {
+    margin-top: var(--space-sm);
   }
 }
