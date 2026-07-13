@@ -279,13 +279,15 @@
   transition: all 150ms ease;
 }
 
-.pub-link-pdf {
+.pub-link-pdf,
+.pub-link-paper {
   background: #fef2f2;
   color: #dc2626;
   border: 1px solid #fecaca;
 }
 
-.pub-link-pdf:hover {
+.pub-link-pdf:hover,
+.pub-link-paper:hover {
   background: #dc2626;
   color: #fff;
   border-color: #dc2626;

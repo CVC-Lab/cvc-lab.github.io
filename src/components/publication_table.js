@@ -1,7 +1,7 @@
 import * as React from 'react'
 import DOMPurify from 'isomorphic-dompurify'
 import { Link } from 'gatsby'
-import { FaFilePdf, FaExternalLinkAlt, FaArrowUp, FaTimes } from 'react-icons/fa'
+import { FaFileAlt, FaFilePdf, FaExternalLinkAlt, FaArrowUp, FaTimes } from 'react-icons/fa'
 import PropTypes from 'prop-types'
 import './publication_table.css'
 import { database } from '../data/database'
@@ -120,10 +120,11 @@ const publicationThumbnailMap = {
     src: pathwayAnchoredThumbnail,
     alt: 'Pathway anchored multimodal clustering publication thumbnail',
   },
-  'Posterior-Aware Phenotyping with Imaging Validation in Parkinson Disease': {
-    src: posteriorAwarePhenotypingThumbnail,
-    alt: 'Posterior-aware phenotyping with imaging validation publication thumbnail',
-  },
+  'Posterior-calibrated multimodal motor states reveal longitudinal and imaging-associated heterogeneity in Parkinson’s disease':
+    {
+      src: posteriorAwarePhenotypingThumbnail,
+      alt: 'Posterior-calibrated multimodal motor states publication thumbnail',
+    },
   'Integrated Genetic, Molecular, and Wearable Sensor Biomarkers Enable Bayesian Machine Learning-Driven Precision Stratification in Parkinson’s Disease: A Comprehensive Multi-Cohort Validation Study':
     {
       src: wearableSensorBiomarkersThumbnail,
@@ -164,6 +165,16 @@ const resolvePdfLink = pdfLink => {
   }
 
   return null
+}
+
+const getPaperLinkConfig = publication => {
+  const isPreprint = publication.PublicationType === 'arXiv'
+
+  return {
+    className: isPreprint ? 'pub-link-paper' : 'pub-link-pdf',
+    Icon: isPreprint ? FaFileAlt : FaFilePdf,
+    label: isPreprint ? 'Paper' : 'PDF',
+  }
 }
 
 const resolveProjectLink = projectLink => {
@@ -292,6 +303,7 @@ const PublicationTable = ({ publicationData = [] }) => {
                       {types[type].map((publication, index) => {
                         const thumbnail = publicationThumbnailMap[publication.Title]
                         const pdfLink = resolvePdfLink(publication.PDFLink)
+                        const paperLinkConfig = getPaperLinkConfig(publication)
 
                         return (
                           <div
@@ -330,10 +342,10 @@ const PublicationTable = ({ publicationData = [] }) => {
                                     href={pdfLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="pub-link-btn pub-link-pdf"
+                                    className={`pub-link-btn ${paperLinkConfig.className}`}
                                   >
-                                    <FaFilePdf className="pub-link-icon" />
-                                    PDF
+                                    <paperLinkConfig.Icon className="pub-link-icon" />
+                                    {paperLinkConfig.label}
                                   </a>
                                 )}
                                 {(() => {

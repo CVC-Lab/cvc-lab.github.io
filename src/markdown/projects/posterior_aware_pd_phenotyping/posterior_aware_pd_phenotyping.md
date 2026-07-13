@@ -14,7 +14,7 @@ Department of Biomedical Engineering, National Institute of Technology Raipur
 
 Oden Institute for Computational Engineering and Sciences, The University of Texas at Austin
 
-**bioRxiv / MICCAI 2026** &nbsp; | &nbsp; [Paper](https://www.biorxiv.org/content/10.64898/2026.06.12.732003v1.full.pdf)
+**bioRxiv 2026** &nbsp; | &nbsp; [Paper](https://doi.org/10.64898/2026.06.12.732003)
 
 ---
 
@@ -40,7 +40,7 @@ The paper's central point is that posterior probabilities are useful, not incide
 
 ### Framework
 
-The MICCAI study analyzes 29,366 longitudinal MDS-UPDRS-III assessments from 1,847 PPMI participants. The item-level motor exam is aggregated into five clinical domains: tremor, bradykinesia, rigidity, axial function, and bulbar symptoms.
+The study analyzes 29,366 longitudinal MDS-UPDRS-III assessments from 1,847 PPMI participants. The item-level motor exam is aggregated into five clinical domains: tremor, bradykinesia, rigidity, axial function, and bulbar symptoms.
 
 A predefined Bayesian Gaussian mixture model search over 2,912 configurations selects a five-state representation. The framework uses model-conditioned posterior vectors to classify visits as high-confidence textbook assignments or intermediate-confidence chimera assignments. It also reconciles five-state and eight-state views through strong cross-granularity nesting.
 
@@ -110,10 +110,12 @@ The model should be read as a visit-level motor-state representation, not as pro
 ### Citation
 
 ```bibtex
-@inproceedings{tirhekar2026posterioraware,
-  title     = {Posterior-Aware Motor Phenotyping with Multimodal Imaging Validation in Parkinson's Disease},
-  author    = {Tirhekar, Harsh Milind and Yadav, Priyanshi and Bajaj, Chandrajit},
-  booktitle = {Proceedings of the International Conference on Medical Image Computing and Computer Assisted Intervention},
-  year      = {2026}
+@article{tirhekar2026posteriorcalibrated,
+  title   = {Posterior-calibrated multimodal motor states reveal longitudinal and imaging-associated heterogeneity in Parkinson's disease},
+  author  = {Tirhekar, H. M. and Yadav, P. and Bajaj, C.},
+  journal = {bioRxiv},
+  year    = {2026},
+  doi     = {10.64898/2026.06.12.732003},
+  url     = {https://doi.org/10.64898/2026.06.12.732003}
 }
 ```
