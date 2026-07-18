@@ -7,6 +7,39 @@ import { FaArrowRight, FaSearch, FaTimes } from 'react-icons/fa'
 import './tiles-modern.css'
 
 const projectTabs = ['All', 'Healthcare AI', 'World Models', 'AI for Science']
+const parkinsonsHealthcareAiTitle = "Parkinson's Disease / Healthcare AI"
+const projectTabQueryParam = 'theme'
+
+const projectTabSlugs = {
+  All: 'all',
+  'Healthcare AI': 'healthcare-ai',
+  'World Models': 'world-models',
+  'AI for Science': 'ai-for-science',
+}
+
+const getProjectTabFromLocation = () => {
+  if (typeof window === 'undefined') {
+    return 'All'
+  }
+
+  const requestedSlug = new window.URLSearchParams(window.location.search).get(projectTabQueryParam)
+  return projectTabs.find(tab => projectTabSlugs[tab] === requestedSlug) || 'All'
+}
+
+const updateProjectTabInUrl = tab => {
+  if (typeof window === 'undefined') {
+    return
+  }
+
+  const url = new window.URL(window.location.href)
+  if (tab === 'All') {
+    url.searchParams.delete(projectTabQueryParam)
+  } else {
+    url.searchParams.set(projectTabQueryParam, projectTabSlugs[tab])
+  }
+
+  window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`)
+}
 
 const worldModelProjectNames = new Set([
   'PHAST',
@@ -43,15 +76,11 @@ const FEATURED_PROJECTS = [
   'PHAST',
   'GRL-SNAM',
   'Dynamic Belief Games',
-  "Actionable Intelligence for Combating Parkinson's Disease",
+  parkinsonsHealthcareAiTitle,
   'Subsurface Flow Modeling',
 ]
 
-const PROJECTS_PAGE_FEATURED_PROJECTS = [
-  'PHAST',
-  'GRL-SNAM',
-  "Actionable Intelligence for Combating Parkinson's Disease",
-]
+const PROJECTS_PAGE_FEATURED_PROJECTS = ['PHAST', 'GRL-SNAM', parkinsonsHealthcareAiTitle]
 
 const projectsPageFeaturedProjectNames = new Set(PROJECTS_PAGE_FEATURED_PROJECTS)
 
@@ -81,18 +110,20 @@ const ProjectCardLink = ({ tile, children, className = 'project-card-link' }) =>
 }
 
 const Tiles = ({ projectTiles, showAllProjects = false }) => {
-  const [activeTab, setActiveTab] = React.useState('All')
+  const [activeTab, setActiveTab] = React.useState(getProjectTabFromLocation)
   const [searchInput, setSearchInput] = React.useState('')
   const debouncedSearch = useDebounce(searchInput, 300)
   const hasSearchInput = searchInput.trim().length > 0
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue)
+    updateProjectTabInUrl(newValue)
   }
 
   const clearFilters = () => {
     setActiveTab('All')
     setSearchInput('')
+    updateProjectTabInUrl('All')
   }
 
   const sortedProjectTiles = React.useMemo(() => {

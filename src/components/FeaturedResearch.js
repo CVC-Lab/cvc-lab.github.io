@@ -25,7 +25,7 @@ const FEATURED_PROJECTS_DATA = [
     video: null,
   },
   {
-    name: "Actionable Intelligence for Combating Parkinson's Disease",
+    name: "Parkinson's Disease / Healthcare AI",
     video: null,
   },
 ]

@@ -7,6 +7,7 @@ const perennialLearningTitle =
   'The Physics, Information, and Computation of Perennial Learning: Kolmogorov Complexity, Information Distance and Port-Hamiltonian Thermodynamics'
 const triModalGeneTherapyTitle =
   'A Novel Tri-Modal Viral–Ultrasound Gene-Delivery Therapy Protocol for Lysosomal Neurodegeneration via Stochastic Model Optimization with Uncertainty Quantification and Generalizability'
+const parkinsonsHealthcareAiTitle = "Parkinson's Disease / Healthcare AI"
 
 module.exports = [
   {
@@ -160,13 +161,14 @@ module.exports = [
     date: '2023-11-21',
   },
   {
-    name: "Actionable Intelligence for Combating Parkinson's Disease",
+    name: parkinsonsHealthcareAiTitle,
     description:
-      "Parkinson's disease analysis tools for quickly extracting patient-specific SBR biomarkers.",
-    img_name: 'projects/Actionable Intelligence Parkinsons/Parkinsons Project Thumbnail',
-    link: 'https://cvc-lab.github.io/parkinsons-website/',
-    tags: ['Health AI/ML'],
-    date: '2024-04-06',
+      "A unified Healthcare AI directory for Parkinson's research across imaging, biomarkers, and interpretable patient phenotypes.",
+    img_name: 'publications/PUB_Posterior-Aware Phenotyping',
+    link: '/projects/healthcare-ai',
+    tags: ['Healthcare AI'],
+    themes: ['Healthcare AI'],
+    date: '2026-06-12',
   },
   {
     name: 'OC Protein Side-Chain and Folding',
@@ -303,33 +305,5 @@ module.exports = [
     link: '/projects/differential-and-pointwise-control-rl',
     tags: ['Reinforcement Learning', 'Scientific ML'],
     date: '2025-12-01',
-  },
-  {
-    name: 'Integrated PD Precision Stratification',
-    description:
-      "Bayesian stratification of Parkinson's disease using genetics, molecular assays, wearable sensing, and clinical data.",
-    img_name: 'projects/Project_IntegratedPDPrecision',
-    link: '/projects/integrated-pd-precision-stratification',
-    tags: ['Health AI/ML', 'Scientific ML'],
-    date: '2025-12-04',
-  },
-  {
-    name: 'Pathway-Anchored PD Clustering',
-    description:
-      "Multimodal Parkinson's clustering that links imaging patterns to interpretable brain pathways.",
-    img_name: 'projects/pathway_anchored_pd_clustering/pathway_annotated_thumbnail',
-    link: '/projects/pathway-anchored-pd-clustering',
-    tags: ['Health AI/ML', 'Scientific ML'],
-    date: '2025-12-15',
-  },
-  {
-    name: 'Posterior-Aware PD Phenotyping',
-    description:
-      "Posterior-aware Bayesian motor-state phenotyping for Parkinson's disease with DaTSCAN and structural MRI validation.",
-    img_name: 'publications/PUB_Posterior-Aware Phenotyping',
-    link: '/projects/posterior-aware-pd-phenotyping',
-    tags: ['Health AI/ML', 'Scientific ML'],
-    themes: ['Healthcare AI', 'AI for Science'],
-    date: '2026-06-12',
   },
 ]

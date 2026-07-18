@@ -1,93 +1,39 @@
 import * as React from 'react'
 import { Link } from 'gatsby'
-import PropTypes from 'prop-types'
+import { FaArrowDown, FaArrowRight } from 'react-icons/fa'
 import cvcLabTitlePhoto from '../../images/CVC_Lab_title_photo.png'
 
-const HeroSection = ({ themes, activeThemeId, onSelectTheme }) => {
-  return (
-    <section className="research-themes-hero">
-      <div className="research-themes-shell">
-        <div className="research-themes-hero-layout">
-          <div className="research-themes-hero-copy">
-            <div className="research-themes-hero-main">
-              <div className="research-themes-hero-identity">
-                <p className="research-themes-hero-label">Computational Visualization Center</p>
-                <p className="research-themes-hero-meta">
-                  Oden Institute · The University of Texas at Austin
-                </p>
-              </div>
-              <h1 className="research-themes-hero-title">
-                Computational methods for healthcare and scientific discovery
-              </h1>
-              <div className="research-themes-hero-text">
-                <div className="research-themes-hero-subtitle">
-                  <p>
-                    We develop AI, simulation, and interpretable modeling methods for understanding
-                    complex systems across healthcare, imaging, and science. Our work helps
-                    researchers integrate multimodal data, model dynamic processes, and make more
-                    informed decisions.
-                  </p>
-                  <p>
-                    Current projects span medical imaging, scientific machine learning, dynamic
-                    prediction, and data-driven discovery in biological, physical, and engineered
-                    systems.
-                  </p>
-                </div>
-                <div className="research-themes-hero-controls">
-                  <div className="research-themes-hero-theme-controls">
-                    <span className="research-themes-hero-rail-label">Starting point</span>
-                    <div className="research-themes-hero-rail" aria-label="Select research theme">
-                      {themes.map(theme => (
-                        <button
-                          key={theme.id}
-                          type="button"
-                          className={`research-themes-hero-rail-button ${
-                            theme.id === activeThemeId
-                              ? 'research-themes-hero-rail-button--active'
-                              : ''
-                          }`}
-                          onClick={() => onSelectTheme(theme.id)}
-                          aria-pressed={theme.id === activeThemeId}
-                        >
-                          {theme.title}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="research-themes-hero-actions">
-                    <Link
-                      to="/projects"
-                      className="research-themes-button research-themes-button--primary"
-                    >
-                      Browse All Projects
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="research-themes-hero-media">
-            <img
-              src={cvcLabTitlePhoto}
-              alt="Computational Visualization Center researchers presenting visualization work in the lab"
-              className="research-themes-hero-image"
-            />
-          </div>
+const HeroSection = () => (
+  <section className="research-home-hero">
+    <img
+      src={cvcLabTitlePhoto}
+      alt="Computational Visualization Center researchers working with large-scale scientific visualizations"
+      className="research-home-hero__image"
+      decoding="async"
+    />
+    <div className="research-home-hero__overlay" aria-hidden="true" />
+    <div className="research-themes-shell research-home-hero__content">
+      <div className="research-home-hero__copy">
+        <p className="research-home-hero__eyebrow">Computational Visualization Center</p>
+        <p className="research-home-hero__meta">
+          Oden Institute · The University of Texas at Austin
+        </p>
+        <h1>AI, visualization, and models for complex systems.</h1>
+        <p className="research-home-hero__summary">
+          We build computational methods that help researchers see structure, reason about change,
+          and make uncertainty visible across healthcare, engineering, and science.
+        </p>
+        <div className="research-home-hero__actions">
+          <a href="#research-themes" className="research-home-button research-home-button--primary">
+            Explore research themes <FaArrowDown aria-hidden="true" />
+          </a>
+          <Link to="/publications" className="research-home-button research-home-button--quiet">
+            Read the research <FaArrowRight aria-hidden="true" />
+          </Link>
         </div>
       </div>
-    </section>
-  )
-}
-
-HeroSection.propTypes = {
-  themes: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  activeThemeId: PropTypes.string.isRequired,
-  onSelectTheme: PropTypes.func.isRequired,
-}
+    </div>
+  </section>
+)
 
 export default HeroSection

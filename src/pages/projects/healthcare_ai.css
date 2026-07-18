@@ -1,0 +1,347 @@
+@import '../../styles/design-system.css';
+
+.healthcare-page {
+  background: var(--ut-white);
+  color: var(--ut-charcoal);
+}
+
+.healthcare-shell {
+  width: calc(100% - 3rem);
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.healthcare-hero {
+  padding: 3rem 0 5rem;
+  background: var(--ut-off-white);
+}
+
+.healthcare-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+  color: var(--ut-burnt-orange);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.healthcare-back-link:hover {
+  color: var(--ut-burnt-orange-dark);
+}
+
+.healthcare-back-link__icon {
+  transform: rotate(180deg);
+}
+
+.healthcare-eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--ut-burnt-orange);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.healthcare-hero h1 {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 0 1rem;
+  color: var(--ut-charcoal);
+  font-size: 4.25rem;
+  line-height: 1.04;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.healthcare-hero__lead {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 0 2.25rem;
+  color: var(--ut-dark-gray);
+  font-size: 1.3rem;
+  line-height: 1.65;
+  overflow-wrap: break-word;
+}
+
+.healthcare-hero__figure {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  border: 1px solid var(--ut-limestone);
+  border-radius: var(--border-radius-lg);
+  background: var(--ut-white);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.healthcare-hero__figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+.healthcare-hero__figure figcaption,
+.healthcare-visual figcaption {
+  padding: 0.9rem 1.1rem;
+  color: var(--ut-dark-gray);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.healthcare-program,
+.healthcare-papers {
+  padding: 5rem 0;
+}
+
+.healthcare-program {
+  background: var(--ut-white);
+}
+
+.healthcare-visuals {
+  padding: 5rem 0;
+  background: var(--ut-off-white);
+}
+
+.healthcare-papers {
+  background: var(--ut-charcoal);
+}
+
+.healthcare-section-heading {
+  max-width: 850px;
+  margin-bottom: 2.25rem;
+}
+
+.healthcare-section-heading--narrow {
+  max-width: 700px;
+}
+
+.healthcare-section-heading h2 {
+  margin: 0 0 0.9rem;
+  color: var(--ut-charcoal);
+  font-size: 2.6rem;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.healthcare-section-heading p:last-child {
+  margin: 0;
+  color: var(--ut-dark-gray);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.healthcare-subprojects {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.healthcare-subproject {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--ut-limestone);
+  border-radius: var(--border-radius-lg);
+  background: var(--ut-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.healthcare-subproject__image-wrap {
+  aspect-ratio: 1.5 / 1;
+  overflow: hidden;
+  background: var(--ut-limestone-light);
+}
+
+.healthcare-subproject__image-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  object-fit: cover;
+}
+
+.healthcare-subproject__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  padding: 1.1rem;
+}
+
+.healthcare-subproject__label {
+  margin: 0 0 0.6rem;
+  color: var(--ut-burnt-orange);
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.healthcare-subproject h3 {
+  margin: 0 0 0.7rem;
+  color: var(--ut-charcoal);
+  font-size: 1.25rem;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.healthcare-subproject__body > p:not(.healthcare-subproject__label) {
+  flex: 1 1 auto;
+  margin: 0 0 1rem;
+  color: var(--ut-dark-gray);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.healthcare-subproject__link,
+.healthcare-paper a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: fit-content;
+  color: var(--ut-burnt-orange);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.healthcare-subproject__link:hover,
+.healthcare-paper a:hover {
+  color: var(--ut-burnt-orange-dark);
+}
+
+.healthcare-visual-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.healthcare-visual {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--ut-limestone);
+  border-radius: var(--border-radius-lg);
+  background: var(--ut-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.healthcare-visual--wide {
+  grid-column: 1 / -1;
+}
+
+.healthcare-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+.healthcare-papers .healthcare-section-heading h2,
+.healthcare-papers .healthcare-section-heading p:last-child {
+  color: var(--ut-white);
+}
+
+.healthcare-papers .healthcare-eyebrow {
+  color: #f3b681;
+}
+
+.healthcare-papers .healthcare-section-heading p:last-child {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.healthcare-paper-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.healthcare-paper {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr);
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.healthcare-paper__number {
+  color: #f3b681;
+  font-size: 1.15rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.healthcare-paper h3 {
+  margin: 0 0 0.45rem;
+  color: var(--ut-white);
+  font-size: 1.2rem;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.healthcare-paper p {
+  margin: 0 0 0.7rem;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.92rem;
+}
+
+.healthcare-paper a {
+  color: #f3b681;
+}
+
+.healthcare-paper a:hover {
+  color: var(--ut-white);
+}
+
+@media (max-width: 1100px) {
+  .healthcare-subprojects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .healthcare-shell {
+    width: min(calc(100% - 2rem), calc(100vw - 2rem));
+  }
+
+  .healthcare-hero,
+  .healthcare-program,
+  .healthcare-visuals,
+  .healthcare-papers {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .healthcare-hero h1 {
+    max-width: 100%;
+    font-size: 2.75rem;
+  }
+
+  .healthcare-hero__lead {
+    font-size: 1.05rem;
+  }
+
+  .healthcare-section-heading h2 {
+    font-size: 2rem;
+  }
+
+  .healthcare-subprojects,
+  .healthcare-visual-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .healthcare-visual--wide {
+    grid-column: auto;
+  }
+
+  .healthcare-paper {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .healthcare-paper h3 {
+    font-size: 1.05rem;
+  }
+}

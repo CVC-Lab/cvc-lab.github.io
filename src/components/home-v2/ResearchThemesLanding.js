@@ -1,105 +1,53 @@
 import * as React from 'react'
+import { Link } from 'gatsby'
+import { FaArrowRight } from 'react-icons/fa'
 import { useSiteMetadata } from '../../context/SiteContext'
 import AboutCondensed from '../AboutCondensed'
 import PeopleCondensed from '../PeopleCondensed'
 import HeroSection from './HeroSection'
-import ThemeExplainerPanel from './ThemeExplainerPanel'
-import FeaturedProjectsGrid from './FeaturedProjectsGrid'
-import OutputsSection from './OutputsSection'
-import MetricsSection from './MetricsSection'
+import ThemeBanners from './ThemeBanners'
 import '../../components/home-v2/research-themes.css'
-import publicationData from '../../data/papers.json'
 
-const {
-  defaultHomepageThemeId,
-  homepageThemes,
-  homepageThemeById,
-} = require('../../data/site/homepageThemes')
+const evidenceLinks = [
+  { label: 'Publications', href: '/publications', description: 'Papers and preprints' },
+  { label: 'Projects', href: '/projects', description: 'The complete project index' },
+  { label: 'Software', href: '/software', description: 'Tools and systems' },
+]
+
+const { homepageThemes } = require('../../data/site/homepageThemes')
 
 const ResearchThemesLanding = () => {
-  const { projectTiles, softwareProjects, newsTiles, peopleCards } = useSiteMetadata()
-  const [activeThemeId, setActiveThemeId] = React.useState(defaultHomepageThemeId)
-  const activeTheme = activeThemeId ? homepageThemeById[activeThemeId] : null
-
-  const handleSelectTheme = themeId => {
-    setActiveThemeId(themeId)
-
-    window.requestAnimationFrame(() => {
-      const selectedThemeSection = document.getElementById('selected-theme-showcase')
-      selectedThemeSection?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    })
-  }
-
-  const activeThemeProjects = React.useMemo(() => {
-    if (!activeTheme) return []
-    const projectsByName = new Map((projectTiles || []).map(project => [project.name, project]))
-
-    return activeTheme.projectNames.map(name => projectsByName.get(name)).filter(Boolean)
-  }, [activeTheme, projectTiles])
-
-  const outputStats = React.useMemo(() => {
-    const softwareToolCount = (softwareProjects || []).reduce(
-      (total, category) => total + (category.items?.length || 0),
-      0
-    )
-    const currentMemberCount = (peopleCards || []).filter(
-      person => person.status === 'current' || person.status === true || person.Current === true
-    ).length
-
-    return {
-      projectCount: (projectTiles || []).length,
-      publicationCount: publicationData.length,
-      softwareCategoryCount: (softwareProjects || []).length,
-      softwareToolCount,
-      newsCount: (newsTiles || []).length,
-      currentMemberCount,
-      yearsOfResearch: '30+',
-    }
-  }, [newsTiles, peopleCards, projectTiles, softwareProjects])
+  const { peopleCards } = useSiteMetadata()
 
   return (
     <>
-      <HeroSection
-        themes={homepageThemes}
-        activeThemeId={activeThemeId}
-        onSelectTheme={handleSelectTheme}
-      />
-      <div id="selected-theme-showcase" className="research-theme-selected-showcase">
-        <aside className="research-theme-side-switcher" aria-label="Switch research theme">
-          <div className="research-themes-shell">
-            <div className="research-theme-side-switcher-card">
-              <span className="research-theme-side-switcher-label">Switch theme</span>
-              {homepageThemes.map(theme => (
-                <button
-                  key={theme.id}
-                  type="button"
-                  className={`research-theme-side-chip ${
-                    theme.id === activeThemeId ? 'research-theme-side-chip--active' : ''
-                  }`}
-                  onClick={() => handleSelectTheme(theme.id)}
-                  aria-pressed={theme.id === activeThemeId}
-                >
-                  {theme.title}
-                </button>
-              ))}
-            </div>
+      <HeroSection />
+      <ThemeBanners themes={homepageThemes} />
+
+      <section className="research-home-evidence" aria-labelledby="research-home-evidence-title">
+        <div className="research-themes-shell research-home-evidence__inner">
+          <div>
+            <p className="research-themes-section-eyebrow">Evidence &amp; tools</p>
+            <h2 id="research-home-evidence-title">Go from a theme to the work behind it.</h2>
+            <p>
+              Short project overviews provide the map. Publications, software, and the full project
+              index provide the technical depth.
+            </p>
           </div>
-        </aside>
-        <ThemeExplainerPanel theme={activeTheme} />
-        <FeaturedProjectsGrid theme={activeTheme} projects={activeThemeProjects} />
-      </div>
-      <OutputsSection
-        publicationCount={outputStats.publicationCount}
-        softwareCategoryCount={outputStats.softwareCategoryCount}
-        softwareToolCount={outputStats.softwareToolCount}
-        newsCount={outputStats.newsCount}
-      />
-      <MetricsSection
-        projectCount={outputStats.projectCount}
-        publicationCount={outputStats.publicationCount}
-        currentMemberCount={outputStats.currentMemberCount}
-        yearsOfResearch={outputStats.yearsOfResearch}
-      />
+          <nav className="research-home-evidence__links" aria-label="Research resources">
+            {evidenceLinks.map(link => (
+              <Link key={link.href} to={link.href} className="research-home-evidence__link">
+                <span>
+                  <strong>{link.label}</strong>
+                  <small>{link.description}</small>
+                </span>
+                <FaArrowRight aria-hidden="true" />
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </section>
+
       <AboutCondensed />
       <PeopleCondensed peopleCards={peopleCards || []} />
     </>

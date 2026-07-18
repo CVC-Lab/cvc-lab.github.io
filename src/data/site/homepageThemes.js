@@ -1,82 +1,62 @@
+const healthcareAiVisual =
+  require('../../images/publications/PUB_Posterior-Aware Phenotyping.png').default
+const worldModelsAnimation =
+  require('../../images/projects/phast/phast_monolithic_demo.gif').default
+const aiForScienceVisual =
+  require('../../images/projects/Project_Subsurface Flow Modeling.png').default
+
 /**
- * Curated research-theme data for the experimental homepage.
- *
- * This is intentionally separate from the existing internal project taxonomy.
- * The goal is to provide a lightweight, reversible theme-first discovery layer
- * for the temporary /research-themes route.
+ * The public homepage taxonomy is intentionally smaller than the internal project list.
+ * Each theme is a single entry point; project-level detail lives behind the theme link.
  */
-
-const triModalGeneTherapyTitle =
-  'A Novel Tri-Modal Viral–Ultrasound Gene-Delivery Therapy Protocol for Lysosomal Neurodegeneration via Stochastic Model Optimization with Uncertainty Quantification and Generalizability'
-
 const homepageThemes = [
   {
     id: 'healthcare-ai',
+    index: '01',
     title: 'Healthcare AI',
+    kicker: 'Human-centered modeling',
     summary:
-      'Multimodal computational methods for diagnosis, patient stratification, and disease monitoring.',
-    description:
-      'We develop computational methods that combine imaging, biomarkers, wearable sensing, and clinical information to support diagnosis, subgroup discovery, and longitudinal monitoring in complex diseases.',
-    useCases: ['Medical imaging', 'Biomarkers', 'Wearables', 'Clinician decision support'],
-    impact:
-      'Integrating imaging, biomarkers, sensors, and clinical data into models that support diagnosis and monitoring.',
-    ctaLabel: 'View all Healthcare AI projects',
-    ctaHref: '/projects',
-    projectNames: [
-      "Actionable Intelligence for Combating Parkinson's Disease",
-      'Integrated PD Precision Stratification',
-      'Pathway-Anchored PD Clustering',
-      triModalGeneTherapyTitle,
-    ],
+      'Interpretable models for multimodal health data, patient heterogeneity, and longitudinal disease monitoring.',
+    tags: ['Imaging', 'Biomarkers', 'Clinical data'],
+    visual: healthcareAiVisual,
+    visualAlt:
+      'Posterior motor states connected to clinical assessments, patient-level phenotypes, DaTSCAN, and MRI validation',
+    visualCaption:
+      'Posterior-aware motor states connect clinical assessments to imaging-associated validation.',
+    href: '/projects/healthcare-ai',
+    ctaLabel: 'Explore Healthcare AI',
   },
   {
     id: 'world-models',
+    index: '02',
     title: 'World Models',
+    kicker: 'Systems that evolve',
     summary:
-      'Structured models and simulations of evolving systems for prediction, reasoning, and decision-making.',
-    description:
-      'We build structured models of systems that change over time, including simulation-oriented methods for physical systems, stability, forecasting, planning, and decision-making in complex environments.',
-    useCases: ['Dynamic environments', 'Temporal inference', 'Planning', 'Scientific simulation'],
-    impact:
-      'Developing robust models for systems that evolve over time and require prediction, planning, simulation, and decision-making.',
-    ctaLabel: 'Browse World Models research',
-    ctaHref: '/projects',
-    projectNames: [
-      'PHAST',
-      'The Physics, Information, and Computation of Perennial Learning: Kolmogorov Complexity, Information Distance and Port-Hamiltonian Thermodynamics',
-      'GRL-SNAM',
-      'Dynamic Belief Games',
-      'Subsurface Flow Modeling',
-      'Scalable Risk-Averse Well-Placement',
-    ],
+      'Physics-informed world models learn structured dynamics for long-horizon forecasting, simulation, and decision-making under uncertainty.',
+    tags: ['Structured dynamics', 'Physics-informed ML', 'Forecasting'],
+    visual: worldModelsAnimation,
+    visualAlt:
+      'PHAST animated comparison of ground truth and learned trajectories across mechanical, electrical, and physical systems',
+    visualCaption:
+      'PHAST compares structured Hamiltonian dynamics against learned baselines across physical systems.',
+    href: '/projects?theme=world-models',
+    ctaLabel: 'Browse World Models',
   },
   {
     id: 'ai-for-science',
+    index: '03',
     title: 'AI for Science',
+    kicker: 'Scientific AI',
     summary:
-      'Machine learning methods for scientific data, imaging, simulations, latent structure, and interpretable analysis.',
-    description:
-      'We apply machine learning to scientific data, imaging, sensing, and simulation pipelines to help researchers recover structure, discover latent patterns, and accelerate analysis while preserving interpretability.',
-    useCases: [
-      'Scientific machine learning',
-      'Multimodal modeling',
-      'Computational imaging',
-      'Simulation-guided inference',
-    ],
-    impact:
-      'Building structure-aware computational methods that help researchers sense, simulate, analyze, and interpret complex systems.',
-    ctaLabel: 'Explore AI for Science projects',
-    ctaHref: '/projects',
-    projectNames: [
-      'Differential and Pointwise Control RL',
-      'The Physics, Information, and Computation of Perennial Learning: Kolmogorov Complexity, Information Distance and Port-Hamiltonian Thermodynamics',
-      'Scalable Robust Bayesian Co-Clustering',
-      'Scalable Risk-Averse Well-Placement',
-      'Subsurface Flow Modeling',
-      'Night-time Aerial Material Segmentation',
-      'Adversarial Cloaking',
-      'DEDRECON',
-    ],
+      'Structure-aware learning for scientific data, simulation, sensing, and computational discovery.',
+    tags: ['Scientific ML', 'Simulation', 'Visualization'],
+    visual: aiForScienceVisual,
+    visualAlt:
+      'Subsurface flow modeling graphical abstract showing layered geology, wells, mesh resolution, and Bayesian uncertainty',
+    visualCaption:
+      'Scientific machine learning brings simulation, uncertainty, and visual reasoning into one workflow.',
+    href: '/projects?theme=ai-for-science',
+    ctaLabel: 'Explore AI for Science',
   },
 ]
 

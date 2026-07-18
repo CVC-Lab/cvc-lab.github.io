@@ -14,6 +14,6 @@ export default IndexPage
 export const Head = () => (
   <Seo
     title="Computational Visualization Center"
-    description="Theme-first homepage for the Computational Visualization Center focused on Healthcare AI, World Models, and AI for Science."
+    description="Explore CVC research across Healthcare AI, World Models, and AI for Science."
   />
 )
