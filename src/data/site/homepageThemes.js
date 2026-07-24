@@ -23,6 +23,24 @@ const homepageThemes = [
       'Posterior motor states connected to clinical assessments, patient-level phenotypes, DaTSCAN, and MRI validation',
     visualCaption:
       'Posterior-aware motor states connect clinical assessments to imaging-associated validation.',
+    featuredProjects: [
+      {
+        label: 'Posterior-aware motor phenotyping',
+        href: '/projects/posterior-aware-pd-phenotyping',
+      },
+      {
+        label: 'Pathway-anchored PD clustering',
+        href: '/projects/pathway-anchored-pd-clustering',
+      },
+      {
+        label: 'Integrated precision stratification',
+        href: '/projects/integrated-pd-precision-stratification',
+      },
+      {
+        label: 'Actionable Intelligence',
+        href: 'https://cvc-lab.github.io/parkinsons-website/',
+      },
+    ],
     href: '/projects/healthcare-ai',
     ctaLabel: 'Explore Healthcare AI',
   },
@@ -39,6 +57,11 @@ const homepageThemes = [
       'PHAST animated comparison of ground truth and learned trajectories across mechanical, electrical, and physical systems',
     visualCaption:
       'PHAST compares structured Hamiltonian dynamics against learned baselines across physical systems.',
+    featuredProjects: [
+      { label: 'Dynamic Belief Games', href: '/projects/dynamic-belief-games' },
+      { label: 'Ski Jumper Digital Twin', href: '/projects/ski-jumper-digital-twin' },
+      { label: 'Piano Digital Twin', href: '/projects/piano-digital-twin' },
+    ],
     href: '/projects?theme=world-models',
     ctaLabel: 'Browse World Models',
   },
@@ -55,6 +78,14 @@ const homepageThemes = [
       'Subsurface flow modeling graphical abstract showing layered geology, wells, mesh resolution, and Bayesian uncertainty',
     visualCaption:
       'Scientific machine learning brings simulation, uncertainty, and visual reasoning into one workflow.',
+    featuredProjects: [
+      { label: 'Molecular dynamics / protein folding', href: '/projects/protein-sidechain' },
+      { label: 'Subsurface Flow Modeling', href: '/projects/subsurface-modeling' },
+      {
+        label: 'Scalable Risk-Averse Well-Placement',
+        href: '/projects/scalable-risk-averse-well-placement',
+      },
+    ],
     href: '/projects?theme=ai-for-science',
     ctaLabel: 'Explore AI for Science',
   },

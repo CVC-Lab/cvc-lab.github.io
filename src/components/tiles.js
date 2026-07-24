@@ -50,7 +50,6 @@ const worldModelProjectNames = new Set([
   'Optimal Control',
   'Sample Complexity',
   'Theoretical Bound for OCF Algorithm',
-  'OC Protein Side-Chain and Folding',
   'Differential and Pointwise Control RL',
   'The Physics, Information, and Computation of Perennial Learning: Kolmogorov Complexity, Information Distance and Port-Hamiltonian Thermodynamics',
 ])

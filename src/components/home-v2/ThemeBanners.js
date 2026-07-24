@@ -70,6 +70,31 @@ const ThemeVisual = ({ theme }) => {
   )
 }
 
+const ThemeProjectLink = ({ project }) => {
+  const linkContent = (
+    <>
+      {project.label} <FaArrowRight aria-hidden="true" />
+    </>
+  )
+
+  if (project.href.startsWith('http')) {
+    return (
+      <a href={project.href} target="_blank" rel="noreferrer">
+        {linkContent}
+      </a>
+    )
+  }
+
+  return <Link to={project.href}>{linkContent}</Link>
+}
+
+ThemeProjectLink.propTypes = {
+  project: PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    href: PropTypes.string.isRequired,
+  }).isRequired,
+}
+
 ThemeVisual.propTypes = {
   theme: PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -112,6 +137,16 @@ const ThemeBanners = ({ themes }) => (
                   <span key={tag}>{tag}</span>
                 ))}
               </div>
+              {theme.featuredProjects?.length > 0 && (
+                <div className="research-theme-banner__projects">
+                  <span className="research-theme-banner__projects-label">Selected projects</span>
+                  <div className="research-theme-banner__projects-list">
+                    {theme.featuredProjects.map(project => (
+                      <ThemeProjectLink key={project.href} project={project} />
+                    ))}
+                  </div>
+                </div>
+              )}
               <Link to={theme.href} className="research-theme-banner__link">
                 {theme.ctaLabel} <FaArrowRight aria-hidden="true" />
               </Link>
@@ -136,6 +171,12 @@ ThemeBanners.propTypes = {
       visualAlt: PropTypes.string.isRequired,
       visualCaption: PropTypes.string.isRequired,
       video: PropTypes.string,
+      featuredProjects: PropTypes.arrayOf(
+        PropTypes.shape({
+          label: PropTypes.string.isRequired,
+          href: PropTypes.string.isRequired,
+        })
+      ),
       href: PropTypes.string.isRequired,
       ctaLabel: PropTypes.string.isRequired,
     })

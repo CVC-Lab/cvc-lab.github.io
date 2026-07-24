@@ -8,6 +8,8 @@ const perennialLearningTitle =
 const triModalGeneTherapyTitle =
   'A Novel Tri-Modal Viral–Ultrasound Gene-Delivery Therapy Protocol for Lysosomal Neurodegeneration via Stochastic Model Optimization with Uncertainty Quantification and Generalizability'
 const parkinsonsHealthcareAiTitle = "Parkinson's Disease / Healthcare AI"
+const pianoDigitalTwinTitle = 'Piano Digital Twin'
+const skiJumperDigitalTwinTitle = 'Ski Jumper Digital Twin'
 
 module.exports = [
   {
@@ -176,6 +178,7 @@ module.exports = [
     img_name: 'project_tiles/protein_sidechain',
     link: '/projects/protein-sidechain',
     tags: ['Reinforcement Learning'],
+    themes: ['AI for Science'],
     date: '2024-09-12',
   },
   {
@@ -196,6 +199,26 @@ module.exports = [
     tags: ['Reinforcement Learning', 'Scientific ML'],
     themes: ['World Models'],
     date: '2025-04-08',
+  },
+  {
+    name: pianoDigitalTwinTitle,
+    description:
+      'A performer-instrument world model for multimodal piano skill, structured dynamics, and safe personalized training.',
+    img_name: 'projects/piano_digital_twin/piano_digital_twin_hero',
+    link: '/projects/piano-digital-twin',
+    tags: ['Scientific ML', 'Human Motion'],
+    themes: ['World Models'],
+    date: '2026-07-19',
+  },
+  {
+    name: skiJumperDigitalTwinTitle,
+    description:
+      'A physics-aware digital twin for phase-dependent ski-jump trajectories, aerodynamic posture, and landing safety.',
+    img_name: 'projects/ski_jumper_digital_twin/ski_jumper_overview',
+    link: '/projects/ski-jumper-digital-twin',
+    tags: ['Scientific ML', 'Simulation'],
+    themes: ['World Models'],
+    date: '2026-07-13',
   },
   {
     name: 'SHASTRA',
@@ -231,6 +254,7 @@ module.exports = [
     img_name: 'projects/Project_Subsurface Flow Modeling',
     link: '/projects/subsurface-modeling',
     tags: ['Reinforcement Learning', 'Scientific ML'],
+    themes: ['AI for Science'],
     date: '2024-10-20',
   },
   {
@@ -277,6 +301,7 @@ module.exports = [
     img_name: 'publications/PUB_Scalable Risk-Averse',
     link: '/projects/scalable-risk-averse-well-placement',
     tags: ['Scientific ML'],
+    themes: ['AI for Science'],
     date: '2026-01-01',
   },
   {
