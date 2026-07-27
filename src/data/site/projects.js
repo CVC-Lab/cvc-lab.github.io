@@ -276,6 +276,16 @@ module.exports = [
     date: '2026-02-19',
   },
   {
+    name: 'QC-PHAST Search',
+    description:
+      'An evidence-gated protocol for comparing classical and quantum query models in finite-pool rare-regime discovery.',
+    img_name: 'publications/PUB_QC-PHAST_Search',
+    link: '/projects/qc-phast-search',
+    tags: ['Scientific ML', 'Quantum Computing'],
+    themes: ['AI for Science'],
+    date: '2026-07-24',
+  },
+  {
     name: perennialLearningTitle,
     description:
       'Perennial learning framework using Kolmogorov complexity, information distance, and port-Hamiltonian dynamics for safe continual adaptation.',

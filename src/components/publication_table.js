@@ -12,6 +12,7 @@ import perennialLearningThumbnail from '../images/publications/PUB_Perennial Lea
 import materialAwareHamiltonianThumbnail from '../images/projects/Learning Material-Aware Hamiltonian_Thumbnail.png'
 import descentTooStableThumbnail from '../images/projects/When Descent Is Too Stable_Thumbnail.png'
 import phastThumbnail from '../images/publications/PUB_PHASTPort-Hamiltonian.png'
+import qcPhastSearchThumbnail from '../images/publications/PUB_QC-PHAST_Search.png'
 import grlSnamThumbnail from '../images/publications/PUB_GRL‑SNAM.png'
 import compositionalElbosThumbnail from '../images/publications/PUB_Compositional ELBOs.png'
 import differentialPointwiseThumbnail from '../images/publications/PUB_Differential and Pointwise.png'
@@ -88,6 +89,10 @@ const publicationThumbnailMap = {
   'PHAST: Port-Hamiltonian Architecture for Structured Temporal Dynamics Forecasting': {
     src: phastThumbnail,
     alt: 'PHAST publication thumbnail',
+  },
+  'QC-PHAST Search: Classical--Quantum Query Benchmarks for Finite-Pool Rare-Regime Discovery': {
+    src: qcPhastSearchThumbnail,
+    alt: 'QC-PHAST Search publication thumbnail',
   },
   'GRL-SNAM: Geometric Reinforcement Learning with Path Differential Hamiltonians for Simultaneous Navigation and Mapping in Unknown Environments':
     {

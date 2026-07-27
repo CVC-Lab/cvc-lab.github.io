@@ -10448,5 +10448,27 @@
     "sortOrder": "",
     "ProjectLink": "/projects/posterior-aware-pd-phenotyping",
     "OtherAuthors": ""
+  },
+  {
+    "PaperID": "",
+    "CatID": "",
+    "CatID2": "",
+    "CatID3": "",
+    "CatID4": "",
+    "CatID_gen": "",
+    "Authors": "Harsh Milind Tirhekar, Chandrajit Bajaj",
+    "Title": "QC-PHAST Search: Classical--Quantum Query Benchmarks for Finite-Pool Rare-Regime Discovery",
+    "Location": "arXiv:2607.21995",
+    "PublicationType": "arXiv",
+    "PublishedDateMonth": "7",
+    "PublishedDateYear": "2026",
+    "PDFLink": "https://arxiv.org/abs/2607.21995",
+    "LocalPDFLink": "/papers/2607.21995v1.pdf",
+    "PSLink": "",
+    "Abstract": "",
+    "RegisterDate": "",
+    "sortOrder": "",
+    "ProjectLink": "/projects/qc-phast-search",
+    "OtherAuthors": ""
   }
 ]
