@@ -16,6 +16,8 @@ Oden Institute for Computational Engineering and Sciences, The University of Tex
 
 **bioRxiv 2026** &nbsp; | &nbsp; [Paper](https://doi.org/10.64898/2026.06.12.732003)
 
+**MICCAI 2026 accepted paper** &nbsp; | &nbsp; [Interactive paper page](/projects/posterior-aware-pd-phenotyping-miccai/)
+
 ---
 
 ![Posterior-aware motor-state phenotyping graphical abstract](../../../images/projects/posterior_aware_pd_phenotyping/fig1_motor_state_graphical_abstract.png)

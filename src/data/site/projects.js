@@ -13,6 +13,16 @@ const skiJumperDigitalTwinTitle = 'Ski Jumper Digital Twin'
 
 module.exports = [
   {
+    name: 'MICCAI 2026 Posterior-Aware Motor Phenotyping',
+    description:
+      'Posterior-aware Bayesian motor-state phenotyping from MDS-UPDRS-III with DaTSCAN, MRI, and BioFIND validation.',
+    img_name: 'projects/posterior_aware_pd_phenotyping/fig2_posterior_pipeline',
+    link: '/projects/posterior-aware-pd-phenotyping-miccai/',
+    tags: ['Health AI/ML', 'Clinical Imaging'],
+    themes: ['Healthcare AI'],
+    date: '2026-08-16',
+  },
+  {
     name: 'DEDRECON',
     description:
       'Real-time anomaly detection for hyperspectral video using encoder-decoder models that fuse spectral and motion cues.',

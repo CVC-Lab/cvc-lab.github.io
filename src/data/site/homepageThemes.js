@@ -29,6 +29,10 @@ const homepageThemes = [
         href: '/projects/posterior-aware-pd-phenotyping',
       },
       {
+        label: 'MICCAI 2026 accepted paper',
+        href: '/projects/posterior-aware-pd-phenotyping-miccai/',
+      },
+      {
         label: 'Pathway-anchored PD clustering',
         href: '/projects/pathway-anchored-pd-clustering',
       },

@@ -25,6 +25,16 @@ const subprojects = [
     cta: 'Open project',
   },
   {
+    title: 'MICCAI 2026 accepted paper',
+    label: 'Interactive paper page',
+    description:
+      'Explore the accepted conference paper through the visual method flow, posterior-state explorer, BGMM configuration browser, and empirical result gallery.',
+    image: posteriorPipeline,
+    alt: 'Posterior-aware motor phenotyping pipeline for the MICCAI 2026 accepted paper',
+    href: '/projects/posterior-aware-pd-phenotyping-miccai/',
+    cta: 'Open paper page',
+  },
+  {
     title: 'Pathway-anchored PD clustering',
     label: 'Interpretable imaging',
     description:
@@ -58,6 +68,13 @@ const subprojects = [
 ]
 
 const papers = [
+  {
+    title:
+      "Posterior-Aware Motor Phenotyping with Multimodal Imaging Validation in Parkinson's Disease",
+    citation: 'H. M. Tirhekar, P. Yadav, C. Bajaj. MICCAI 2026, accepted paper 4053.',
+    href: '/projects/posterior-aware-pd-phenotyping-miccai/',
+    internal: true,
+  },
   {
     title:
       "Posterior-calibrated multimodal motor states reveal longitudinal and imaging-associated heterogeneity in Parkinson's disease",
@@ -239,9 +256,15 @@ const HealthcareAiPage = () => (
                 <div>
                   <h3>{paper.title}</h3>
                   <p>{paper.citation}</p>
-                  <a href={paper.href} target="_blank" rel="noopener noreferrer">
-                    Open paper <FaExternalLinkAlt aria-hidden="true" />
-                  </a>
+                  {paper.internal ? (
+                    <Link to={paper.href}>
+                      Open paper page <FaArrowRight aria-hidden="true" />
+                    </Link>
+                  ) : (
+                    <a href={paper.href} target="_blank" rel="noopener noreferrer">
+                      Open paper <FaExternalLinkAlt aria-hidden="true" />
+                    </a>
+                  )}
                 </div>
               </li>
             ))}

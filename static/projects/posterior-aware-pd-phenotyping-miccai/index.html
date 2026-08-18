@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="MICCAI 2026 project page for Posterior-Aware Motor Phenotyping with Multimodal Imaging Validation in Parkinson's Disease."
+    />
+    <title>Posterior-Aware Motor Phenotyping | MICCAI 2026 | CVC Lab</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "name": "Posterior-Aware Motor Phenotyping with Multimodal Imaging Validation in Parkinson's Disease",
+        "author": [
+          { "@type": "Person", "name": "Harsh Tirhekar" },
+          { "@type": "Person", "name": "Priyanshi Yadav" },
+          { "@type": "Person", "name": "Chandrajit Bajaj" }
+        ],
+        "isPartOf": {
+          "@type": "Event",
+          "name": "29th International Conference on Medical Image Computing and Computer Assisted Intervention"
+        },
+        "url": "https://cvc-lab.github.io/projects/posterior-aware-pd-phenotyping-miccai/"
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Site header">
+      <a class="brand" href="/" aria-label="CVC Lab home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>
+          <strong>Computational Visualization Center</strong>
+          <small>Oden Institute · UT Austin</small>
+        </span>
+      </a>
+      <nav class="top-nav" aria-label="Project navigation">
+        <a href="/projects/">CVC projects</a>
+        <a href="#paper">Paper</a>
+        <a href="#visuals">Visuals</a>
+        <a href="#atlas">Atlas</a>
+        <a href="#configs">Configs</a>
+        <a href="#explorer">Explorer</a>
+        <a href="#results">Results</a>
+        <a href="#network">PD Web</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">MICCAI 2026 Accepted Paper · Paper 4053 · Healthcare AI</p>
+          <h1 id="hero-title">
+            Posterior-Aware Motor Phenotyping with Multimodal Imaging Validation in Parkinson's Disease
+          </h1>
+          <p class="hero-lede">
+            A posterior-aware Bayesian mixture framework for visit-level Parkinson's motor-state
+            phenotyping from MDS-UPDRS-III, validated against DaTSCAN SPECT, structural MRI,
+            and out-of-cohort BioFIND transfer.
+          </p>
+          <div class="hero-actions" aria-label="Primary links">
+            <a class="button primary" href="https://www.biorxiv.org/content/10.64898/2026.06.12.732003v1">bioRxiv extended version</a>
+            <a class="button" href="/projects/posterior-aware-pd-phenotyping/">Existing project page</a>
+            <a class="button" href="https://github.com/CVC-Lab/posterior-aware-pd-phenotyping">Code</a>
+          </div>
+          <p class="release-note">
+            Official MICCAI open-access link pending public proceedings release.
+          </p>
+        </div>
+        <figure class="hero-visual">
+          <img src="assets/generated/hero-brain-posterior.png" alt="Generated scientific visualization of a transparent brain with posterior motor-state ribbons." />
+          <figcaption>Generated concept visual for communication; empirical figures appear below.</figcaption>
+        </figure>
+      </section>
+
+      <section class="metric-band" aria-label="Paper evidence summary">
+        <div class="metric">
+          <strong data-count="29366">29,366</strong>
+          <span>MDS-UPDRS-III assessments</span>
+        </div>
+        <div class="metric">
+          <strong data-count="1847">1,847</strong>
+          <span>PPMI participants in MICCAI analysis</span>
+        </div>
+        <div class="metric">
+          <strong data-count="2912">2,912</strong>
+          <span>predefined BGMM configurations</span>
+        </div>
+        <div class="metric">
+          <strong data-count="5">5</strong>
+          <span>visit-level motor states</span>
+        </div>
+        <div class="metric">
+          <strong data-count="99.5">99.5%</strong>
+          <span>high-confidence assignments</span>
+        </div>
+      </section>
+
+      <section id="paper" class="section two-column">
+        <div>
+          <p class="eyebrow">What the MICCAI paper contributes</p>
+          <h2>A cautious state model, not an overclaimed subtype taxonomy</h2>
+          <p>
+            The paper identifies a reproducible visit-level motor-state representation while keeping
+            posterior uncertainty visible. The strongest interpretation is practical: the model gives a
+            compact, uncertainty-aware layer for cohort stratification and multimodal validation.
+          </p>
+          <p>
+            The work deliberately avoids claiming five stable biological patient subtypes. Imaging is
+            used as downstream validation, not as clustering input, so DaTSCAN and MRI associations
+            are convergent evidence rather than circular discovery features.
+          </p>
+        </div>
+        <div class="fact-grid" aria-label="Key facts">
+          <article>
+            <span>Cross-granularity</span>
+            <strong>V = 0.945</strong>
+            <p>Strong correspondence between five- and eight-component assignments.</p>
+          </article>
+          <article>
+            <span>DaTSCAN validation</span>
+            <strong>n = 1,839</strong>
+            <p>Motor states differ in striatal binding ratio patterns.</p>
+          </article>
+          <article>
+            <span>FreeSurfer MRI</span>
+            <strong>n = 1,706</strong>
+            <p>13 of 25 subcortical ROIs FDR-significant with small effect sizes.</p>
+          </article>
+          <article>
+            <span>BioFIND transfer</span>
+            <strong>n = 310</strong>
+            <p>PPMI-trained scaler and BGMM applied without refitting.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="visuals" class="section visual-story" aria-labelledby="visuals-title">
+        <div class="section-heading">
+          <p class="eyebrow">Visual map</p>
+          <h2 id="visuals-title">Motor exams, posterior uncertainty, imaging, and external transfer in one flow</h2>
+        </div>
+        <figure class="wide-figure">
+          <img src="assets/generated/evidence-network.png" alt="Generated evidence network linking motor exams, imaging, longitudinal visits, and five posterior motor states." />
+          <figcaption>
+            Generated public-facing evidence map. It is a visual explanation, not a replacement for
+            the result figures from the paper.
+          </figcaption>
+        </figure>
+        <div class="story-steps" aria-label="Method flow">
+          <article>
+            <span>01</span>
+            <h3>Motor-domain representation</h3>
+            <p>Longitudinal MDS-UPDRS-III motor items are organized into clinically interpretable domains.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Bayesian mixture sweep</h3>
+            <p>A predefined 2,912-configuration BGMM search selects an effective five-state representation.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Posterior triage</h3>
+            <p>Each visit receives a posterior vector, confidence tier, entropy, and state-boundary context.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Multimodal validation</h3>
+            <p>DaTSCAN and FreeSurfer MRI test whether motor states have complementary imaging correlates.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="atlas" class="section atlas-section" aria-labelledby="atlas-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Clinical and anatomical atlas</p>
+          <h2 id="atlas-title">From motor examination to multimodal brain validation</h2>
+          <p>
+            These generated atlas visuals are designed for presentations and the CVC project page:
+            they show the body-scale motor examination vocabulary alongside the brain regions and
+            imaging modalities used to validate the posterior motor-state representation.
+          </p>
+        </div>
+
+        <div class="atlas-grid">
+          <figure class="atlas-figure">
+            <img src="assets/generated/motor-skeleton-atlas.png" alt="Generated full-body skeleton and motor examination atlas for Parkinson's disease motor domains." />
+            <figcaption>
+              Generated full-body motor atlas with skeleton, gait, posture, face, upper-limb,
+              lower-limb, and task-level movement cues.
+            </figcaption>
+          </figure>
+          <div class="atlas-copy">
+            <h3>Motor examination vocabulary</h3>
+            <div class="chip-cloud" aria-label="Motor domain labels">
+              <span>Tremor</span>
+              <span>Bradykinesia</span>
+              <span>Rigidity</span>
+              <span>Axial function</span>
+              <span>Bulbar symptoms</span>
+              <span>Rest tremor</span>
+              <span>Action tremor</span>
+              <span>Postural tremor</span>
+              <span>Finger tapping</span>
+              <span>Hand movements</span>
+              <span>Pronation-supination</span>
+              <span>Toe tapping</span>
+              <span>Leg agility</span>
+              <span>Arising from chair</span>
+              <span>Gait</span>
+              <span>Freezing of gait</span>
+              <span>Postural stability</span>
+              <span>Posture</span>
+              <span>Body bradykinesia</span>
+              <span>Facial expression</span>
+              <span>Speech</span>
+              <span>Neck rigidity</span>
+              <span>Upper-limb rigidity</span>
+              <span>Lower-limb rigidity</span>
+            </div>
+            <h3>Body map</h3>
+            <div class="chip-cloud body" aria-label="Body-region labels">
+              <span>Right arm</span>
+              <span>Left arm</span>
+              <span>Right leg</span>
+              <span>Left leg</span>
+              <span>Upper limbs</span>
+              <span>Lower limbs</span>
+              <span>Trunk</span>
+              <span>Neck</span>
+              <span>Face</span>
+              <span>Voice</span>
+              <span>Oral-motor control</span>
+            </div>
+          </div>
+
+          <figure class="atlas-figure">
+            <img src="assets/generated/brain-region-atlas.png" alt="Generated brain-region and neuroimaging atlas with basal ganglia, subcortical regions, MRI, and DaTSCAN motifs." />
+            <figcaption>
+              Generated brain-region atlas with basal ganglia, subcortical/cortical structures,
+              DaTSCAN-like SPECT panels, and T1-weighted MRI panels.
+            </figcaption>
+          </figure>
+          <div class="atlas-copy">
+            <h3>Imaging and brain-region vocabulary</h3>
+            <div class="chip-cloud brain" aria-label="Brain-region and imaging labels">
+              <span>Putamen</span>
+              <span>Caudate nucleus</span>
+              <span>Striatum</span>
+              <span>Dopaminergic system</span>
+              <span>Hippocampus</span>
+              <span>Thalamus</span>
+              <span>Amygdala</span>
+              <span>Lateral ventricles</span>
+              <span>Subcortical brain regions</span>
+              <span>Cortical thickness</span>
+              <span>Motor cortex</span>
+              <span>Brain MRI</span>
+              <span>DaTSCAN SPECT</span>
+              <span>T1-weighted MRI</span>
+            </div>
+            <p>
+              The atlas supports the public narrative without adding new numerical claims: the
+              empirical support remains the accepted MICCAI result figures and the extended bioRxiv
+              analyses shown below.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="configs" class="section config-section" aria-labelledby="configs-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">2,912-configuration sweep browser</p>
+          <h2 id="configs-title">Move through the BGMM search space and watch the visual state change</h2>
+          <p>
+            This module is driven by the saved BGMM sweep artifact, not hardcoded display values.
+            It encodes each selected configuration's diagnostics as an animated body-brain scene:
+            active components, posterior confidence, mixed/ambiguous assignments, entropy, silhouette,
+            and component occupancy. Component labels can permute across mixture fits, so this should be
+            read as a sweep diagnostic browser rather than a clinical prediction.
+          </p>
+        </div>
+
+        <div class="config-theater">
+          <div class="config-controls" aria-label="BGMM configuration controls">
+            <div class="control-stack">
+              <label>
+                <span>Candidate components K</span>
+                <input id="configK" type="range" min="0" max="12" value="1" />
+                <output id="configKLabel">5</output>
+              </label>
+              <label>
+                <span>Covariance model</span>
+                <select id="configCovariance"></select>
+              </label>
+              <label>
+                <span>Prior family</span>
+                <select id="configPriorType"></select>
+              </label>
+              <label>
+                <span>Concentration prior</span>
+                <input id="configAlpha" type="range" min="0" max="6" value="3" />
+                <output id="configAlphaLabel">0.1</output>
+              </label>
+              <label>
+                <span>Mean precision prior</span>
+                <input id="configMeanPrecision" type="range" min="0" max="3" value="0" />
+                <output id="configMeanPrecisionLabel">0.001</output>
+              </label>
+            </div>
+            <div class="preset-row">
+              <button id="configProceedings" class="preset is-active" type="button">Proceedings setting</button>
+              <button id="configArtifactBest" class="preset" type="button">Artifact top row</button>
+            </div>
+            <p class="microcopy">
+              The proceedings setting button uses the K=5, full-covariance, Dirichlet-distribution,
+              alpha=0.1 setting described in the paper source. The artifact top row button jumps to
+              the top stored sweep row from the saved summary artifact.
+            </p>
+          </div>
+
+          <div class="config-stage">
+            <canvas id="configCanvas" aria-hidden="true"></canvas>
+            <div class="config-readout">
+              <div>
+                <span>Config ID</span>
+                <strong id="configId">--</strong>
+              </div>
+              <div>
+                <span>Status</span>
+                <strong id="configStatus">--</strong>
+              </div>
+              <div>
+                <span>Effective k</span>
+                <strong id="configEffectiveK">--</strong>
+              </div>
+              <div>
+                <span>Silhouette</span>
+                <strong id="configSilhouette">--</strong>
+              </div>
+              <div>
+                <span>High-confidence</span>
+                <strong id="configHighConfidence">--</strong>
+              </div>
+              <div>
+                <span>Mixed/ambiguous</span>
+                <strong id="configMixed">--</strong>
+              </div>
+            </div>
+            <div id="configWeights" class="component-strip" aria-label="Top component occupancy"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="explorer" class="section explorer-section" aria-labelledby="explorer-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Working prototype</p>
+          <h2 id="explorer-title">Posterior-state explorer</h2>
+          <p>
+            This interactive panel demonstrates the paper's posterior-triage rule. Adjust the five
+            probabilities and the browser recomputes confidence tier, gap, entropy, and the posterior
+            visualization. The controls are explanatory and do not predict a real patient.
+          </p>
+        </div>
+        <div class="explorer-layout">
+          <div class="control-panel">
+            <div class="preset-row" aria-label="Posterior presets">
+              <button class="preset is-active" data-preset="textbook">Textbook M2</button>
+              <button class="preset" data-preset="chimera">M2/M3 boundary</button>
+              <button class="preset" data-preset="mixed">Low-certainty mix</button>
+            </div>
+            <div class="slider-list" aria-label="Posterior probability sliders">
+              <label>
+                <span>M0 · Mod-Trem</span>
+                <input type="range" min="0" max="100" value="4" data-state="0" />
+              </label>
+              <label>
+                <span>M1 · Sev-Trem</span>
+                <input type="range" min="0" max="100" value="2" data-state="1" />
+              </label>
+              <label>
+                <span>M2 · Mild-Ax</span>
+                <input type="range" min="0" max="100" value="90" data-state="2" />
+              </label>
+              <label>
+                <span>M3 · Sev-Ax</span>
+                <input type="range" min="0" max="100" value="3" data-state="3" />
+              </label>
+              <label>
+                <span>M4 · Mod-Mix</span>
+                <input type="range" min="0" max="100" value="1" data-state="4" />
+              </label>
+            </div>
+          </div>
+
+          <div class="posterior-card" aria-live="polite">
+            <div class="posterior-summary">
+              <div>
+                <span>Assignment tier</span>
+                <strong id="tierLabel">Textbook</strong>
+              </div>
+              <div>
+                <span>Dominant state</span>
+                <strong id="dominantState">M2 · Mild-Ax</strong>
+              </div>
+              <div>
+                <span>Posterior gap</span>
+                <strong id="gapValue">0.86</strong>
+              </div>
+              <div>
+                <span>Entropy</span>
+                <strong id="entropyValue">0.42</strong>
+              </div>
+            </div>
+            <div class="posterior-visual">
+              <canvas id="posteriorCanvas" aria-hidden="true"></canvas>
+              <div class="bar-stack" id="barStack" aria-label="Normalized posterior probabilities"></div>
+            </div>
+          </div>
+        </div>
+        <figure class="prototype-figure">
+          <img src="assets/generated/prototype-dashboard.png" alt="Generated dashboard concept for an uncertainty-aware Parkinson's motor-state explorer." />
+          <figcaption>Generated prototype concept; the live browser explorer above is implemented in this package.</figcaption>
+        </figure>
+      </section>
+
+      <section id="results" class="section results-section" aria-labelledby="results-title">
+        <div class="section-heading">
+          <p class="eyebrow">Empirical result figures</p>
+          <h2 id="results-title">Proceedings figures and extended context</h2>
+          <p>
+            The first row uses the accepted MICCAI figures. The second row adds extended bioRxiv
+            context for presentations and web storytelling, with links kept separate from the official
+            proceedings release.
+          </p>
+        </div>
+
+        <div class="gallery" aria-label="Result figure gallery">
+          <figure class="gallery-card large">
+            <img src="assets/figures/miccai-pipeline.png" alt="MICCAI posterior-aware phenotyping pipeline figure." />
+            <figcaption>
+              <strong>MICCAI pipeline</strong>
+              PPMI motor preprocessing, BGMM configuration search, bootstrap validation, posterior
+              triage, imaging validation, BioFIND transfer, and temporal analysis.
+            </figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <img src="assets/figures/miccai-explainability.png" alt="MICCAI explainability panels for motor-state profiles and Granger matrix." />
+            <figcaption>
+              <strong>Explainability</strong>
+              Motor-state profiles, converged configuration evidence, and temporal predictability.
+            </figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <img src="assets/figures/miccai-posterior-triage.png" alt="MICCAI posterior triage and cross-granularity correspondence figure." />
+            <figcaption>
+              <strong>Posterior triage</strong>
+              Textbook versus Chimera assignments and five-to-eight-state correspondence.
+            </figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <img src="assets/figures/miccai-imaging-validation.png" alt="MICCAI multimodal imaging validation figure." />
+            <figcaption>
+              <strong>Imaging validation</strong>
+              DaTSCAN SBR and FreeSurfer subcortical MRI correlates of motor states.
+            </figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <img src="assets/figures/biorxiv-posterior-calibration.png" alt="bioRxiv posterior calibration curve." />
+            <figcaption>
+              <strong>Extended calibration</strong>
+              Refit-stability calibration from patient-blocked bootstrap analysis.
+            </figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <img src="assets/figures/biorxiv-state-transition.png" alt="bioRxiv state transition heatmap." />
+            <figcaption>
+              <strong>Longitudinal dynamics</strong>
+              Visit-to-visit transition structure across posterior motor states.
+            </figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <img src="assets/figures/biorxiv-imaging-posterior-performance.png" alt="bioRxiv imaging-to-posterior prediction performance figure." />
+            <figcaption>
+              <strong>Soft posterior prediction</strong>
+              Imaging-to-posterior performance for DaTSCAN, MRI, and fused models.
+            </figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <img src="assets/figures/biorxiv-biofind-endpoints.png" alt="bioRxiv BioFIND endpoint gradients figure." />
+            <figcaption>
+              <strong>BioFIND endpoint gradients</strong>
+              External clinical face-validity analysis after model transfer.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="network" class="section network-section" aria-labelledby="network-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Web of Parkinson's activity</p>
+          <h2 id="network-title">Cross-link this MICCAI page with CVC's Parkinson's ecosystem</h2>
+          <p>
+            The page is designed to sit inside the CVC project/publication network and link forward to
+            the broader AI4PD activity without mixing proceedings claims with broader preprint work.
+          </p>
+        </div>
+        <div class="link-grid">
+          <a href="/publications/">
+            <span>CVC publications</span>
+            <strong>Conference entry target</strong>
+            <p>Use this page as the visual project link from the CVC 2026 conference-publications list.</p>
+          </a>
+          <a href="/projects/posterior-aware-pd-phenotyping/">
+            <span>Existing project page</span>
+            <strong>Posterior-aware PD phenotyping</strong>
+            <p>Keep this as the deeper project page and cross-link the MICCAI accepted paper page.</p>
+          </a>
+          <a href="https://cvc-lab.github.io/parkinsons-website/">
+            <span>AI4PD</span>
+            <strong>Mechanism-grounded AI for Parkinson's care</strong>
+            <p>Connect this accepted paper to the larger Parkinson's activity and validation narrative.</p>
+          </a>
+          <a href="https://conferences.miccai.org/2026/en/">
+            <span>MICCAI 2026</span>
+            <strong>Official conference site</strong>
+            <p>Replace with the paper-specific MICCAI open-access URL once proceedings are public.</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="section citation-section" aria-labelledby="citation-title">
+        <div class="citation-box">
+          <div>
+            <p class="eyebrow">Suggested citation card</p>
+            <h2 id="citation-title">CVC publication listing text</h2>
+          </div>
+          <pre><code>Tirhekar, H., Yadav, P., and Bajaj, C.
+Posterior-Aware Motor Phenotyping with Multimodal Imaging Validation in Parkinson's Disease.
+MICCAI 2026, accepted paper 4053.</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        Computational Visualization Center · Oden Institute for Computational Engineering and Sciences ·
+        The University of Texas at Austin
+      </p>
+      <p>
+        Generated concept visuals are for communication only. Empirical claims should be read from the
+        MICCAI paper and extended bioRxiv manuscript.
+      </p>
+    </footer>
+
+    <dialog id="figureDialog" aria-label="Figure preview">
+      <button id="dialogClose" class="dialog-close" aria-label="Close preview">Close</button>
+      <img id="dialogImage" alt="" />
+      <p id="dialogCaption"></p>
+    </dialog>
+
+    <script src="assets/data/bgmm-configs.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
