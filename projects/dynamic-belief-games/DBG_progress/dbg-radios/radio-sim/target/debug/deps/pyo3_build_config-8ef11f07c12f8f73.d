@@ -1,0 +1,14 @@
+/Users/andrewfarell/GitHub/dbg-radios/radio-sim/target/debug/deps/pyo3_build_config-8ef11f07c12f8f73.d: /Users/andrewfarell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.24.2/src/lib.rs /Users/andrewfarell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.24.2/src/errors.rs /Users/andrewfarell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.24.2/src/impl_.rs /Users/andrewfarell/GitHub/dbg-radios/radio-sim/target/debug/build/pyo3-build-config-4cb8fdbe3fe76231/out/pyo3-build-config-file.txt /Users/andrewfarell/GitHub/dbg-radios/radio-sim/target/debug/build/pyo3-build-config-4cb8fdbe3fe76231/out/pyo3-build-config.txt
+
+/Users/andrewfarell/GitHub/dbg-radios/radio-sim/target/debug/deps/libpyo3_build_config-8ef11f07c12f8f73.rlib: /Users/andrewfarell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.24.2/src/lib.rs /Users/andrewfarell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.24.2/src/errors.rs /Users/andrewfarell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.24.2/src/impl_.rs /Users/andrewfarell/GitHub/dbg-radios/radio-sim/target/debug/build/pyo3-build-config-4cb8fdbe3fe76231/out/pyo3-build-config-file.txt /Users/andrewfarell/GitHub/dbg-radios/radio-sim/target/debug/build/pyo3-build-config-4cb8fdbe3fe76231/out/pyo3-build-config.txt
+
+/Users/andrewfarell/GitHub/dbg-radios/radio-sim/target/debug/deps/libpyo3_build_config-8ef11f07c12f8f73.rmeta: /Users/andrewfarell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.24.2/src/lib.rs /Users/andrewfarell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.24.2/src/errors.rs /Users/andrewfarell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.24.2/src/impl_.rs /Users/andrewfarell/GitHub/dbg-radios/radio-sim/target/debug/build/pyo3-build-config-4cb8fdbe3fe76231/out/pyo3-build-config-file.txt /Users/andrewfarell/GitHub/dbg-radios/radio-sim/target/debug/build/pyo3-build-config-4cb8fdbe3fe76231/out/pyo3-build-config.txt
+
+/Users/andrewfarell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.24.2/src/lib.rs:
+/Users/andrewfarell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.24.2/src/errors.rs:
+/Users/andrewfarell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.24.2/src/impl_.rs:
+/Users/andrewfarell/GitHub/dbg-radios/radio-sim/target/debug/build/pyo3-build-config-4cb8fdbe3fe76231/out/pyo3-build-config-file.txt:
+/Users/andrewfarell/GitHub/dbg-radios/radio-sim/target/debug/build/pyo3-build-config-4cb8fdbe3fe76231/out/pyo3-build-config.txt:
+
+# env-dep:CARGO_PKG_VERSION=0.24.2
+# env-dep:OUT_DIR=/Users/andrewfarell/GitHub/dbg-radios/radio-sim/target/debug/build/pyo3-build-config-4cb8fdbe3fe76231/out
