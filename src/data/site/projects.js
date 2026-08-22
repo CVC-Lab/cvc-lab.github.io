@@ -16,7 +16,7 @@ module.exports = [
     name: 'MICCAI 2026 Posterior-Aware Motor Phenotyping',
     description:
       'Posterior-aware Bayesian motor-state phenotyping from MDS-UPDRS-III with DaTSCAN, MRI, and BioFIND validation.',
-    img_name: 'projects/posterior_aware_pd_phenotyping/fig2_posterior_pipeline',
+    img_name: 'projects/posterior_aware_pd_phenotyping/miccai_2026_posterior_aware_thumbnail',
     link: '/projects/posterior-aware-pd-phenotyping-miccai/',
     tags: ['Health AI/ML', 'Clinical Imaging'],
     themes: ['Healthcare AI'],
