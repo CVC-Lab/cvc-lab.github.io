@@ -172,8 +172,12 @@ const resolvePdfLink = pdfLink => {
   return null
 }
 
+const PREPRINT_LOCATION_PATTERN = /^\s*(arXiv|bioRxiv|medRxiv)/i
+
 const getPaperLinkConfig = publication => {
-  const isPreprint = publication.PublicationType === 'arXiv'
+  const isPreprint =
+    publication.PublicationType === 'arXiv' ||
+    PREPRINT_LOCATION_PATTERN.test(publication.Location || '')
 
   return {
     className: isPreprint ? 'pub-link-paper' : 'pub-link-pdf',
