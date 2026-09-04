@@ -296,6 +296,46 @@ module.exports = [
     date: '2026-07-24',
   },
   {
+    name: 'Material-Aware Hamiltonian Risk Fields',
+    description:
+      'A context-energy term that makes a port-Hamiltonian navigation policy activate evasive maneuvers only when the local scene admits a safer feasible route.',
+    img_name: 'projects/Learning Material-Aware Hamiltonian_Thumbnail',
+    link: '/projects/material-aware-hamiltonian-risk-fields',
+    tags: ['Reinforcement Learning', 'Scientific ML'],
+    themes: ['World Models'],
+    date: '2026-05-07',
+  },
+  {
+    name: 'Event-Triggered Hamiltonian Optimization',
+    description:
+      'SHAPE, a port-Hamiltonian optimizer that treats stagnation as a control event to hunt for better minima under a fixed evaluation budget.',
+    img_name: 'projects/When Descent Is Too Stable_Thumbnail',
+    link: '/projects/event-triggered-hamiltonian-optimization',
+    tags: ['Scientific ML'],
+    themes: ['AI for Science'],
+    date: '2026-05-07',
+  },
+  {
+    name: 'Dynamic Metric Space Maintenance',
+    description:
+      'A self-balancing dynamic octree giving logarithmic-time updates and queries in evolving metric spaces, without rebuilding as distributions shift.',
+    img_name: 'publications/PUB_Rapid Multi-kernel Estimation',
+    link: '/projects/dynamic-metric-space-octree',
+    tags: ['Scientific ML'],
+    themes: ['AI for Science'],
+    date: '2025-09-01',
+  },
+  {
+    name: '4DRecons',
+    description:
+      'Complete textured deforming 3D models from a single RGB-D sequence, using 4D neural implicit surfaces with deformation and topology regularizations.',
+    img_name: 'publications/PUB_4drecons',
+    link: '/projects/4drecons',
+    tags: ['Computer Vision'],
+    themes: ['World Models'],
+    date: '2025-06-14',
+  },
+  {
     name: perennialLearningTitle,
     description:
       'Perennial learning framework using Kolmogorov complexity, information distance, and port-Hamiltonian dynamics for safe continual adaptation.',
