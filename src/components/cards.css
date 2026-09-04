@@ -20,7 +20,7 @@
   transform: translateY(-1px);
 }
 
-.image-container img {
+.image-container > img {
   background: var(--color-white);
   width: 80px;
   height: 80px;
@@ -29,6 +29,22 @@
   border: 2px solid var(--color-primary);
   display: block;
   margin: 0 auto var(--space-sm);
+  object-fit: cover;
+}
+
+/* GatsbyImage renders a wrapper around the <img>, so the frame goes on the
+   wrapper; the wrapper already clips its contents. */
+.image-container .gatsby-image-wrapper {
+  background: var(--color-white);
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-primary);
+  display: block;
+  margin: 0 auto var(--space-sm);
+}
+
+.image-container .gatsby-image-wrapper img {
   object-fit: cover;
 }
 

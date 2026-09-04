@@ -164,7 +164,10 @@ export const ProtectedRoute = ({
     })
   }, [pathname, shouldRedirectToPassword])
 
-  if (isLoading) {
+  // Only a protected route has to wait for the cookie check. Blocking every
+  // route on it made each page server-render as the loading shell, because
+  // isLoading is cleared from an effect that never runs during SSR.
+  if (isLoading && isProtected) {
     return <div>Loading...</div>
   }
 

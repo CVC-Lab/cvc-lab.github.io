@@ -1,15 +1,18 @@
 import * as React from 'react'
 import { Link } from 'gatsby'
 import { FaArrowDown, FaArrowRight } from 'react-icons/fa'
-import cvcLabTitlePhoto from '../../images/CVC_Lab_title_photo.png'
+import { StaticImage } from 'gatsby-plugin-image'
 
 const HeroSection = () => (
   <section className="research-home-hero">
-    <img
-      src={cvcLabTitlePhoto}
+    <StaticImage
+      src="../../images/CVC_Lab_title_photo.png"
       alt="Computational Visualization Center researchers working with large-scale scientific visualizations"
       className="research-home-hero__image"
-      decoding="async"
+      layout="fullWidth"
+      loading="eager"
+      formats={['auto', 'webp']}
+      placeholder="dominantColor"
     />
     <div className="research-home-hero__overlay" aria-hidden="true" />
     <div className="research-themes-shell research-home-hero__content">

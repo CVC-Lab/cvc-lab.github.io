@@ -1,6 +1,24 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { useCardImage } from '../../hooks/useCardImages'
+
+const ProjectPreview = ({ project }) => {
+  const resolveCardImage = useCardImage()
+  const image = getImage(resolveCardImage(project.img_name))
+
+  if (!image) return null
+
+  return <GatsbyImage image={image} alt={`${project.name} project preview`} loading="lazy" />
+}
+
+ProjectPreview.propTypes = {
+  project: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    img_name: PropTypes.string.isRequired,
+  }).isRequired,
+}
 
 const ProjectCardLink = ({ project, children }) => {
   if (project.link.startsWith('http')) {
@@ -48,11 +66,7 @@ const FeaturedProjectsGrid = ({ theme, projects }) => {
               }`}
             >
               <div className="research-theme-project-image">
-                <img
-                  src={require(`../../images/${project.img_name}.png`).default}
-                  alt={`${project.name} project preview`}
-                  loading="lazy"
-                />
+                <ProjectPreview project={project} />
               </div>
 
               <div className="research-theme-project-content">

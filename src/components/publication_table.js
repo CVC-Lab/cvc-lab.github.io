@@ -1,31 +1,11 @@
 import * as React from 'react'
 import DOMPurify from 'isomorphic-dompurify'
 import { Link } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { useCardImage } from '../hooks/useCardImages'
 import { FaFileAlt, FaFilePdf, FaExternalLinkAlt, FaArrowUp, FaTimes } from 'react-icons/fa'
 import PropTypes from 'prop-types'
 import './publication_table.css'
-import { database } from '../data/database'
-import { ref, get } from 'firebase/database'
-import scalableRiskAverseThumbnail from '../images/publications/PUB_Scalable Risk-Averse.png'
-import computerAlgebraThumbnail from '../images/publications/PUB_Computer Algebra.png'
-import perennialLearningThumbnail from '../images/publications/PUB_Perennial Learning.png'
-import materialAwareHamiltonianThumbnail from '../images/projects/Learning Material-Aware Hamiltonian_Thumbnail.png'
-import descentTooStableThumbnail from '../images/projects/When Descent Is Too Stable_Thumbnail.png'
-import phastThumbnail from '../images/publications/PUB_PHASTPort-Hamiltonian.png'
-import qcPhastSearchThumbnail from '../images/publications/PUB_QC-PHAST_Search.png'
-import grlSnamThumbnail from '../images/publications/PUB_GRL‑SNAM.png'
-import compositionalElbosThumbnail from '../images/publications/PUB_Compositional ELBOs.png'
-import differentialPointwiseThumbnail from '../images/publications/PUB_Differential and Pointwise.png'
-import fourDreconsThumbnail from '../images/publications/PUB_4drecons.png'
-import hamiltonianNoisyTrajectoryThumbnail from '../images/publications/PUB_Hamiltonian_noisyTrajectory.png'
-import pathwayAnchoredThumbnail from '../images/publications/PUB_Pathway Anchored Multimodal.png'
-import posteriorAwarePhenotypingThumbnail from '../images/publications/PUB_Posterior-Aware Phenotyping.png'
-import wearableSensorBiomarkersThumbnail from '../images/publications/PUB_Wearable Sensor Biomarkers.png'
-import threePhaseReservoirThumbnail from '../images/publications/PUB_Three-Phase Reservoir.png'
-import fieldScaleBayesianThumbnail from '../images/publications/PUB_Field-Scale Bayesian.png'
-import roughPathThumbnail from '../images/publications/PUB_A Rough Path Approach.png'
-import rapidMultiKernelThumbnail from '../images/publications/PUB_Rapid Multi-kernel Estimation.png'
-import triModalGeneTherapyThumbnail from '../images/publications/PUB_Tri-Modal Gene Therapy.png'
 
 const publicationTypeOrder = [
   'Journal Publications',
@@ -55,6 +35,17 @@ const groupByYearAndType = publications => {
   }, {})
 }
 
+// Types are listed in a fixed order, but anything the data carries that is not
+// in that list is appended rather than dropped — a publication with an
+// unexpected PublicationType would otherwise never render at all.
+const orderTypes = types => {
+  const known = publicationTypeOrder.filter(type => types[type])
+  const unknown = Object.keys(types)
+    .filter(type => !publicationTypeOrder.includes(type))
+    .sort()
+  return [...known, ...unknown]
+}
+
 const generatePublicationKey = (publication, index) => {
   const titlePart = publication.Title ? publication.Title.substring(0, 20).replace(/\s+/g, '_') : ''
   const authorPart = publication.Authors
@@ -66,90 +57,90 @@ const generatePublicationKey = (publication, index) => {
 const publicationThumbnailMap = {
   'Scalable Risk-Averse Well-Placement Optimization Using Quadratic Knapsack Problem and Randomized Singular Value Decomposition':
     {
-      src: scalableRiskAverseThumbnail,
+      img: 'publications/PUB_Scalable Risk-Averse',
       alt: 'Scalable Risk-Averse Well-Placement Optimization publication thumbnail',
     },
   'Computer Algebra Meets Hamiltonian Geometry': {
-    src: computerAlgebraThumbnail,
+    img: 'publications/PUB_Computer Algebra',
     alt: 'Computer Algebra Meets Hamiltonian Geometry publication thumbnail',
   },
   'The Physics, Information, and Computation of Perennial Learning: Kolmogorov Complexity, Information Distance and Port-Hamiltonian Thermodynamics':
     {
-      src: perennialLearningThumbnail,
+      img: 'publications/PUB_Perennial Learning',
       alt: 'Perennial Learning via Port-Hamiltonian Dynamics publication thumbnail',
     },
   'Learning Material-Aware Hamiltonian Risk Fields for Safe Navigation': {
-    src: materialAwareHamiltonianThumbnail,
+    img: 'projects/Learning Material-Aware Hamiltonian_Thumbnail',
     alt: 'Learning Material-Aware Hamiltonian Risk Fields for Safe Navigation publication thumbnail',
   },
   'When Descent Is Too Stable: Event-Triggered Hamiltonian Learning to Optimize': {
-    src: descentTooStableThumbnail,
+    img: 'projects/When Descent Is Too Stable_Thumbnail',
     alt: 'When Descent Is Too Stable publication thumbnail',
   },
   'PHAST: Port-Hamiltonian Architecture for Structured Temporal Dynamics Forecasting': {
-    src: phastThumbnail,
+    img: 'publications/PUB_PHASTPort-Hamiltonian',
     alt: 'PHAST publication thumbnail',
   },
   'QC-PHAST Search: Classical--Quantum Query Benchmarks for Finite-Pool Rare-Regime Discovery': {
-    src: qcPhastSearchThumbnail,
+    img: 'publications/PUB_QC-PHAST_Search',
     alt: 'QC-PHAST Search publication thumbnail',
   },
   'GRL-SNAM: Geometric Reinforcement Learning with Path Differential Hamiltonians for Simultaneous Navigation and Mapping in Unknown Environments':
     {
-      src: grlSnamThumbnail,
+      img: 'publications/PUB_GRL‑SNAM',
       alt: 'GRL-SNAM publication thumbnail',
     },
   'A Novel Tri-Modal Viral–Ultrasound Gene-Delivery Therapy Protocol for Lysosomal Neurodegeneration via Stochastic Model Optimization with Uncertainty Quantification and Generalizability':
     {
-      src: triModalGeneTherapyThumbnail,
+      img: 'publications/PUB_Tri-Modal Gene Therapy',
       alt: 'Tri-modal viral ultrasound gene-delivery therapy publication thumbnail',
     },
   'Scalable Robust Bayesian Co-Clustering with Compositional ELBOs': {
-    src: compositionalElbosThumbnail,
+    img: 'publications/PUB_Compositional ELBOs',
     alt: 'Compositional ELBOs publication thumbnail',
   },
   'A Differential and Pointwise Control Approach to Reinforcement Learning': {
-    src: differentialPointwiseThumbnail,
+    img: 'publications/PUB_Differential and Pointwise',
     alt: 'Differential and Pointwise Control publication thumbnail',
   },
   '4drecons: 4d neural implicit deformable objects reconstruction from a single rgb-d camera with geometrical and topological regularizations':
     {
-      src: fourDreconsThumbnail,
+      img: 'publications/PUB_4drecons',
       alt: '4drecons publication thumbnail',
     },
   'Learning Generalized Hamiltonian Dynamics with Stability from Noisy Trajectory Data': {
-    src: hamiltonianNoisyTrajectoryThumbnail,
+    img: 'publications/PUB_Hamiltonian_noisyTrajectory',
     alt: 'Hamiltonian dynamics from noisy trajectories publication thumbnail',
   },
   'Pathway Anchored Multimodal Clustering Reveals Circuit Level Signatures in Parkinsons Disease': {
-    src: pathwayAnchoredThumbnail,
+    img: 'publications/PUB_Pathway Anchored Multimodal',
     alt: 'Pathway anchored multimodal clustering publication thumbnail',
   },
   'Posterior-calibrated multimodal motor states reveal longitudinal and imaging-associated heterogeneity in Parkinson’s disease':
     {
-      src: posteriorAwarePhenotypingThumbnail,
+      img: 'publications/PUB_Posterior-Aware Phenotyping',
       alt: 'Posterior-calibrated multimodal motor states publication thumbnail',
     },
   'Integrated Genetic, Molecular, and Wearable Sensor Biomarkers Enable Bayesian Machine Learning-Driven Precision Stratification in Parkinson’s Disease: A Comprehensive Multi-Cohort Validation Study':
     {
-      src: wearableSensorBiomarkersThumbnail,
+      img: 'publications/PUB_Wearable Sensor Biomarkers',
       alt: 'Wearable sensor biomarkers publication thumbnail',
     },
   'Bayesian Port–Hamiltonian Surrogate for Three-Phase Reservoir Flow Simulation': {
-    src: threePhaseReservoirThumbnail,
+    img: 'publications/PUB_Three-Phase Reservoir',
     alt: 'Three-phase reservoir flow publication thumbnail',
   },
   'Field-Scale Bayesian Production Forecasting via Spectral Gaussian-Process Mixtures': {
-    src: fieldScaleBayesianThumbnail,
+    img: 'publications/PUB_Field-Scale Bayesian',
     alt: 'Field-scale Bayesian production forecasting publication thumbnail',
   },
   'Stochastic Differential Policy Optimization: A Rough Path Approach to Reinforcement Learning': {
-    src: roughPathThumbnail,
+    img: 'publications/PUB_A Rough Path Approach',
     alt: 'Rough path reinforcement learning publication thumbnail',
   },
   'Self-balancing, Memory Efficient, Dynamic Metric Space Data Maintenance, for Rapid Multi-kernel Estimation':
     {
-      src: rapidMultiKernelThumbnail,
+      img: 'publications/PUB_Rapid Multi-kernel Estimation',
       alt: 'Rapid multi-kernel estimation publication thumbnail',
     },
 }
@@ -228,26 +219,9 @@ const scrollToTop = () => {
 }
 
 const PublicationTable = ({ publicationData = [] }) => {
-  const [firebasePublicationData, setFirebasePublicationData] = React.useState([])
+  const resolveCardImage = useCardImage()
   const [showBackToTop, setShowBackToTop] = React.useState(false)
   const [previewPublication, setPreviewPublication] = React.useState(null)
-
-  React.useEffect(() => {
-    if (publicationData.length > 0) {
-      return
-    }
-
-    const dbRef = ref(database, '10EvljkxfSNwL6I1m81tXzruizAVLN-EwmgclGkh_vkA/Papers')
-    get(dbRef)
-      .then(snapshot => {
-        if (snapshot.exists()) {
-          setFirebasePublicationData(Object.values(snapshot.val()))
-        }
-      })
-      .catch(() => {
-        // Firebase error occurred, handled silently
-      })
-  }, [publicationData])
 
   React.useEffect(() => {
     if (typeof window === 'undefined') return
@@ -271,10 +245,7 @@ const PublicationTable = ({ publicationData = [] }) => {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [previewPublication])
 
-  const resolvedPublicationData =
-    publicationData.length > 0 ? publicationData : firebasePublicationData
-
-  const groupedPublications = groupByYearAndType(resolvedPublicationData)
+  const groupedPublications = groupByYearAndType(publicationData)
   const sortedYears = Object.keys(groupedPublications).sort((a, b) => b - a)
 
   return (
@@ -304,96 +275,97 @@ const PublicationTable = ({ publicationData = [] }) => {
               <div key={year} id={`year-${year}`} className="year-section">
                 <h3 className="year-header">{year}</h3>
                 <hr className="year-divider" />
-                {publicationTypeOrder
-                  .filter(type => types[type])
-                  .map(type => (
-                    <div key={type} className="type-section">
-                      <h4 className="type-header">{type}</h4>
-                      {types[type].map((publication, index) => {
-                        const thumbnail = publicationThumbnailMap[publication.Title]
-                        const pdfLink = resolvePdfLink(publication.PDFLink)
-                        const paperLinkConfig = getPaperLinkConfig(publication)
+                {orderTypes(types).map(type => (
+                  <div key={type} className="type-section">
+                    <h4 className="type-header">{type}</h4>
+                    {types[type].map((publication, index) => {
+                      const thumbnail = publicationThumbnailMap[publication.Title]
+                      const thumbnailImage = thumbnail
+                        ? getImage(resolveCardImage(thumbnail.img))
+                        : null
+                      const pdfLink = resolvePdfLink(publication.PDFLink)
+                      const paperLinkConfig = getPaperLinkConfig(publication)
 
-                        return (
-                          <div
-                            key={generatePublicationKey(publication, index)}
-                            className="publication-card"
-                          >
-                            {thumbnail && (
-                              <button
-                                type="button"
-                                className="publication-thumbnail"
-                                onClick={() =>
-                                  setPreviewPublication({
-                                    title: publication.Title,
-                                    src: thumbnail.src,
-                                    alt: thumbnail.alt,
-                                  })
-                                }
-                                aria-label={`Preview thumbnail for ${publication.Title}`}
-                              >
-                                <img src={thumbnail.src} alt={thumbnail.alt} loading="lazy" />
-                              </button>
+                      return (
+                        <div
+                          key={generatePublicationKey(publication, index)}
+                          className="publication-card"
+                        >
+                          {thumbnailImage && (
+                            <button
+                              type="button"
+                              className="publication-thumbnail"
+                              onClick={() =>
+                                setPreviewPublication({
+                                  title: publication.Title,
+                                  image: thumbnailImage,
+                                  alt: thumbnail.alt,
+                                })
+                              }
+                              aria-label={`Preview thumbnail for ${publication.Title}`}
+                            >
+                              <GatsbyImage image={thumbnailImage} alt={thumbnail.alt} />
+                            </button>
+                          )}
+                          <div className="lower-container-pubs">
+                            <h3>{publication.Title}</h3>
+                            <h4>{publication.Authors}</h4>
+                            {publication.Location && publication.Location !== 'NULL' && (
+                              <h4
+                                dangerouslySetInnerHTML={{
+                                  __html: DOMPurify.sanitize(`<i>${publication.Location}</i>`),
+                                }}
+                              ></h4>
                             )}
-                            <div className="lower-container-pubs">
-                              <h3>{publication.Title}</h3>
-                              <h4>{publication.Authors}</h4>
-                              {publication.Location && publication.Location !== 'NULL' && (
-                                <h4
-                                  dangerouslySetInnerHTML={{
-                                    __html: DOMPurify.sanitize(`<i>${publication.Location}</i>`),
-                                  }}
-                                ></h4>
+                            <div className="pub-links">
+                              {pdfLink && (
+                                <a
+                                  href={pdfLink}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className={`pub-link-btn ${paperLinkConfig.className}`}
+                                >
+                                  <paperLinkConfig.Icon className="pub-link-icon" />
+                                  {paperLinkConfig.label}
+                                </a>
                               )}
-                              <div className="pub-links">
-                                {pdfLink && (
+                              {(() => {
+                                const projectLink = resolveProjectLink(publication.ProjectLink)
+
+                                if (!projectLink) return null
+
+                                const content = (
+                                  <>
+                                    <FaExternalLinkAlt className="pub-link-icon" />
+                                    Project Page
+                                  </>
+                                )
+
+                                return projectLink.isInternal ? (
+                                  <Link
+                                    to={projectLink.to}
+                                    className="pub-link-btn pub-link-project"
+                                  >
+                                    {content}
+                                  </Link>
+                                ) : (
                                   <a
-                                    href={pdfLink}
+                                    href={projectLink.to}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className={`pub-link-btn ${paperLinkConfig.className}`}
+                                    className="pub-link-btn pub-link-project"
                                   >
-                                    <paperLinkConfig.Icon className="pub-link-icon" />
-                                    {paperLinkConfig.label}
+                                    {content}
                                   </a>
-                                )}
-                                {(() => {
-                                  const projectLink = resolveProjectLink(publication.ProjectLink)
-
-                                  if (!projectLink) return null
-
-                                  const content = (
-                                    <>
-                                      <FaExternalLinkAlt className="pub-link-icon" />
-                                      Project Page
-                                    </>
-                                  )
-
-                                  return projectLink.isInternal ? (
-                                    <Link
-                                      to={projectLink.to}
-                                      className="pub-link-btn pub-link-project"
-                                    >
-                                      {content}
-                                    </Link>
-                                  ) : (
-                                    <a
-                                      href={projectLink.to}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="pub-link-btn pub-link-project"
-                                    >
-                                      {content}
-                                    </a>
-                                  )
-                                })()}
-                              </div>
+                                )
+                              })()}
                             </div>
                           </div>
-                        )
-                      })}
-                    </div>
-                  ))}
+                        </div>
+                      )
+                    })}
+                  </div>
+                ))}
               </div>
             )
           })}
@@ -429,7 +401,7 @@ const PublicationTable = ({ publicationData = [] }) => {
             >
               <FaTimes />
             </button>
-            <img src={previewPublication.src} alt={previewPublication.alt} />
+            <GatsbyImage image={previewPublication.image} alt={previewPublication.alt} />
             <p>{previewPublication.title}</p>
           </div>
         </div>
@@ -446,7 +418,6 @@ PublicationTable.propTypes = {
       PublicationType: PropTypes.string,
       PublishedDateYear: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       PDFLink: PropTypes.string,
-      LocalPDFLink: PropTypes.string,
       Authors: PropTypes.string,
       ProjectLink: PropTypes.string,
     })

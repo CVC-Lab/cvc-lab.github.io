@@ -2,6 +2,9 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { useCardImage } from '../hooks/useCardImages'
+import phastMonolithicDemo from '../images/projects/phast/phast_monolithic_demo.gif'
+import hydroVideo from '../videos/hydro6A80.mp4'
 import { FaChevronLeft, FaChevronRight, FaPlay, FaPause } from 'react-icons/fa'
 import './FeaturedResearch.css'
 
@@ -10,7 +13,7 @@ const FEATURED_PROJECTS_DATA = [
   {
     name: 'PHAST',
     video: null,
-    gif: 'projects/phast/phast_monolithic_demo.gif',
+    gif: phastMonolithicDemo,
   },
   {
     name: 'GRL-SNAM',
@@ -18,7 +21,7 @@ const FEATURED_PROJECTS_DATA = [
   },
   {
     name: 'Subsurface Flow Modeling',
-    video: 'hydro6A80.mp4',
+    video: hydroVideo,
   },
   {
     name: 'Dynamic Belief Games',
@@ -38,6 +41,8 @@ const FeaturedResearch = ({ projectTiles }) => {
   const timerRef = React.useRef(null)
 
   // Get featured projects from projectTiles
+  const resolveCardImage = useCardImage()
+
   const featuredProjects = React.useMemo(() => {
     const featuredNames = FEATURED_PROJECTS_DATA.map(p => p.name)
     return projectTiles
@@ -46,6 +51,7 @@ const FeaturedResearch = ({ projectTiles }) => {
         const featuredData = FEATURED_PROJECTS_DATA.find(p => p.name === tile.name)
         return {
           ...tile,
+          image: tile.image || resolveCardImage(tile.img_name),
           video: featuredData?.video || null,
           gif: featuredData?.gif || null,
         }
@@ -56,7 +62,7 @@ const FeaturedResearch = ({ projectTiles }) => {
         const bIndex = FEATURED_PROJECTS_DATA.findIndex(p => p.name === b.name)
         return aIndex - bIndex
       })
-  }, [projectTiles])
+  }, [projectTiles, resolveCardImage])
 
   const currentProject = featuredProjects[currentIndex]
 
@@ -140,7 +146,7 @@ const FeaturedResearch = ({ projectTiles }) => {
                       <video
                         ref={videoRef}
                         className="featured-video"
-                        src={require(`../videos/${currentProject.video}`).default}
+                        src={currentProject.video}
                         autoPlay
                         muted
                         loop
@@ -157,24 +163,16 @@ const FeaturedResearch = ({ projectTiles }) => {
                   ) : currentProject.gif ? (
                     <div className="featured-image-wrapper">
                       <img
-                        src={require(`../images/${currentProject.gif}`).default}
+                        src={currentProject.gif}
                         alt={`${currentProject.name} preview`}
                         className="featured-image"
                       />
                     </div>
                   ) : (
                     <div className="featured-image-wrapper">
-                      {currentProject.image &&
-                      currentProject.image.childImageSharp &&
-                      getImage(currentProject.image) ? (
+                      {getImage(currentProject.image) && (
                         <GatsbyImage
                           image={getImage(currentProject.image)}
-                          alt={`${currentProject.name} preview`}
-                          className="featured-image"
-                        />
-                      ) : (
-                        <img
-                          src={require(`../images/${currentProject.img_name}.png`).default}
                           alt={`${currentProject.name} preview`}
                           className="featured-image"
                         />

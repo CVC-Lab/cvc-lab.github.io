@@ -142,7 +142,8 @@
   cursor: zoom-in;
 }
 
-.publication-thumbnail img {
+.publication-thumbnail img,
+.publication-thumbnail .gatsby-image-wrapper {
   display: block;
   width: 100%;
   height: 100%;
@@ -186,7 +187,8 @@
   cursor: default;
 }
 
-.publication-preview-modal__content img {
+.publication-preview-modal__content img,
+.publication-preview-modal__content .gatsby-image-wrapper {
   display: block;
   width: 100%;
   max-height: calc(86vh - 8rem);

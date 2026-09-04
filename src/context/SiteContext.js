@@ -38,6 +38,7 @@ export const SiteProvider = ({ children }) => {
             img_name
             link
             tags
+            themes
             date
           }
           peopleCards {

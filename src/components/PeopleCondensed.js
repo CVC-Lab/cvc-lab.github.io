@@ -2,6 +2,8 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { usePersonImage } from '../hooks/usePersonImages'
+import personPlaceholder from '../images/people/placeholder.png'
 import './PeopleCondensed.css'
 
 // Priority order for faculty/staff
@@ -74,28 +76,23 @@ const PeopleCondensed = ({ peopleCards }) => {
 }
 
 const PersonCard = ({ person }) => {
+  const resolvePersonImage = usePersonImage()
   const name = person.name || person.Name
   const position = person.position || person.Position
   const imageName = person.image || person.Image || 'placeholder.png'
-  let imageSrc
-
-  try {
-    imageSrc = require(`../images/people/${imageName}`).default
-  } catch {
-    imageSrc = require('../images/people/placeholder.png').default
-  }
+  const imageFile = person.imageFile || resolvePersonImage(imageName)
 
   return (
     <div className="person-card-condensed">
       <div className="person-image-wrapper">
-        {person.imageFile && person.imageFile.childImageSharp ? (
+        {imageFile && imageFile.childImageSharp ? (
           <GatsbyImage
-            image={getImage(person.imageFile)}
+            image={getImage(imageFile)}
             alt={`${name}'s profile`}
             className="person-image"
           />
         ) : (
-          <img src={imageSrc} alt={`${name}'s profile`} className="person-image" />
+          <img src={personPlaceholder} alt={`${name}'s profile`} className="person-image" />
         )}
       </div>
       <h3 className="person-name">{name}</h3>

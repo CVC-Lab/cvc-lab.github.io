@@ -333,7 +333,7 @@ module.exports = [
     link: '/projects/4drecons',
     tags: ['Computer Vision'],
     themes: ['World Models'],
-    date: '2025-06-14',
+    date: '2024-06-14',
   },
   {
     name: perennialLearningTitle,

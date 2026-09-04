@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { Container, Tabs, Tab } from '@mui/material'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { useCardImage } from '../hooks/useCardImages'
 import { FaArrowRight, FaSearch, FaTimes } from 'react-icons/fa'
 import './tiles-modern.css'
 
@@ -125,12 +126,16 @@ const Tiles = ({ projectTiles, showAllProjects = false }) => {
     updateProjectTabInUrl('All')
   }
 
+  const resolveCardImage = useCardImage()
+
   const sortedProjectTiles = React.useMemo(() => {
     if (!projectTiles || projectTiles.length === 0) {
       return []
     }
-    return projectTiles.slice().sort((a, b) => new Date(b.date) - new Date(a.date))
-  }, [projectTiles])
+    return projectTiles
+      .map(tile => ({ ...tile, image: tile.image || resolveCardImage(tile.img_name) }))
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+  }, [projectTiles, resolveCardImage])
 
   // On dedicated projects page, show all projects; on homepage, exclude featured ones
   const regularProjects = React.useMemo(() => {
@@ -372,16 +377,11 @@ const ProjectCard = ({ tile }) => {
     <div className="project-card">
       <div className="project-card-image">
         <div className="project-card-image-frame">
-          {tile.image && tile.image.childImageSharp && getImage(tile.image) ? (
+          {getImage(tile.image) && (
             <GatsbyImage
               image={getImage(tile.image)}
               alt={`${tile.name} project preview`}
               loading="lazy"
-            />
-          ) : (
-            <img
-              src={require(`../images/${tile.img_name}.png`).default}
-              alt={`${tile.name} project preview`}
             />
           )}
         </div>

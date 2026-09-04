@@ -2,6 +2,8 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import { Grid, Tabs, Tab, Box } from '@mui/material'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { usePersonImage } from '../hooks/usePersonImages'
+import personPlaceholder from '../images/people/placeholder.png'
 import './cards.css'
 
 const TabPanel = props => {
@@ -145,36 +147,39 @@ function renderMembersByTitle(members) {
   )
 }
 
+const AVATAR_STYLE = { width: '125px', height: '125px', borderRadius: '50%' }
+
+// renderCard is a plain function, so the sharp lookup lives in its own component.
+const MemberAvatar = ({ imageName, name, imageFile: providedImageFile }) => {
+  const resolvePersonImage = usePersonImage()
+  const imageFile = providedImageFile || resolvePersonImage(imageName)
+
+  if (imageFile && imageFile.childImageSharp) {
+    return (
+      <GatsbyImage image={getImage(imageFile)} alt={`${name}'s profile`} style={AVATAR_STYLE} />
+    )
+  }
+
+  return <img src={personPlaceholder} alt={`${name}'s profile`} style={AVATAR_STYLE} />
+}
+
+MemberAvatar.propTypes = {
+  imageName: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  imageFile: PropTypes.object,
+}
+
 function renderCard(people, showFullTitle = false) {
   const name = people.name || people.Name
   const position = people.position || people.Position
   const imageName = people.image || people.Image || 'placeholder.png'
-  let imageSrc
-
-  try {
-    imageSrc = require(`../images/people/${imageName}`).default
-  } catch {
-    imageSrc = require('../images/people/placeholder.png').default
-  }
 
   return (
     <Grid item xs={6} sm={4} md={2} key={name} className="member-grid-item">
       <div className="Card">
         <div className="upper-container">
           <div className="image-container">
-            {people.imageFile && people.imageFile.childImageSharp ? (
-              <GatsbyImage
-                image={getImage(people.imageFile)}
-                alt={`${name}'s profile`}
-                style={{ width: '125px', height: '125px', borderRadius: '50%' }}
-              />
-            ) : (
-              <img
-                src={imageSrc}
-                alt={`${name}'s profile`}
-                style={{ width: '125px', height: '125px', borderRadius: '50%' }}
-              />
-            )}
+            <MemberAvatar imageName={imageName} name={name} imageFile={people.imageFile} />
           </div>
         </div>
         <div className="lower-container">

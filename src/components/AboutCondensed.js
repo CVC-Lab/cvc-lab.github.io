@@ -1,5 +1,5 @@
 import * as React from 'react'
-import groupPhoto from '../images/cvc_group photo.jpeg'
+import { StaticImage } from 'gatsby-plugin-image'
 import './AboutCondensed.css'
 
 const AboutCondensed = () => (
@@ -45,10 +45,14 @@ const AboutCondensed = () => (
         </div>
       </div>
       <div className="about-condensed-photo-wrapper">
-        <img
-          src={groupPhoto}
+        <StaticImage
+          src="../images/cvc_group photo.jpeg"
           alt="Computational Visualization Center group"
           className="about-condensed-photo"
+          layout="constrained"
+          width={900}
+          formats={['auto', 'webp']}
+          placeholder="dominantColor"
         />
       </div>
     </div>

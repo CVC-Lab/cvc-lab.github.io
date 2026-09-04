@@ -1,7 +1,28 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { useCardImage } from '../../hooks/useCardImages'
 import { Link } from 'gatsby'
 import { FaArrowRight, FaPause, FaPlay } from 'react-icons/fa'
+
+const ThemeStillImage = ({ theme }) => {
+  const resolveCardImage = useCardImage()
+  const image = theme.visualImage ? getImage(resolveCardImage(theme.visualImage)) : null
+
+  if (image) {
+    return <GatsbyImage image={image} alt={theme.visualAlt} loading="lazy" />
+  }
+
+  return <img src={theme.visual} alt={theme.visualAlt} loading="lazy" decoding="async" />
+}
+
+ThemeStillImage.propTypes = {
+  theme: PropTypes.shape({
+    visual: PropTypes.string,
+    visualImage: PropTypes.string,
+    visualAlt: PropTypes.string.isRequired,
+  }).isRequired,
+}
 
 const ThemeVisual = ({ theme }) => {
   const videoRef = React.useRef(null)
@@ -48,7 +69,7 @@ const ThemeVisual = ({ theme }) => {
             aria-label={`${theme.title} animated research preview`}
           />
         ) : (
-          <img src={theme.visual} alt={theme.visualAlt} loading="lazy" decoding="async" />
+          <ThemeStillImage theme={theme} />
         )}
 
         {theme.video && (
@@ -98,7 +119,8 @@ ThemeProjectLink.propTypes = {
 ThemeVisual.propTypes = {
   theme: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    visual: PropTypes.string.isRequired,
+    visual: PropTypes.string,
+    visualImage: PropTypes.string,
     visualAlt: PropTypes.string.isRequired,
     visualCaption: PropTypes.string.isRequired,
     video: PropTypes.string,
@@ -167,7 +189,8 @@ ThemeBanners.propTypes = {
       kicker: PropTypes.string.isRequired,
       summary: PropTypes.string.isRequired,
       tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-      visual: PropTypes.string.isRequired,
+      visual: PropTypes.string,
+      visualImage: PropTypes.string,
       visualAlt: PropTypes.string.isRequired,
       visualCaption: PropTypes.string.isRequired,
       video: PropTypes.string,

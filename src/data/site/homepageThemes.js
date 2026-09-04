@@ -1,9 +1,10 @@
-const healthcareAiVisual =
-  require('../../images/publications/PUB_Posterior-Aware Phenotyping.png').default
+// Still images are referenced by path so ThemeBanners can resolve them through
+// gatsby-plugin-image; the animation stays a direct require because sharp does
+// not process GIFs.
+const healthcareAiVisual = 'publications/PUB_Posterior-Aware Phenotyping'
 const worldModelsAnimation =
   require('../../images/projects/phast/phast_monolithic_demo.gif').default
-const aiForScienceVisual =
-  require('../../images/projects/Project_Subsurface Flow Modeling.png').default
+const aiForScienceVisual = 'projects/Project_Subsurface Flow Modeling'
 
 /**
  * The public homepage taxonomy is intentionally smaller than the internal project list.
@@ -18,7 +19,7 @@ const homepageThemes = [
     summary:
       'Interpretable models for multimodal health data, patient heterogeneity, and longitudinal disease monitoring.',
     tags: ['Imaging', 'Biomarkers', 'Clinical data'],
-    visual: healthcareAiVisual,
+    visualImage: healthcareAiVisual,
     visualAlt:
       'Posterior motor states connected to clinical assessments, patient-level phenotypes, DaTSCAN, and MRI validation',
     visualCaption:
@@ -77,7 +78,7 @@ const homepageThemes = [
     summary:
       'Structure-aware learning for scientific data, simulation, sensing, and computational discovery.',
     tags: ['Scientific ML', 'Simulation', 'Visualization'],
-    visual: aiForScienceVisual,
+    visualImage: aiForScienceVisual,
     visualAlt:
       'Subsurface flow modeling graphical abstract showing layered geology, wells, mesh resolution, and Bayesian uncertainty',
     visualCaption:

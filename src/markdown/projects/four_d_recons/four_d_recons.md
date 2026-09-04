@@ -1,7 +1,7 @@
 ---
 title: '4DRecons'
 slug: '/projects/4drecons'
-date: '2025-06-14'
+date: '2024-06-14'
 ---
 
 # 4DRecons: 4D Neural Implicit Deformable Objects Reconstruction from a Single RGB-D Camera with Geometrical and Topological Regularizations
