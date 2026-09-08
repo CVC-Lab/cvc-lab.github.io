@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta
+      name="description"
+      content="A human-readable chronology, uncertainty, calendar, and transport audit for longitudinal multimodal Parkinson disease prediction."
+    />
+    <title>Validity Gates for Longitudinal Parkinson Disease Prediction</title>
+    <link rel="stylesheet" href="../assets/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="../">Parkinson Disease Research</a>
+        <div class="nav-links">
+          <a href="../">Program</a>
+          <a href="./" aria-current="page">Validity gates</a>
+          <a href="../pd-signed-laterality/">Signed laterality</a>
+          <a href="/projects/healthcare-ai/">CVC Parkinson's program</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <header class="hero">
+        <div class="shell">
+          <p class="eyebrow">Paper 1 | An evidence-quality spine</p>
+          <h1>Validity Gates Expose Limits of Longitudinal Multimodal Parkinson Disease Prediction</h1>
+          <p class="lead">
+            A model does not earn credibility from one favorable score. We ask seven separate
+            questions: Was the future hidden? Were people and sites separated? Is the gain large
+            enough to matter? Does it survive calendar change? Can uncertainty identify safer
+            forecasts? Does the result travel to another cohort?
+          </p>
+          <p class="authors">Harsh Milind Tirhekar, Priyanshi Yadav, Chandrajit Bajaj</p>
+          <div class="hero-actions">
+            <a class="button" href="#gate-summary">Read the seven verdicts</a>
+            <a class="button button--quiet" href="../pd-signed-laterality/">See the biological coordinate</a>
+          </div>
+          <div class="status-line" aria-label="Study scale">
+            <span>5,404 future-only cutoffs from 1,058 PPMI participants</span>
+            <span>8,000 controlled gate-stress experiments</span>
+            <span>One small internal signal; no deployment claim</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="section section--soft" id="gate-summary" aria-labelledby="gate-summary-title">
+        <div class="shell">
+          <p class="eyebrow">The result at a glance</p>
+          <h2 id="gate-summary-title">Seven questions produce seven verdicts, not one headline score</h2>
+          <p class="section-intro">
+            Each gate protects a different claim. Passing chronology cannot rescue failed
+            transport, and correct interval coverage cannot substitute for useful error ranking.
+          </p>
+          <div class="gate-strip" aria-label="Validity-gate verdicts">
+            <div class="gate-item gate-pass"><strong>Chronology</strong><span>Pass</span></div>
+            <div class="gate-item gate-pass"><strong>Participant</strong><span>Pass</span></div>
+            <div class="gate-item gate-pass"><strong>Site</strong><span>Pass</span></div>
+            <div class="gate-item gate-caution"><strong>Magnitude</strong><span>Information only</span></div>
+            <div class="gate-item gate-stop"><strong>Calendar</strong><span>Fail</span></div>
+            <div class="gate-item gate-caution"><strong>Selective UQ</strong><span>Abstain</span></div>
+            <div class="gate-item gate-stop"><strong>PDBP transport</strong><span>Fail</span></div>
+          </div>
+          <div class="callout">
+            <p>
+              <strong>The scientific output is the decision boundary.</strong> Dated multimodal
+              history contains a reproducible internal increment, but the effect is clinically
+              tiny, temporally fragile, and not externally transportable in the available export.
+              The protocol therefore stops the claim before deployment language begins.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="design-title">
+        <div class="shell">
+          <p class="eyebrow">Study design</p>
+          <h2 id="design-title">Every forecast begins at a dated cutoff</h2>
+          <p class="section-intro">
+            Imagine pausing one patient's record on a particular day. Only measurements already
+            available at that moment may describe the state. Their age and absence remain visible;
+            the future motor examination, 9 to 15 months later, stays hidden until evaluation.
+          </p>
+          <div class="concept-key concept-key--three" aria-label="Time-valid patient journey">
+            <div><strong>1. Observed history</strong><span>Exam, wearable, DaT-SPECT, biomarker, and dated trends</span></div>
+            <div><strong>2. Landmark</strong><span>The state is frozen using only information already available</span></div>
+            <div><strong>3. Held-out future</strong><span>The later motor examination is revealed only for evaluation</span></div>
+          </div>
+          <figure class="figure concept-figure">
+            <div class="figure-shell figure-shell--concept">
+              <div class="figure-toolbar">
+                <strong>One patient record, separated into observed history and held-out future</strong>
+                <button
+                  class="figure-action"
+                  type="button"
+                  data-figure-open="../assets/images/concept_time_valid_patient.png"
+                  data-figure-title="Conceptual time-valid patient journey"
+                >Inspect full figure</button>
+              </div>
+              <div class="figure-viewport">
+                <img
+                  src="../assets/images/concept_time_valid_patient.png"
+                  alt="Conceptual same-patient clinical history, multimodal landmark review, and future motor examination separated by a held-out boundary"
+                  width="1672"
+                  height="941"
+                />
+              </div>
+            </div>
+            <figcaption>
+              Conceptual medical illustration, not a participant record. The visible separation
+              expresses the temporal firewall enforced programmatically in the analysis below.
+            </figcaption>
+          </figure>
+          <figure class="figure">
+            <div class="figure-shell">
+              <div class="figure-toolbar">
+                <strong>Future-only longitudinal design and independent validity gates</strong>
+                <button
+                  class="figure-action"
+                  type="button"
+                  data-figure-open="../assets/images/time_valid_design.png"
+                  data-figure-title="Future-only longitudinal design and independent validity gates"
+                >Inspect full figure</button>
+              </div>
+              <div class="figure-viewport">
+                <img
+                  src="../assets/images/time_valid_design.png"
+                  alt="A future-only patient timeline followed by separate participant, site, calendar, uncertainty, and transport gates"
+                  width="2341"
+                  height="1381"
+                />
+              </div>
+            </div>
+            <figcaption>
+              The model receives each source's most recent eligible value, age, availability, and
+              observation context. The timeline is a protocol schematic, not an individual record.
+              Every gate permits only its own claim.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="question-title">
+        <div class="shell">
+          <p class="eyebrow">Why ordinary validation is insufficient</p>
+          <h2 id="question-title">A repeated clinical history is not a flat table</h2>
+          <div class="prose">
+            <p>
+              The same person appears at multiple visits. A scan may be months older than the
+              examination it accompanies. Missingness may encode a study protocol rather than
+              biology. Medication state changes motor scores, and a new enrollment era can change
+              both who is measured and how sources are collected.
+            </p>
+            <p>
+              These are different scientific risks. The benchmark therefore assigns each one a
+              distinct population, uncertainty interval, and promotion rule.
+            </p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Analysis</th>
+                  <th>Scale</th>
+                  <th>Question it answers</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Rolling-origin benchmark</td>
+                  <td>1,058 people; 5,404 cutoffs</td>
+                  <td>Do dated sources add internal information when every person stays in one fold?</td>
+                </tr>
+                <tr>
+                  <td>Strict-calendar challenge</td>
+                  <td>442 later-era participants</td>
+                  <td>Does the frozen relation survive a later enrollment and observation regime?</td>
+                </tr>
+                <tr>
+                  <td>Site-disjoint challenge</td>
+                  <td>951 people across 52 sites</td>
+                  <td>Is the increment dependent on acquisition center?</td>
+                </tr>
+                <tr>
+                  <td>Gate stress test</td>
+                  <td>8,000 controlled experiments</td>
+                  <td>Does the protocol suppress false promotion and detect leakage or shift?</td>
+                </tr>
+                <tr>
+                  <td>PDBP clinical transport</td>
+                  <td>77 calibration; 156 untouched test participants</td>
+                  <td>Does a frozen clinical model travel to an independent cohort?</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--soft" aria-labelledby="internal-title">
+        <div class="shell">
+          <p class="eyebrow">Internal result</p>
+          <h2 id="internal-title">The signal is measurable; the improvement is not clinically persuasive</h2>
+          <figure class="figure">
+            <div class="figure-shell">
+              <div class="figure-toolbar">
+                <strong>Performance under progressively stricter validation</strong>
+                <button
+                  class="figure-action"
+                  type="button"
+                  data-figure-open="../assets/images/longitudinal_comparisons.png"
+                  data-figure-title="Performance under progressively stricter validation"
+                >Inspect full figure</button>
+              </div>
+              <div class="figure-viewport">
+                <img
+                  loading="lazy"
+                  src="../assets/images/longitudinal_comparisons.png"
+                  alt="Held-out performance across participant, site, enrollment-era, and strict-calendar evaluations"
+                  width="4627"
+                  height="2753"
+                />
+              </div>
+            </div>
+            <figcaption>
+              Dated DaT-SPECT and MoCA history improve internal prediction over clinical trajectory
+              by delta R-squared 0.015 and delta MAE -0.060 MDS-UPDRS Part III points. The interval
+              supports a small information increment, but it misses the prespecified promotion
+              magnitude and becomes uncertain under strict calendar testing.
+            </figcaption>
+          </figure>
+          <div class="metric-grid" aria-label="Primary internal result">
+            <div class="metric"><strong>0.015</strong><span>Internal delta R-squared</span></div>
+            <div class="metric"><strong>-0.060</strong><span>Delta MAE in motor points</span></div>
+            <div class="metric"><strong>Information only</strong><span>Prespecified magnitude verdict</span></div>
+          </div>
+          <div class="callout">
+            <p>
+              A statistically stable improvement can still be practically negligible. The 0.060
+              point MAE reduction does not establish individual prognosis, patient-management
+              value, or clinical-trial enrichment.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="uncertainty-title">
+        <div class="shell">
+          <p class="eyebrow">Uncertainty and stress testing</p>
+          <h2 id="uncertainty-title">An interval may cover well and still fail to identify safer predictions</h2>
+          <p class="section-intro">
+            Coverage asks whether the future falls inside an interval. Selective prediction asks a
+            harder question: when the model says it is more certain, is it actually less wrong?
+          </p>
+          <figure class="figure">
+            <div class="figure-shell">
+              <div class="figure-toolbar">
+                <strong>Selective risk, participant coverage, and gate behavior</strong>
+                <button
+                  class="figure-action"
+                  type="button"
+                  data-figure-open="../assets/images/uncertainty_and_gate_stress.png"
+                  data-figure-title="Selective risk, participant coverage, and gate behavior"
+                >Inspect full figure</button>
+              </div>
+              <div class="figure-viewport">
+                <img
+                  loading="lazy"
+                  src="../assets/images/uncertainty_and_gate_stress.png"
+                  alt="Selective-risk curves, participant-level interval coverage, and controlled gate behavior"
+                  width="2341"
+                  height="2021"
+                />
+              </div>
+            </div>
+            <figcaption>
+              Source-aware 90% intervals covered every eligible forecast for 90.6% of participants,
+              yet interval width did not rank future error better than the clinical reference and
+              reversed under calendar shift. The locked selective-prediction verdict is ABSTAIN.
+              Across 8,000 controlled experiments, the full gate limited null promotion to 0.35%,
+              detected constructed leakage, and blocked 94.75% of calendar reversals.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section section--soft" aria-labelledby="transport-title">
+        <div class="shell">
+          <p class="eyebrow">External transport</p>
+          <h2 id="transport-title">A large archive is not the same as a compatible cohort</h2>
+          <p class="section-intro">
+            PDBP contains valuable Parkinson disease data, but a transport claim requires the same
+            diagnosis, modalities, timing, endpoint, and eligible participants to intersect. File
+            presence alone is not validation.
+          </p>
+          <figure class="figure">
+            <div class="figure-shell">
+              <div class="figure-toolbar">
+                <strong>Model-capacity and PPMI-to-PDBP transport stress tests</strong>
+                <button
+                  class="figure-action"
+                  type="button"
+                  data-figure-open="../assets/images/transport_stress_tests.png"
+                  data-figure-title="Model-capacity and PPMI-to-PDBP transport stress tests"
+                >Inspect full figure</button>
+              </div>
+              <div class="figure-viewport">
+                <img
+                  loading="lazy"
+                  src="../assets/images/transport_stress_tests.png"
+                  alt="Model-capacity and external-transport stress tests from PPMI to PDBP"
+                  width="4576"
+                  height="2815"
+                />
+              </div>
+            </div>
+            <figcaption>
+              A six-variable clinical model achieved internal PPMI R-squared 0.134 but fell to
+              -0.077 under raw PDBP transport. Recalibration reached R-squared 0.005 and did not
+              beat the PDBP mean reference on MAE. The local imaging export contained no eligible
+              diagnosis-modality-time intersection, so this is a failed transport and
+              interoperability result, not external multimodal validation.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="contract-title">
+        <div class="shell">
+          <p class="eyebrow">Claim contract</p>
+          <h2 id="contract-title">What the evidence permits us to say</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Gate</th>
+                  <th>Verdict</th>
+                  <th>Permitted statement</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Future-only chronology</td><td class="verdict-pass">Pass</td><td>Every predictor precedes its endpoint</td></tr>
+                <tr><td>Participant separation</td><td class="verdict-pass">Pass</td><td>The internal signal is not produced by repeated-person leakage</td></tr>
+                <tr><td>Site separation</td><td class="verdict-pass">Pass</td><td>A similarly small increment survives a center-held-out challenge</td></tr>
+                <tr><td>Effect magnitude</td><td class="verdict-caution">Information only</td><td>Dated sources add an internal increment below promotion magnitude</td></tr>
+                <tr><td>Calendar stability</td><td class="verdict-stop">Fail</td><td>Added value is not established across enrollment era</td></tr>
+                <tr><td>Selective uncertainty</td><td class="verdict-caution">Abstain</td><td>Coverage is adequate, but uncertainty does not reliably rank error</td></tr>
+                <tr><td>External PDBP transport</td><td class="verdict-stop">Fail</td><td>Recalibration and archive size do not establish transport</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="scope-list">
+            <section>
+              <h3>What this work contributes</h3>
+              <ul>
+                <li>A future-only rolling-origin patient representation</li>
+                <li>Separate people for model fitting, calibration, and testing</li>
+                <li>Independent gate verdicts instead of one favorable score</li>
+                <li>Executable stopping decisions under null effects, leakage, and shift</li>
+              </ul>
+            </section>
+            <section>
+              <h3>What this work does not claim</h3>
+              <ul>
+                <li>Individual clinical prognosis</li>
+                <li>Calibrated mechanism probability</li>
+                <li>Treatment selection or treatment benefit</li>
+                <li>Successful external multimodal validation</li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <p><strong>Research companion updated 30 August 2026.</strong></p>
+        <p>
+          Aggregate scientific displays only. Participant-level source records remain governed by
+          PPMI and PDBP and are not distributed here.
+        </p>
+      </div>
+    </footer>
+    <script src="../assets/site.js"></script>
+  </body>
+</html>

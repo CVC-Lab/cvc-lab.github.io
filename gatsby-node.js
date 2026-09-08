@@ -9,6 +9,8 @@ const DBG_PROGRESS_DIR = path.join(
   'dynamic-belief-games',
   'DBG_progress'
 )
+const PD_COMPANION_ROUTE = '/projects/pd-research-companion'
+const PD_COMPANION_DIR = path.join(__dirname, 'static', 'projects', 'pd-research-companion')
 const MICCAI_PROJECT_ROUTE = '/projects/posterior-aware-pd-phenotyping-miccai'
 const MICCAI_PROJECT_DIR = path.join(
   __dirname,
@@ -28,6 +30,13 @@ exports.onCreateDevServer = ({ app }) => {
   app.use(
     MICCAI_PROJECT_ROUTE,
     express.static(MICCAI_PROJECT_DIR, {
+      extensions: ['html'],
+      index: ['index.html'],
+    })
+  )
+  app.use(
+    PD_COMPANION_ROUTE,
+    express.static(PD_COMPANION_DIR, {
       extensions: ['html'],
       index: ['index.html'],
     })

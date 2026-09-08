@@ -13,6 +13,16 @@ const skiJumperDigitalTwinTitle = 'Ski Jumper Digital Twin'
 
 module.exports = [
   {
+    name: 'PD Research Companion',
+    description:
+      'Two 2026 manuscripts on Parkinson disease: longitudinal validity gates and signed dopaminergic asymmetry, with outcome-blind patient dossiers.',
+    img_name: 'projects/pd_research_companion/companion_thumbnail',
+    link: '/projects/pd-research-companion/',
+    tags: ['Health AI/ML', 'Clinical Imaging'],
+    themes: ['Healthcare AI'],
+    date: '2026-08-30',
+  },
+  {
     name: 'MICCAI 2026 Posterior-Aware Motor Phenotyping',
     description:
       'Posterior-aware Bayesian motor-state phenotyping from MDS-UPDRS-III with DaTSCAN, MRI, and BioFIND validation.',

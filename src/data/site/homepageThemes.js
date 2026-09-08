@@ -15,7 +15,7 @@ const homepageThemes = [
     id: 'healthcare-ai',
     index: '01',
     title: 'Healthcare AI',
-    kicker: 'Human-centered modeling',
+    kicker: 'We infer the unseen',
     summary:
       'Interpretable models for multimodal health data, patient heterogeneity, and longitudinal disease monitoring.',
     tags: ['Imaging', 'Biomarkers', 'Clinical data'],
@@ -25,6 +25,14 @@ const homepageThemes = [
     visualCaption:
       'Posterior-aware motor states connect clinical assessments to imaging-associated validation.',
     featuredProjects: [
+      {
+        label: 'Patient portal: motion and gait visualization',
+        href: 'https://cvc-lab.github.io/parkinson-viz/',
+      },
+      {
+        label: 'PD Research Companion: two 2026 manuscripts',
+        href: '/projects/pd-research-companion/',
+      },
       {
         label: 'Posterior-aware motor phenotyping',
         href: '/projects/posterior-aware-pd-phenotyping',
@@ -42,7 +50,7 @@ const homepageThemes = [
         href: '/projects/integrated-pd-precision-stratification',
       },
       {
-        label: 'Actionable Intelligence',
+        label: 'AI4PD program site',
         href: 'https://cvc-lab.github.io/parkinsons-website/',
       },
     ],

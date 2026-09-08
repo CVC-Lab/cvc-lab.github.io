@@ -65,6 +65,59 @@
   overflow-wrap: break-word;
 }
 
+.healthcare-hero__actions,
+.healthcare-portal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0 0 2.5rem;
+}
+
+.healthcare-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.4rem;
+  border: 2px solid var(--ut-burnt-orange);
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.healthcare-button--primary {
+  background: var(--ut-burnt-orange);
+  color: var(--ut-white);
+}
+
+.healthcare-button--primary:hover,
+.healthcare-button--primary:focus-visible {
+  background: var(--ut-burnt-orange-dark);
+  border-color: var(--ut-burnt-orange-dark);
+  color: var(--ut-white);
+}
+
+.healthcare-button--quiet {
+  background: transparent;
+  color: var(--ut-burnt-orange);
+}
+
+.healthcare-button--quiet:hover,
+.healthcare-button--quiet:focus-visible {
+  background: rgba(191, 87, 0, 0.08);
+  color: var(--ut-burnt-orange-dark);
+}
+
+.healthcare-button:focus-visible {
+  outline: 3px solid var(--ut-burnt-orange);
+  outline-offset: 3px;
+}
+
 .healthcare-hero__figure {
   width: 100%;
   max-width: 100%;
@@ -76,7 +129,8 @@
   overflow: hidden;
 }
 
-.healthcare-hero__figure img {
+.healthcare-hero__figure img,
+.healthcare-hero__figure .gatsby-image-wrapper {
   display: block;
   width: 100%;
   height: auto;
@@ -94,6 +148,78 @@
 .healthcare-program,
 .healthcare-papers {
   padding: 5rem 0;
+}
+
+/* Patient portal highlight: the one thing a first-time visitor should notice. */
+.healthcare-portal {
+  padding: 0 0 4rem;
+  background: var(--ut-white);
+}
+
+.healthcare-portal__card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  margin-top: -2.75rem;
+  padding: 2.5rem;
+  border: 1px solid var(--ut-limestone);
+  border-left: 6px solid var(--ut-burnt-orange);
+  border-radius: var(--border-radius-lg);
+  background: var(--ut-white);
+  box-shadow: var(--shadow-md);
+}
+
+.healthcare-portal__intro h2 {
+  margin: 0 0 0.9rem;
+  color: var(--ut-charcoal);
+  font-size: 2.4rem;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.healthcare-portal__intro > p:not(.healthcare-eyebrow):not(.healthcare-portal__note) {
+  margin: 0 0 1.5rem;
+  color: var(--ut-dark-gray);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.healthcare-portal__actions {
+  margin-bottom: 1rem;
+}
+
+.healthcare-portal__note {
+  margin: 0;
+  color: var(--ut-medium-gray);
+  font-size: 0.85rem;
+}
+
+.healthcare-portal__points {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.healthcare-portal__points li {
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--border-radius-md);
+  background: var(--ut-off-white);
+}
+
+.healthcare-portal__points h3 {
+  margin: 0 0 0.35rem;
+  color: var(--ut-burnt-orange);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.healthcare-portal__points p {
+  margin: 0;
+  color: var(--ut-charcoal);
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 .healthcare-program {
@@ -135,8 +261,8 @@
 
 .healthcare-subprojects {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
 }
 
 .healthcare-subproject {
@@ -156,7 +282,8 @@
   background: var(--ut-limestone-light);
 }
 
-.healthcare-subproject__image-wrap img {
+.healthcare-subproject__image-wrap img,
+.healthcare-subproject__image-wrap .gatsby-image-wrapper {
   display: block;
   width: 100%;
   height: 100%;
@@ -232,7 +359,8 @@
   grid-column: 1 / -1;
 }
 
-.healthcare-visual img {
+.healthcare-visual img,
+.healthcare-visual .gatsby-image-wrapper {
   display: block;
   width: 100%;
   height: auto;
@@ -299,6 +427,11 @@
   .healthcare-subprojects {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .healthcare-portal__card {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
 }
 
 @media (max-width: 720px) {
@@ -330,6 +463,20 @@
   .healthcare-subprojects,
   .healthcare-visual-grid {
     grid-template-columns: 1fr;
+  }
+
+  .healthcare-portal__card {
+    margin-top: -1.5rem;
+    padding: 1.5rem;
+  }
+
+  .healthcare-portal__intro h2 {
+    font-size: 1.85rem;
+  }
+
+  .healthcare-button {
+    width: 100%;
+    justify-content: center;
   }
 
   .healthcare-visual--wide {

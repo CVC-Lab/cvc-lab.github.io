@@ -4282,5 +4282,23 @@
     "PublishedDateYear": "2026",
     "PDFLink": "https://arxiv.org/abs/2607.21995",
     "ProjectLink": "/projects/qc-phast-search"
+  },
+  {
+    "Title": "Validity Gates Expose Limits of Longitudinal Multimodal Parkinson Disease Prediction",
+    "Authors": "H. M. Tirhekar, P. Yadav, C. Bajaj",
+    "Location": "Preprint, 2026 (arXiv submission in preparation)",
+    "PublicationType": "arXiv",
+    "PublishedDateYear": "2026",
+    "PDFLink": "/projects/pd-research-companion/pd-validity-gates/",
+    "ProjectLink": "/projects/healthcare-ai"
+  },
+  {
+    "Title": "Signed Dopaminergic Asymmetry Tracks Contralateral Motor Laterality in Parkinson\u2019s Disease",
+    "Authors": "H. M. Tirhekar, P. Yadav, C. Bajaj",
+    "Location": "Preprint, 2026 (arXiv submission in preparation)",
+    "PublicationType": "arXiv",
+    "PublishedDateYear": "2026",
+    "PDFLink": "/projects/pd-research-companion/pd-signed-laterality/",
+    "ProjectLink": "/projects/healthcare-ai"
   }
 ]

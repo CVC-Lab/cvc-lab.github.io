@@ -17,6 +17,12 @@ const softwareData = require('./src/data/site/software')
 const menuData = require('./src/data/site/menu')
 
 module.exports = {
+  // Parallel query running intermittently loses a page's temp query result during
+  // clean builds ("Couldn't find temp query result for ..."), failing the build.
+  // Serialising query running is cheap for this site; image processing stays parallel.
+  flags: {
+    PARALLEL_QUERY_RUNNING: false,
+  },
   pathPrefix: '/',
   siteMetadata: {
     title: `Computational Visualization Center`,
