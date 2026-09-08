@@ -27,7 +27,7 @@ const homepageThemes = [
     featuredProjects: [
       {
         label: 'Patient portal: motion and gait visualization',
-        href: 'https://cvc-lab.github.io/parkinson-viz/',
+        href: 'https://ai4pd-portal.secure.cvc-lab.org/',
       },
       {
         label: 'PD Research Companion: two 2026 manuscripts',

@@ -1,7 +1,7 @@
 // Single place for the AI4PD program's addresses.
 export const AI4PD_BASE = '/projects/ai4pd'
 // The clinician-facing patient portal: motion and gait visualization app (separate repo).
-export const PATIENT_PORTAL_URL = 'https://cvc-lab.github.io/parkinson-viz/'
+export const PATIENT_PORTAL_URL = 'https://ai4pd-portal.secure.cvc-lab.org/'
 // Static research companion for the two 2026 manuscripts (static/projects/pd-research-companion).
 export const COMPANION_URL = '/projects/pd-research-companion/'
 export const CONTACT_EMAIL = 'bajaj@cs.utexas.edu'
