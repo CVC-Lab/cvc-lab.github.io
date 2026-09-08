@@ -26,7 +26,7 @@ const FEATURED_PROJECTS_DATA = [
     video: null,
   },
   {
-    name: "Parkinson's Disease / Healthcare AI",
+    name: "AI4PD: Parkinson's Disease",
     video: null,
   },
 ]

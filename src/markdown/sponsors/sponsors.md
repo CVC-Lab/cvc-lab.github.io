@@ -7,7 +7,7 @@ The Computational Visualization Center (CVC) is a cross disciplinary effort whos
 
 **Michael J. Fox Foundation**
 
-- [Quick and Efficient Extraction of Patient Specific SBR Ratios for Parkinson’s Disease](https://cvc-lab.github.io/parkinsons-website/)
+- [Quick and Efficient Extraction of Patient Specific SBR Ratios for Parkinson’s Disease](/projects/ai4pd/background/)
 
 **Army Futures Command**
 

@@ -7,7 +7,7 @@ const perennialLearningTitle =
   'The Physics, Information, and Computation of Perennial Learning: Kolmogorov Complexity, Information Distance and Port-Hamiltonian Thermodynamics'
 const triModalGeneTherapyTitle =
   'A Novel Tri-Modal Viral–Ultrasound Gene-Delivery Therapy Protocol for Lysosomal Neurodegeneration via Stochastic Model Optimization with Uncertainty Quantification and Generalizability'
-const parkinsonsHealthcareAiTitle = "Parkinson's Disease / Healthcare AI"
+const parkinsonsHealthcareAiTitle = "AI4PD: Parkinson's Disease"
 const pianoDigitalTwinTitle = 'Piano Digital Twin'
 const skiJumperDigitalTwinTitle = 'Ski Jumper Digital Twin'
 
@@ -185,9 +185,9 @@ module.exports = [
   {
     name: parkinsonsHealthcareAiTitle,
     description:
-      "A unified Healthcare AI directory for Parkinson's research across imaging, biomarkers, and interpretable patient phenotypes.",
-    img_name: 'publications/PUB_Posterior-Aware Phenotyping',
-    link: '/projects/healthcare-ai',
+      "AI4PD: patient-specific AI for Parkinson's disease. The program hub, with the patient portal, the digital-twin approach, clinician workflow, evidence, and partners.",
+    img_name: 'projects/ai4pd/ai4pd-architecture-figure1',
+    link: '/projects/ai4pd/',
     tags: ['Healthcare AI'],
     themes: ['Healthcare AI'],
     date: '2026-06-12',

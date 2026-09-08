@@ -33,6 +33,7 @@ const CARD_IMAGE_QUERY = graphql`
             "projects/posterior_aware_pd_phenotyping"
             "projects/ski_jumper_digital_twin"
             "projects/pd_research_companion"
+            "projects/ai4pd"
             "projects/integrated_pd_precision_stratification"
             "projects/pathway_anchored_pd_clustering"
             "projects/Actionable Intelligence Parkinsons"

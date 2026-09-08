@@ -8,7 +8,7 @@ import { FaArrowRight, FaSearch, FaTimes } from 'react-icons/fa'
 import './tiles-modern.css'
 
 const projectTabs = ['All', 'Healthcare AI', 'World Models', 'AI for Science']
-const parkinsonsHealthcareAiTitle = "Parkinson's Disease / Healthcare AI"
+const parkinsonsHealthcareAiTitle = "AI4PD: Parkinson's Disease"
 const projectTabQueryParam = 'theme'
 
 const projectTabSlugs = {

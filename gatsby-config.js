@@ -61,6 +61,7 @@ module.exports = {
           `/internal/**`,
           `/password-protect/`,
           `/old-home/`,
+          `/projects/healthcare-ai/`,
           `/projects/dynamic-belief-games/internal/**`,
         ],
       },

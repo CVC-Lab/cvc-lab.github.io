@@ -50,11 +50,11 @@ const homepageThemes = [
         href: '/projects/integrated-pd-precision-stratification',
       },
       {
-        label: 'AI4PD program site',
-        href: 'https://cvc-lab.github.io/parkinsons-website/',
+        label: 'Approach: the digital twin',
+        href: '/projects/ai4pd/approach/',
       },
     ],
-    href: '/projects/healthcare-ai',
+    href: '/projects/ai4pd/',
     ctaLabel: 'Explore Healthcare AI',
   },
   {
