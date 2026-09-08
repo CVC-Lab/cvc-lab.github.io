@@ -203,6 +203,11 @@ a:hover {
   outline: none;
 }
 
+.button:focus-visible {
+  outline: 3px solid var(--ut-burnt-orange);
+  outline-offset: 2px;
+}
+
 .button--primary {
   background-color: var(--ut-burnt-orange);
   color: var(--ut-white);

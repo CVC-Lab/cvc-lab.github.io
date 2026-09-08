@@ -81,6 +81,9 @@
   flex-direction: column;
   margin-bottom: var(--space-2xl);
   scroll-margin-top: 60px;
+  /* 476 cards: skip layout/paint for years that are off-screen. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
 .year-header {
@@ -151,7 +154,8 @@
 }
 
 .publication-thumbnail:focus-visible {
-  outline: 3px solid rgba(191, 87, 0, 0.28);
+  outline: 3px solid var(--ut-burnt-orange);
+  outline-offset: 2px;
   outline-offset: 3px;
 }
 
@@ -251,7 +255,9 @@
   line-height: 1.5;
 }
 
-.lower-container-pubs h4 {
+.lower-container-pubs h4,
+.lower-container-pubs .pub-authors,
+.lower-container-pubs .pub-venue {
   color: var(--color-text-secondary);
   font-weight: var(--font-weight-normal);
   font-size: var(--font-size-sm);
@@ -309,6 +315,9 @@
 
 .pub-link-icon {
   font-size: 0.7rem;
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
   flex-shrink: 0;
 }
 

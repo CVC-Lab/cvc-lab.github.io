@@ -11,9 +11,14 @@ const Layout = ({ children, headerVariant = 'default' }) => {
 
   return (
     <>
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
       <Header menuLinks={menuLinks} siteTitle={title} variant={headerVariant} />
       <div>
-        <main style={{ minHeight: '90vh' }}>{children}</main>
+        <main id="main-content" tabIndex={-1} style={{ minHeight: '90vh' }}>
+          {children}
+        </main>
       </div>
       <Footer />
     </>

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import PropTypes from 'prop-types'
 import { Link, withPrefix } from 'gatsby'
 import Layout from '../../../../components/layout'
 import Seo from '../../../../components/seo'
@@ -322,10 +323,15 @@ const SystemsProtocolsPage = () => {
 
 export default SystemsProtocolsPage
 
-export const Head = () => (
+export const Head = ({ location }) => (
   <Seo
+    pathname={location.pathname}
     title="DBG Internal: Systems & Protocols"
     description="Convenience-gated internal workstream summary for DBG systems, protocols, and integration."
     meta={[{ name: 'robots', content: 'noindex, nofollow' }]}
   />
 )
+
+Head.propTypes = {
+  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
+}

@@ -1,8 +1,10 @@
-import '@fontsource/libre-franklin/300.css'
-import '@fontsource/libre-franklin/400.css'
-import '@fontsource/libre-franklin/500.css'
-import '@fontsource/libre-franklin/600.css'
-import '@fontsource/libre-franklin/700.css'
+// Latin subset only: the all-subsets files declare nine @font-face rules per weight
+// (cyrillic, greek, vietnamese, ...) that the site never uses.
+import '@fontsource/libre-franklin/latin-300.css'
+import '@fontsource/libre-franklin/latin-400.css'
+import '@fontsource/libre-franklin/latin-500.css'
+import '@fontsource/libre-franklin/latin-600.css'
+import '@fontsource/libre-franklin/latin-700.css'
 import './src/styles/global.css'
 import React from 'react'
 import { PasswordProvider, ProtectedRoute } from './src/components/password-protect/PasswordContext'
@@ -22,10 +24,9 @@ export const wrapPageElement = ({ element, props }) => {
   return <ProtectedRoute {...props}>{element}</ProtectedRoute>
 }
 
-// Reset scroll to top on every route change, but preserve in-page anchor
-// navigation so hash links like #dbg-gym on the microsite still work.
-export const shouldUpdateScroll = ({ routerProps: { location } }) => {
+// New navigations start at the top; hash links scroll to their anchor; browser
+// back/forward restore the position Gatsby saved for that history entry.
+export const shouldUpdateScroll = ({ routerProps: { location }, getSavedScrollPosition }) => {
   if (location.hash) return true
-  window.scrollTo(0, 0)
-  return false
+  return getSavedScrollPosition(location) || [0, 0]
 }

@@ -1,58 +1,65 @@
 @import url('../styles/design-system.css');
 
-.software div, .sponsors div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0 var(--space-lg);
-    width: 100%;
-    max-width: var(--max-width-content);
-    margin: 0 auto;
+.software div,
+.sponsors div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 var(--space-lg);
+  width: 100%;
+  max-width: var(--max-width-content);
+  margin: 0 auto;
 }
 
-.software h1, .software h2, .software ul, .software li {
-    margin: 0;
-    padding: 0;
+.software h1,
+.software h2,
+.software ul,
+.software li {
+  margin: 0;
+  padding: 0;
 }
 
-.sponsors p{
-    padding: var(--space-sm) 0;
-    color: var(--color-text-secondary);
-    line-height: var(--line-height-relaxed);
+.sponsors p {
+  padding: var(--space-sm) 0;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
 }
 
-.software h1, .sponsors h1 {
-    color: var(--color-text-primary);
-    font-weight: var(--font-weight-bold);
-    font-size: var(--font-size-3xl); 
-    width: 100%;
-    text-align: center;
-    padding: var(--space-2xl) 0 var(--space-lg);
+.software h1,
+.sponsors h1 {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-3xl);
+  width: 100%;
+  text-align: center;
+  padding: var(--space-2xl) 0 var(--space-lg);
 }
 
 .software h2 {
-    color: var(--color-text-primary);
-    font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-xl);
-    width: 100%;
-    text-align: left;
-    margin: var(--space-lg) 0 var(--space-md);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xl);
+  width: 100%;
+  text-align: left;
+  margin: var(--space-lg) 0 var(--space-md);
 }
-  
-.software ul, .sponsors ul {
-    list-style-type: disc;
-    padding: 0 var(--space-lg);
-    margin: 0 var(--space-lg);
-    width: calc(100% - var(--space-3xl));
-    font-weight: var(--font-weight-normal);
-    font-size: var(--font-size-base);
+
+.software ul,
+.sponsors ul {
+  list-style-type: disc;
+  padding: 0 var(--space-lg);
+  margin: 0 var(--space-lg);
+  width: calc(100% - var(--space-3xl));
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-base);
 }
-  
-.software li, .sponsors li {
-    text-align: left;
-    margin: var(--space-sm) 0;
-    font-weight: var(--font-weight-normal);
-    font-size: var(--font-size-base);
-    color: var(--color-text-secondary);
-    line-height: var(--line-height-relaxed);
+
+.software li,
+.sponsors li {
+  text-align: left;
+  margin: var(--space-sm) 0;
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
 }

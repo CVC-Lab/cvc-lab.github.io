@@ -32,21 +32,6 @@ export const SiteProvider = ({ children }) => {
               description
             }
           }
-          projectTiles {
-            name
-            description
-            img_name
-            link
-            tags
-            themes
-            date
-          }
-          peopleCards {
-            name
-            image
-            position
-            status
-          }
           newsTiles {
             name
             description
@@ -69,8 +54,6 @@ export const SiteProvider = ({ children }) => {
           description: 'A cross-disciplinary effort at UT Austin',
           menuLinks: [],
           softwareProjects: [],
-          projectTiles: [],
-          peopleCards: [],
           newsTiles: [],
         },
       },
@@ -97,6 +80,8 @@ export const SiteProvider = ({ children }) => {
         ? data.site.siteMetadata
         : fallbackData.site.siteMetadata
 
+    // projectTiles and peopleCards come straight from the data modules (which keep
+    // fields like `themes` intact), so they are deliberately not part of the query.
     return {
       ...siteData,
       peopleCards: peopleData,

@@ -1,55 +1,53 @@
 /**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
+ * SEO head for the Gatsby Head API.
  *
- * Updated to use Gatsby Head API instead of react-helmet
+ * Usage from a page:  export const Head = ({ location }) => <Seo title="..." pathname={location.pathname} />
  */
 
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 
-// Component for use with Gatsby Head API
-export const Head = ({ title, description, lang, meta }) => (
-  <Seo title={title} description={description} lang={lang} meta={meta} />
-)
+const DEFAULT_IMAGE_PATH = '/og-image.jpg'
 
-Head.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-}
-
-function Seo({ description = '', lang = 'en', meta = [], title }) {
+function Seo({ description = '', lang = 'en', meta = [], title, pathname, image }) {
   const { site } = useStaticQuery(graphql`
     query {
       site {
         siteMetadata {
           title
           description
-          author
+          siteUrl
         }
       }
     }
   `)
 
+  const siteTitle = site.siteMetadata.title
+  const siteUrl = (site.siteMetadata.siteUrl || '').replace(/\/+$/, '')
   const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+  // Pages pass their own title; the homepage passes the site name itself, which
+  // used to render as "Site | Site".
+  const fullTitle = title && title !== siteTitle ? `${title} | ${siteTitle}` : siteTitle
+  const canonical = pathname && siteUrl ? `${siteUrl}${pathname}` : undefined
+  const imageUrl = siteUrl ? `${siteUrl}${image || DEFAULT_IMAGE_PATH}` : undefined
 
   return (
     <>
       <html lang={lang} />
-      <title>{title ? `${title} | ${defaultTitle}` : defaultTitle}</title>
+      <title>{fullTitle}</title>
       <meta name="description" content={metaDescription} />
-      <meta property="og:title" content={title} />
+      {canonical && <link rel="canonical" href={canonical} />}
+      <meta property="og:site_name" content={siteTitle} />
+      <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content="website" />
-      <meta name="twitter:card" content="summary" />
-      <meta name="twitter:creator" content={site.siteMetadata?.author || ``} />
-      <meta name="twitter:title" content={title} />
+      {canonical && <meta property="og:url" content={canonical} />}
+      {imageUrl && <meta property="og:image" content={imageUrl} />}
+      <meta name="twitter:card" content={imageUrl ? 'summary_large_image' : 'summary'} />
+      <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={metaDescription} />
-      <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+      {imageUrl && <meta name="twitter:image" content={imageUrl} />}
       {meta.map(({ name, content, property }) =>
         property ? (
           <meta key={property} property={property} content={content} />
@@ -65,7 +63,9 @@ Seo.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  pathname: PropTypes.string,
+  image: PropTypes.string,
 }
 
 export default Seo

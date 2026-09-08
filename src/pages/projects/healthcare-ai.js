@@ -285,9 +285,14 @@ ProjectLink.propTypes = {
 
 export default HealthcareAiPage
 
-export const Head = () => (
+export const Head = ({ location }) => (
   <Seo
+    pathname={location.pathname}
     title="Parkinson's Disease | Healthcare AI"
     description="CVC Healthcare AI research in Parkinson's disease, spanning imaging, biomarkers, patient heterogeneity, and interpretable longitudinal modeling."
   />
 )
+
+Head.propTypes = {
+  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
+}

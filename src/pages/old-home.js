@@ -1,4 +1,5 @@
 import * as React from 'react'
+import PropTypes from 'prop-types'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import { useSiteMetadata } from '../context/SiteContext'
@@ -27,9 +28,15 @@ const OldHomePage = () => {
 
 export default OldHomePage
 
-export const Head = () => (
+export const Head = ({ location }) => (
   <Seo
+    pathname={location.pathname}
     title="Previous Home"
     description="Archived previous homepage for the Computational Visualization Center."
+    meta={[{ name: 'robots', content: 'noindex, nofollow' }]}
   />
 )
+
+Head.propTypes = {
+  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
+}

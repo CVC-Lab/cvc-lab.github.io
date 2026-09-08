@@ -3,9 +3,26 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import DOMPurify from 'isomorphic-dompurify'
 import Layout from '../components/layout'
+import Seo from '../components/seo'
 import '../components/project_page.css'
 import 'katex/dist/katex.min.css'
 import '../components/software_list.css'
+
+// The HTML is generated at build time from the repo's own markdown, so the sanitiser is
+// defence in depth, not a trust boundary. Its defaults strip <iframe>, which silently
+// removed every YouTube embed produced by gatsby-remark-embed-video, and drop target=.
+const SANITIZE_OPTIONS = {
+  ADD_TAGS: ['iframe'],
+  ADD_ATTR: [
+    'allow',
+    'allowfullscreen',
+    'frameborder',
+    'scrolling',
+    'target',
+    'loading',
+    'referrerpolicy',
+  ],
+}
 
 const SponsorsTemplate = ({ data: { markdownRemark } }) => {
   const { frontmatter, html } = markdownRemark
@@ -40,7 +57,7 @@ const SponsorsTemplate = ({ data: { markdownRemark } }) => {
             ← Back
           </button>
           <h1>{frontmatter.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />
+          <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html, SANITIZE_OPTIONS) }} />
         </div>
       </div>
     </Layout>
@@ -117,7 +134,7 @@ const DefaultTemplate = ({ data: { markdownRemark } }) => {
           </h4>
           <div
             className="post-body"
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html, SANITIZE_OPTIONS) }}
           />
         </div>
       </div>
@@ -171,10 +188,24 @@ DefaultTemplate.propTypes = {
   }).isRequired,
 }
 
+export const Head = ({ data, location }) => (
+  <Seo
+    title={data.markdownRemark.frontmatter.title}
+    description={data.markdownRemark.excerpt}
+    pathname={location.pathname}
+  />
+)
+
+Head.propTypes = {
+  data: PropTypes.object.isRequired,
+  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
+}
+
 export const pageQuery = graphql`
   query ($id: String!) {
     markdownRemark(id: { eq: $id }) {
       html
+      excerpt(pruneLength: 160)
       frontmatter {
         # date(formatString: "MMMM DD, YYYY")
         title

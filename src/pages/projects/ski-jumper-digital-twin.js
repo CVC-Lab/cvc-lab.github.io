@@ -1,4 +1,5 @@
 import * as React from 'react'
+import PropTypes from 'prop-types'
 import Seo from '../../components/seo'
 import DigitalTwinPage from '../../components/project-pages/DigitalTwinPage'
 import skiOverview from '../../images/projects/ski_jumper_digital_twin/ski_jumper_overview.png'
@@ -136,9 +137,14 @@ const SkiJumperDigitalTwinPage = () => <DigitalTwinPage project={skiProject} />
 
 export default SkiJumperDigitalTwinPage
 
-export const Head = () => (
+export const Head = ({ location }) => (
   <Seo
+    pathname={location.pathname}
     title="Ski Jumper Digital Twin"
     description="A physics-aware world model that moves from ski-jump motion capture to phase-dependent trajectory optimization."
   />
 )
+
+Head.propTypes = {
+  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
+}

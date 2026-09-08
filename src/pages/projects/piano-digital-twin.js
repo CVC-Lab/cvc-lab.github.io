@@ -1,4 +1,5 @@
 import * as React from 'react'
+import PropTypes from 'prop-types'
 import Seo from '../../components/seo'
 import DigitalTwinPage from '../../components/project-pages/DigitalTwinPage'
 import pianoHero from '../../images/projects/piano_digital_twin/piano_digital_twin_hero.png'
@@ -130,9 +131,14 @@ const PianoDigitalTwinPage = () => <DigitalTwinPage project={pianoProject} />
 
 export default PianoDigitalTwinPage
 
-export const Head = () => (
+export const Head = ({ location }) => (
   <Seo
+    pathname={location.pathname}
     title="Piano Digital Twin"
     description="A performer-instrument world model for seeing, hearing, and safely improving expert piano skill."
   />
 )
+
+Head.propTypes = {
+  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
+}

@@ -1,7 +1,7 @@
 ---
-title: "Flexible Fitting of Crystal Structures into Density Maps"
-slug: "/seminars/spring2011/flexible-fitting"
-date: "2011-06-02"
+title: 'Flexible Fitting of Crystal Structures into Density Maps'
+slug: '/seminars/spring2011/flexible-fitting-crystal-structures'
+date: '2011-06-02'
 ---
 
 CVC Seminar: Wed June 1 10:00-11am ACES 4.402

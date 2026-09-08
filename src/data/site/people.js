@@ -7,7 +7,7 @@ module.exports = [
   {
     name: 'Chandrajit Bajaj',
     image: 'chandrajit.png',
-    position: 'Director, Principle Investigator',
+    position: 'Director, Principal Investigator',
     status: 'current',
   },
   {

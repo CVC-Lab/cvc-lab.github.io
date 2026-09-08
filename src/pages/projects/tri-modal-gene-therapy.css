@@ -442,7 +442,8 @@ body:has(.trimod-page) #gatsby-focus-wrapper {
 }
 
 .trimod-page .tab-btn:focus-visible {
-  outline: 3px solid rgba(191, 87, 0, 0.18);
+  outline: 3px solid var(--ut-burnt-orange);
+  outline-offset: 2px;
   outline-offset: 2px;
 }
 

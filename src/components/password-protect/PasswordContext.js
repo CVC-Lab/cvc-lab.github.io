@@ -157,6 +157,7 @@ export const ProtectedRoute = ({
     }
 
     navigate('/password-protect', {
+      replace: true,
       state: {
         redirectTo: pathname,
         routePassword: getRoutePasswordForPath(pathname),

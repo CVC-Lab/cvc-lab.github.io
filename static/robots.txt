@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /internal/
+Disallow: /password-protect/
+Disallow: /projects/dynamic-belief-games/internal/
+
+Sitemap: https://cvc-lab.github.io/sitemap-index.xml

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import PropTypes from 'prop-types'
 import { FaBookOpen, FaCopy, FaCubes, FaDownload, FaRoute } from 'react-icons/fa'
 import Layout from '../../components/layout'
 import Seo from '../../components/seo'
@@ -388,9 +389,14 @@ render_phase_portrait()`}</code>
 
 export default ComputerAlgebraHamiltonianGeometryPage
 
-export const Head = () => (
+export const Head = ({ location }) => (
   <Seo
+    pathname={location.pathname}
     title="Computer Algebra Meets Hamiltonian Geometry"
     description="Symbolic computation for deriving, simplifying, and visualizing Hamiltonian, metriplectic, and Lie-Poisson dynamical systems."
   />
 )
+
+Head.propTypes = {
+  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
+}

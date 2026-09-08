@@ -162,7 +162,7 @@ module.exports = [
   {
     name: 'Flexible Fitting of Crystal Structures into Density Maps',
     category: 'seminars',
-    link: '/seminars/spring2011/flexible-fitting',
+    link: '/seminars/spring2011/flexible-fitting-crystal-structures',
     date: '2011-06-02',
   },
   {
@@ -355,7 +355,7 @@ module.exports = [
     name: 'UT Austin Aids Army in Test of Drone Defenses in Downtown Austin',
     category: 'news',
     link: 'https://news.utexas.edu/2021/12/21/ut-austin-aids-army-in-test-of-drone-defenses-in-downtown-austin/',
-    date: '2024-04-19',
+    date: '2021-12-21',
   },
   {
     name: 'Computer Science Professor Trains AI Through Game Theory',

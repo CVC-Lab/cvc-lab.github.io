@@ -36,6 +36,30 @@ module.exports = {
     `gatsby-plugin-typescript`,
     `gatsby-plugin-image`,
     {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Computational Visualization Center`,
+        short_name: `CVC`,
+        start_url: `/`,
+        background_color: `#ffffff`,
+        theme_color: `#bf5700`,
+        display: `minimal-ui`,
+        icon: `src/favicons/icon-512.png`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        excludes: [
+          `/internal/`,
+          `/internal/**`,
+          `/password-protect/`,
+          `/old-home/`,
+          `/projects/dynamic-belief-games/internal/**`,
+        ],
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,

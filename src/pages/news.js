@@ -1,8 +1,10 @@
 import * as React from 'react'
+import PropTypes from 'prop-types'
 import { Suspense, lazy } from 'react'
 import { useSiteMetadata } from '../context/SiteContext'
 
 import Layout from '../components/layout'
+import Seo from '../components/seo'
 import LoadingFallback from '../components/LoadingFallback'
 
 // Lazy load component
@@ -56,3 +58,15 @@ const NewsPage = () => {
 }
 
 export default NewsPage
+
+export const Head = ({ location }) => (
+  <Seo
+    title="News"
+    description="News, announcements and seminars from the Computational Visualization Center"
+    pathname={location.pathname}
+  />
+)
+
+Head.propTypes = {
+  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
+}

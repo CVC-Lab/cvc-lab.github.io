@@ -6,9 +6,18 @@ import './tiles-modern.css'
 
 const categoryTabs = ['All', 'News', 'Seminars']
 
+// 'YYYY-MM-DD' parsed by new Date() is UTC midnight, which formats as the previous
+// day west of UTC and differs between server and client. Parse it as a local date.
+const parseDate = dateStr => {
+  if (typeof dateStr !== 'string') return new Date(NaN)
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr.trim())
+  if (match) return new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]))
+  return new Date(dateStr)
+}
+
 const formatDate = dateStr => {
   try {
-    const date = new Date(dateStr)
+    const date = parseDate(dateStr)
     if (isNaN(date.getTime())) return 'Date unknown'
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
   } catch {
@@ -18,7 +27,7 @@ const formatDate = dateStr => {
 
 const getYear = dateStr => {
   try {
-    const date = new Date(dateStr)
+    const date = parseDate(dateStr)
     if (isNaN(date.getTime())) return null
     return date.getFullYear()
   } catch {
@@ -37,7 +46,7 @@ const NewsTiles = ({ newsTiles }) => {
   const sortedNewsTiles = React.useMemo(() => {
     if (safeNewsTiles.length === 0) return []
     return [...safeNewsTiles].sort((a, b) => {
-      const dateDifference = new Date(b.date) - new Date(a.date)
+      const dateDifference = parseDate(b.date) - parseDate(a.date)
       if (dateDifference !== 0) return dateDifference
       return b.name.localeCompare(a.name)
     })
@@ -143,11 +152,16 @@ const NewsTiles = ({ newsTiles }) => {
                       <h3 className="news-item-title">{tile.name}</h3>
                       {tile.description && <p className="news-item-desc">{tile.description}</p>}
                     </a>
-                  ) : (
-                    <Link className="news-item-link" to={tile.link || '#'}>
+                  ) : tile.link ? (
+                    <Link className="news-item-link" to={tile.link}>
                       <h3 className="news-item-title">{tile.name}</h3>
                       {tile.description && <p className="news-item-desc">{tile.description}</p>}
                     </Link>
+                  ) : (
+                    <div className="news-item-link">
+                      <h3 className="news-item-title">{tile.name}</h3>
+                      {tile.description && <p className="news-item-desc">{tile.description}</p>}
+                    </div>
                   )}
                   {tile.category && (
                     <span className={`news-category-badge news-category-badge--${tile.category}`}>

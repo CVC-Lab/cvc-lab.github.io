@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { useCardImage } from '../hooks/useCardImages'
-import phastMonolithicDemo from '../images/projects/phast/phast_monolithic_demo.gif'
 import hydroVideo from '../videos/hydro6A80.mp4'
 import { FaChevronLeft, FaChevronRight, FaPlay, FaPause } from 'react-icons/fa'
 import './FeaturedResearch.css'
@@ -12,8 +11,7 @@ import './FeaturedResearch.css'
 const FEATURED_PROJECTS_DATA = [
   {
     name: 'PHAST',
-    video: null,
-    gif: phastMonolithicDemo,
+    video: '/media/phast_monolithic_demo.mp4',
   },
   {
     name: 'GRL-SNAM',
@@ -38,7 +36,6 @@ const FeaturedResearch = ({ projectTiles }) => {
   const [isPlaying, setIsPlaying] = React.useState(true)
   const [isPaused, setIsPaused] = React.useState(false)
   const videoRef = React.useRef(null)
-  const timerRef = React.useRef(null)
 
   // Get featured projects from projectTiles
   const resolveCardImage = useCardImage()
@@ -85,29 +82,16 @@ const FeaturedResearch = ({ projectTiles }) => {
     }
   }
 
-  const resetTimer = React.useCallback(() => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current)
-    }
-    timerRef.current = setInterval(goToNext, 3000)
-  }, [goToNext])
+  // Bumping the epoch re-runs the effect below, which restarts the interval.
+  const [timerEpoch, setTimerEpoch] = React.useState(0)
+  const resetTimer = React.useCallback(() => setTimerEpoch(epoch => epoch + 1), [])
 
-  // Auto-rotation
+  // Auto-rotation: the effect owns the only interval, so pausing always clears it.
   React.useEffect(() => {
-    if (isPaused || featuredProjects.length <= 1) {
-      if (timerRef.current) {
-        clearInterval(timerRef.current)
-        timerRef.current = null
-      }
-      return
-    }
-    timerRef.current = setInterval(goToNext, 3000)
-    return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current)
-      }
-    }
-  }, [isPaused, goToNext, featuredProjects.length])
+    if (isPaused || featuredProjects.length <= 1) return undefined
+    const id = setInterval(goToNext, 3000)
+    return () => clearInterval(id)
+  }, [isPaused, goToNext, featuredProjects.length, timerEpoch])
 
   if (featuredProjects.length === 0) {
     return null

@@ -5,106 +5,105 @@
 
 module.exports = [
   {
-    category: "Graphical User Tools",
+    category: 'Graphical User Tools',
     items: [
       {
-        name: "TexMol",
-        description: "Molecular visualization and computation",
+        name: 'TexMol',
+        description: 'Molecular visualization and computation',
       },
       {
-        name: "VolumeRover",
-        description: "Scalable Image Processing and Visualization Tool",
+        name: 'VolumeRover',
+        description: 'Scalable Image Processing and Visualization Tool',
       },
       {
-        name: "VolRoverN",
+        name: 'VolRoverN',
         description:
-          "Geometric and electrophysiological neuronal simulation and visualization package",
+          'Geometric and electrophysiological neuronal simulation and visualization package',
       },
       {
-        name: "LBIE",
-        description: "Level Set Boundary-Interior-Exterior Meshing Tool",
+        name: 'LBIE',
+        description: 'Level Set Boundary-Interior-Exterior Meshing Tool',
       },
       {
-        name: "Prism",
-        description: "Geometric modeling using algebraic patches",
+        name: 'Prism',
+        description: 'Geometric modeling using algebraic patches',
       },
-      { name: "GANITH", description: "Algebraic geometry toolkit" },
+      { name: 'GANITH', description: 'Algebraic geometry toolkit' },
     ],
   },
   {
-    category: "Software Libraries and Command-Line Utilities",
+    category: 'Software Libraries and Command-Line Utilities',
     items: [
       {
-        name: "MolSurf",
-        description: "Molecular surface generation and manipulation",
+        name: 'MolSurf',
+        description: 'Molecular surface generation and manipulation',
       },
       {
-        name: "MolEnergy",
-        description: "Molecular energetics computation",
+        name: 'MolEnergy',
+        description: 'Molecular energetics computation',
       },
-      { name: "DPG", description: "Dynamic packing grids" },
+      { name: 'DPG', description: 'Dynamic packing grids' },
       {
-        name: "SSEP",
-        description: "Secondary structure elucidation package",
-      },
-      {
-        name: "Pocket/Tunnel",
-        description: "Protein pocket/tunnel extractor",
+        name: 'SSEP',
+        description: 'Secondary structure elucidation package',
       },
       {
-        name: "QHM",
-        description: "Quality Quadrilateral/Hexahedral Mesh Generator",
+        name: 'Pocket/Tunnel',
+        description: 'Protein pocket/tunnel extractor',
       },
       {
-        name: "QTM",
-        description: "Quality Triangular/Tetrahedral Mesh Generator",
+        name: 'QHM',
+        description: 'Quality Quadrilateral/Hexahedral Mesh Generator',
       },
       {
-        name: "QMDM",
-        description: "Quality Multi-Domain Meshing with Gap",
+        name: 'QTM',
+        description: 'Quality Triangular/Tetrahedral Mesh Generator',
       },
       {
-        name: "QMDMNG",
-        description: "Quality Multi-Domain Meshing with No Gap",
+        name: 'QMDM',
+        description: 'Quality Multi-Domain Meshing with Gap',
       },
       {
-        name: "GPU Renderer",
-        description: "Surface/Volume Rendering Packages",
-      },
-      { name: "Shastra", description: "X11 Based Scientific Toolkits" },
-      {
-        name: "Tracing/Tiling/Tetra",
-        description:
-          "Arbitrary Topology Shape Reconstruction Library from Planar Cross Sections",
-      },
-      { name: "PFCorr", description: "Polar Fourier Correlation" },
-      {
-        name: "PF2Fit",
-        description: "Polar Fast Fourier Rigid-body Fitting",
+        name: 'QMDMNG',
+        description: 'Quality Multi-Domain Meshing with No Gap',
       },
       {
-        name: "PF3Fit",
-        description: "Polar Fast Fourier Flexible Fitting",
+        name: 'GPU Renderer',
+        description: 'Surface/Volume Rendering Packages',
       },
-      { name: "PMEOPA", description: "Parallel Molecular Energetics" },
-      { name: "PGBFOPA", description: "Parallel Generalized Born Force" },
-      { name: "TVCT", description: "Time-varying Contour Trees" },
+      { name: 'Shastra', description: 'X11 Based Scientific Toolkits' },
+      {
+        name: 'Tracing/Tiling/Tetra',
+        description: 'Arbitrary Topology Shape Reconstruction Library from Planar Cross Sections',
+      },
+      { name: 'PFCorr', description: 'Polar Fourier Correlation' },
+      {
+        name: 'PF2Fit',
+        description: 'Polar Fast Fourier Rigid-body Fitting',
+      },
+      {
+        name: 'PF3Fit',
+        description: 'Polar Fast Fourier Flexible Fitting',
+      },
+      { name: 'PMEOPA', description: 'Parallel Molecular Energetics' },
+      { name: 'PGBFOPA', description: 'Parallel Generalized Born Force' },
+      { name: 'TVCT', description: 'Time-varying Contour Trees' },
     ],
   },
   {
-    category: "Server Based Codes",
+    category: 'Server Based Codes',
     items: [
-      { name: "F2Dock", description: "Protein docking software" },
-      { name: "TRLIB", description: "Texture-based Rendering Library" },
+      { name: 'F2Dock', description: 'Protein docking software' },
+      { name: 'TRLIB', description: 'Texture-based Rendering Library' },
       {
-        name: "ParIso",
-        description: "Fast Parallel Isosurface Rendering Library",
+        name: 'ParIso',
+        description: 'Fast Parallel Isosurface Rendering Library',
       },
       {
-        name: "MTD",
-        description: "Server-Client based Multi-Tiled Display Library",
+        name: 'MTD',
+        description: 'Server-Client based Multi-Tiled Display Library',
       },
-      { name: "PVRC", description: "Parallel Volume Ray Casting Library" },
+      { name: 'PVRC', description: 'Parallel Volume Ray Casting Library' },
     ],
   },
-];
+]

@@ -121,12 +121,12 @@ const Footer = () => {
           <h3 className="footer-section-title">Quick Links</h3>
           <ul className="footer-links">
             <li className="footer-link-item">
-              <a href="/#projects" className="footer-link">
+              <a href="/projects/" className="footer-link">
                 Research Projects
               </a>
             </li>
             <li className="footer-link-item">
-              <a href="/#people" className="footer-link">
+              <a href="/people/" className="footer-link">
                 Our Team
               </a>
             </li>
@@ -168,9 +168,9 @@ const Footer = () => {
       <div className="footer-container">
         <div className="footer-bottom" style={{ gridColumn: 'span 12' }}>
           <p>
-            © {currentYear} Computational Visualization Center. All rights reserved. Part of the
-            Oden Institute for Computational Engineering and Sciences at The University of Texas at
-            Austin.
+            © <span suppressHydrationWarning>{currentYear}</span> Computational Visualization
+            Center. All rights reserved. Part of the Oden Institute for Computational Engineering
+            and Sciences at The University of Texas at Austin.
           </p>
         </div>
       </div>

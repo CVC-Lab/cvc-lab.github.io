@@ -1,4 +1,6 @@
 import * as React from 'react'
+import PropTypes from 'prop-types'
+import Seo from '../../components/seo'
 import { Link } from 'gatsby'
 import 'katex/dist/katex.min.css'
 import './tri-modal-gene-therapy.css'
@@ -976,7 +978,7 @@ const TriModalGeneTherapyPage = () => {
             <Link to="/software">Software</Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/#about">About</Link>
           </li>
         </ul>
       </nav>
@@ -985,15 +987,13 @@ const TriModalGeneTherapyPage = () => {
   )
 }
 
-export const Head = () => (
+export const Head = ({ location }) => (
   <>
-    <html lang="en" />
-    <title>{`${projectTitle} | Computational Visualization Center`}</title>
-    <meta
-      name="description"
-      content="Computationally optimized tri-modal AAV-T4, SP2, and focused ultrasound gene-delivery protocol for lysosomal neurodegeneration."
+    <Seo
+      title={projectTitle}
+      description="Computationally optimized tri-modal AAV-T4, SP2, and focused ultrasound gene-delivery protocol for lysosomal neurodegeneration."
+      pathname={location.pathname}
     />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
     <link
@@ -1004,3 +1004,7 @@ export const Head = () => (
 )
 
 export default TriModalGeneTherapyPage
+
+Head.propTypes = {
+  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
+}

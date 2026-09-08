@@ -70,11 +70,11 @@ const Header = ({ siteTitle = '', menuLinks = [], variant = 'default' }) => {
           </Link>
         ) : showExpandedHeader ? (
           <>
-            <h1 style={{ margin: 0 }}>
+            <div className="site-title-wrap">
               <Link to="/" className="site-title-link">
                 <div className="site-title">{siteTitle}</div>
               </Link>
-            </h1>
+            </div>
           </>
         ) : null}
       </div>

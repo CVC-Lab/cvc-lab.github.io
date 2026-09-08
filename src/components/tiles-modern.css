@@ -125,7 +125,8 @@
 }
 
 .MuiTab-root:focus-visible {
-  outline: 3px solid rgba(191, 87, 0, 0.22);
+  outline: 3px solid var(--ut-burnt-orange);
+  outline-offset: 2px;
   outline-offset: 2px;
 }
 
@@ -167,7 +168,8 @@
 }
 
 .project-clear-filters-button:focus-visible {
-  outline: 3px solid rgba(191, 87, 0, 0.18);
+  outline: 3px solid var(--ut-burnt-orange);
+  outline-offset: 2px;
   outline-offset: 2px;
 }
 
@@ -390,7 +392,7 @@
 }
 
 .project-card-link:focus-visible .project-card {
-  border-color: rgba(191, 87, 0, 0.45);
+  border-color: var(--ut-burnt-orange);
   box-shadow:
     var(--shadow-lg),
     0 0 0 4px rgba(191, 87, 0, 0.12);
@@ -621,7 +623,7 @@
 
 .project-search-input:focus {
   border-color: var(--ut-burnt-orange);
-  box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.1);
+  box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.35);
 }
 
 .project-search-input::placeholder {
@@ -676,7 +678,8 @@
 }
 
 .project-search-clear:focus-visible {
-  outline: 3px solid rgba(191, 87, 0, 0.18);
+  outline: 3px solid var(--ut-burnt-orange);
+  outline-offset: 2px;
   outline-offset: 2px;
 }
 

@@ -1,9 +1,9 @@
 // Still images are referenced by path so ThemeBanners can resolve them through
-// gatsby-plugin-image; the animation stays a direct require because sharp does
-// not process GIFs.
+// gatsby-plugin-image.
 const healthcareAiVisual = 'publications/PUB_Posterior-Aware Phenotyping'
-const worldModelsAnimation =
-  require('../../images/projects/phast/phast_monolithic_demo.gif').default
+// The PHAST demo is an H.264 clip under static/media (198 KB); it used to be an 8 MB GIF.
+const worldModelsVideo = '/media/phast_monolithic_demo.mp4'
+const worldModelsPoster = '/media/phast_monolithic_demo_poster.jpg'
 const aiForScienceVisual = 'projects/Project_Subsurface Flow Modeling'
 
 /**
@@ -57,7 +57,8 @@ const homepageThemes = [
     summary:
       'Physics-informed world models learn structured dynamics for long-horizon forecasting, simulation, and decision-making under uncertainty.',
     tags: ['Structured dynamics', 'Physics-informed ML', 'Forecasting'],
-    visual: worldModelsAnimation,
+    video: worldModelsVideo,
+    visual: worldModelsPoster,
     visualAlt:
       'PHAST animated comparison of ground truth and learned trajectories across mechanical, electrical, and physical systems',
     visualCaption:

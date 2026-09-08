@@ -154,7 +154,11 @@ const ThemeBanners = ({ themes }) => (
               </div>
               <h3>{theme.title}</h3>
               <p>{theme.summary}</p>
-              <div className="research-theme-banner__tags" aria-label={`${theme.title} topics`}>
+              <div
+                className="research-theme-banner__tags"
+                role="group"
+                aria-label={`${theme.title} topics`}
+              >
                 {theme.tags.map(tag => (
                   <span key={tag}>{tag}</span>
                 ))}

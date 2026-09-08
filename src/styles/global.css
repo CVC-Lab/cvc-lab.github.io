@@ -4,7 +4,7 @@
  */
 
 @import './variables.css';
-@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700&display=swap');
+/* Libre Franklin is self-hosted via @fontsource (see gatsby-browser.js); no Google Fonts request. */
 
 /* === Base Styles === */
 * {
@@ -28,7 +28,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: var(--font-weight-bold);
   line-height: var(--leading-tight);
   margin-bottom: var(--spacing-4);
@@ -73,7 +78,8 @@ a:hover {
   color: var(--ut-burnt-orange-dark);
 }
 
-ul, ol {
+ul,
+ol {
   margin-bottom: var(--spacing-4);
   padding-left: var(--spacing-6);
 }
@@ -235,15 +241,15 @@ button {
   h1 {
     font-size: var(--text-2xl);
   }
-  
+
   h2 {
     font-size: var(--text-xl);
   }
-  
+
   h3 {
     font-size: var(--text-lg);
   }
-  
+
   .section {
     padding-top: var(--spacing-12);
     padding-bottom: var(--spacing-12);

@@ -1,27 +1,38 @@
 import * as React from 'react'
-import { Helmet } from 'react-helmet'
+import PropTypes from 'prop-types'
 import { useSiteMetadata } from '../context/SiteContext'
 import Layout from '../components/layout'
 import Tiles from '../components/tiles'
-import favicon from '../favicons/favicon.png'
+import Seo from '../components/seo'
 
-const ProjectsPage = () => {
+const ProjectsPage = ({ location }) => {
   const { projectTiles } = useSiteMetadata()
 
   return (
     <Layout>
-      <Helmet>
-        <title>Projects | CVC Lab</title>
-        <meta name="icon" href={favicon} />
-        <meta
-          name="description"
-          content="Research projects at the Computational Visualization Center"
-        />
-      </Helmet>
-
-      <Tiles projectTiles={projectTiles || []} showAllProjects />
+      <Tiles
+        projectTiles={projectTiles || []}
+        showAllProjects
+        locationSearch={location?.search || ''}
+      />
     </Layout>
   )
 }
 
+ProjectsPage.propTypes = {
+  location: PropTypes.shape({ search: PropTypes.string }),
+}
+
 export default ProjectsPage
+
+export const Head = ({ location }) => (
+  <Seo
+    title="Projects"
+    description="Research projects at the Computational Visualization Center"
+    pathname={location.pathname}
+  />
+)
+
+Head.propTypes = {
+  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
+}

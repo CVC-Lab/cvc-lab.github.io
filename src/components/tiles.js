@@ -109,8 +109,14 @@ const ProjectCardLink = ({ tile, children, className = 'project-card-link' }) =>
   )
 }
 
-const Tiles = ({ projectTiles, showAllProjects = false }) => {
-  const [activeTab, setActiveTab] = React.useState(getProjectTabFromLocation)
+const Tiles = ({ projectTiles, showAllProjects = false, locationSearch = '' }) => {
+  // Server-render the 'All' tab and only read the ?theme= query after mount, so the
+  // first client render matches the HTML and deep links do not force a re-hydrate.
+  const [activeTab, setActiveTab] = React.useState('All')
+
+  React.useEffect(() => {
+    setActiveTab(getProjectTabFromLocation())
+  }, [locationSearch])
   const [searchInput, setSearchInput] = React.useState('')
   const debouncedSearch = useDebounce(searchInput, 300)
   const hasSearchInput = searchInput.trim().length > 0
@@ -262,7 +268,11 @@ const Tiles = ({ projectTiles, showAllProjects = false }) => {
       id="projects"
     >
       <Container maxWidth="lg">
-        <h2 className="section-title">{showAllProjects ? 'All Projects' : 'Research'}</h2>
+        {showAllProjects ? (
+          <h1 className="section-title">All Projects</h1>
+        ) : (
+          <h2 className="section-title">Research</h2>
+        )}
         <p className="section-subtitle">
           Browse current research across Healthcare AI, World Models, and AI for Science.
         </p>
@@ -419,6 +429,7 @@ Tiles.propTypes = {
     })
   ).isRequired,
   showAllProjects: PropTypes.bool,
+  locationSearch: PropTypes.string,
 }
 
 ProjectCardLink.propTypes = {

@@ -13,8 +13,8 @@ const TabPanel = props => {
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`tabpanel-${index}`}
-      aria-labelledby={`tab-${index}`}
+      id={`people-tabpanel-${index}`}
+      aria-labelledby={`people-tab-${index}`}
       {...other}
     >
       {value === index && (
@@ -36,7 +36,7 @@ TabPanel.propTypes = {
 
 const sortMembers = members => {
   const positionOrder = [
-    'Director, Principle Investigator',
+    'Director, Principal Investigator',
     'Researcher',
     'Research Administrator',
     'Lead Research Scientist',
@@ -211,8 +211,8 @@ const Cards = ({ peopleCards }) => {
       <div className="people-container">
         <h4 className="header-subtitle">People</h4>
         <Tabs value={value} onChange={handleChange} aria-label="people categories">
-          <Tab label="Current Members" />
-          <Tab label="Alumni" />
+          <Tab label="Current Members" id="people-tab-0" aria-controls="people-tabpanel-0" />
+          <Tab label="Alumni" id="people-tab-1" aria-controls="people-tabpanel-1" />
         </Tabs>
         <TabPanel value={value} index={0}>
           {renderMembersByTitle(currentMembers)}

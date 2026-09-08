@@ -379,7 +379,8 @@
 
 .dt-button:focus-visible,
 .dt-gallery__item a:focus-visible {
-  outline: 3px solid rgba(191, 87, 0, 0.38);
+  outline: 3px solid var(--ut-burnt-orange);
+  outline-offset: 2px;
   outline-offset: 3px;
 }
 

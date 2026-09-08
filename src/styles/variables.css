@@ -5,59 +5,59 @@
 
 :root {
   /* UT Austin Brand Colors */
-  --ut-burnt-orange: #BF5700;         /* Primary brand color */
-  --ut-burnt-orange-light: #E2957E;   /* Lighter variant */
-  --ut-burnt-orange-dark: #8C3F00;    /* Darker variant */
-  
-  --ut-charcoal: #333F48;             /* Secondary color */
-  --ut-charcoal-light: #5D6A75;       /* Lighter variant */
-  --ut-charcoal-dark: #1D2429;        /* Darker variant */
+  --ut-burnt-orange: #bf5700; /* Primary brand color */
+  --ut-burnt-orange-light: #e2957e; /* Lighter variant */
+  --ut-burnt-orange-dark: #8c3f00; /* Darker variant */
+
+  --ut-charcoal: #333f48; /* Secondary color */
+  --ut-charcoal-light: #5d6a75; /* Lighter variant */
+  --ut-charcoal-dark: #1d2429; /* Darker variant */
 
   /* Extended palette */
-  --ut-limestone: #D6D2C4;
-  --ut-limestone-light: #F2F1ED;
-  --ut-limestone-dark: #ADA594;
-  
-  --ut-white: #FFFFFF;
-  --ut-off-white: #F8F8F8;
-  --ut-light-gray: #EEEEEE;
-  --ut-medium-gray: #999999;
+  --ut-limestone: #d6d2c4;
+  --ut-limestone-light: #f2f1ed;
+  --ut-limestone-dark: #ada594;
+
+  --ut-white: #ffffff;
+  --ut-off-white: #f8f8f8;
+  --ut-light-gray: #eeeeee;
+  --ut-medium-gray: #6f6f6f; /* 5.0:1 on white; #999999 was 2.85:1 and used for body text */
   --ut-dark-gray: #666666;
-  
+
   /* Accent colors */
-  --ut-blue: #005EB8;
-  --ut-green: #43695B;
-  --ut-yellow: #F2A900;
-  
+  --ut-blue: #005eb8;
+  --ut-green: #43695b;
+  --ut-yellow: #f2a900;
+
   /* State colors */
-  --ut-success: #43B02A;
-  --ut-warning: #F2A900;
-  --ut-error: #D6001C;
-  --ut-info: #0082CA;
+  --ut-success: #43b02a;
+  --ut-warning: #f2a900;
+  --ut-error: #d6001c;
+  --ut-info: #0082ca;
 
   /* Typography */
   --font-primary: 'Libre Franklin', 'Helvetica Neue', Arial, sans-serif;
   --font-secondary: 'Georgia', 'Times New Roman', serif;
   --font-monospace: 'Consolas', 'Monaco', monospace;
-  
+
   /* Font weights */
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  
+
   /* Font sizes - based on a modular scale */
-  --text-xs: 0.75rem;      /* 12px */
-  --text-sm: 0.875rem;     /* 14px */
-  --text-base: 1rem;       /* 16px */
-  --text-md: 1.125rem;     /* 18px */
-  --text-lg: 1.25rem;      /* 20px */
-  --text-xl: 1.5rem;       /* 24px */
-  --text-2xl: 1.875rem;    /* 30px */
-  --text-3xl: 2.25rem;     /* 36px */
-  --text-4xl: 3rem;        /* 48px */
-  
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-md: 1.125rem; /* 18px */
+  --text-lg: 1.25rem; /* 20px */
+  --text-xl: 1.5rem; /* 24px */
+  --text-2xl: 1.875rem; /* 30px */
+  --text-3xl: 2.25rem; /* 36px */
+  --text-4xl: 3rem; /* 48px */
+
   /* Line heights */
   --leading-none: 1;
   --leading-tight: 1.25;
@@ -65,41 +65,41 @@
   --leading-normal: 1.5;
   --leading-relaxed: 1.625;
   --leading-loose: 2;
-  
+
   /* Spacing */
   --spacing-0: 0;
-  --spacing-1: 0.25rem;    /* 4px */
-  --spacing-2: 0.5rem;     /* 8px */
-  --spacing-3: 0.75rem;    /* 12px */
-  --spacing-4: 1rem;       /* 16px */
-  --spacing-5: 1.25rem;    /* 20px */
-  --spacing-6: 1.5rem;     /* 24px */
-  --spacing-8: 2rem;       /* 32px */
-  --spacing-10: 2.5rem;    /* 40px */
-  --spacing-12: 3rem;      /* 48px */
-  --spacing-16: 4rem;      /* 64px */
-  --spacing-20: 5rem;      /* 80px */
-  --spacing-24: 6rem;      /* 96px */
-  
+  --spacing-1: 0.25rem; /* 4px */
+  --spacing-2: 0.5rem; /* 8px */
+  --spacing-3: 0.75rem; /* 12px */
+  --spacing-4: 1rem; /* 16px */
+  --spacing-5: 1.25rem; /* 20px */
+  --spacing-6: 1.5rem; /* 24px */
+  --spacing-8: 2rem; /* 32px */
+  --spacing-10: 2.5rem; /* 40px */
+  --spacing-12: 3rem; /* 48px */
+  --spacing-16: 4rem; /* 64px */
+  --spacing-20: 5rem; /* 80px */
+  --spacing-24: 6rem; /* 96px */
+
   /* Borders */
-  --border-radius-sm: 0.125rem;   /* 2px */
-  --border-radius-md: 0.25rem;    /* 4px */
-  --border-radius-lg: 0.5rem;     /* 8px */
-  --border-radius-xl: 1rem;       /* 16px */
+  --border-radius-sm: 0.125rem; /* 2px */
+  --border-radius-md: 0.25rem; /* 4px */
+  --border-radius-lg: 0.5rem; /* 8px */
+  --border-radius-xl: 1rem; /* 16px */
   --border-radius-full: 9999px;
-  
+
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
-  
+
   /* Transitions */
   --transition-fast: 150ms;
   --transition-normal: 300ms;
   --transition-slow: 500ms;
-  
+
   /* Z-index */
   --z-0: 0;
   --z-10: 10;
@@ -108,14 +108,14 @@
   --z-40: 40;
   --z-50: 50;
   --z-auto: auto;
-  
+
   /* Container */
   --container-max-width: 1280px;
   --container-padding: var(--spacing-4);
-  
+
   /* Page sections */
   --section-padding-y: var(--spacing-16);
-  
+
   /* Component specific variables */
   --header-height: 80px;
   --footer-padding: var(--spacing-12);

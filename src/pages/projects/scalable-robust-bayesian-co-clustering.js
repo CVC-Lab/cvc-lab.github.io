@@ -1,4 +1,5 @@
 import * as React from 'react'
+import PropTypes from 'prop-types'
 import { FaBookOpen, FaCopy, FaDownload } from 'react-icons/fa'
 import Layout from '../../components/layout'
 import Seo from '../../components/seo'
@@ -358,9 +359,14 @@ const ScalableRobustBayesianCoClusteringPage = () => {
 
 export default ScalableRobustBayesianCoClusteringPage
 
-export const Head = () => (
+export const Head = ({ location }) => (
   <Seo
+    pathname={location.pathname}
     title="Scalable Robust Bayesian Co-Clustering"
     description="A variational co-clustering framework for robust row and column structure discovery in noisy, sparse, and high-dimensional data."
   />
 )
+
+Head.propTypes = {
+  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
+}
