@@ -235,7 +235,8 @@
 }
 
 .research-theme-banner__media img,
-.research-theme-banner__media video {
+.research-theme-banner__media video,
+.research-theme-banner__media .gatsby-image-wrapper {
   display: block;
   width: 100%;
   height: 100%;

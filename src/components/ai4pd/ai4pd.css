@@ -513,8 +513,14 @@
   box-shadow: var(--shadow-sm);
 }
 
+/* A CONSTRAINED image must not be forced wider than its sizer, or its
+   cover-fit <img> is cropped; centre it and let FULL_WIDTH figures fill. */
 .ai4pd-figure .gatsby-image-wrapper {
   display: block;
+  margin: 0 auto;
+}
+
+.ai4pd-figure--wide .gatsby-image-wrapper {
   width: 100%;
 }
 

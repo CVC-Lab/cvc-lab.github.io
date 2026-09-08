@@ -105,6 +105,7 @@ const ApproachPage = () => (
           </Link>
         </div>
         <Ai4pdFigure
+          wide
           name="ai4pd-architecture-figure1"
           alt="AI4PD architecture: clinical partners and multimodal evidence feed a Texas-core AI platform that maintains a patient-specific twin and returns clinician-facing guidance"
           loading="eager"

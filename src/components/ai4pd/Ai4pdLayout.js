@@ -6,6 +6,7 @@ import { FaExternalLinkAlt, FaArrowRight } from 'react-icons/fa'
 import Layout from '../layout'
 import Seo from '../seo'
 import { useCardImage } from '../../hooks/useCardImages'
+import { useWideImage } from '../../hooks/useWideImages'
 import { AI4PD_NAV, AI4PD_BASE, PATIENT_PORTAL_URL, CONTACT_EMAIL } from './links'
 import './ai4pd.css'
 
@@ -90,8 +91,11 @@ Ai4pdHead.propTypes = {
 /** A figure from src/images/projects/ai4pd, served through gatsby-plugin-image. */
 export const Ai4pdFigure = ({ name, alt, caption, loading = 'lazy', wide = false }) => {
   const resolveCardImage = useCardImage()
+  const resolveWideImage = useWideImage()
   const key = name.startsWith('projects/') ? name : `projects/ai4pd/${name}`
-  const image = getImage(resolveCardImage(key))
+  // Wide figures span the container, so they need FULL_WIDTH image data; the
+  // 800px CONSTRAINED data would be stretched and cropped (see useWideImages).
+  const image = getImage((wide ? resolveWideImage : resolveCardImage)(key))
   if (!image) return null
   return (
     <figure className={`ai4pd-figure${wide ? ' ai4pd-figure--wide' : ''}`}>
