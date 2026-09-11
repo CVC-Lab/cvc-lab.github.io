@@ -10,8 +10,11 @@
     />
     <title>Validity Gates for Longitudinal Parkinson Disease Prediction</title>
     <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="stylesheet" href="../assets/patient-evidence.css" />
+    <script defer src="../assets/patient-evidence-data.js"></script>
+    <script defer src="../assets/patient-evidence.js"></script>
   </head>
-  <body>
+  <body class="patient-first">
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
     <header class="site-header">
@@ -21,7 +24,7 @@
           <a href="../">Program</a>
           <a href="./" aria-current="page">Validity gates</a>
           <a href="../pd-signed-laterality/">Signed laterality</a>
-          <a href="/projects/ai4pd/">AI4PD program</a>
+          <a href="https://cvc-lab.github.io/projects/ai4pd/">AI4PD program</a>
         </div>
       </nav>
     </header>
@@ -29,26 +32,52 @@
     <main id="main-content">
       <header class="hero">
         <div class="shell">
-          <p class="eyebrow">Paper 1 | An evidence-quality spine</p>
+          <p class="eyebrow">Paper 1 / Longitudinal prediction</p>
           <h1>Validity Gates Expose Limits of Longitudinal Multimodal Parkinson Disease Prediction</h1>
           <p class="lead">
-            A model does not earn credibility from one favorable score. We ask seven separate
-            questions: Was the future hidden? Were people and sites separated? Is the gain large
-            enough to matter? Does it survive calendar change? Can uncertainty identify safer
-            forecasts? Does the result travel to another cohort?
+            Similar motor scores can sit on very different evidence histories. This study makes
+            those differences visible, then tests whether they support a trustworthy forecast.
+            A small predictive gain is not the same as a clinically useful prediction.
           </p>
           <p class="authors">Harsh Milind Tirhekar, Priyanshi Yadav, Chandrajit Bajaj</p>
           <div class="hero-actions">
-            <a class="button" href="#gate-summary">Read the seven verdicts</a>
+            <a class="button" href="#patient-evidence">Patient evidence</a>
+            <a class="button button--quiet" href="#gate-summary">Seven validity gates</a>
             <a class="button button--quiet" href="../pd-signed-laterality/">See the biological coordinate</a>
-          </div>
-          <div class="status-line" aria-label="Study scale">
-            <span>5,404 future-only cutoffs from 1,058 PPMI participants</span>
-            <span>8,000 controlled gate-stress experiments</span>
-            <span>One small internal signal; no deployment claim</span>
           </div>
         </div>
       </header>
+
+      <section class="section evidence-section" id="patient-evidence" aria-labelledby="patient-evidence-title">
+        <div class="shell">
+          <p class="eyebrow">Actual PPMI records / Baseline-selected comparison</p>
+          <h2 id="patient-evidence-title">Motor scores of 10 and 11. Different evidence behind them.</h2>
+          <p class="section-intro">P1-A has recent imaging and cognitive measurements; P1-B has no
+            eligible DaT-SPECT value but does have injury and lysosomal assay evidence. A missing
+            measurement is not a normal result. Neither record supports a treatment recommendation.</p>
+          <div data-patient-explorer="paper1">
+            <p class="evidence-fallback">The two complete measured histories are also available in the
+              <a href="../assets/images/patient_evidence_histories.png">patient comparison figure</a>.</p>
+          </div>
+          <details class="evidence-methods">
+            <summary>Selection, score meaning and uncertainty</summary>
+            <p>The pair was selected without future outcomes or forecast errors. The earliest eligible
+              records were matched within sex and analysis fold, with baseline calipers for motor
+              score (3 points), age (5 years), disease duration (2 years) and prior motor slope
+              (2 points/year). The closest clinical pair among 30 candidates was retained.
+              Treatment was not matched; this is an illustration, not a causal comparison.</p>
+            <p>Evidence coordinates are oriented, training-fold-relative ranks on a scale from
+              -1 to +1, not probabilities or clinical severity grades. Positive values indicate
+              relatively greater evidence on that axis. Reliability summarizes available source
+              weights, with a 24-month age half-life; it is not the probability of a correct forecast.
+              An older source can retain its relative score while losing reliability.</p>
+            <p>The displayed prediction interval belongs only to the separately fitted nested uncertainty
+              model, not to the main point forecasts. Valid interval coverage did not establish
+              reliable error ranking. The cohort-level selective-uncertainty verdict is ABSTAIN;
+              this is not an individualized diagnosis or a claim that either patient failed a test.</p>
+          </details>
+        </div>
+      </section>
 
       <section class="section section--soft" id="gate-summary" aria-labelledby="gate-summary-title">
         <div class="shell">
@@ -83,40 +112,10 @@
           <p class="eyebrow">Study design</p>
           <h2 id="design-title">Every forecast begins at a dated cutoff</h2>
           <p class="section-intro">
-            Imagine pausing one patient's record on a particular day. Only measurements already
+            Each patient's record is paused at a dated cutoff. Only measurements already
             available at that moment may describe the state. Their age and absence remain visible;
             the future motor examination, 9 to 15 months later, stays hidden until evaluation.
           </p>
-          <div class="concept-key concept-key--three" aria-label="Time-valid patient journey">
-            <div><strong>1. Observed history</strong><span>Exam, wearable, DaT-SPECT, biomarker, and dated trends</span></div>
-            <div><strong>2. Landmark</strong><span>The state is frozen using only information already available</span></div>
-            <div><strong>3. Held-out future</strong><span>The later motor examination is revealed only for evaluation</span></div>
-          </div>
-          <figure class="figure concept-figure">
-            <div class="figure-shell figure-shell--concept">
-              <div class="figure-toolbar">
-                <strong>One patient record, separated into observed history and held-out future</strong>
-                <button
-                  class="figure-action"
-                  type="button"
-                  data-figure-open="../assets/images/concept_time_valid_patient.png"
-                  data-figure-title="Conceptual time-valid patient journey"
-                >Inspect full figure</button>
-              </div>
-              <div class="figure-viewport">
-                <img
-                  src="../assets/images/concept_time_valid_patient.png"
-                  alt="Conceptual same-patient clinical history, multimodal landmark review, and future motor examination separated by a held-out boundary"
-                  width="1672"
-                  height="941"
-                />
-              </div>
-            </div>
-            <figcaption>
-              Conceptual medical illustration, not a participant record. The visible separation
-              expresses the temporal firewall enforced programmatically in the analysis below.
-            </figcaption>
-          </figure>
           <figure class="figure">
             <div class="figure-shell">
               <div class="figure-toolbar">
@@ -377,14 +376,59 @@
           </div>
         </div>
       </section>
+      <section class="section section--soft" aria-labelledby="program-links-title">
+        <div class="shell">
+          <p class="eyebrow">Connected research / Different questions, different claims</p>
+          <h2 id="program-links-title">From patient phenotypes toward mechanism-aware evidence</h2>
+          <ol class="research-chain">
+            <li><small>01 / Pathway context</small>
+              <a href="https://cvc-lab.github.io/projects/pathway-anchored-pd-clustering/"><strong>CVC pathway-anchored clustering</strong></a>
+              <p>Organizes structural, microstructural and dopaminergic imaging by predefined biological pathways.</p>
+            </li>
+            <li><small>02 / Patient phenotypes</small>
+              <a href="https://cvc-lab.github.io/projects/posterior-aware-pd-phenotyping/"><strong>Posterior-aware phenotyping</strong></a>
+              <p>Addresses clinical heterogeneity and uncertainty in patient representations.</p>
+              <a href="https://www.biorxiv.org/content/10.64898/2026.06.12.732003v1">bioRxiv preprint</a>
+              <p><a href="https://cvc-lab.github.io/projects/posterior-aware-pd-phenotyping-miccai/">Related MICCAI project</a></p>
+            </li>
+            <li><small>03 / Biological specificity</small>
+              <a href="../pd-signed-laterality/"><strong>Signed dopaminergic laterality</strong></a>
+              <p>Retains direction, tests contralateral agreement and preserves unresolved conflict.</p>
+            </li>
+            <li><small>04 / Validity limits</small>
+              <a href="../pd-validity-gates/"><strong>Longitudinal validity gates</strong></a>
+              <p>Tests when a patient-state forecast is informative and when its clinical claim must stop.</p>
+            </li>
+          </ol>
+          <p class="evidence-footnote">Our earlier
+            <a href="https://cvc-lab.github.io/projects/integrated-pd-precision-stratification/">integrated
+            genetic, molecular and wearable-biomarker study</a>
+            (<a href="https://www.medrxiv.org/content/10.64898/2025.12.02.25340302v1">medRxiv preprint</a>)
+            provides complementary multimodal stratification context. It is distinct from CVC's
+            pathway-anchored imaging study.</p>
+          <p class="evidence-footnote">This is a research progression, not a single jointly validated
+            diagnostic pipeline. Patient-specific intervention simulation and treatment selection
+            remain future work. The <a href="https://cvc-lab.github.io/projects/ai4pd/">AI4PD program</a>
+            provides the broader systems context; these pages replay fixed research examples,
+            not live clinical predictions.</p>
+          <p class="evidence-footnote">Data: <a href="https://www.ppmi-info.org/">PPMI</a>;
+            access to underlying participant data follows the source study's application process.
+            Code is available from the authors on request. Putamen outlines adapt the
+            <a href="https://3d.nih.gov/entries/20960/1">NIH 3D Human Reference Atlas
+            &quot;Brain, Male&quot; (3DPX-020960), based on the Allen Human Reference Atlas</a>
+            under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>,
+            rendered here as neutral two-dimensional views. They are not patient scans.</p>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
       <div class="shell">
-        <p><strong>Research companion updated 30 August 2026.</strong></p>
+        <p><strong>Research companion updated 11 September 2026.</strong></p>
         <p>
-          Aggregate scientific displays only. Participant-level source records remain governed by
-          PPMI and PDBP and are not distributed here.
+          Aggregate findings and six selected, de-identified illustrations across the two papers
+          are shown. These pages disclose rounded measurements and relative times, not participant
+          identifiers, calendar dates, raw cohort tables or participant scans.
         </p>
       </div>
     </footer>
