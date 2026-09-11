@@ -10,9 +10,12 @@
     />
     <title>Signed Dopaminergic Asymmetry and Motor Laterality</title>
     <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="stylesheet" href="../assets/patient-evidence.css" />
+    <script defer src="../assets/patient-evidence-data.js"></script>
+    <script defer src="../assets/patient-evidence.js"></script>
     <script defer src="../assets/site.js"></script>
   </head>
-  <body>
+  <body class="patient-first">
     <a class="skip-link" href="#main-content">Skip to evidence</a>
     <header class="site-header">
       <nav class="nav" aria-label="Primary navigation">
@@ -21,7 +24,7 @@
           <a href="../">Program</a>
           <a href="../pd-validity-gates/">Validity gates</a>
           <a href="./" aria-current="page">Signed laterality</a>
-          <a href="/projects/ai4pd/">AI4PD program</a>
+          <a href="https://cvc-lab.github.io/projects/ai4pd/">AI4PD program</a>
         </div>
       </nav>
     </header>
@@ -29,71 +32,56 @@
     <main id="main-content">
       <header class="hero">
         <div class="shell">
-          <p class="eyebrow">Paper 2 | A biological coordinate inside the patient state</p>
+          <p class="eyebrow">Paper 2 / Signed biological evidence</p>
           <h1>Signed Dopaminergic Asymmetry Tracks Contralateral Motor Laterality in Parkinson's Disease</h1>
           <p class="lead">
-            A magnitude says that two hemispheres differ. A sign reveals which putamen has lower
-            binding, which body side carries greater motor burden, and whether two sources agree.
-            Preserving that direction recovers reproducible anatomy while keeping future
-            uncertainty visible.
+            The amount of asymmetry does not tell us which side is affected. Retaining its direction
+            distinguishes opposite biological states and exposes disagreement between imaging and
+            examination. It helps describe the present more clearly than it predicts the future.
           </p>
           <p class="authors">Harsh Milind Tirhekar, Priyanshi Yadav, Chandrajit Bajaj</p>
           <div class="hero-actions">
-            <a class="button" href="#patient-selection">See how patients were selected</a>
-            <a class="button button--quiet" href="#case-explorer">Inspect Cases A-D</a>
-          </div>
-          <div class="status-line">
-            <span>PPMI biological analysis: n = 1,367</span>
-            <span>Independent S4 replication: n = 56</span>
-            <span>Future-only PPMI analysis: n = 1,204</span>
+            <a class="button" href="#patient-evidence">Patient evidence</a>
+            <a class="button button--quiet" href="#replication">Biological replication</a>
+            <a class="button button--quiet" href="#patient-selection">Case selection</a>
           </div>
         </div>
       </header>
 
-      <section class="section section--soft" aria-labelledby="anatomy-title">
+      <section class="section evidence-section" id="patient-evidence" aria-labelledby="patient-evidence-title">
         <div class="shell">
-          <p class="eyebrow">Anatomical orientation</p>
-          <h2 id="anatomy-title">The side of the brain and the side of the body are not interchangeable</h2>
-          <p class="section-intro">
-            Dopaminergic loss is read within the striatum, while motor burden is observed on the
-            body. The clinically meaningful relation is contralateral: evidence on one brain side
-            is aligned with signs on the opposite body side. The mirror configuration must remain
-            distinguishable rather than being reduced to one unsigned magnitude.
-          </p>
-          <div class="concept-key concept-key--four" aria-label="Anatomical illustration key">
-            <div><strong>Putamen</strong><span>Striatal DaT-SPECT binding coordinate</span></div>
-            <div><strong>Substantia nigra</strong><span>Dopaminergic source region</span></div>
-            <div><strong>Contralateral body</strong><span>Opposite-side motor examination</span></div>
-            <div><strong>Mirror state</strong><span>Direction reverses; meaning is retained</span></div>
+          <p class="eyebrow">Actual PPMI records / Four different information states</p>
+          <h2 id="patient-evidence-title">Which side, according to which measurement?</h2>
+          <p class="section-intro">Cases A and B show opposite imaging-motor directions. Case C has
+            nearly symmetric imaging despite an asymmetric examination. In Case D the two sources
+            disagree. These are measured records, including cases where added imaging did not help.</p>
+          <div data-patient-explorer="paper2">
+            <p class="evidence-fallback">The complete records remain available in the
+              <a href="#case-explorer">four patient dossiers</a>.</p>
           </div>
-          <figure class="figure concept-figure">
-            <div class="figure-shell figure-shell--concept">
-              <div class="figure-toolbar">
-                <strong>Mirror anatomy: brain-side evidence and opposite-body burden</strong>
-                <button
-                  class="figure-action"
-                  type="button"
-                  data-figure-open="../assets/images/concept_contralateral_anatomy.png"
-                  data-figure-title="Conceptual mirror anatomy for contralateral motor laterality"
-                >Inspect full figure</button>
-              </div>
-              <div class="figure-viewport">
-                <img
-                  src="../assets/images/concept_contralateral_anatomy.png"
-                  alt="Conceptual paired coronal brains and human bodies showing two mirror configurations of contralateral dopaminergic and motor laterality"
-                  width="1672"
-                  height="941"
-                />
-              </div>
-            </div>
-            <figcaption>
-              Conceptual medical illustration for anatomical orientation only; it is neither a
-              participant scan nor an inferential result. The exact left-right sign convention is
-              defined in the measured, data-derived panel below.
-            </figcaption>
-          </figure>
+          <details class="evidence-methods">
+            <summary>Sign convention, case selection and model inputs</summary>
+            <p>Signed imaging is (right SBR - left SBR) / (right SBR + left SBR).
+              Signed motor laterality is (right paired motor sum - left paired motor sum) /
+              (right paired motor sum + left paired motor sum). Thus positive imaging means
+              relatively lower left putamen binding; positive motor laterality means greater
+              right-body burden. Lower binding on one side is not a measurement of global disease severity.</p>
+            <p>The four frozen cases came from the 32-record strict multimodal pool within 1,204
+              longitudinal participants. Baseline state, source freshness, held-out model disagreement,
+              interval width and a hashed tie-breaker were used, not the individual's future value
+              or forecast error. A and B are not severity-matched. The fuller selection map follows below.</p>
+            <p>Clinical scores, demographics, examination state and LEDD enter the clinical model;
+              imaging is added in the comparison models. MoCA, SAA and CSF values are contextual
+              annotations, not inputs to these focused forecasts. CSF percentiles are relative to
+              the 32-record illustration pool, not clinical reference ranges.</p>
+            <p>The 90% interval and its median belong to a separate conformalized quantile-regression
+              model. They must not be attached to the four ridge-model point forecasts. Points on
+              the history trace are actual examinations; connecting segments are not measured
+              intervening states or a simulation of disease.</p>
+          </details>
         </div>
       </section>
+
 
       <section class="section" aria-labelledby="coordinate-title">
         <div class="shell">
@@ -187,7 +175,8 @@
           <h2 id="case-title">Read each record as a sequence, not a pile of modalities</h2>
           <p class="section-intro">
             Each dossier keeps source age, bilateral anatomy, clinical side balance, observed
-            history, the held-out forecast, and its uncertainty in one view. The four records were
+            history and four held-out model forecasts in one view. The separate quantile-model
+            median and interval are not uncertainty bounds for the ridge forecasts. The records were
             selected to expose different information states, not four favorable predictions.
           </p>
 
@@ -208,8 +197,8 @@
                 <img
                   src="../assets/images/patient_specific_mirror_histories.png"
                   alt="Two de-identified outcome-blind PPMI histories showing mirror-image signed dopaminergic and motor states"
-                  width="3307"
-                  height="2907"
+                  width="3369"
+                  height="2964"
                   loading="lazy"
                   decoding="async"
                 />
@@ -219,7 +208,8 @@
               Case A shows relatively lower left putamen binding with greater right-body burden;
               Case B shows the mirror state. Only one retained its imaging-indicated sign at 12
               months. Current anatomy can therefore be resolved while an individual's future
-              side-balance remains uncertain.
+              side-balance remains uncertain. A and B are opposite directional examples, not a
+              severity-matched pair. The interval belongs only to the separately fitted quantile model.
             </figcaption>
           </figure>
 
@@ -290,7 +280,7 @@
                 </div>
                 <div>
                   <strong>Boundary</strong>
-                  <span>A clear current state does not guarantee a precise future state.</span>
+                  <span>Signed imaging moved the forecast to 0.249, farther from the observed zero laterality.</span>
                 </div>
               </div>
               <div class="figure-toolbar">
@@ -308,8 +298,8 @@
                 <img
                   src="../assets/images/case_A_dossier.png"
                   alt="Case A dated sources, bilateral state, observed motor laterality, and held-out uncertainty"
-                  width="3219"
-                  height="2631"
+                  width="3189"
+                  height="2633"
                   loading="lazy"
                   decoding="async"
                 />
@@ -328,7 +318,7 @@
                 </div>
                 <div>
                   <strong>Boundary</strong>
-                  <span>Directional agreement at baseline does not remove forecast uncertainty.</span>
+                  <span>The signed forecast of -0.472 was closer to the observed -0.500, but one case is not proof of utility.</span>
                 </div>
               </div>
               <div class="figure-toolbar">
@@ -346,8 +336,8 @@
                 <img
                   src="../assets/images/case_B_dossier.png"
                   alt="Case B dated sources, bilateral state, observed motor laterality, and held-out uncertainty"
-                  width="3219"
-                  height="2631"
+                  width="3189"
+                  height="2633"
                   loading="lazy"
                   decoding="async"
                 />
@@ -366,7 +356,7 @@
                 </div>
                 <div>
                   <strong>Boundary</strong>
-                  <span>Missing directional agreement is retained rather than converted into certainty.</span>
+                  <span>Signed imaging reduced the forecast to 0.538 but did not resolve the error: observed laterality was zero.</span>
                 </div>
               </div>
               <div class="figure-toolbar">
@@ -384,8 +374,8 @@
                 <img
                   src="../assets/images/case_C_dossier.png"
                   alt="Case C dated sources, near-symmetric imaging, clinical laterality, and held-out uncertainty"
-                  width="3311"
-                  height="2631"
+                  width="3189"
+                  height="2633"
                   loading="lazy"
                   decoding="async"
                 />
@@ -404,7 +394,7 @@
                 </div>
                 <div>
                   <strong>Boundary</strong>
-                  <span>The framework exposes conflict but does not causally resolve it.</span>
+                  <span>Signed imaging anticipated the future sign, but the magnitude-only forecast had a smaller absolute error.</span>
                 </div>
               </div>
               <div class="figure-toolbar">
@@ -422,8 +412,8 @@
                 <img
                   src="../assets/images/case_D_dossier.png"
                   alt="Case D dated sources, conflicting imaging and clinical direction, and held-out uncertainty"
-                  width="3219"
-                  height="2631"
+                  width="3189"
+                  height="2633"
                   loading="lazy"
                   decoding="async"
                 />
@@ -583,6 +573,19 @@
         <div class="shell">
           <p class="eyebrow">Claim boundary</p>
           <h2 id="evidence-title">What sign adds, and what it does not</h2>
+          <div class="prose">
+            <p><strong>Which patients would an unsigned summary merge?</strong> A secondary audit
+              identified 365 non-overlapping patient pairs with similar total motor scores, mean
+              putamen binding and absolute asymmetry, but opposite imaging signs. In 281 pairs,
+              the clinical signs were opposite too. Retaining direction keeps these biological
+              states distinguishable.</p>
+            <p>These are <strong>not 365 misdiagnoses</strong>. The clinical reference already
+              includes clinical laterality. In the full future-outcome comparison, binary side
+              accuracy was 90.2% for the clinical model and 89.8% after adding signed imaging:
+              no improvement. Nor did the earlier matched-profile analysis establish that
+              secondary biomarkers explain future divergence. More informative representation,
+              better prediction and biological explanation remain separate questions.</p>
+          </div>
           <div class="table-wrap">
             <table>
               <thead>
@@ -643,11 +646,55 @@
           </div>
         </div>
       </section>
+      <section class="section section--soft" aria-labelledby="program-links-title">
+        <div class="shell">
+          <p class="eyebrow">Connected research / Different questions, different claims</p>
+          <h2 id="program-links-title">From patient phenotypes toward mechanism-aware evidence</h2>
+          <ol class="research-chain">
+            <li><small>01 / Pathway context</small>
+              <a href="https://cvc-lab.github.io/projects/pathway-anchored-pd-clustering/"><strong>CVC pathway-anchored clustering</strong></a>
+              <p>Organizes structural, microstructural and dopaminergic imaging by predefined biological pathways.</p>
+            </li>
+            <li><small>02 / Patient phenotypes</small>
+              <a href="https://cvc-lab.github.io/projects/posterior-aware-pd-phenotyping/"><strong>Posterior-aware phenotyping</strong></a>
+              <p>Addresses clinical heterogeneity and uncertainty in patient representations.</p>
+              <a href="https://www.biorxiv.org/content/10.64898/2026.06.12.732003v1">bioRxiv preprint</a>
+              <p><a href="https://cvc-lab.github.io/projects/posterior-aware-pd-phenotyping-miccai/">Related MICCAI project</a></p>
+            </li>
+            <li><small>03 / Biological specificity</small>
+              <a href="../pd-signed-laterality/"><strong>Signed dopaminergic laterality</strong></a>
+              <p>Retains direction, tests contralateral agreement and preserves unresolved conflict.</p>
+            </li>
+            <li><small>04 / Validity limits</small>
+              <a href="../pd-validity-gates/"><strong>Longitudinal validity gates</strong></a>
+              <p>Tests when a patient-state forecast is informative and when its clinical claim must stop.</p>
+            </li>
+          </ol>
+          <p class="evidence-footnote">Our earlier
+            <a href="https://cvc-lab.github.io/projects/integrated-pd-precision-stratification/">integrated
+            genetic, molecular and wearable-biomarker study</a>
+            (<a href="https://www.medrxiv.org/content/10.64898/2025.12.02.25340302v1">medRxiv preprint</a>)
+            provides complementary multimodal stratification context. It is distinct from CVC's
+            pathway-anchored imaging study.</p>
+          <p class="evidence-footnote">This is a research progression, not a single jointly validated
+            diagnostic pipeline. Patient-specific intervention simulation and treatment selection
+            remain future work. The <a href="https://cvc-lab.github.io/projects/ai4pd/">AI4PD program</a>
+            provides the broader systems context; these pages replay fixed research examples,
+            not live clinical predictions.</p>
+          <p class="evidence-footnote">Data: <a href="https://www.ppmi-info.org/">PPMI</a>;
+            access to underlying participant data follows the source study's application process.
+            Code is available from the authors on request. Putamen outlines adapt the
+            <a href="https://3d.nih.gov/entries/20960/1">NIH 3D Human Reference Atlas
+            &quot;Brain, Male&quot; (3DPX-020960), based on the Allen Human Reference Atlas</a>
+            under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>,
+            rendered here as neutral two-dimensional views. They are not patient scans.</p>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
       <div class="shell">
-        <p><strong>Research companion updated 30 August 2026.</strong></p>
+        <p><strong>Research companion updated 11 September 2026.</strong></p>
         <p>
           Aggregate results and de-identified outcome-blind histories are shown. Participant
           identifiers, calendar dates, source records, and participant scans are not included.
