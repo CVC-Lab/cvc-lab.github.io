@@ -72,8 +72,23 @@
               or forecast error. A and B are not severity-matched. The fuller selection map follows below.</p>
             <p>Clinical scores, demographics, examination state and LEDD enter the clinical model;
               imaging is added in the comparison models. MoCA, SAA and CSF values are contextual
-              annotations, not inputs to these focused forecasts. CSF percentiles are relative to
+              annotations, not inputs to these focused forecasts. These sources were also examined
+              in separate exploratory context comparisons; those tests did not establish a
+              molecular explanation for the directional differences. CSF percentiles are relative to
               the 32-record illustration pool, not clinical reference ranges.</p>
+            <div class="table-wrap">
+              <table>
+                <caption>Reading the patient's sources across scales</caption>
+                <thead><tr><th scope="col">Measurement</th><th scope="col">Scale and meaning</th><th scope="col">Role here</th></tr></thead>
+                <tbody>
+                  <tr><td>Putamen SBR</td><td>Regional imaging: dopamine-transporter specific-binding ratio</td><td>Mean, magnitude and signed forecast comparisons</td></tr>
+                  <tr><td>Paired motor scores</td><td>Clinical examination: matched left/right MDS-UPDRS III items</td><td>Current state and separately dated future endpoint</td></tr>
+                  <tr><td>LEDD and examination state</td><td>Treatment record: levodopa-equivalent dose and ON/OFF documentation</td><td>Clinical-model inputs, with missingness retained</td></tr>
+                  <tr><td>MoCA</td><td>Clinical cognition: screening score out of 30</td><td>Display and exploratory context, not a forecast input</td></tr>
+                  <tr><td>SAA, CSF alpha-synuclein and NfL</td><td>Fluid biomarkers: seeding assay, protein measurements and neurofilament light</td><td>Display and exploratory context, not causal explanations</td></tr>
+                </tbody>
+              </table>
+            </div>
             <p>The 90% interval and its median belong to a separate conformalized quantile-regression
               model. They must not be attached to the four ridge-model point forecasts. Points on
               the history trace are actual examinations; connecting segments are not measured
@@ -109,8 +124,8 @@
                 <img
                   src="../assets/images/directional_coordinate.png"
                   alt="Atlas-based left and right putamen coordinate linked to contralateral clinical laterality and future side-balance"
-                  width="3848"
-                  height="2635"
+                  width="3792"
+                  height="2833"
                   decoding="async"
                 />
               </div>
@@ -197,8 +212,8 @@
                 <img
                   src="../assets/images/patient_specific_mirror_histories.png"
                   alt="Two de-identified outcome-blind PPMI histories showing mirror-image signed dopaminergic and motor states"
-                  width="3369"
-                  height="2964"
+                  width="2776"
+                  height="3098"
                   loading="lazy"
                   decoding="async"
                 />
@@ -683,7 +698,9 @@
             not live clinical predictions.</p>
           <p class="evidence-footnote">Data: <a href="https://www.ppmi-info.org/">PPMI</a>;
             access to underlying participant data follows the source study's application process.
-            Code is available from the authors on request. Putamen outlines adapt the
+            Code is available from the authors on request; the paper-specific repository is
+            <a href="https://github.com/CVC-Lab/pd-signed-laterality">pd-signed-laterality</a>
+            (access required). Putamen outlines adapt the
             <a href="https://3d.nih.gov/entries/20960/1">NIH 3D Human Reference Atlas
             &quot;Brain, Male&quot; (3DPX-020960), based on the Allen Human Reference Atlas</a>
             under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>,

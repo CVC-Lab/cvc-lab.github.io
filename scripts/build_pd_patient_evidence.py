@@ -68,8 +68,8 @@ def paper1():
         history = history[history.relative.between(-24, 0)].dropna(subset=["NP3TOT"])
         history = history.groupby("relative", as_index=False).NP3TOT.median().sort_values("relative")
         assert np.isclose(history[history.relative.eq(0)].NP3TOT.iloc[0], row.last_np3)
-        sources = [source("DaT-SPECT mean putamen SBR", number(row.dat_putamen_mean_sbr, 3), row.dat_gap_months, "Observed source"),
-                   source("MoCA (out of 30)", number(row.moca_total, 0), row.moca_gap_months, "Observed source"),
+        sources = [source("DaT-SPECT mean putamen SBR", number(row.dat_putamen_mean_sbr, 3), row.dat_gap_months, "Dated source"),
+                   source("MoCA (out of 30)", number(row.moca_total, 0), row.moca_gap_months, "Dated source"),
                    source("LEDD (mg/day)", number(row.ledd_active_at_cutoff, 0), np.nan, "Treatment context")]
         molecular = molecules[molecules.case.eq(row.case)].set_index("field")
         for key, label in [("mol_nfl", "NfL"), ("mol_gcase_activity", "GCase")]:

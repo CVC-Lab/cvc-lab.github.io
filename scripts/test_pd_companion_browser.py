@@ -29,6 +29,13 @@ def main():
                     assert "cohort-level" in verdict.inner_text()
                     assert "not diagnoses" in verdict.inner_text()
                 page.screenshot(path=str(SHOTS / (name + "-" + str(width) + "-top.png")))
+                glossary = page.locator("details.evidence-methods")
+                glossary.locator("summary").click()
+                assert glossary.locator("table tbody tr").count() == 5
+                assert glossary.locator(".table-wrap").evaluate("(el) => el.scrollWidth <= el.clientWidth + 1"), "Clipped source glossary"
+                assert page.locator("body").evaluate("(el) => el.scrollWidth <= innerWidth"), "Glossary overflow"
+                glossary.screenshot(path=str(SHOTS / (name + "-" + str(width) + "-glossary.png")))
+                glossary.locator("summary").click()
                 explorer.screenshot(path=str(SHOTS / (name + "-" + str(width) + "-measured.png")))
                 for tab in explorer.locator("[data-record]").all():
                     tab.click()

@@ -53,7 +53,7 @@
           <p class="eyebrow">Actual PPMI records / Baseline-selected comparison</p>
           <h2 id="patient-evidence-title">Motor scores of 10 and 11. Different evidence behind them.</h2>
           <p class="section-intro">P1-A has recent imaging and cognitive measurements; P1-B has no
-            eligible DaT-SPECT value but does have injury and lysosomal assay evidence. A missing
+            eligible DaT-SPECT value but does have NfL and GCase assay evidence. A missing
             measurement is not a normal result. Neither record supports a treatment recommendation.</p>
           <div data-patient-explorer="paper1">
             <p class="evidence-fallback">The two complete measured histories are also available in the
@@ -71,6 +71,19 @@
               relatively greater evidence on that axis. Reliability summarizes available source
               weights, with a 24-month age half-life; it is not the probability of a correct forecast.
               An older source can retain its relative score while losing reliability.</p>
+            <div class="table-wrap">
+              <table>
+                <caption>Measurements behind the evidence coordinates</caption>
+                <thead><tr><th scope="col">Measurement and scale</th><th scope="col">What it contributes</th><th scope="col">Interpretation limit</th></tr></thead>
+                <tbody>
+                  <tr><td>DaT-SPECT SBR: regional imaging</td><td>Specific-binding ratio, used as dopaminergic evidence</td><td>Not a direct count of surviving neurons</td></tr>
+                  <tr><td>MoCA: clinical cognition</td><td>Cognitive screening score out of 30</td><td>Not proof of a specific molecular co-pathology</td></tr>
+                  <tr><td>NfL: fluid biomarker</td><td>Neurofilament light evidence within the injury/glial coordinate</td><td>NfL alone does not establish inflammation</td></tr>
+                  <tr><td>GCase: enzyme assay</td><td>Glucocerebrosidase-related lysosomal evidence</td><td>Not a GBA genotype or a treatment-response test</td></tr>
+                  <tr><td>LEDD: treatment record</td><td>Levodopa-equivalent daily dose and its availability</td><td>An absent record does not mean untreated</td></tr>
+                </tbody>
+              </table>
+            </div>
             <p>The displayed prediction interval belongs only to the separately fitted nested uncertainty
               model, not to the main point forecasts. Valid interval coverage did not establish
               reliable error ranking. The cohort-level selective-uncertainty verdict is ABSTAIN;
@@ -413,7 +426,9 @@
             not live clinical predictions.</p>
           <p class="evidence-footnote">Data: <a href="https://www.ppmi-info.org/">PPMI</a>;
             access to underlying participant data follows the source study's application process.
-            Code is available from the authors on request. Putamen outlines adapt the
+            Code is available from the authors on request; the paper-specific repository is
+            <a href="https://github.com/CVC-Lab/pd-validity-gates">pd-validity-gates</a>
+            (access required). Putamen outlines adapt the
             <a href="https://3d.nih.gov/entries/20960/1">NIH 3D Human Reference Atlas
             &quot;Brain, Male&quot; (3DPX-020960), based on the Allen Human Reference Atlas</a>
             under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>,

@@ -98,6 +98,9 @@
 .evidence-methods { border-top: 1px solid var(--line); margin-top: 28px; padding-top: 15px; font-size: 14px; max-width: 960px; }
 .evidence-methods summary { cursor: pointer; color: #245b5c; padding: 5px 0; font-weight: 600; }
 .evidence-methods p { max-width: 900px; }
+.evidence-methods table { min-width: 0; table-layout: fixed; }
+.evidence-methods caption { text-align: left; padding-bottom: 12px; font-weight: 600; }
+.evidence-methods th, .evidence-methods td { overflow-wrap: anywhere; }
 .patient-first .research-chain { padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
 .research-chain li { border-top: 2px solid #bdcacc; padding-top: 12px; font-size: 14px; }
 .research-chain strong { display: block; color: #14222b; margin: 5px 0; }
@@ -117,6 +120,7 @@
   .evidence-cases .evidence-tab { font-size: 13px; }
   .patient-first .research-chain { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .evidence-record-title { flex-wrap: wrap; gap: 0 12px; }
+  .evidence-methods th, .evidence-methods td { padding: 10px 6px; font-size: 13px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .patient-first * { scroll-behavior: auto !important; transition: none !important; }

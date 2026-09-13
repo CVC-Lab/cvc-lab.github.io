@@ -12,13 +12,13 @@ window.PD_PATIENT_EVIDENCE = {
           "name": "DaT-SPECT mean putamen SBR",
           "value": 0.835,
           "age": 0.0,
-          "role": "Observed source"
+          "role": "Dated source"
         },
         {
           "name": "MoCA (out of 30)",
           "value": 19.0,
           "age": 0.0,
-          "role": "Observed source"
+          "role": "Dated source"
         },
         {
           "name": "LEDD (mg/day)",
@@ -125,13 +125,13 @@ window.PD_PATIENT_EVIDENCE = {
           "name": "DaT-SPECT mean putamen SBR",
           "value": null,
           "age": null,
-          "role": "Observed source"
+          "role": "Dated source"
         },
         {
           "name": "MoCA (out of 30)",
           "value": 25.0,
           "age": 0.0,
-          "role": "Observed source"
+          "role": "Dated source"
         },
         {
           "name": "LEDD (mg/day)",

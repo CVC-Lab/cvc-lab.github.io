@@ -111,6 +111,17 @@ class CompanionTests(unittest.TestCase):
                     self.assertIn(parsed.fragment, Page(target).ids, (path.name, link))
             self.assertTrue(all(img.get("alt") for img in page.images))
 
+    def test_source_glossaries_and_repository_access_are_explicit(self):
+        for slug in ["pd-validity-gates", "pd-signed-laterality"]:
+            source = (SITE / slug / "index.html").read_text()
+            self.assertIn("access required", source)
+            self.assertIn("https://github.com/CVC-Lab/" + slug, source)
+            self.assertIn("available from the authors on request", source)
+            self.assertIn("<caption>", source)
+        laterality = (SITE / "pd-signed-laterality/index.html").read_text()
+        self.assertIn("separate exploratory context comparisons", laterality)
+        self.assertIn("not inputs to these focused forecasts", laterality)
+
 
 if __name__ == "__main__":
     unittest.main()
