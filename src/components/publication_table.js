@@ -90,6 +90,11 @@ const publicationThumbnailMap = {
       img: 'publications/PUB_GRL‑SNAM',
       alt: 'GRL-SNAM publication thumbnail',
     },
+  'A Prior-Robust Sensitivity and Factorial-Necessity Analysis of Tri-Modal Viral-Ultrasound Gene Delivery for Lysosomal Neurodegeneration':
+    {
+      img: 'publications/PUB_Tri-Modal Sensitivity Audit',
+      alt: 'Tri-modal gene-therapy sensitivity audit publication thumbnail',
+    },
   'A Novel Tri-Modal Viral–Ultrasound Gene-Delivery Therapy Protocol for Lysosomal Neurodegeneration via Stochastic Model Optimization with Uncertainty Quantification and Generalizability':
     {
       img: 'publications/PUB_Tri-Modal Gene Therapy',

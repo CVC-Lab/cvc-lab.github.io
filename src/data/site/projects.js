@@ -7,6 +7,8 @@ const perennialLearningTitle =
   'The Physics, Information, and Computation of Perennial Learning: Kolmogorov Complexity, Information Distance and Port-Hamiltonian Thermodynamics'
 const triModalGeneTherapyTitle =
   'A Novel Tri-Modal Viral–Ultrasound Gene-Delivery Therapy Protocol for Lysosomal Neurodegeneration via Stochastic Model Optimization with Uncertainty Quantification and Generalizability'
+const triModalSensitivityAuditTitle =
+  'A Prior-Robust Sensitivity and Factorial-Necessity Analysis of Tri-Modal Viral-Ultrasound Gene Delivery for Lysosomal Neurodegeneration'
 const parkinsonsHealthcareAiTitle = "AI4PD: Parkinson's Disease"
 const pianoDigitalTwinTitle = 'Piano Digital Twin'
 const skiJumperDigitalTwinTitle = 'Ski Jumper Digital Twin'
@@ -354,6 +356,16 @@ module.exports = [
     tags: ['Scientific ML'],
     themes: ['World Models', 'AI for Science'],
     date: '2026-04-01',
+  },
+  {
+    name: triModalSensitivityAuditTitle,
+    description:
+      'A four-part audit of the tri-modal GM2 model: under corrected priors, enzyme kinetics, not BBB entry, dominate, and focused ultrasound is practically negligible by day 365.',
+    img_name: 'project_tiles/tri_modal_sensitivity_audit',
+    link: '/projects/tri-modal-sensitivity-audit',
+    tags: ['Health AI/ML', 'Scientific ML'],
+    themes: ['Healthcare AI', 'AI for Science'],
+    date: '2026-09-22',
   },
   {
     name: triModalGeneTherapyTitle,

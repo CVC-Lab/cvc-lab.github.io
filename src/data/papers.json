@@ -4289,8 +4289,8 @@
     "Location": "Preprint, 2026 (arXiv submission in preparation)",
     "PublicationType": "arXiv",
     "PublishedDateYear": "2026",
-    "PDFLink": "/projects/pd-research-companion/pd-validity-gates/",
-    "ProjectLink": "/projects/ai4pd/"
+    "PDFLink": "",
+    "ProjectLink": "/projects/pd-research-companion/pd-validity-gates/"
   },
   {
     "Title": "Signed Dopaminergic Asymmetry Tracks Contralateral Motor Laterality in Parkinson\u2019s Disease",
@@ -4298,7 +4298,16 @@
     "Location": "Preprint, 2026 (arXiv submission in preparation)",
     "PublicationType": "arXiv",
     "PublishedDateYear": "2026",
-    "PDFLink": "/projects/pd-research-companion/pd-signed-laterality/",
-    "ProjectLink": "/projects/ai4pd/"
+    "PDFLink": "/papers/signed-dopaminergic-asymmetry-sep2026.pdf",
+    "ProjectLink": "/projects/pd-research-companion/pd-signed-laterality/"
+  },
+  {
+    "Title": "A Prior-Robust Sensitivity and Factorial-Necessity Analysis of Tri-Modal Viral-Ultrasound Gene Delivery for Lysosomal Neurodegeneration",
+    "Authors": "Kartheek Nekkanti, Chandrajit Bajaj",
+    "Location": "Preprint, 2026 (arXiv submission in preparation)",
+    "PublicationType": "arXiv",
+    "PublishedDateYear": "2026",
+    "PDFLink": "/projects/tri-modal-sensitivity-audit/Nekkanti-Bajaj-prior-robust-audit-sep2026.pdf",
+    "ProjectLink": "/projects/tri-modal-sensitivity-audit"
   }
 ]

@@ -49,6 +49,17 @@ const pageMarkup = String.raw`
   </div>
 </div>
 
+<div class="content">
+  <div class="followup-note">
+    <strong>Update, September 2026.</strong> A follow-up paper,
+    <a href="/projects/tri-modal-sensitivity-audit">A Prior-Robust Sensitivity and Factorial-Necessity Analysis</a>,
+    re-examines this model's central sensitivity result. Under converged sampling and corrected input-uncertainty
+    specifications, BBB-entry kinetics are no longer dominant (\(S_T \le 0.04\)): the entry step is already saturated at
+    the calibrated dose, enzyme-kinetic and synthesis parameters dominate instead, and focused ultrasound's day-365
+    contribution is practically negligible. The findings on this page should be read alongside that audit.
+  </div>
+</div>
+
 <div class="anim-panel">
   <div class="anim-box">
     <canvas id="hero-canvas"></canvas>

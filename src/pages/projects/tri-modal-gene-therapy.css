@@ -506,6 +506,17 @@ body:has(.trimod-page) #gatsby-focus-wrapper {
   background: #fafaf7;
 }
 
+.trimod-page .followup-note {
+  margin: 1.5rem 0 0;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--orange);
+  border-radius: 0 6px 6px 0;
+  background: #fdf6f0;
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
 .trimod-page .td-highlight {
   color: var(--text);
   font-weight: 700;
