@@ -4309,5 +4309,14 @@
     "PublishedDateYear": "2026",
     "PDFLink": "/projects/tri-modal-sensitivity-audit/Nekkanti-Bajaj-prior-robust-audit-sep2026.pdf",
     "ProjectLink": "/projects/tri-modal-sensitivity-audit"
+  },
+  {
+    "Title": "AI4PD: A Multi-Agent Clinical Web Portal for Querying the Unseen States of Patients with Parkinson\u2019s Disease",
+    "Authors": "Ryan Farell, Harsh Milind Tirhekar, Garvit Bansal, Shubham Bhardwaj, Aditya Sai Ellendula, Andrew Farell, Kartheek Nekkanti, Aparna Dev, Priyanshi Yadav, Ashwin Vinod, Yi Wang, Chandrajit Bajaj",
+    "Location": "Submitted to MICAD 2026, 7th International Conference on Medical Imaging and Computer-Aided Diagnosis (under review)",
+    "PublicationType": "Conference Presentations & Publications",
+    "PublishedDateYear": "2026",
+    "PDFLink": "/papers/ai4pd-micad2026-submission.pdf",
+    "ProjectLink": "/projects/ai4pd/"
   }
 ]
