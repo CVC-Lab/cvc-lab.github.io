@@ -22,11 +22,19 @@ const canvas = document.querySelector('#posteriorCanvas')
 const ctx = canvas.getContext('2d')
 const configCanvas = document.querySelector('#configCanvas')
 const configCtx = configCanvas.getContext('2d')
+const posteriorStatus = document.querySelector('#posteriorStatus')
+const posteriorPresets = Array.from(document.querySelectorAll('[data-preset]'))
+const motionToggles = Array.from(document.querySelectorAll('[data-motion-toggle]'))
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+const visibleCanvases = new Set()
 
 let normalized = [0, 0, 1, 0, 0]
 let animationFrame = 0
 let selectedConfig = null
 let configLookup = new Map()
+let motionPaused = reduceMotion.matches
+let clock = 0
+let lastTick = 0
 
 function normalize(values) {
   const total = values.reduce((sum, value) => sum + value, 0)
@@ -87,11 +95,27 @@ function updateExplorer() {
   const gap = sorted[0] - sorted[1]
   const maxIndex = normalized.indexOf(max)
 
-  tierLabel.textContent = classify(normalized)
-  dominantState.textContent = `${STATES[maxIndex].id} · ${STATES[maxIndex].label}`
+  const tier = classify(normalized)
+  const dominant = `${STATES[maxIndex].id} · ${STATES[maxIndex].label}`
+  tierLabel.textContent = tier
+  dominantState.textContent = dominant
   gapValue.textContent = gap.toFixed(2)
   entropyValue.textContent = entropy(normalized).toFixed(2)
+  sliders.forEach((slider, index) => {
+    slider.setAttribute('aria-valuetext', normalized[index].toFixed(2))
+  })
+  const status = `${tier}, dominant state ${dominant}`
+  if (posteriorStatus.textContent !== status) posteriorStatus.textContent = status
   renderBars(normalized)
+  redraw()
+}
+
+function setActivePreset(buttons, active) {
+  buttons.forEach(button => {
+    const on = button === active
+    button.classList.toggle('is-active', on)
+    button.setAttribute('aria-pressed', String(on))
+  })
 }
 
 function applyPreset(name) {
@@ -100,23 +124,68 @@ function applyPreset(name) {
   sliders.forEach((slider, index) => {
     slider.value = values[index]
   })
-  document.querySelectorAll('.preset').forEach(button => {
-    button.classList.toggle('is-active', button.dataset.preset === name)
-  })
+  setActivePreset(
+    posteriorPresets,
+    posteriorPresets.find(button => button.dataset.preset === name)
+  )
   updateExplorer()
 }
 
-function sizeCanvas() {
+function fitCanvas(target, context) {
   const ratio = window.devicePixelRatio || 1
-  let rect = canvas.getBoundingClientRect()
-  canvas.width = Math.max(1, Math.floor(rect.width * ratio))
-  canvas.height = Math.max(1, Math.floor(rect.height * ratio))
-  ctx.setTransform(ratio, 0, 0, ratio, 0, 0)
+  const rect = target.getBoundingClientRect()
+  const width = Math.max(1, Math.floor(rect.width * ratio))
+  const height = Math.max(1, Math.floor(rect.height * ratio))
+  if (target.width === width && target.height === height) return
+  target.width = width
+  target.height = height
+  context.setTransform(ratio, 0, 0, ratio, 0, 0)
+}
 
-  rect = configCanvas.getBoundingClientRect()
-  configCanvas.width = Math.max(1, Math.floor(rect.width * ratio))
-  configCanvas.height = Math.max(1, Math.floor(rect.height * ratio))
-  configCtx.setTransform(ratio, 0, 0, ratio, 0, 0)
+function sizeCanvas() {
+  fitCanvas(canvas, ctx)
+  fitCanvas(configCanvas, configCtx)
+  redraw()
+}
+
+function redraw() {
+  drawPosteriorCanvas(clock)
+  drawConfigCanvas(clock)
+}
+
+function animate(now) {
+  if (lastTick) clock += now - lastTick
+  lastTick = now
+  if (visibleCanvases.has(canvas)) drawPosteriorCanvas(clock)
+  if (visibleCanvases.has(configCanvas)) drawConfigCanvas(clock)
+  animationFrame = requestAnimationFrame(animate)
+}
+
+function syncMotion() {
+  const run = !motionPaused && !document.hidden && visibleCanvases.size > 0
+  if (run && !animationFrame) {
+    lastTick = 0
+    animationFrame = requestAnimationFrame(animate)
+  } else if (!run && animationFrame) {
+    cancelAnimationFrame(animationFrame)
+    animationFrame = 0
+  }
+  document.documentElement.classList.toggle('motion-paused', motionPaused)
+  motionToggles.forEach(button => {
+    button.textContent = motionPaused ? 'Play animation' : 'Pause animation'
+  })
+}
+
+function watchCanvases() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) visibleCanvases.add(entry.target)
+      else visibleCanvases.delete(entry.target)
+    })
+    syncMotion()
+  })
+  observer.observe(canvas)
+  observer.observe(configCanvas)
 }
 
 function drawPosteriorCanvas(time) {
@@ -186,9 +255,6 @@ function drawPosteriorCanvas(time) {
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
   ctx.fillText(classify(normalized), centerX, centerY)
-
-  drawConfigCanvas(time)
-  animationFrame = requestAnimationFrame(drawPosteriorCanvas)
 }
 
 function fmt(value, digits = 3) {
@@ -210,7 +276,11 @@ function configKey(config) {
 
 function setupConfigExplorer() {
   const data = window.BGMM_CONFIG_DATA
-  if (!data || !data.configs) return
+  if (!data || !data.configs) {
+    document.querySelector('.config-theater').hidden = true
+    document.querySelector('#configFallback').hidden = false
+    return
+  }
 
   const controls = {
     k: document.querySelector('#configK'),
@@ -224,6 +294,7 @@ function setupConfigExplorer() {
     proceedings: document.querySelector('#configProceedings'),
     artifactBest: document.querySelector('#configArtifactBest'),
   }
+  const configPresets = [controls.proceedings, controls.artifactBest]
 
   const options = data.options
   const kOptions = options.n_components
@@ -256,9 +327,7 @@ function setupConfigExplorer() {
     controls.priorType.value = config.weight_concentration_prior_type
     controls.alpha.value = String(alphaOptions.indexOf(config.weight_concentration_prior))
     controls.meanPrecision.value = String(precisionOptions.indexOf(config.mean_precision_prior))
-    document.querySelectorAll('.config-controls .preset').forEach(button => {
-      button.classList.toggle('is-active', button === activeButton)
-    })
+    setActivePreset(configPresets, activeButton)
     updateConfigFromControls()
   }
 
@@ -275,7 +344,11 @@ function setupConfigExplorer() {
     controls.kLabel.textContent = desired.n_components
     controls.alphaLabel.textContent = desired.weight_concentration_prior
     controls.meanPrecisionLabel.textContent = desired.mean_precision_prior
+    controls.k.setAttribute('aria-valuetext', desired.n_components)
+    controls.alpha.setAttribute('aria-valuetext', desired.weight_concentration_prior)
+    controls.meanPrecision.setAttribute('aria-valuetext', desired.mean_precision_prior)
     renderConfigReadout(selectedConfig)
+    redraw()
   }
 
   const defaultConfig = data.metadata.default_config
@@ -292,9 +365,7 @@ function setupConfigExplorer() {
     controls.meanPrecision,
   ].forEach(control => {
     control.addEventListener('input', () => {
-      document
-        .querySelectorAll('.config-controls .preset')
-        .forEach(button => button.classList.remove('is-active'))
+      setActivePreset(configPresets, null)
       updateConfigFromControls()
     })
   })
@@ -433,7 +504,6 @@ function drawAnimatedSkeleton(cx, cy, scale, phase, stride, uncertainty) {
   configCtx.lineJoin = 'round'
   configCtx.strokeStyle = 'rgba(255,255,255,0.58)'
   configCtx.lineWidth = Math.max(2, scale * 0.02)
-
   ;[
     [head, neck],
     [neck, spine],
@@ -609,23 +679,32 @@ function drawDiagnosticRibbons(width, height, weights, phase) {
 }
 
 function animateMetrics() {
+  if (reduceMotion.matches) return
   const metrics = document.querySelectorAll('[data-count]')
   const observer = new IntersectionObserver(
     entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return
         const node = entry.target
+        const finalText = node.textContent
         const target = Number(node.dataset.count)
-        const suffix = node.textContent.includes('%') ? '%' : ''
+        const decimals = (node.dataset.count.split('.')[1] || '').length
+        const suffix = finalText.includes('%') ? '%' : ''
         const start = performance.now()
 
         function tick(now) {
           const progress = Math.min(1, (now - start) / 900)
+          if (progress === 1) {
+            node.textContent = finalText
+            return
+          }
           const eased = 1 - Math.pow(1 - progress, 3)
-          const value = target * eased
-          node.textContent =
-            target >= 100 ? Math.round(value).toLocaleString() : `${value.toFixed(1)}${suffix}`
-          if (progress < 1) requestAnimationFrame(tick)
+          const value = (target * eased).toLocaleString('en-US', {
+            minimumFractionDigits: decimals,
+            maximumFractionDigits: decimals,
+          })
+          node.textContent = `${value}${suffix}`
+          requestAnimationFrame(tick)
         }
 
         requestAnimationFrame(tick)
@@ -647,10 +726,12 @@ function revealOnScroll() {
   const observer = new IntersectionObserver(
     entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('is-visible')
+        if (!entry.isIntersecting) return
+        entry.target.classList.add('is-visible')
+        observer.unobserve(entry.target)
       })
     },
-    { threshold: 0.12 }
+    { rootMargin: '0px 0px -8% 0px' }
   )
 
   nodes.forEach(node => observer.observe(node))
@@ -658,19 +739,42 @@ function revealOnScroll() {
 
 function setupDialog() {
   const dialog = document.querySelector('#figureDialog')
-  const dialogImage = document.querySelector('#dialogImage')
   const dialogCaption = document.querySelector('#dialogCaption')
   const closeButton = document.querySelector('#dialogClose')
+  if (typeof dialog.showModal !== 'function') return
 
-  document.querySelectorAll('.gallery-card img').forEach(image => {
-    image.addEventListener('click', () => {
-      dialogImage.src = image.src
+  const dialogImage = document.createElement('img')
+  dialogImage.id = 'dialogImage'
+  dialogImage.alt = ''
+  closeButton.after(dialogImage)
+  let opener = null
+
+  document.querySelectorAll('.gallery-zoom').forEach(link => {
+    link.addEventListener('click', event => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+      const image = link.querySelector('img')
+      // The dialog image is capped by the dialog width and by max-height: 72vh. Open the file
+      // itself when the dialog would not show the figure at least 25% larger than the card.
+      const aspect = Number(image.getAttribute('width')) / Number(image.getAttribute('height'))
+      const rem = parseFloat(getComputedStyle(document.documentElement).fontSize)
+      const dialogWidth = Math.min(window.innerWidth * 0.92, rem * 72) - rem * 2
+      const shownWidth = Math.min(dialogWidth, window.innerHeight * 0.72 * aspect)
+      if (shownWidth < image.clientWidth * 1.25) return
+      event.preventDefault()
+      opener = link
+      dialogImage.src = link.href
       dialogImage.alt = image.alt
-      dialogCaption.textContent = image.closest('figure').querySelector('figcaption').innerText
+      dialogCaption.textContent = link.closest('figure').querySelector('figcaption').innerText
       dialog.showModal()
+      document.documentElement.classList.add('dialog-open')
     })
   })
 
+  dialog.addEventListener('close', () => {
+    document.documentElement.classList.remove('dialog-open')
+    if (opener) opener.focus()
+    opener = null
+  })
   closeButton.addEventListener('click', () => dialog.close())
   dialog.addEventListener('click', event => {
     const rect = dialog.getBoundingClientRect()
@@ -683,18 +787,76 @@ function setupDialog() {
   })
 }
 
-sliders.forEach(slider => slider.addEventListener('input', updateExplorer))
-document.querySelectorAll('[data-preset]').forEach(button => {
+// Firefox does not scroll a control that is already partly in view when it takes focus, so a
+// control reached from the keyboard can stay half under the sticky header. Move it clear as the
+// other engines do. Its scroll-margin-top (styles.css, set only while the header is sticky) is
+// the clearance. Engines that scroll the control themselves (smoothly or not) start moving the
+// page within three frames (Safari's smooth scroll on the third) and are left alone.
+function keepFocusClearOfHeader() {
+  const header = document.querySelector('.site-header')
+  document.addEventListener('focusin', event => {
+    const control = event.target
+    if (!(control instanceof Element)) return
+    try {
+      if (!control.matches(':focus-visible')) return
+    } catch {
+      return
+    }
+    const startY = window.scrollY
+    let frames = 0
+    const check = () => {
+      if (document.activeElement !== control || window.scrollY !== startY) return
+      frames += 1
+      if (frames < 4) {
+        requestAnimationFrame(check)
+        return
+      }
+      const clearance = parseFloat(getComputedStyle(control).scrollMarginTop) || 0
+      if (!clearance) return
+      const box = control.getBoundingClientRect()
+      const covered = box.top < header.getBoundingClientRect().bottom && box.bottom > 0
+      if (covered && box.height <= window.innerHeight - clearance) {
+        window.scrollBy({ top: box.top - clearance, behavior: 'instant' })
+      }
+    }
+    requestAnimationFrame(check)
+  })
+}
+
+sliders.forEach(slider =>
+  slider.addEventListener('input', () => {
+    setActivePreset(posteriorPresets, null)
+    updateExplorer()
+  })
+)
+posteriorPresets.forEach(button => {
   button.addEventListener('click', () => applyPreset(button.dataset.preset))
+})
+motionToggles.forEach(button => {
+  button.addEventListener('click', () => {
+    motionPaused = !motionPaused
+    syncMotion()
+  })
+})
+reduceMotion.addEventListener('change', () => {
+  motionPaused = reduceMotion.matches
+  syncMotion()
 })
 
 window.addEventListener('resize', sizeCanvas)
+document.addEventListener('visibilitychange', syncMotion)
+window.addEventListener('pageshow', syncMotion)
+window.addEventListener('pagehide', () => {
+  cancelAnimationFrame(animationFrame)
+  animationFrame = 0
+})
+
 sizeCanvas()
 updateExplorer()
 setupConfigExplorer()
-drawPosteriorCanvas(0)
+watchCanvases()
+syncMotion()
 animateMetrics()
 revealOnScroll()
 setupDialog()
-
-window.addEventListener('pagehide', () => cancelAnimationFrame(animationFrame))
+keepFocusClearOfHeader()

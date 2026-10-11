@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- noindex is deliberate until both manuscripts have final identifiers; lift it together with a canonical link and sitemap entries. -->
     <meta name="robots" content="noindex, nofollow, noarchive" />
     <meta
       name="description"
@@ -19,10 +20,10 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://cvc-lab.github.io/projects/pd-research-companion/assets/og/signed-laterality.jpg" />
     <title>Signed Dopaminergic Asymmetry and Motor Laterality</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
     <link rel="stylesheet" href="../assets/styles.css" />
     <link rel="stylesheet" href="../assets/patient-evidence.css" />
-    <script defer src="../assets/patient-evidence-data.js"></script>
-    <script defer src="../assets/patient-evidence.js"></script>
     <script defer src="../assets/site.js"></script>
   </head>
   <body class="patient-first">
@@ -34,7 +35,7 @@
           <a href="../">Program</a>
           <a href="../pd-validity-gates/">Validity gates</a>
           <a href="./" aria-current="page">Signed laterality</a>
-          <a href="https://cvc-lab.github.io/projects/ai4pd/">AI4PD program</a>
+          <a href="/projects/ai4pd/">AI4PD program</a>
         </div>
       </nav>
     </header>
@@ -69,6 +70,8 @@
             <p class="evidence-fallback">The complete records remain available in the
               <a href="#case-explorer">four patient dossiers</a>.</p>
           </div>
+          <script src="../assets/patient-evidence-data.js"></script>
+          <script src="../assets/patient-evidence.js"></script>
           <details class="evidence-methods">
             <summary>Sign convention, case selection and model inputs</summary>
             <p>Signed imaging is (right SBR - left SBR) / (right SBR + left SBR).
@@ -132,10 +135,13 @@
               </div>
               <div class="figure-viewport">
                 <img
-                  src="../assets/images/directional_coordinate.png"
+                  src="../assets/images/directional_coordinate.webp"
+                  srcset="../assets/images/directional_coordinate_1200.webp 1200w, ../assets/images/directional_coordinate.webp 3792w"
+                  sizes="(max-width: 640px) calc(100vw - 46px), (max-width: 1220px) calc(100vw - 70px), 1150px"
                   alt="Atlas-based left and right putamen coordinate linked to contralateral clinical laterality and future side-balance"
                   width="3792"
                   height="2833"
+                  loading="lazy"
                   decoding="async"
                 />
               </div>
@@ -174,7 +180,9 @@
               </div>
               <div class="figure-viewport">
                 <img
-                  src="../assets/images/patient_selection_state_map.png"
+                  src="../assets/images/patient_selection_state_map.webp"
+                  srcset="../assets/images/patient_selection_state_map_1200.webp 1200w, ../assets/images/patient_selection_state_map.webp 3356w"
+                  sizes="(max-width: 640px) calc(100vw - 46px), (max-width: 1220px) calc(100vw - 70px), 1150px"
                   alt="Outcome-blind flow from 1,204 participants to 32 candidates, archetype counts, and the signed DaT-motor state map"
                   width="3356"
                   height="2636"
@@ -220,7 +228,9 @@
               </div>
               <div class="figure-viewport">
                 <img
-                  src="../assets/images/patient_specific_mirror_histories.png"
+                  src="../assets/images/patient_specific_mirror_histories.webp"
+                  srcset="../assets/images/patient_specific_mirror_histories_1200.webp 1200w, ../assets/images/patient_specific_mirror_histories.webp 2776w"
+                  sizes="(max-width: 640px) calc(100vw - 46px), (max-width: 1220px) calc(100vw - 70px), 1150px"
                   alt="Two de-identified outcome-blind PPMI histories showing mirror-image signed dopaminergic and motor states"
                   width="2776"
                   height="3098"
@@ -238,7 +248,7 @@
             </figcaption>
           </figure>
 
-          <div class="case-explorer" aria-label="Interactive patient-state dossiers">
+          <div class="case-explorer" role="group" aria-label="Interactive patient-state dossiers">
             <div class="case-controls" role="tablist" aria-label="Choose a patient information state">
               <button
                 class="case-tab"
@@ -321,7 +331,9 @@
               </div>
               <div class="figure-viewport">
                 <img
-                  src="../assets/images/case_A_dossier.png"
+                  src="../assets/images/case_A_dossier.webp"
+                  srcset="../assets/images/case_A_dossier_1200.webp 1200w, ../assets/images/case_A_dossier.webp 3189w"
+                  sizes="(max-width: 640px) calc(100vw - 46px), (max-width: 1220px) calc(100vw - 78px), 1142px"
                   alt="Case A dated sources, bilateral state, observed motor laterality, and held-out uncertainty"
                   width="3189"
                   height="2633"
@@ -359,7 +371,9 @@
               </div>
               <div class="figure-viewport">
                 <img
-                  src="../assets/images/case_B_dossier.png"
+                  src="../assets/images/case_B_dossier.webp"
+                  srcset="../assets/images/case_B_dossier_1200.webp 1200w, ../assets/images/case_B_dossier.webp 3189w"
+                  sizes="(max-width: 640px) calc(100vw - 46px), (max-width: 1220px) calc(100vw - 78px), 1142px"
                   alt="Case B dated sources, bilateral state, observed motor laterality, and held-out uncertainty"
                   width="3189"
                   height="2633"
@@ -397,7 +411,9 @@
               </div>
               <div class="figure-viewport">
                 <img
-                  src="../assets/images/case_C_dossier.png"
+                  src="../assets/images/case_C_dossier.webp"
+                  srcset="../assets/images/case_C_dossier_1200.webp 1200w, ../assets/images/case_C_dossier.webp 3189w"
+                  sizes="(max-width: 640px) calc(100vw - 46px), (max-width: 1220px) calc(100vw - 78px), 1142px"
                   alt="Case C dated sources, near-symmetric imaging, clinical laterality, and held-out uncertainty"
                   width="3189"
                   height="2633"
@@ -435,7 +451,9 @@
               </div>
               <div class="figure-viewport">
                 <img
-                  src="../assets/images/case_D_dossier.png"
+                  src="../assets/images/case_D_dossier.webp"
+                  srcset="../assets/images/case_D_dossier_1200.webp 1200w, ../assets/images/case_D_dossier.webp 3189w"
+                  sizes="(max-width: 640px) calc(100vw - 46px), (max-width: 1220px) calc(100vw - 78px), 1142px"
                   alt="Case D dated sources, conflicting imaging and clinical direction, and held-out uncertainty"
                   width="3189"
                   height="2633"
@@ -475,7 +493,9 @@
               </div>
               <div class="figure-viewport">
                 <img
-                  src="../assets/images/biological_replication.png"
+                  src="../assets/images/biological_replication.webp"
+                  srcset="../assets/images/biological_replication_1200.webp 1200w, ../assets/images/biological_replication.webp 3427w"
+                  sizes="(max-width: 640px) calc(100vw - 46px), (max-width: 1220px) calc(100vw - 70px), 1150px"
                   alt="Signed putamen DaT-SPECT asymmetry correlated with contralateral motor laterality in PPMI and S4"
                   width="3427"
                   height="2381"
@@ -518,7 +538,9 @@
               </div>
               <div class="figure-viewport">
                 <img
-                  src="../assets/images/longitudinal_laterality.png"
+                  src="../assets/images/longitudinal_laterality.webp"
+                  srcset="../assets/images/longitudinal_laterality_1200.webp 1200w, ../assets/images/longitudinal_laterality.webp 3992w"
+                  sizes="(max-width: 640px) calc(100vw - 46px), (max-width: 1220px) calc(100vw - 70px), 1150px"
                   alt="Future-only PPMI laterality analysis comparing signed and non-directional imaging representations"
                   width="3992"
                   height="2449"
@@ -575,7 +597,9 @@
               </div>
               <div class="figure-viewport">
                 <img
-                  src="../assets/images/discordance_stability.png"
+                  src="../assets/images/discordance_stability.webp"
+                  srcset="../assets/images/discordance_stability_1200.webp 1200w, ../assets/images/discordance_stability.webp 2341w"
+                  sizes="(max-width: 640px) calc(100vw - 46px), (max-width: 1220px) calc(100vw - 70px), 1150px"
                   alt="Directional agreement groups, stability estimates, prediction error, and molecular context screen"
                   width="2341"
                   height="2213"
@@ -611,13 +635,13 @@
               secondary biomarkers explain future divergence. More informative representation,
               better prediction and biological explanation remain separate questions.</p>
           </div>
-          <div class="table-wrap">
+          <div class="table-wrap" role="group" aria-labelledby="evidence-title" tabindex="0">
             <table>
               <thead>
                 <tr>
-                  <th>Question</th>
-                  <th>Result</th>
-                  <th>Interpretation</th>
+                  <th scope="col">Question</th>
+                  <th scope="col">Result</th>
+                  <th scope="col">Interpretation</th>
                 </tr>
               </thead>
               <tbody>
@@ -677,14 +701,14 @@
           <h2 id="program-links-title">From patient phenotypes toward mechanism-aware evidence</h2>
           <ol class="research-chain">
             <li><small>01 / Pathway context</small>
-              <a href="https://cvc-lab.github.io/projects/pathway-anchored-pd-clustering/"><strong>CVC pathway-anchored clustering</strong></a>
+              <a href="/projects/pathway-anchored-pd-clustering/"><strong>CVC pathway-anchored clustering</strong></a>
               <p>Organizes structural, microstructural and dopaminergic imaging by predefined biological pathways.</p>
             </li>
             <li><small>02 / Patient phenotypes</small>
-              <a href="https://cvc-lab.github.io/projects/posterior-aware-pd-phenotyping/"><strong>Posterior-aware phenotyping</strong></a>
+              <a href="/projects/posterior-aware-pd-phenotyping/"><strong>Posterior-aware phenotyping</strong></a>
               <p>Addresses clinical heterogeneity and uncertainty in patient representations.</p>
               <a href="https://www.biorxiv.org/content/10.64898/2026.06.12.732003v1">bioRxiv preprint</a>
-              <p><a href="https://cvc-lab.github.io/projects/posterior-aware-pd-phenotyping-miccai/">Related MICCAI project</a></p>
+              <p><a href="/projects/posterior-aware-pd-phenotyping-miccai/">Related MICCAI project</a></p>
             </li>
             <li><small>03 / Biological specificity</small>
               <a href="../pd-signed-laterality/"><strong>Signed dopaminergic laterality</strong></a>
@@ -696,14 +720,14 @@
             </li>
           </ol>
           <p class="evidence-footnote">Our earlier
-            <a href="https://cvc-lab.github.io/projects/integrated-pd-precision-stratification/">integrated
+            <a href="/projects/integrated-pd-precision-stratification/">integrated
             genetic, molecular and wearable-biomarker study</a>
             (<a href="https://www.medrxiv.org/content/10.64898/2025.12.02.25340302v1">medRxiv preprint</a>)
             provides complementary multimodal stratification context. It is distinct from CVC's
             pathway-anchored imaging study.</p>
           <p class="evidence-footnote">This is a research progression, not a single jointly validated
             diagnostic pipeline. Patient-specific intervention simulation and treatment selection
-            remain future work. The <a href="https://cvc-lab.github.io/projects/ai4pd/">AI4PD program</a>
+            remain future work. The <a href="/projects/ai4pd/">AI4PD program</a>
             provides the broader systems context; these pages replay fixed research examples,
             not live clinical predictions.</p>
           <p class="evidence-footnote">Data: <a href="https://www.ppmi-info.org/">PPMI</a>;

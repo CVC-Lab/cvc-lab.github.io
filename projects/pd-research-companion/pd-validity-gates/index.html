@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- noindex is deliberate until both manuscripts have final identifiers; lift it together with a canonical link and sitemap entries. -->
     <meta name="robots" content="noindex, nofollow, noarchive" />
     <meta
       name="description"
@@ -19,10 +20,10 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://cvc-lab.github.io/projects/pd-research-companion/assets/og/validity-gates.jpg" />
     <title>Validity Gates for Longitudinal Parkinson Disease Prediction</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
     <link rel="stylesheet" href="../assets/styles.css" />
     <link rel="stylesheet" href="../assets/patient-evidence.css" />
-    <script defer src="../assets/patient-evidence-data.js"></script>
-    <script defer src="../assets/patient-evidence.js"></script>
   </head>
   <body class="patient-first">
     <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -34,7 +35,7 @@
           <a href="../">Program</a>
           <a href="./" aria-current="page">Validity gates</a>
           <a href="../pd-signed-laterality/">Signed laterality</a>
-          <a href="https://cvc-lab.github.io/projects/ai4pd/">AI4PD program</a>
+          <a href="/projects/ai4pd/">AI4PD program</a>
         </div>
       </nav>
     </header>
@@ -69,6 +70,8 @@
             <p class="evidence-fallback">The two complete measured histories are also available in the
               <a href="../assets/images/patient_evidence_histories.png">patient comparison figure</a>.</p>
           </div>
+          <script src="../assets/patient-evidence-data.js"></script>
+          <script src="../assets/patient-evidence.js"></script>
           <details class="evidence-methods">
             <summary>Selection, score meaning and uncertainty</summary>
             <p>The pair was selected without future outcomes or forecast errors. The earliest eligible
@@ -110,14 +113,14 @@
             Each gate protects a different claim. Passing chronology cannot rescue failed
             transport, and correct interval coverage cannot substitute for useful error ranking.
           </p>
-          <div class="gate-strip" aria-label="Validity-gate verdicts">
-            <div class="gate-item gate-pass"><strong>Chronology</strong><span>Pass</span></div>
-            <div class="gate-item gate-pass"><strong>Participant</strong><span>Pass</span></div>
-            <div class="gate-item gate-pass"><strong>Site</strong><span>Pass</span></div>
-            <div class="gate-item gate-caution"><strong>Magnitude</strong><span>Information only</span></div>
-            <div class="gate-item gate-stop"><strong>Calendar</strong><span>Fail</span></div>
-            <div class="gate-item gate-caution"><strong>Selective UQ</strong><span>Abstain</span></div>
-            <div class="gate-item gate-stop"><strong>PDBP transport</strong><span>Fail</span></div>
+          <div class="gate-strip" role="list" aria-label="Validity-gate verdicts">
+            <div class="gate-item gate-pass" role="listitem"><strong>Chronology</strong><span>Pass</span></div>
+            <div class="gate-item gate-pass" role="listitem"><strong>Participant</strong><span>Pass</span></div>
+            <div class="gate-item gate-pass" role="listitem"><strong>Site</strong><span>Pass</span></div>
+            <div class="gate-item gate-caution" role="listitem"><strong>Magnitude</strong><span>Information only</span></div>
+            <div class="gate-item gate-stop" role="listitem"><strong>Calendar</strong><span>Fail</span></div>
+            <div class="gate-item gate-caution" role="listitem"><strong>Selective UQ</strong><span>Abstain</span></div>
+            <div class="gate-item gate-stop" role="listitem"><strong>PDBP transport</strong><span>Fail</span></div>
           </div>
           <div class="callout">
             <p>
@@ -152,10 +155,14 @@
               </div>
               <div class="figure-viewport">
                 <img
-                  src="../assets/images/time_valid_design.png"
+                  src="../assets/images/time_valid_design.webp"
+                  srcset="../assets/images/time_valid_design_1200.webp 1200w, ../assets/images/time_valid_design.webp 2341w"
+                  sizes="(max-width: 640px) calc(100vw - 46px), (max-width: 1220px) calc(100vw - 70px), 1150px"
                   alt="A future-only patient timeline followed by separate participant, site, calendar, uncertainty, and transport gates"
                   width="2341"
                   height="1381"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -184,13 +191,13 @@
               distinct population, uncertainty interval, and promotion rule.
             </p>
           </div>
-          <div class="table-wrap">
+          <div class="table-wrap" role="group" aria-labelledby="question-title" tabindex="0">
             <table>
               <thead>
                 <tr>
-                  <th>Analysis</th>
-                  <th>Scale</th>
-                  <th>Question it answers</th>
+                  <th scope="col">Analysis</th>
+                  <th scope="col">Scale</th>
+                  <th scope="col">Question it answers</th>
                 </tr>
               </thead>
               <tbody>
@@ -243,7 +250,10 @@
               <div class="figure-viewport">
                 <img
                   loading="lazy"
-                  src="../assets/images/longitudinal_comparisons.png"
+                  decoding="async"
+                  src="../assets/images/longitudinal_comparisons.webp"
+                  srcset="../assets/images/longitudinal_comparisons_1200.webp 1200w, ../assets/images/longitudinal_comparisons.webp 4627w"
+                  sizes="(max-width: 640px) calc(100vw - 46px), (max-width: 1220px) calc(100vw - 70px), 1150px"
                   alt="Held-out performance across participant, site, enrollment-era, and strict-calendar evaluations"
                   width="4627"
                   height="2753"
@@ -257,7 +267,7 @@
               magnitude and becomes uncertain under strict calendar testing.
             </figcaption>
           </figure>
-          <div class="metric-grid" aria-label="Primary internal result">
+          <div class="metric-grid" role="group" aria-label="Primary internal result">
             <div class="metric"><strong>0.015</strong><span>Internal delta R-squared</span></div>
             <div class="metric"><strong>-0.060</strong><span>Delta MAE in motor points</span></div>
             <div class="metric"><strong>Information only</strong><span>Prespecified magnitude verdict</span></div>
@@ -294,7 +304,10 @@
               <div class="figure-viewport">
                 <img
                   loading="lazy"
-                  src="../assets/images/uncertainty_and_gate_stress.png"
+                  decoding="async"
+                  src="../assets/images/uncertainty_and_gate_stress.webp"
+                  srcset="../assets/images/uncertainty_and_gate_stress_1200.webp 1200w, ../assets/images/uncertainty_and_gate_stress.webp 2341w"
+                  sizes="(max-width: 640px) calc(100vw - 46px), (max-width: 1220px) calc(100vw - 70px), 1150px"
                   alt="Selective-risk curves, participant-level interval coverage, and controlled gate behavior"
                   width="2341"
                   height="2021"
@@ -335,7 +348,10 @@
               <div class="figure-viewport">
                 <img
                   loading="lazy"
-                  src="../assets/images/transport_stress_tests.png"
+                  decoding="async"
+                  src="../assets/images/transport_stress_tests.webp"
+                  srcset="../assets/images/transport_stress_tests_1200.webp 1200w, ../assets/images/transport_stress_tests.webp 4576w"
+                  sizes="(max-width: 640px) calc(100vw - 46px), (max-width: 1220px) calc(100vw - 70px), 1150px"
                   alt="Model-capacity and external-transport stress tests from PPMI to PDBP"
                   width="4576"
                   height="2815"
@@ -357,13 +373,13 @@
         <div class="shell">
           <p class="eyebrow">Claim contract</p>
           <h2 id="contract-title">What the evidence permits us to say</h2>
-          <div class="table-wrap">
+          <div class="table-wrap" role="group" aria-labelledby="contract-title" tabindex="0">
             <table>
               <thead>
                 <tr>
-                  <th>Gate</th>
-                  <th>Verdict</th>
-                  <th>Permitted statement</th>
+                  <th scope="col">Gate</th>
+                  <th scope="col">Verdict</th>
+                  <th scope="col">Permitted statement</th>
                 </tr>
               </thead>
               <tbody>
@@ -405,14 +421,14 @@
           <h2 id="program-links-title">From patient phenotypes toward mechanism-aware evidence</h2>
           <ol class="research-chain">
             <li><small>01 / Pathway context</small>
-              <a href="https://cvc-lab.github.io/projects/pathway-anchored-pd-clustering/"><strong>CVC pathway-anchored clustering</strong></a>
+              <a href="/projects/pathway-anchored-pd-clustering/"><strong>CVC pathway-anchored clustering</strong></a>
               <p>Organizes structural, microstructural and dopaminergic imaging by predefined biological pathways.</p>
             </li>
             <li><small>02 / Patient phenotypes</small>
-              <a href="https://cvc-lab.github.io/projects/posterior-aware-pd-phenotyping/"><strong>Posterior-aware phenotyping</strong></a>
+              <a href="/projects/posterior-aware-pd-phenotyping/"><strong>Posterior-aware phenotyping</strong></a>
               <p>Addresses clinical heterogeneity and uncertainty in patient representations.</p>
               <a href="https://www.biorxiv.org/content/10.64898/2026.06.12.732003v1">bioRxiv preprint</a>
-              <p><a href="https://cvc-lab.github.io/projects/posterior-aware-pd-phenotyping-miccai/">Related MICCAI project</a></p>
+              <p><a href="/projects/posterior-aware-pd-phenotyping-miccai/">Related MICCAI project</a></p>
             </li>
             <li><small>03 / Biological specificity</small>
               <a href="../pd-signed-laterality/"><strong>Signed dopaminergic laterality</strong></a>
@@ -424,14 +440,14 @@
             </li>
           </ol>
           <p class="evidence-footnote">Our earlier
-            <a href="https://cvc-lab.github.io/projects/integrated-pd-precision-stratification/">integrated
+            <a href="/projects/integrated-pd-precision-stratification/">integrated
             genetic, molecular and wearable-biomarker study</a>
             (<a href="https://www.medrxiv.org/content/10.64898/2025.12.02.25340302v1">medRxiv preprint</a>)
             provides complementary multimodal stratification context. It is distinct from CVC's
             pathway-anchored imaging study.</p>
           <p class="evidence-footnote">This is a research progression, not a single jointly validated
             diagnostic pipeline. Patient-specific intervention simulation and treatment selection
-            remain future work. The <a href="https://cvc-lab.github.io/projects/ai4pd/">AI4PD program</a>
+            remain future work. The <a href="/projects/ai4pd/">AI4PD program</a>
             provides the broader systems context; these pages replay fixed research examples,
             not live clinical predictions.</p>
           <p class="evidence-footnote">Data: <a href="https://www.ppmi-info.org/">PPMI</a>;

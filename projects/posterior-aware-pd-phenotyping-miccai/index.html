@@ -8,19 +8,35 @@
       content="MICCAI 2026 project page for Posterior-Aware Motor Phenotyping with Multimodal Imaging Validation in Parkinson's Disease."
     />
     <title>Posterior-Aware Motor Phenotyping | MICCAI 2026 | CVC Lab</title>
+    <link rel="canonical" href="https://cvc-lab.github.io/projects/posterior-aware-pd-phenotyping-miccai/" />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+    <meta name="theme-color" content="#bf5700" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Computational Visualization Center" />
+    <meta property="og:title" content="Posterior-Aware Motor Phenotyping with Multimodal Imaging Validation in Parkinson's Disease" />
+    <meta property="og:description" content="MICCAI 2026 project page for Posterior-Aware Motor Phenotyping with Multimodal Imaging Validation in Parkinson's Disease." />
+    <meta property="og:url" content="https://cvc-lab.github.io/projects/posterior-aware-pd-phenotyping-miccai/" />
+    <meta property="og:image" content="https://cvc-lab.github.io/projects/posterior-aware-pd-phenotyping-miccai/assets/og/miccai-posterior-aware.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://cvc-lab.github.io/projects/posterior-aware-pd-phenotyping-miccai/assets/og/miccai-posterior-aware.jpg" />
     <link rel="stylesheet" href="styles.css" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "ScholarlyArticle",
         "name": "Posterior-Aware Motor Phenotyping with Multimodal Imaging Validation in Parkinson's Disease",
+        "headline": "Posterior-Aware Motor Phenotyping with Multimodal Imaging Validation in Parkinson's Disease",
+        "image": "https://cvc-lab.github.io/projects/posterior-aware-pd-phenotyping-miccai/assets/og/miccai-posterior-aware.jpg",
         "author": [
           { "@type": "Person", "name": "Harsh Tirhekar" },
           { "@type": "Person", "name": "Priyanshi Yadav" },
           { "@type": "Person", "name": "Chandrajit Bajaj" }
         ],
-        "isPartOf": {
-          "@type": "Event",
+        "publication": {
+          "@type": "PublicationEvent",
           "name": "29th International Conference on Medical Image Computing and Computer Assisted Intervention"
         },
         "url": "https://cvc-lab.github.io/projects/posterior-aware-pd-phenotyping-miccai/"
@@ -62,7 +78,7 @@
             phenotyping from MDS-UPDRS-III, validated against DaTSCAN SPECT, structural MRI,
             and out-of-cohort BioFIND transfer.
           </p>
-          <div class="hero-actions" aria-label="Primary links">
+          <div class="hero-actions" role="group" aria-label="Primary links">
             <a class="button primary" href="https://www.biorxiv.org/content/10.64898/2026.06.12.732003v1">bioRxiv extended version</a>
             <a class="button" href="/projects/posterior-aware-pd-phenotyping/">Existing project page</a>
             <a class="button" href="https://github.com/CVC-Lab/posterior-aware-pd-phenotyping">Code</a>
@@ -72,7 +88,15 @@
           </p>
         </div>
         <figure class="hero-visual">
-          <img src="assets/generated/hero-brain-posterior.png" alt="Generated scientific visualization of a transparent brain with posterior motor-state ribbons." />
+          <img
+            src="assets/generated/hero-brain-posterior.webp"
+            srcset="assets/generated/hero-brain-posterior-1100.webp 1100w, assets/generated/hero-brain-posterior.webp 1672w"
+            sizes="(max-width: 56.25em) 90vw, 50vw"
+            width="1672"
+            height="941"
+            fetchpriority="high"
+            alt="Generated scientific visualization of a transparent brain with posterior motor-state ribbons."
+          />
           <figcaption>Generated concept visual for communication; empirical figures appear below.</figcaption>
         </figure>
       </section>
@@ -115,7 +139,7 @@
             are convergent evidence rather than circular discovery features.
           </p>
         </div>
-        <div class="fact-grid" aria-label="Key facts">
+        <div class="fact-grid" role="group" aria-label="Key facts">
           <article>
             <span>Cross-granularity</span>
             <strong>V = 0.945</strong>
@@ -145,13 +169,22 @@
           <h2 id="visuals-title">Motor exams, posterior uncertainty, imaging, and external transfer in one flow</h2>
         </div>
         <figure class="wide-figure">
-          <img src="assets/generated/evidence-network.png" alt="Generated evidence network linking motor exams, imaging, longitudinal visits, and five posterior motor states." />
+          <img
+            src="assets/generated/evidence-network.webp"
+            srcset="assets/generated/evidence-network-1100.webp 1100w, assets/generated/evidence-network.webp 1672w"
+            sizes="90vw"
+            width="1672"
+            height="941"
+            loading="lazy"
+            decoding="async"
+            alt="Generated evidence network linking motor exams, imaging, longitudinal visits, and five posterior motor states."
+          />
           <figcaption>
             Generated public-facing evidence map. It is a visual explanation, not a replacement for
             the result figures from the paper.
           </figcaption>
         </figure>
-        <div class="story-steps" aria-label="Method flow">
+        <div class="story-steps" role="group" aria-label="Method flow">
           <article>
             <span>01</span>
             <h3>Motor-domain representation</h3>
@@ -188,7 +221,16 @@
 
         <div class="atlas-grid">
           <figure class="atlas-figure">
-            <img src="assets/generated/motor-skeleton-atlas.png" alt="Generated full-body skeleton and motor examination atlas for Parkinson's disease motor domains." />
+            <img
+              src="assets/generated/motor-skeleton-atlas.webp"
+              srcset="assets/generated/motor-skeleton-atlas-1100.webp 1100w, assets/generated/motor-skeleton-atlas.webp 1536w"
+              sizes="(max-width: 56.25em) 90vw, 54vw"
+              width="1536"
+              height="1024"
+              loading="lazy"
+              decoding="async"
+              alt="Generated full-body skeleton and motor examination atlas for Parkinson's disease motor domains."
+            />
             <figcaption>
               Generated full-body motor atlas with skeleton, gait, posture, face, upper-limb,
               lower-limb, and task-level movement cues.
@@ -196,7 +238,7 @@
           </figure>
           <div class="atlas-copy">
             <h3>Motor examination vocabulary</h3>
-            <div class="chip-cloud" aria-label="Motor domain labels">
+            <div class="chip-cloud" role="group" aria-label="Motor domain labels">
               <span>Tremor</span>
               <span>Bradykinesia</span>
               <span>Rigidity</span>
@@ -223,7 +265,7 @@
               <span>Lower-limb rigidity</span>
             </div>
             <h3>Body map</h3>
-            <div class="chip-cloud body" aria-label="Body-region labels">
+            <div class="chip-cloud body" role="group" aria-label="Body-region labels">
               <span>Right arm</span>
               <span>Left arm</span>
               <span>Right leg</span>
@@ -239,7 +281,16 @@
           </div>
 
           <figure class="atlas-figure">
-            <img src="assets/generated/brain-region-atlas.png" alt="Generated brain-region and neuroimaging atlas with basal ganglia, subcortical regions, MRI, and DaTSCAN motifs." />
+            <img
+              src="assets/generated/brain-region-atlas.webp"
+              srcset="assets/generated/brain-region-atlas-1100.webp 1100w, assets/generated/brain-region-atlas.webp 1672w"
+              sizes="(max-width: 56.25em) 90vw, 54vw"
+              width="1672"
+              height="941"
+              loading="lazy"
+              decoding="async"
+              alt="Generated brain-region and neuroimaging atlas with basal ganglia, subcortical regions, MRI, and DaTSCAN motifs."
+            />
             <figcaption>
               Generated brain-region atlas with basal ganglia, subcortical/cortical structures,
               DaTSCAN-like SPECT panels, and T1-weighted MRI panels.
@@ -247,7 +298,7 @@
           </figure>
           <div class="atlas-copy">
             <h3>Imaging and brain-region vocabulary</h3>
-            <div class="chip-cloud brain" aria-label="Brain-region and imaging labels">
+            <div class="chip-cloud brain" role="group" aria-label="Brain-region and imaging labels">
               <span>Putamen</span>
               <span>Caudate nucleus</span>
               <span>Striatum</span>
@@ -286,12 +337,12 @@
         </div>
 
         <div class="config-theater">
-          <div class="config-controls" aria-label="BGMM configuration controls">
+          <div class="config-controls" role="group" aria-label="BGMM configuration controls">
             <div class="control-stack">
               <label>
                 <span>Candidate components K</span>
                 <input id="configK" type="range" min="0" max="12" value="1" />
-                <output id="configKLabel">5</output>
+                <output id="configKLabel" aria-live="off">5</output>
               </label>
               <label>
                 <span>Covariance model</span>
@@ -304,17 +355,17 @@
               <label>
                 <span>Concentration prior</span>
                 <input id="configAlpha" type="range" min="0" max="6" value="3" />
-                <output id="configAlphaLabel">0.1</output>
+                <output id="configAlphaLabel" aria-live="off">0.1</output>
               </label>
               <label>
                 <span>Mean precision prior</span>
                 <input id="configMeanPrecision" type="range" min="0" max="3" value="0" />
-                <output id="configMeanPrecisionLabel">0.001</output>
+                <output id="configMeanPrecisionLabel" aria-live="off">0.001</output>
               </label>
             </div>
             <div class="preset-row">
-              <button id="configProceedings" class="preset is-active" type="button">Proceedings setting</button>
-              <button id="configArtifactBest" class="preset" type="button">Artifact top row</button>
+              <button id="configProceedings" class="preset is-active" type="button" aria-pressed="true">Proceedings setting</button>
+              <button id="configArtifactBest" class="preset" type="button" aria-pressed="false">Artifact top row</button>
             </div>
             <p class="microcopy">
               The proceedings setting button uses the K=5, full-covariance, Dirichlet-distribution,
@@ -324,7 +375,10 @@
           </div>
 
           <div class="config-stage">
-            <canvas id="configCanvas" aria-hidden="true"></canvas>
+            <div class="canvas-frame">
+              <canvas id="configCanvas" aria-hidden="true"></canvas>
+              <button class="motion-toggle" type="button" data-motion-toggle>Pause animation</button>
+            </div>
             <div class="config-readout">
               <div>
                 <span>Config ID</span>
@@ -351,9 +405,12 @@
                 <strong id="configMixed">--</strong>
               </div>
             </div>
-            <div id="configWeights" class="component-strip" aria-label="Top component occupancy"></div>
+            <div id="configWeights" class="component-strip" role="group" aria-label="Top component occupancy"></div>
           </div>
         </div>
+        <p id="configFallback" class="microcopy" role="status" hidden>
+          The sweep data could not be loaded. Reload the page to try again.
+        </p>
       </section>
 
       <section id="explorer" class="section explorer-section" aria-labelledby="explorer-title">
@@ -368,12 +425,12 @@
         </div>
         <div class="explorer-layout">
           <div class="control-panel">
-            <div class="preset-row" aria-label="Posterior presets">
-              <button class="preset is-active" data-preset="textbook">Textbook M2</button>
-              <button class="preset" data-preset="chimera">M2/M3 boundary</button>
-              <button class="preset" data-preset="mixed">Low-certainty mix</button>
+            <div class="preset-row" role="group" aria-label="Posterior presets">
+              <button class="preset is-active" type="button" data-preset="textbook" aria-pressed="true">Textbook M2</button>
+              <button class="preset" type="button" data-preset="chimera" aria-pressed="false">M2/M3 boundary</button>
+              <button class="preset" type="button" data-preset="mixed" aria-pressed="false">Low-certainty mix</button>
             </div>
-            <div class="slider-list" aria-label="Posterior probability sliders">
+            <div class="slider-list" role="group" aria-label="Posterior probability sliders">
               <label>
                 <span>M0 · Mod-Trem</span>
                 <input type="range" min="0" max="100" value="4" data-state="0" />
@@ -397,7 +454,7 @@
             </div>
           </div>
 
-          <div class="posterior-card" aria-live="polite">
+          <div class="posterior-card">
             <div class="posterior-summary">
               <div>
                 <span>Assignment tier</span>
@@ -416,14 +473,27 @@
                 <strong id="entropyValue">0.42</strong>
               </div>
             </div>
+            <p id="posteriorStatus" class="visually-hidden" role="status">Textbook, dominant state M2 · Mild-Ax</p>
             <div class="posterior-visual">
-              <canvas id="posteriorCanvas" aria-hidden="true"></canvas>
-              <div class="bar-stack" id="barStack" aria-label="Normalized posterior probabilities"></div>
+              <div class="canvas-frame">
+                <canvas id="posteriorCanvas" aria-hidden="true"></canvas>
+                <button class="motion-toggle" type="button" data-motion-toggle>Pause animation</button>
+              </div>
+              <div class="bar-stack" id="barStack" role="group" aria-label="Normalized posterior probabilities"></div>
             </div>
           </div>
         </div>
         <figure class="prototype-figure">
-          <img src="assets/generated/prototype-dashboard.png" alt="Generated dashboard concept for an uncertainty-aware Parkinson's motor-state explorer." />
+          <img
+            src="assets/generated/prototype-dashboard.webp"
+            srcset="assets/generated/prototype-dashboard-1100.webp 1100w, assets/generated/prototype-dashboard.webp 1672w"
+            sizes="90vw"
+            width="1672"
+            height="941"
+            loading="lazy"
+            decoding="async"
+            alt="Generated dashboard concept for an uncertainty-aware Parkinson's motor-state explorer."
+          />
           <figcaption>Generated prototype concept; the live browser explorer above is implemented in this package.</figcaption>
         </figure>
       </section>
@@ -439,9 +509,12 @@
           </p>
         </div>
 
-        <div class="gallery" aria-label="Result figure gallery">
+        <div class="gallery" role="group" aria-label="Result figure gallery">
           <figure class="gallery-card large">
-            <img src="assets/figures/miccai-pipeline.png" alt="MICCAI posterior-aware phenotyping pipeline figure." />
+            <a class="gallery-zoom" href="assets/figures/miccai-pipeline.webp">
+              <img src="assets/figures/miccai-pipeline-1280.webp" width="1280" height="375" loading="lazy" decoding="async" alt="MICCAI posterior-aware phenotyping pipeline figure." />
+              <span class="visually-hidden">Enlarge figure</span>
+            </a>
             <figcaption>
               <strong>MICCAI pipeline</strong>
               PPMI motor preprocessing, BGMM configuration search, bootstrap validation, posterior
@@ -449,49 +522,70 @@
             </figcaption>
           </figure>
           <figure class="gallery-card">
-            <img src="assets/figures/miccai-explainability.png" alt="MICCAI explainability panels for motor-state profiles and Granger matrix." />
+            <a class="gallery-zoom" href="assets/figures/miccai-explainability.webp">
+              <img src="assets/figures/miccai-explainability-1280.webp" width="1280" height="1058" loading="lazy" decoding="async" alt="MICCAI explainability panels for motor-state profiles and Granger matrix." />
+              <span class="visually-hidden">Enlarge figure</span>
+            </a>
             <figcaption>
               <strong>Explainability</strong>
               Motor-state profiles, converged configuration evidence, and temporal predictability.
             </figcaption>
           </figure>
           <figure class="gallery-card">
-            <img src="assets/figures/miccai-posterior-triage.png" alt="MICCAI posterior triage and cross-granularity correspondence figure." />
+            <a class="gallery-zoom" href="assets/figures/miccai-posterior-triage.webp">
+              <img src="assets/figures/miccai-posterior-triage-1280.webp" width="1280" height="898" loading="lazy" decoding="async" alt="MICCAI posterior triage and cross-granularity correspondence figure." />
+              <span class="visually-hidden">Enlarge figure</span>
+            </a>
             <figcaption>
               <strong>Posterior triage</strong>
               Textbook versus Chimera assignments and five-to-eight-state correspondence.
             </figcaption>
           </figure>
           <figure class="gallery-card">
-            <img src="assets/figures/miccai-imaging-validation.png" alt="MICCAI multimodal imaging validation figure." />
+            <a class="gallery-zoom" href="assets/figures/miccai-imaging-validation.webp">
+              <img src="assets/figures/miccai-imaging-validation-1280.webp" width="1280" height="849" loading="lazy" decoding="async" alt="MICCAI multimodal imaging validation figure." />
+              <span class="visually-hidden">Enlarge figure</span>
+            </a>
             <figcaption>
               <strong>Imaging validation</strong>
               DaTSCAN SBR and FreeSurfer subcortical MRI correlates of motor states.
             </figcaption>
           </figure>
           <figure class="gallery-card">
-            <img src="assets/figures/biorxiv-posterior-calibration.png" alt="bioRxiv posterior calibration curve." />
+            <a class="gallery-zoom" href="assets/figures/biorxiv-posterior-calibration.webp">
+              <img src="assets/figures/biorxiv-posterior-calibration.webp" width="1026" height="846" loading="lazy" decoding="async" alt="bioRxiv posterior calibration curve." />
+              <span class="visually-hidden">Enlarge figure</span>
+            </a>
             <figcaption>
               <strong>Extended calibration</strong>
               Refit-stability calibration from patient-blocked bootstrap analysis.
             </figcaption>
           </figure>
           <figure class="gallery-card">
-            <img src="assets/figures/biorxiv-state-transition.png" alt="bioRxiv state transition heatmap." />
+            <a class="gallery-zoom" href="assets/figures/biorxiv-state-transition.webp">
+              <img src="assets/figures/biorxiv-state-transition.webp" width="1047" height="917" loading="lazy" decoding="async" alt="bioRxiv state transition heatmap." />
+              <span class="visually-hidden">Enlarge figure</span>
+            </a>
             <figcaption>
               <strong>Longitudinal dynamics</strong>
               Visit-to-visit transition structure across posterior motor states.
             </figcaption>
           </figure>
           <figure class="gallery-card">
-            <img src="assets/figures/biorxiv-imaging-posterior-performance.png" alt="bioRxiv imaging-to-posterior prediction performance figure." />
+            <a class="gallery-zoom" href="assets/figures/biorxiv-imaging-posterior-performance.webp">
+              <img src="assets/figures/biorxiv-imaging-posterior-performance.webp" width="1152" height="774" loading="lazy" decoding="async" alt="bioRxiv imaging-to-posterior prediction performance figure." />
+              <span class="visually-hidden">Enlarge figure</span>
+            </a>
             <figcaption>
               <strong>Soft posterior prediction</strong>
               Imaging-to-posterior performance for DaTSCAN, MRI, and fused models.
             </figcaption>
           </figure>
           <figure class="gallery-card">
-            <img src="assets/figures/biorxiv-biofind-endpoints.png" alt="bioRxiv BioFIND endpoint gradients figure." />
+            <a class="gallery-zoom" href="assets/figures/biorxiv-biofind-endpoints.webp">
+              <img src="assets/figures/biorxiv-biofind-endpoints.webp" width="1243" height="846" loading="lazy" decoding="async" alt="bioRxiv BioFIND endpoint gradients figure." />
+              <span class="visually-hidden">Enlarge figure</span>
+            </a>
             <figcaption>
               <strong>BioFIND endpoint gradients</strong>
               External clinical face-validity analysis after model transfer.
@@ -558,8 +652,7 @@ MICCAI 2026, accepted paper 4053.</code></pre>
     </footer>
 
     <dialog id="figureDialog" aria-label="Figure preview">
-      <button id="dialogClose" class="dialog-close" aria-label="Close preview">Close</button>
-      <img id="dialogImage" alt="" />
+      <button id="dialogClose" class="dialog-close" type="button" aria-label="Close preview">Close</button>
       <p id="dialogCaption"></p>
     </dialog>
 
