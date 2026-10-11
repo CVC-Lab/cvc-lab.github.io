@@ -1,6 +1,10 @@
 /**
  * Software projects data for the CVC website
  * This file contains all software projects by category
+ *
+ * Optional item fields:
+ * - `href`: external page, opens in a new tab
+ * - `slug`: overrides the slug derived from `name` for the /software/<slug>/ page
  */
 
 module.exports = [
@@ -27,6 +31,7 @@ module.exports = [
       {
         name: 'Prism',
         description: 'Geometric modeling using algebraic patches',
+        href: 'https://www.cs.utexas.edu/%7Ebajaj/cvc/software/prism.shtml',
       },
       { name: 'GANITH', description: 'Algebraic geometry toolkit' },
     ],
@@ -50,14 +55,17 @@ module.exports = [
       {
         name: 'Pocket/Tunnel',
         description: 'Protein pocket/tunnel extractor',
+        href: 'https://www.cs.utexas.edu/%7Ebajaj/cvc/software/Pocktunnel.shtml',
       },
       {
         name: 'QHM',
         description: 'Quality Quadrilateral/Hexahedral Mesh Generator',
+        href: 'https://www.cs.utexas.edu/%7Ebajaj/cvc/software/QHM.shtml',
       },
       {
         name: 'QTM',
         description: 'Quality Triangular/Tetrahedral Mesh Generator',
+        href: 'https://www.cs.utexas.edu/%7Ebajaj/cvc/software/QTM.shtml',
       },
       {
         name: 'QMDM',
@@ -70,6 +78,7 @@ module.exports = [
       {
         name: 'GPU Renderer',
         description: 'Surface/Volume Rendering Packages',
+        href: 'https://www.cs.utexas.edu/%7Ebajaj/cvc/software/SurfVolRender.shtml',
       },
       { name: 'Shastra', description: 'X11 Based Scientific Toolkits' },
       {
@@ -94,7 +103,11 @@ module.exports = [
     category: 'Server Based Codes',
     items: [
       { name: 'F2Dock', description: 'Protein docking software' },
-      { name: 'TRLIB', description: 'Texture-based Rendering Library' },
+      {
+        name: 'TRLIB',
+        description: 'Texture-based Rendering Library',
+        href: 'https://www.cs.utexas.edu/%7Ebajaj/cvc/software/TRLIB.shtml',
+      },
       {
         name: 'ParIso',
         description: 'Fast Parallel Isosurface Rendering Library',

@@ -1,12 +1,13 @@
-import React from 'react'
+import * as React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { toLookup } from './imageLookup'
+import { toLookup, warnMissing } from './imageLookup'
 
 /**
- * Avatars are referenced from site metadata by filename (`aaron.png`), so they
- * used to be pulled in with a raw `require()` — shipping the untouched source
- * PNG, several megabytes in places, for an 80px circle. This resolves the same
- * filenames to processed gatsbyImageData.
+ * Avatars are referenced from site data by filename (`aaron.png`). This resolves
+ * those filenames to processed gatsbyImageData: a 256px square, cropped from the
+ * centre at build time (the same framing a centred object-fit crop gives), with
+ * `sizes` set for the largest avatar on the site (125px), so 1x screens load the
+ * 128px file and 2x screens the 256px one.
  *
  * Gatsby allows one static query per file, which is why this lives apart from
  * useCardImages.
@@ -25,9 +26,12 @@ const PERSON_IMAGE_QUERY = graphql`
         childImageSharp {
           gatsbyImageData(
             width: 256
+            height: 256
+            sizes: "125px"
             layout: CONSTRAINED
             placeholder: DOMINANT_COLOR
             formats: [AUTO, WEBP]
+            transformOptions: { cropFocus: CENTER }
           )
         }
       }
@@ -45,6 +49,11 @@ export const usePersonImage = () => {
 
   return React.useMemo(() => {
     const lookup = toLookup(nodes)
-    return imageName => (imageName ? lookup[`people/${imageName}`] || null : null)
+    return imageName => {
+      if (!imageName) return null
+      const node = lookup[`people/${imageName}`]
+      if (!node) warnMissing('usePersonImage', imageName, 'Add the file to src/images/people.')
+      return node || null
+    }
   }, [nodes])
 }

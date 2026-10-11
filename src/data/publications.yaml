@@ -1,0 +1,4167 @@
+# Publications listed on /publications/. This file is the only source of that list:
+# edit it (on GitHub or locally) and the next build publishes the change. The build checks
+# every entry and stops with the entry number, line and title when one is wrong.
+# Step-by-step guide: docs/ADDPUBLICATION.md.
+#
+# One entry per paper. Leave out keys you do not use.
+#   title          Required. Paper title.
+#   authors        Required. Author list, as it should appear.
+#   venue          Journal, conference, publisher or other venue. May contain simple HTML:
+#                  <a href="https://...">, <i>, <em>, <b>, <strong>, <br>.
+#   type           Required. One of the headings listed below.
+#   year           Required. Four-digit year, without quotes.
+#   month          1 to 12. Not shown on the page.
+#   pdf            Link to the paper: a full URL (https://...), or a site path such as
+#                  /papers/name.pdf for a file in static/papers/.
+#   project        Project page: a site path such as /projects/phast/, or a full URL.
+#   doi            DOI, such as 10.1145/3337680. Not shown on the page.
+#   arxiv          arXiv identifier, such as 2402.14081. Not shown on the page.
+#   thumbnail      Image shown next to the entry: put the PNG or JPG in
+#                  src/images/publications/ and write its path without the extension and
+#                  with the file name's capitals, such as publications/PUB_QC-PHAST_Search.
+#   thumbnail_alt  Required with thumbnail. Short description of the image.
+#   id             PaperID from the retired Google Sheet. Leave it out for new entries.
+#
+# type is one of these, and the page shows them in this order within each year:
+#   Journal Publications, arXiv, Conference Presentations & Publications, Technical Reports,
+#   Book, Edited Books, Book Chapters, Multimedia
+#
+# Order: entries are grouped by year, newest year first (a "# year" line starts each group).
+# Within a year and type the page lists entries in the order of this file.
+#
+# Put a value in quotes when it starts with a quote, [, {, #, &, *, !, |, >, %, @ or `,
+# or when it contains ": " or " #" (as many titles below do).
+
+# 2026
+
+- title: A Novel Tri-Modal Viral–Ultrasound Gene-Delivery Therapy Protocol for Lysosomal Neurodegeneration via Stochastic Model Optimization with Uncertainty Quantification and Generalizability
+  authors: Kartheek Nekkanti, Chandrajit Bajaj
+  venue: arXiv
+  type: arXiv
+  year: 2026
+  month: 5
+  pdf: /projects/tri-modal-gene-therapy/Tri-modal_kartheek-arxiv.pdf
+  project: /projects/tri-modal-gene-therapy
+  thumbnail: publications/PUB_Tri-Modal Gene Therapy
+  thumbnail_alt: Tri-modal viral ultrasound gene-delivery therapy publication thumbnail
+
+- title: 'The Physics, Information, and Computation of Perennial Learning: Kolmogorov Complexity, Information Distance and Port-Hamiltonian Thermodynamics'
+  authors: Chandrajit Bajaj
+  venue: Entropy, 2026, 28(5), 551, Special Issue dedicated to Professor Paul Vitányi
+  type: Journal Publications
+  year: 2026
+  month: 5
+  pdf: https://www.mdpi.com/1099-4300/28/5/551/pdf
+  project: /projects/perennial-learning-kolmogorov
+  thumbnail: publications/PUB_Perennial Learning
+  thumbnail_alt: Perennial Learning via Port-Hamiltonian Dynamics publication thumbnail
+
+- title: Computer Algebra Meets Hamiltonian Geometry
+  authors: Chandrajit Bajaj
+  venue: Maple Transactions, 2026, Tribute to Laureano González–Vega
+  type: Journal Publications
+  year: 2026
+  month: 3
+  pdf: https://mapletransactions.org/index.php/maple/article/view/24248/18704
+  project: /projects/computer-algebra-hamiltonian-geometry
+  thumbnail: publications/PUB_Computer Algebra
+  thumbnail_alt: Computer Algebra Meets Hamiltonian Geometry publication thumbnail
+
+- title: Scalable Risk-Averse Well-Placement Optimization Using Quadratic Knapsack Problem and Randomized Singular Value Decomposition
+  authors: R. Farell, J. E. Bickel, C. Bajaj
+  venue: 'SPE Journal 31.01 (2026): 480-496.'
+  type: Journal Publications
+  year: 2026
+  month: 1
+  pdf: https://doi.org/10.2118/231170-PA
+  project: https://cvc-lab.github.io/projects/scalable-risk-averse-well-placement
+  doi: 10.2118/231170-PA
+  thumbnail: publications/PUB_Scalable Risk-Averse
+  thumbnail_alt: Scalable Risk-Averse Well-Placement Optimization publication thumbnail
+
+- title: Learning Material-Aware Hamiltonian Risk Fields for Safe Navigation
+  authors: A. S. Ellendula, Y. Wang, C. Bajaj
+  venue: arXiv:2605.07038
+  type: arXiv
+  year: 2026
+  month: 5
+  pdf: https://arxiv.org/pdf/2605.07038.pdf
+  project: /projects/material-aware-hamiltonian-risk-fields
+  arxiv: '2605.07038'
+  thumbnail: projects/Learning Material-Aware Hamiltonian_Thumbnail
+  thumbnail_alt: Learning Material-Aware Hamiltonian Risk Fields for Safe Navigation publication thumbnail
+
+- title: 'When Descent Is Too Stable: Event-Triggered Hamiltonian Learning to Optimize'
+  authors: Y. Wang, C. Bajaj
+  venue: arXiv:2605.06868
+  type: arXiv
+  year: 2026
+  month: 5
+  pdf: https://arxiv.org/pdf/2605.06868.pdf
+  project: /projects/event-triggered-hamiltonian-optimization
+  arxiv: '2605.06868'
+  thumbnail: projects/When Descent Is Too Stable_Thumbnail
+  thumbnail_alt: When Descent Is Too Stable publication thumbnail
+
+- title: 'PHAST: Port-Hamiltonian Architecture for Structured Temporal Dynamics Forecasting'
+  authors: Shubham Bhardwaj and Chandrajit Bajaj
+  venue: arXiv:2602.17998
+  type: arXiv
+  year: 2026
+  month: 2
+  pdf: https://arxiv.org/pdf/2602.17998.pdf
+  project: /projects/phast
+  arxiv: '2602.17998'
+  thumbnail: publications/PUB_PHASTPort-Hamiltonian
+  thumbnail_alt: PHAST publication thumbnail
+
+- title: 'GRL-SNAM: Geometric Reinforcement Learning with Path Differential Hamiltonians for Simultaneous Navigation and Mapping in Unknown Environments'
+  authors: AS Ellendula, Y Wang, M Nguyen, C Bajaj
+  venue: International Conference on Learning Representations (ICLR), 2026
+  type: Conference Presentations & Publications
+  year: 2026
+  month: 1
+  pdf: https://arxiv.org/abs/2601.00116
+  project: https://cvc-lab.github.io/projects/grl-snam
+  arxiv: '2601.00116'
+  thumbnail: publications/PUB_GRL‑SNAM
+  thumbnail_alt: GRL-SNAM publication thumbnail
+
+- title: Posterior-calibrated multimodal motor states reveal longitudinal and imaging-associated heterogeneity in Parkinson’s disease
+  authors: H. M. Tirhekar, P. Yadav, C. Bajaj
+  venue: bioRxiv:2026.06.12.732003v1<br/>MICCAI 2026
+  type: Conference Presentations & Publications
+  year: 2026
+  month: 6
+  pdf: https://doi.org/10.64898/2026.06.12.732003
+  project: /projects/posterior-aware-pd-phenotyping
+  doi: 10.64898/2026.06.12.732003
+  thumbnail: publications/PUB_Posterior-Aware Phenotyping
+  thumbnail_alt: Posterior-calibrated multimodal motor states publication thumbnail
+
+- title: 'QC-PHAST Search: Classical--Quantum Query Benchmarks for Finite-Pool Rare-Regime Discovery'
+  authors: Harsh Milind Tirhekar, Chandrajit Bajaj
+  venue: arXiv:2607.21995
+  type: arXiv
+  year: 2026
+  month: 7
+  pdf: https://arxiv.org/abs/2607.21995
+  project: /projects/qc-phast-search
+  arxiv: '2607.21995'
+  thumbnail: publications/PUB_QC-PHAST_Search
+  thumbnail_alt: QC-PHAST Search publication thumbnail
+
+- title: Validity Gates Expose Limits of Longitudinal Multimodal Parkinson Disease Prediction
+  authors: H. M. Tirhekar, P. Yadav, C. Bajaj
+  venue: Preprint, 2026 (arXiv submission in preparation)
+  type: arXiv
+  year: 2026
+  month: 8
+  project: /projects/pd-research-companion/pd-validity-gates/
+
+- title: Signed Dopaminergic Asymmetry Tracks Contralateral Motor Laterality in Parkinson’s Disease
+  authors: H. M. Tirhekar, P. Yadav, C. Bajaj
+  venue: Preprint, 2026 (arXiv submission in preparation)
+  type: arXiv
+  year: 2026
+  month: 8
+  pdf: /papers/signed-dopaminergic-asymmetry-sep2026.pdf
+  project: /projects/pd-research-companion/pd-signed-laterality/
+
+- title: A Prior-Robust Sensitivity and Factorial-Necessity Analysis of Tri-Modal Viral-Ultrasound Gene Delivery for Lysosomal Neurodegeneration
+  authors: Kartheek Nekkanti, Chandrajit Bajaj
+  venue: Preprint, 2026 (arXiv submission in preparation)
+  type: arXiv
+  year: 2026
+  month: 9
+  pdf: /projects/tri-modal-sensitivity-audit/Nekkanti-Bajaj-prior-robust-audit-sep2026.pdf
+  project: /projects/tri-modal-sensitivity-audit
+  thumbnail: publications/PUB_Tri-Modal Sensitivity Audit
+  thumbnail_alt: Tri-modal gene-therapy sensitivity audit publication thumbnail
+
+- title: 'AI4PD: A Multi-Agent Clinical Web Portal for Querying the Unseen States of Patients with Parkinson’s Disease'
+  authors: Ryan Farell, Harsh Milind Tirhekar, Garvit Bansal, Shubham Bhardwaj, Aditya Sai Ellendula, Andrew Farell, Kartheek Nekkanti, Aparna Dev, Priyanshi Yadav, Ashwin Vinod, Yi Wang, Chandrajit Bajaj
+  venue: Submitted to MICAD 2026, 7th International Conference on Medical Imaging and Computer-Aided Diagnosis (under review)
+  type: Conference Presentations & Publications
+  year: 2026
+  month: 9
+  pdf: /papers/ai4pd-micad2026-submission.pdf
+  project: /projects/ai4pd/
+
+# 2025
+
+- title: A Differential and Pointwise Control Approach to Reinforcement Learning
+  authors: MP Nguyen, CL Bajaj
+  venue: The Thirty-ninth Annual Conference on Neural Information Processing Systems (NeurIPS), Dec 2025
+  type: Journal Publications
+  year: 2025
+  month: 12
+  pdf: https://arxiv.org/abs/2404.15617
+  project: https://cvc-lab.github.io/projects/differential-and-pointwise-control-rl
+  arxiv: '2404.15617'
+  thumbnail: publications/PUB_Differential and Pointwise
+  thumbnail_alt: Differential and Pointwise Control publication thumbnail
+
+- title: Scalable Robust Bayesian Co-Clustering with Compositional ELBOs
+  authors: A. Vinod, C. Bajaj
+  venue: ArXiv
+  type: arXiv
+  year: 2025
+  month: 4
+  pdf: https://doi.org/10.48550/arXiv.2504.04079
+  project: /projects/scalable-robust-bayesian-co-clustering
+  doi: 10.48550/arXiv.2504.04079
+  arxiv: '2504.04079'
+  thumbnail: publications/PUB_Compositional ELBOs
+  thumbnail_alt: Compositional ELBOs publication thumbnail
+
+- title: Learning Generalized Hamiltonian Dynamics with Stability from Noisy Trajectory Data
+  authors: L McLennan, Y Wang, R Farell, M Nguyen, C Bajaj
+  venue: ArXiv
+  type: arXiv
+  year: 2025
+  month: 9
+  pdf: https://arxiv.org/abs/2509.07280
+  project: https://cvc-lab.github.io/projects/subsurface-modeling
+  arxiv: '2509.07280'
+  thumbnail: publications/PUB_Hamiltonian_noisyTrajectory
+  thumbnail_alt: Hamiltonian dynamics from noisy trajectories publication thumbnail
+
+- title: Pathway Anchored Multimodal Clustering Reveals Circuit Level Signatures in Parkinsons Disease
+  authors: A Vinod, AS Ellendula, S Bhardwaj, A Dev, A Dominic, C Bajaj
+  venue: ArXiv
+  type: arXiv
+  year: 2025
+  month: 12
+  pdf: https://doi.org/10.64898/2025.12.15.694278
+  project: https://cvc-lab.github.io/projects/pathway-anchored-pd-clustering
+  doi: 10.64898/2025.12.15.694278
+  thumbnail: publications/PUB_Pathway Anchored Multimodal
+  thumbnail_alt: Pathway anchored multimodal clustering publication thumbnail
+
+- title: 'Integrated Genetic, Molecular, and Wearable Sensor Biomarkers Enable Bayesian Machine Learning-Driven Precision Stratification in Parkinson’s Disease: A Comprehensive Multi-Cohort Validation Study'
+  authors: Harsh Milind Tirhekar, Priyanshi Yadav, Chandrajit Bajaj
+  venue: ArXiv
+  type: arXiv
+  year: 2025
+  month: 12
+  pdf: https://doi.org/10.64898/2025.12.02.25340302
+  project: https://cvc-lab.github.io/projects/integrated-pd-precision-stratification
+  doi: 10.64898/2025.12.02.25340302
+  thumbnail: publications/PUB_Wearable Sensor Biomarkers
+  thumbnail_alt: Wearable sensor biomarkers publication thumbnail
+
+- title: Self-balancing, Memory Efficient, Dynamic Metric Space Data Maintenance, for Rapid Multi-kernel Estimation
+  authors: AS Ellendula, C Bajaj
+  venue: Joint European Conference on Machine Learning and Knowledge Discovery in Databases, Sep 2025
+  type: Conference Presentations & Publications
+  year: 2025
+  month: 9
+  pdf: https://arxiv.org/abs/2504.18003
+  project: /projects/dynamic-metric-space-octree
+  arxiv: '2504.18003'
+  thumbnail: publications/PUB_Rapid Multi-kernel Estimation
+  thumbnail_alt: Rapid multi-kernel estimation publication thumbnail
+
+- title: Bayesian Port–Hamiltonian Surrogate for Three-Phase Reservoir Flow Simulation
+  authors: R Farell, J Eric Bickel, C Bajaj
+  venue: SPE Middle East Oil and Gas Show and Conference. SPE, 2025.
+  type: Conference Presentations & Publications
+  year: 2025
+  month: 1
+  pdf: https://onepetro.org/SPEMEOS/proceedings-abstract/25MEOS/25MEOS/D021S043R002/673886
+  project: https://cvc-lab.github.io/projects/subsurface-modeling
+  thumbnail: publications/PUB_Three-Phase Reservoir
+  thumbnail_alt: Three-phase reservoir flow publication thumbnail
+
+- title: Field-Scale Bayesian Production Forecasting via Spectral Gaussian-Process Mixtures
+  authors: R Farell, JE Bickel, C Bajaj
+  venue: SPE/AAPG/SEG Unconventional Resources Technology Conference. URTEC, 2025.
+  type: Conference Presentations & Publications
+  year: 2025
+  month: 1
+  pdf: https://onepetro.org/URTECONF/proceedings-abstract/25URTC/25URTC/D021S035R003/675539
+  project: https://cvc-lab.github.io/projects/subsurface-modeling
+  thumbnail: publications/PUB_Field-Scale Bayesian
+  thumbnail_alt: Field-scale Bayesian production forecasting publication thumbnail
+
+- title: 'Stochastic Differential Policy Optimization: A Rough Path Approach to Reinforcement Learning'
+  authors: MP Nguyen, CL Bajaj
+  venue: Workshop on the Theory of AI for Scientific Computing (COLT), 2025
+  type: Conference Presentations & Publications
+  year: 2025
+  month: 1
+  pdf: https://openreview.net/pdf?id=W2TVe58Rp2
+  project: https://cvc-lab.github.io/projects/theoretical-bound
+  thumbnail: publications/PUB_A Rough Path Approach
+  thumbnail_alt: Rough path reinforcement learning publication thumbnail
+
+# 2024
+
+- title: 'DeblurSR: Event-Based Motion Deblurring Under the Spiking Representation'
+  authors: C. Song, C. Bajaj, Q. Huang
+  venue: Proc. Of the 38th Annual AAAI conference on Artificial Intelligence, Vancouver, Canada, Feb. 2024
+  type: Conference Presentations & Publications
+  year: 2024
+  month: 2
+
+- title: Sample Efficient Learning of Factored Embeddings of Tensor Fields
+  authors: C. Bajaj, T. Heo
+  venue: The 27th International Conference on Artificial Intelligence and Statistics (AISTATS) , Valencia, Spain
+  type: Conference Presentations & Publications
+  year: 2024
+  month: 5
+
+- title: Robust Learning of Noisy Time Series Collections Using Stochastic Process Models with Motion Codes
+  authors: C. Bajaj, M. Nguyen
+  venue: ArXiv
+  type: arXiv
+  year: 2024
+  month: 2
+  pdf: https://arxiv.org/abs/2402.14081
+  arxiv: '2402.14081'
+
+- title: 'GenCorres: Consistent Shape Matching via Coupled Implicit-Explicit Generative Models'
+  authors: H. Yang, X. Huang, B. Sun, C. Bajaj, Q. Huang
+  venue: International Conference on Learning Representations, ICLR 2024, May 2024
+  type: Conference Presentations & Publications
+  year: 2024
+  month: 5
+  pdf: https://arxiv.org/pdf/2304.10523.pdf
+  arxiv: '2304.10523'
+
+- title: Learning Optimal Control with Stochastic Models of Hamiltonian Dynamics, Springer Series, "Lecture Notes in Networks and Systems".
+  authors: C. Bajaj, M. Nguyen
+  venue: IntelliSys 2024, Sept.2-4, Amsterdam, Netherlands
+  type: Conference Presentations & Publications
+  year: 2024
+  month: 9
+  pdf: https://arxiv.org/pdf/2111.08108.pdf
+  arxiv: '2111.08108'
+
+- title: '4drecons: 4d neural implicit deformable objects reconstruction from a single rgb-d camera with geometrical and topological regularizations'
+  authors: X Cong, H Yang, L Chen, K Zhang, L Yi, C Bajaj
+  venue: ArXiv
+  type: arXiv
+  year: 2024
+  month: 6
+  pdf: https://arxiv.org/abs/2406.10167
+  project: /projects/4drecons
+  arxiv: '2406.10167'
+  thumbnail: publications/PUB_4drecons
+  thumbnail_alt: 4drecons publication thumbnail
+
+# 2023
+
+- title: 'Recipes for when Physics Fails: Recovering Robust Learning of Physics Informed Neural Networks'
+  authors: C. Bajaj, L. McLennan, T. Andeen, A. Roy
+  venue: 'Machine Learning: Science and Technology, January 2023'
+  type: Journal Publications
+  year: 2023
+  month: 1
+  pdf: https://iopscience.iop.org/article/10.1088/2632-2153/acb416/pdf
+  id: 1043
+
+- title: 'TAssembly: Data-driven fractured object assembly using a linear template model'
+  authors: Z. Deng, J. Jiang, Z. Chen, W. Zhang, Q. Yao, C. Song, Y. Sun, Z. Yang, S. Yan, Q. Huang, C. Bajaj
+  venue: Computers & Graphics- publisher Elsevier, Volume 113, June 2023, Pages 102-112
+  type: Journal Publications
+  year: 2023
+  month: 6
+  pdf: https://www.sciencedirect.com/science/article/abs/pii/S0097849323000560?dgcid=coauthor
+
+- title: 'DeblurSR: Event-Based Motion Deblurring Under the Spiking Representation'
+  authors: C. Song, C. Bajaj, Q. Huang
+  venue: ArXiv
+  type: arXiv
+  year: 2023
+  month: 3
+  pdf: https://arxiv.org/pdf/2303.08977.pdf
+  arxiv: '2303.08977'
+
+- title: 'GenCorres: Consistent Shape Matching via Coupled Implicit- Explicit Generative Models'
+  authors: H. Yang, X. Huang, B. Sun, C. Bajaj, Q. Huang
+  venue: ArXiv
+  type: arXiv
+  year: 2023
+  month: 4
+  pdf: https://arxiv.org/pdf/2304.10523.pdf
+  arxiv: '2304.10523'
+
+- title: A Novel Perspective on Brain Tumor Classification Using Hybrid Algorithm
+  authors: R. Jayanthi, A. Hepzibah Christinal, D.A. Chandy, and C. Bajaj
+  venue: 2023 IEEE International Conference on Computer, Electronics & Electrical Engineering and their applications (IC2E3), June 2023
+  type: Conference Presentations & Publications
+  year: 2023
+  month: 6
+
+- title: Deep Contrastive Patch-Based Subspace Learning for Camera Image Signal Processing
+  authors: Y. Yang, Y. Wang, C. Bajaj
+  venue: 2023 IEEE World Conference on Applied Intelligence and Computing (AIC 2023)
+  type: Conference Presentations & Publications
+  year: 2023
+  month: 7
+
+- title: Reinforcement Learning of Self Enhancing Camera Image and Signal Processing
+  authors: C. Bajaj, Y. Wang, Y. Yang
+  venue: 'In Advances in Data-driven Computing and Intelligent Systems: Selected Papers from International Conference on Advances in Data-driven Computing and Intelligent Systems (ADCIS 2022), Volume 2 (pp. 281-303) Singapore: Springer Nature, Springer Book Series, "Lecture Notes in Networks and Systems".'
+  type: Conference Presentations & Publications
+  year: 2023
+  month: 6
+  pdf: https://www.springer.com/series/15179
+
+- title: Application of intelligent edge computing and machine learning algorithms in MBTI personality prediction
+  authors: J.A. Sharon, A. Hepzibah Christinal, D. Abraham Chandy, C. Bajaj
+  venue: Intelligent Edge Computing for Cyber-Physical Applications, May 2023, Edited by D. JudeHemanth, BrijB Gupta, Mohamed Elhoseny and Swanti Vijay Shinde, Chapter 11, pp. 187-215, doi:org/10.1016/B978-0-323-99412-5.00003-4
+  type: Book Chapters
+  year: 2023
+  month: 3
+  pdf: https://www.sciencedirect.com/science/article/abs/pii/B9780323994125000034?via%3Dihub
+
+# 2022
+
+- title: A Distribution-Dependent Mumford-Shah Model for Unsupervised Hyperspectral Image Segmentation
+  authors: JC. Cohrs, C. Bajaj, B. Berkels
+  venue: |-
+    IEEE Transactions on Geoscience and Remote Sensing, 
+    Print ISSN: 0196-2892, 
+    Online ISSN: 1558-0644, 
+    Digital Object Identifier: 10.1109/TGRS.2022.3227061
+  type: Journal Publications
+  year: 2022
+  month: 3
+  pdf: https://arxiv.org/abs/2203.15058
+  arxiv: '2203.15058'
+  id: 1040
+
+- title: 'E-CIR: Event-Enhanced Continuous Intensity Recovery'
+  authors: C. Song, Q. Huang, C. Bajaj
+  venue: 2022 Conference on Computer Vision and Pattern Recognition, CVPR 2022
+  type: Conference Presentations & Publications
+  year: 2022
+  month: 3
+  pdf: "https://cvcweb.oden.utexas.edu/cvc/papers/2022/conference/2022_CVPR_EventDeblur_1117_0200CST.pdf\n"
+  id: 1031
+
+- title: Sequential Effect of Stochastic Distribution in Compressive Sensing for MRI Images
+  authors: G. Kowsalya; D. Abraham Chandy, S. Preethi Ceon  C. Bajaj
+  venue: Expert Systems With Applications
+  type: Journal Publications
+  year: 2022
+  month: 7
+  id: 1034
+
+- title: 'HOFS: Higher Order Mutual Information, Approximation for Feature Selection in R'
+  authors: K.Gajowniczek, J. Wu, S. Gupta, C. Bajaj
+  venue: SoftwareX
+  type: Journal Publications
+  year: 2022
+  pdf: https://authors.elsevier.com/sd/article/S2352711022000930
+  id: 1035
+
+- title: 'Probabilistic PolarGMM: Unsupervised Cluster Learning of Very Noisy Projection Images of Unknown Pose'
+  authors: S. Chockchowwat, C. Bajaj
+  venue: arXiv:2206.12959
+  type: arXiv
+  year: 2022
+  month: 6
+  pdf: https://arxiv.org/pdf/2206.12959.pdf
+  arxiv: '2206.12959'
+  id: 1037
+
+- title: Reinforcement Learning of Self Enhancing Camera Image and Signal Processing
+  authors: C. Bajaj, Y. Wang, Y. Yang
+  venue: |-
+    International Conference on Advances in Data-driven Computing and Intelligent Systems (ADCIS 2022), 
+  
+    Springer Book Series, "Lecture Notes in Networks and Systems"
+  type: Conference Presentations & Publications
+  year: 2022
+  month: 8
+  pdf: https://www.springer.com/series/15179
+  id: 1038
+
+- title: Learning Generative Embeddings using an Optimal Subsampling Policy for Tensor Sketching
+  authors: C. Bajaj, T. Heo, R. Avlur
+  venue: https://arxiv.org/abs/2209.00372
+  type: arXiv
+  year: 2022
+  month: 9
+  pdf: https://arxiv.org/abs/2209.00372
+  arxiv: '2209.00372'
+  id: 1039
+
+- title: A Particle-based Sparse Gaussian Process Optimizer
+  authors: C. Bajaj, OB. Vaidya, Y. Wang
+  venue: "arXiv:2211.14517v1,  \t\nhttps://doi.org/10.48550/arXiv.2211.14517\n "
+  type: arXiv
+  year: 2022
+  month: 11
+  pdf: https://arxiv.org/abs/2211.14517
+  arxiv: '2211.14517'
+  id: 1041
+
+- title: Solving the Side-Chain Packing Arrangement of Proteins from Reinforcement Learned Stochastic Decision Making
+  authors: C. Bajaj, C. Li, M. Nguyen
+  venue: arXiv:2212.03320
+  type: arXiv
+  year: 2022
+  month: 12
+  pdf: https://doi.org/10.48550/arXiv.2212.03320
+  doi: 10.48550/arXiv.2212.03320
+  arxiv: '2212.03320'
+  id: 1042
+
+# 2021
+
+- title: Learning Transferable 3D Adversarial Cloaks for Deep Trained Detectors
+  authors: Arman Maesumi, Mingkang Zhu, Yi Wang, Tianlong Chen, Zhangyang Wang, Chandrajit Bajaj
+  venue: arxiv.org/abs/2104.11101
+  type: arXiv
+  year: 2021
+  month: 4
+  pdf: https://arxiv.org/abs/2104.11101
+  arxiv: '2104.11101'
+  id: 1012
+
+- title: Learning Deep Latent Subspaces for Image Denoising
+  authors: Yunhao Yang, Yuhan Zheng, Yi Wang, Chandrajit Bajaj
+  venue: arXiv:2104.00253
+  type: arXiv
+  year: 2021
+  month: 4
+  pdf: "https://arxiv.org/abs/2104.00253\n"
+  arxiv: '2104.00253'
+  id: 1011
+
+- title: Invariance-based Multi-Clustering of Latent Space Embeddings for Equivariant Learning
+  authors: Chandrajit Bajaj, Avik Roy, Haoran Zhang
+  venue: arXiv 2107.11717, 2021
+  type: arXiv
+  year: 2021
+  month: 7
+  pdf: http://arxiv.org/abs/2107.11717
+  arxiv: '2107.11717'
+  id: 1020
+
+- title: Materials for emergent silicon-integrated optical computing
+  authors: Alexander A. Demkov, Chandrajit Bajaj, John G. Ekerdt, Chris J. Palmstrom, S. J. Ben Yoo
+  venue: 'Journal of Applied Physics-(Vol.130, Issue 7), DOI: 10.1063/5.0056441'
+  type: Journal Publications
+  year: 2021
+  month: 8
+  pdf: "https://doi.org/10.1063/5.0056441\n"
+  doi: 10.1063/5.0056441
+  id: 1021
+
+- title: 'ARAPReg: An As-Rigid-As Possible Regularization Loss for Learning Deformable Shape Generators'
+  authors: Bo Sun, Xiangru Huang, Zaiwei Zhang, Junfeng Jiang, Qixing Huang, Chandrajit Bajaj
+  venue: International Conference on Computer Vision(ICCV) 2021, arXiv:2108.09432
+  type: Conference Presentations & Publications
+  year: 2021
+  month: 7
+  pdf: https://arxiv.org/abs/2108.09432
+  arxiv: '2108.09432'
+  id: 1017
+
+- title: Scene Synthesis via Uncertainty-Driven Attribute Synchronization
+  authors: Haitao Yang, Zaiwei Zhang, Siming Yan, Chongyang Ma, Haibin Huang, Yi Zheng, Chandrajit Bajaj, Qixing Huang
+  venue: International Conference on Computer Vision (ICCV) 2021
+  type: Conference Presentations & Publications
+  year: 2021
+  month: 7
+  pdf: "https://arxiv.org/abs/2108.13499\n"
+  arxiv: '2108.13499'
+  id: 1019
+
+- title: An Efficient Algorithm to Compute the X-ray Transform
+  authors: Chong Chen, Runqian Wang, Chandrajit Bajaj,  Ozan Oktem
+  venue: International Journal of Computer Mathematics, DOI:10.1080/00207160.2021, arXiv:20060068v2
+  type: Journal Publications
+  year: 2021
+  month: 7
+  pdf: https://doi.org/10.1080/00207160.2021.1969017
+  doi: 10.1080/00207160.2021.1969017
+  id: 1023
+
+- title: Deep Predictive Learning of Carotid Stenosis Severity
+  authors: Yiqun Diao, Oliver Zhao, Priya Kothapalli, Peter Monteleone, Chandrajit Bajaj
+  venue: arXiv:2108.00296
+  type: arXiv
+  year: 2021
+  month: 7
+  pdf: "https://arxiv.org/abs/2108.00296\n"
+  arxiv: '2108.00296'
+  id: 1024
+
+- title: 'Learning Optimal Control with Stochastic Models of Hamiltonian Dynamics '
+  authors: Chandrajit Bajaj, Minh Nguyen
+  venue: 'arXiv:2111.08108 '
+  type: arXiv
+  year: 2021
+  month: 11
+  pdf: http://arxiv.org/abs/2111.08108
+  arxiv: '2111.08108'
+  id: 1029
+
+- title: Robust Learning of Physics Informed Neural Networks
+  authors: Chandrajit Bajaj, Luke McLennan, Timothy Andeen, Avik Roy
+  venue: https://arxiv.org/abs/2110.13330, October 26, 2021
+  type: arXiv
+  year: 2021
+  month: 10
+  pdf: https://arxiv.org/abs/2110.13330
+  arxiv: '2110.13330'
+  id: 1026
+
+- title: "Recursive Self-Improvement for Camera Image and Signal Processing Pipeline \n"
+  authors: Chandrajit Bajaj, Yi Wang, Yunghao Yang, Yuhan Zheng
+  venue: arXiv:2111.07499
+  type: arXiv
+  year: 2021
+  month: 11
+  pdf: "http://arxiv.org/abs/2111.07499\n"
+  arxiv: '2111.07499'
+  id: 1028
+
+- title: Development of Low Rank Sparse Matrix Decomposition for Improving Spatial and Temporal Resolutions of MRI Medical Data
+  authors: G. Kowsalya, A.Hepzibah Christinal, D.Abraham Chandy, S.Jebasingh,  R. Hephzibah, C. Bajaj
+  venue: |-
+    Intl. Conference on Advancements in Electrical, Electronics, Communication, Computing and Automation, 2021,
+    ELCVIA: Electronic Letters on Computer Vision and Image Analysis, DOI:10.5565/rev/elcvia.1412
+  type: Conference Presentations & Publications
+  year: 2021
+  pdf: "https://ddd.uab.cat/pub/elcvia/elcvia_a2021v20n2/elcvia_a2021v20n2aX.pdf\n"
+  id: 1033
+
+# 2020
+
+- title: 'VoroCrust: Voronoi Meshing Without Clipping'
+  authors: A. Abdelkader, C. L. Bajaj, M. S. Ebeida, A. H. Mahmoud, S. A. Mitchell, J. D. Owens, A. A. Rushdi
+  venue: "ACM Transaction on Graphics, May 2020, Article No.:23\n"
+  type: Journal Publications
+  year: 2020
+  month: 5
+  pdf: "https://doi.org/10.1145/3337680\n"
+  doi: 10.1145/3337680
+  id: 556
+
+- title: Weighted Random Forests to Improve Arrhythimia Classification
+  authors: K. Gajowniczek, I. Grzegorczyk, T. Zabkowski, C. Bajaj
+  venue: Electronics as part of the Special Issue Computational Intelligence for Physilogical Sensors and Body Sensor Network. Electronics 2020 Jan; 9,99; doi:10.3390/electronics9010099.
+  type: Journal Publications
+  year: 2020
+  month: 1
+  pdf: https://www.mdpi.com/2079-9292/9/1/99/pdf
+  id: 1007
+
+- title: Can 3D Adversarial Logos Cloak Humans?
+  authors: T. Chen,  Y Wang J Zhou, S. Liu, S. Chang,  C. Bajaj, Z. Wang
+  venue: arXiv:2006.14655
+  type: arXiv
+  year: 2020
+  month: 7
+  pdf: ' https://arxiv.org/pdf/2006.14655.pdf '
+  arxiv: '2006.14655'
+  id: 1005
+
+- title: A Fast and Adaptive Algorithm to Compute the X-ray Transform
+  authors: C. Chen, R. Wang, C. Bajaj, O. Oktem
+  venue: 'arXiv: 2006.00686v2'
+  type: arXiv
+  year: 2020
+  month: 8
+  pdf: https://arxiv.org/abs/2006.00686
+  arxiv: '2006.00686'
+  id: 1013
+
+# 2019
+
+- title: 'SketchyCoreSVD: SketchySVD from Random Subsampling of the Data Matrix'
+  authors: Chandrajit Bajaj, Yi Wang, Tianming Wang
+  venue: 'http://arxiv.org/abs/1907.13634, Proc. of IEEE Big Data Conference, Los Angeles, CA, 2019, DOI: 10.1109/BigData47090.2019.9006345'
+  type: Technical Reports
+  year: 2019
+  pdf: http://arxiv.org/abs/1907.13634
+  arxiv: '1907.13634'
+  id: 561
+
+- title: A Streaming model for Generalized Rayleigh with extensions to Minimum Noise Fraction
+  authors: S. Gupta, C. Bajaj
+  venue: 'Proc. Of IEEE Big Data Conferencee 2019, DOI: 10.1109/BigData47090.2019.9006512'
+  type: Conference Presentations & Publications
+  year: 2019
+  pdf: https://utexas.app.box.com/file/561181357948
+  id: 1002
+
+- title: Blind Hyperspectral-Multispectral Image Fusion via Graph Laplacian Regularization
+  authors: C. L. Bajaj, T. Wang
+  venue: Arxiv:1902.08224
+  type: arXiv
+  year: 2019
+  month: 2
+  pdf: https://arxiv.org/abs/1902.08224
+  arxiv: '1902.08224'
+  id: 555
+
+- title: 'SketchyCoreSVD: SketchySVD from Random Subsampling of the Data Matrix'
+  authors: C. Bajaj, Y. Wang, T. Wang
+  venue: 'Proc. Of IEEE Big Data Conferencee 2019, DOI: 10.1109/BigData47090.2019.9006345'
+  type: Conference Presentations & Publications
+  year: 2019
+  pdf: https://arxiv.org/pdf/1907.13634.pdf
+  arxiv: '1907.13634'
+  id: 1001
+
+- title: A Fully Automated, Faster Noise Reduction Approach to Increasing the Analytical Capability of Chemical Imaging for Digital Histopathology
+  authors: S. Gupta, S. Mittal, A. Kajdacsy-Balla, R. Bhargava, C. L. Bajaj
+  venue: |-
+    Plos One  https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0205219
+    DOI: 10.1101/425835, 
+  type: Journal Publications
+  year: 2019
+  pdf: https://www.biorxiv.org/content/biorxiv/early/2018/09/24/425835.full.pdf
+  id: 558
+
+- title: Tensor Maps for Synchronizing Heterogeneous Shape Collections
+  authors: Q. Huang, Z. Liang, H. Wang, S. Zuo, C. Bajaj
+  venue: 'ACM Transactions on Graphics (Siggraph 2019), 38:4 (106:1--106:18) DOI: 10.1145/3197517.3201359'
+  type: Journal Publications
+  year: 2019
+  pdf: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6656399/
+  id: 560
+
+- title: Stein Variational Gradient Descent With Matrix-Valued Kernels
+  authors: Dilin Wang,  Ziyang Tang, Chandrajit Bajaj, Qiang Liu
+  venue: |-
+    Proc. of 33rd Neural Information processing, NeurIPS 2019, 
+    Accepted for publication.
+  type: Conference Presentations & Publications
+  year: 2019
+  pdf: https://arxiv.org/abs/1910.12794
+  arxiv: '1910.12794'
+  id: 564
+
+- title: Primal-Dual Mesh Optimization with Mathematical Foundations
+  authors: |
+    S. Mitchell, P. Knupp, A. Abdelkader, M. Awad, C. Bajaj, M. Deakin, M. Ebeida, D. Engwirda, A. Mahmoud, D. 
+    Manocha, D. McKay, S. Mousley, J. Owens, C. Park, A. Patney, A. Rushdi, L. Swiler, L. Wei
+  venue: |
+    Sandia National
+    Lab(SNL-NM) Albuquerque, NM
+  type: Conference Presentations & Publications
+  year: 2019
+  month: 1
+  pdf: https://www.osti.gov/servlets/purl/1596226
+  id: 1014
+
+# 2018
+
+- title: Sampling Conditions for Conforming Voronoi Meshing by the VoroCrust Algorithm
+  authors: A. Abdelkader, C. L. Bajaj, M. S. Ebeida, A. H. Mahomoud, S. A. Mitchell, A. A. Rushdi, J. D. Owens
+  venue: 'LIPIcs: Leibniz International Proceedings in Informatics, Volume 99, ArXiv:1803.06078, Symposium on Computational Geometry (SOCG 2018), Budapest, Hungary, June 2018'
+  type: Journal Publications
+  year: 2018
+  month: 6
+  pdf: http://drops.dagstuhl.de/opus/volltexte/2018/8714/pdf/LIPIcs-SoCG-2018-1.pdf
+  id: 554
+
+- title: |-
+    Uncertainty Quantified Computational Analysis of the Energetics of Viral Capsid
+    Assembly
+  authors: N. Clement, M. Rasheed and C. Bajaj
+  venue: 'Journal of Computational Biology, Volume 25, Issue 1, 25(1): 51-71'
+  type: Journal Publications
+  year: 2018
+  month: 1
+  pdf: https://arxiv.org/pdf/1610.00638.pdf
+  arxiv: '1610.00638'
+  id: 529
+
+- title: Functional Data Approximation on Bounded Domains using Polygonal Finite Elements
+  authors: J. Cao, Y. Xiao, Z. Chen, W. Wang, C. Bajaj
+  venue: Computer Aided Geometric Design, Volume 63, Pages 149-163, 2018
+  type: Journal Publications
+  year: 2018
+  pdf: https://www.sciencedirect.com/science/article/pii/S0167839618300633?via%3Dihub
+  id: 542
+
+- title: 'SMAC: Simultaneous Mapping and Clustering Using Spectral Decompositions'
+  authors: C. Bajaj, T. Gao, Q. Huang, Z. He, Z. Liang
+  venue: International Conference on Machine Learning 2018, Stockholm, Sweden, July 2018 (ICML 2018)
+  type: Conference Presentations & Publications
+  year: 2018
+  pdf: https://cvcweb.ices.utexas.edu/cvc/papers/2018/conference/2018_ICML_SMAC-main.pdf
+  id: 543
+
+- title: 'VoroCrust Illustrated: Theory and Challenges'
+  authors: A. Abdelkader, C. Bajaj, M. Ebeida, A. Mahmoud, S. Mitchell, J. Owens, A. Rushdi
+  type: Multimedia
+  year: 2018
+  month: 6
+  pdf: http://www.cs.umd.edu/~akader/files/MME18_VC.pdf
+  id: 545
+
+- title: Dynamic Filtering with Large Sampling Field for ConvNets
+  authors: J. Wu, D. Li, Y. Yang, C. Bajaj , X. Ji
+  venue: |
+    Ferrari V., Hebert M., Sminchisescu C., Weiss Y. (eds) Computer Vision – ECCV 2018. Lecture Notes in Computer Science, vol 11214. Springer, 
+    https://doi//.org/10.1007/978-3-030-01249-612
+  type: Conference Presentations & Publications
+  year: 2018
+  pdf: "https://arxiv.org/pdf/1803.07624.pdf\n"
+  arxiv: '1803.07624'
+  id: 548
+
+- title: A Mathematical Primer for Computational Data Sciences (frequently updated)
+  authors: C. Bajaj
+  type: Book
+  year: 2018
+  month: 2
+  pdf: http://www.cs.utexas.edu/~bajaj/math-ds.pdf
+  id: 551
+
+# 2017
+
+- title: Shape based image reconstruction using linearized deformations.
+  authors: O. Oktem, C. Chen, N. O. Domanic, P. Ravikumar, C. Bajaj
+  venue: Inverse Problems, Volume 33, No 3 (Mar 2017), pp.1-33
+  type: Journal Publications
+  year: 2017
+  month: 1
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2017/journal/shape_based_reconstruction.pdf
+  id: 525
+
+- title: Splines and Geometric Modeling
+  authors: C. Bajaj
+  venue: |-
+    Handbook of Discrete and Computational Geometry, 3rd Edition
+    J.E. Goodman and J. O'Rourke, editors,
+    CRC Press LLC, Boca Raton, FL, 1997. pp. 1479-1502
+  type: Book Chapters
+  year: 2017
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2017/book/chap57-fin-idx.pdf
+  id: 526
+
+- title: 'Geometric Detection Algorithms for Cavities on Protein Surfaces in Molecular Graphics: A Survey'
+  authors: T. Simões, D. Lopes, S. Dias, F. Fernandes, J. Pereira, J. Jorge, C. Bajaj, and A. Gomes
+  venue: Computer Graphics Forum, Volume 36, Issue 8, pp. 643-683
+  type: Journal Publications
+  year: 2017
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2017/journal/2017-survey.pdf
+  id: 528
+
+- title: A Seed Placement Strategy for Conforming Voronoi Meshing
+  authors: A. Abdelkader, C. Bajaj, M. Ebeida, S. Mitchell
+  venue: Canadian Conference on Computational Geometry (CCCG) 2017, Ottawa, Ontario, Canada, July 2017
+  type: Conference Presentations & Publications
+  year: 2017
+  month: 7
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2017/conference/CCCG17_conforming_voronoi_mesh.pdf
+  id: 533
+
+- title: Statistical Framework for Uncertainty Quantification in Computational Molecular Modeling
+  authors: M. Rasheed, N. Clement, A. Bhowmick, C. Bajaj
+  venue: |-
+    IEEE/ACM Transactions on Computational Biology and Bioinformatics, Volume 15, Issue 4 pgs 146-155
+    DOI: 10.1109/TCBB.2017.2771240
+  type: Journal Publications
+  year: 2017
+  month: 5
+  pdf: https://cvcweb.ices.utexas.edu/cvc/papers/2017/conference/bajaj-UQ-TCBB.pdf
+  id: 535
+
+- title: Translation Synchronization via Truncated Least Squares
+  authors: X. Huang, Z. Liang, C. Bajaj, Q. Huang
+  venue: Advances in Neural Information Processing Systems 30 (NIPS 2017), Long Beach, California, December 2017
+  type: Conference Presentations & Publications
+  year: 2017
+  month: 12
+  pdf: https://papers.nips.cc/paper/6744-translation-synchronization-via-truncated-least-squares
+  id: 536
+
+- title: Efficient Clustering-based Noise Covariance Estimation for Maximum Noise Fraction
+  authors: S. Gupta, C. Bajaj
+  venue: |-
+    National Conference on Computer Vision, Pattern Recognition, Image Processing and Graphics (NCVPRIPG), Mandi, India, December 2017
+    DOI: 10.1007/978-981-13-0020-2_21
+  type: Conference Presentations & Publications
+  year: 2017
+  month: 12
+  pdf: https://cvcweb.ices.utexas.edu/cvc/papers/2017/conference/efficient-clustering-based.pdf
+  id: 537
+
+# 2016
+
+- title: X-ray, Cryo-EM, and computationally predicted protein structures used in integrative modeling of HIV Env glycoprotein gp120 in complex with CD4 and 17b
+  authors: M. Rasheed, R. Bettadapura, C. Bajaj
+  venue: Data in Brief, Volume 6 (March 2016), pp. 833-839
+  type: Journal Publications
+  year: 2016
+  month: 1
+  pdf: http://www.sciencedirect.com/science/article/pii/S2352340916000032
+  id: 519
+
+- title: Construction of Scalar and Vector Finite Element Families on Polygonal and Polyhedral Meshes
+  authors: A. Gillette, A. Rand, C. Bajaj
+  venue: 'J. Comput. Methods Appl. Math., DOI: 10.1515/cmam-2016-0019'
+  type: Journal Publications
+  year: 2016
+  month: 5
+  pdf: http://arxiv.org/abs/1405.6978
+  arxiv: '1405.6978'
+  id: 520
+
+- title: Disk Density Tuning of a Maximal Random Packing
+  authors: M. Ebeida, A. Rushdi, M. Awad, A. Mahmoud, D-M. Yan, S. English, J. Owens, C. Bajaj, S. Mitchell
+  venue: Eurographics Symposium on Geometry Processing 2016,  <b>Computer Graphics Forum</b>
+  type: Journal Publications
+  year: 2016
+  month: 5
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2016/journal/SGP16_DiskTuning.pdf
+  id: 521
+
+- title: All-Hex Meshing of Multiple-Region Domains without Cleanup
+  authors: M. Awad, A. Rushdi, M. Awad,  M. A. Abas,  S. Mitchell, A. Mahmoud, C. Bajaj, M. Ebeida
+  venue: (25 th IMR), Procedia Engineering, Volume 163, 2016, pp. 251-261
+  type: Journal Publications
+  year: 2016
+  month: 11
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2016/journal/allhex_IMR16-final.pdf
+  id: 522
+
+- title: Statistical Framework for Uncertainty Quantification in Computational Molecular Modeling
+  authors: M. Rasheed, N. Clement, A. Bhowmick, C. Bajaj
+  venue: Proc. Of the 7th ACM Conference on Bioinformatics, Computational Biology and Health Informatics, Seattle, WA, Oct . 2016 (ACM-BCB 2016)
+  type: Conference Presentations & Publications
+  year: 2016
+  month: 10
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2016/conference/UQ-ACM_BCB-final.pdf
+  id: 524
+
+- title: Higher Order Mutual Information Approximation for Feature Selection
+  authors: J. Wu, S. Gupta, C. Bajaj
+  venue: arXiv:1612.00554
+  type: arXiv
+  year: 2016
+  month: 12
+  pdf: https://arxiv.org/pdf/1612.00554
+  arxiv: '1612.00554'
+  id: 538
+
+- title: Predicting and explaining identity risk, exposure and cost using the ecosystem of identity attributes
+  authors: R. Zaeem, S. Budalakoti, K. Barber, M. Rasheed, C. Bajaj
+  venue: IEEE- International Camahan Conference on Security Technology (ICCST)
+  type: Conference Presentations & Publications
+  year: 2016
+  month: 10
+  pdf: "https://ieeexplore.ieee.org/abstract/document/7815701?casa_token=mXo1VuE6DwcAAAAA:HM4v1mwuqDxDDbk94kfU_a4kUte5p_L34GyzpGB9F2iZmS4E-3Obwrd19Dyh5zOO8OXMVRzv0tU\n"
+  id: 1009
+
+# 2015
+
+- title: Human Heart Preservation Analysis using Convective Cooling
+  authors: A. Abdoli, G. Dulikravich, C. Bajaj, D. Stowe, M. Salik Jahania
+  venue: International Journal for Numerical Methods in Heat and Fluid Flow, Vol 25, Iss 6, pp. 1426-1443
+  type: Journal Publications
+  year: 2015
+  month: 6
+  pdf: http://www.emeraldinsight.com/doi/abs/10.1108/HFF-08-2014-0251
+  id: 425
+
+- title: Approximating the Generalized Voronoi Diagram of Closely Spaced Objects
+  authors: J. Edwards, E. Daniel, V. Pascucci, C. Bajaj
+  venue: 'Eurographics 2015, Guest Editors: O. Sorkine-Hornung and M. Wimmer, Computer Graphics Forum, 2015, 34(2): 299-309. DOI:10.111/cgf.12561 (<a href="http://cvcweb.ices.utexas.edu/cvc/papers/2015/journal/Eurographics-GVD-paper-final-2015.pdf">pdf</a>)'
+  type: Journal Publications
+  year: 2015
+  month: 5
+  id: 426
+
+- title: |-
+    Computational Refinement and Validation Protocol for Proteins with Large Variable
+    Regions Applied to Model HIV Env Spike in CD4 and 17b Bound State
+  authors: M. Rasheed, R. Bettadapura, C. Bajaj
+  venue: 'Structure, 2015, 23,(6): pp.1138-1149.  (<a href="http://cvcweb.ices.utexas.edu/cvc/papers/2015/journal/gp120.pdf">manuscript</a>) and  (<a href="http://cvcweb.ices.utexas.edu/cvc/papers/2015/journal/gp120supp.pdf">supplement</a>)'
+  type: Journal Publications
+  year: 2015
+  month: 6
+  id: 429
+
+- title: 'PF2fit: Polar Fast Fourier Matched Alignment of Atomistic Structures with 3D Electron Microscopy Maps'
+  authors: R. Bettadapura, M. Rasheed, A. Vollrath, C. Bajaj
+  venue: PLOS Computational Biology, 2015. (<a href="http://cvcweb.ices.utexas.edu/cvc/papers/2015/journal/fitting-PLOS.pdf">manuscript</a>) DOI <a href=http://dx.doi.org/10.1371/journal.pcbi.1004289>10.1371/journal.pcbi.1004289</a>
+  type: Journal Publications
+  year: 2015
+  month: 10
+  pdf: http://www.ploscompbiol.org/article/fetchObject.action?uri=info:doi/10.1371/journal.pcbi.1004289&representation=PDF
+  doi: 10.1371/journal.pcbi.1004289
+  id: 430
+
+- title: Quality Partitioned Meshing of Multi-material Objects
+  authors: Q. Zhang , D. Cha, C. Bajaj
+  venue: 'Proc. Of 24th Intl. Meshing Roundtable (2015); Procedia Engineering (2015) Vol 124: pp. 187-199 (<a href="http://cvcweb.ices.utexas.edu/cvc/papers/2015/journal/MultiDomainNoGap-IMR-2015.pdf">local pdf</a>)'
+  type: Journal Publications
+  year: 2015
+  month: 10
+  pdf: http://www.sciencedirect.com/science/article/pii/S1877705815032336
+  id: 503
+
+- title: Robust All Quad Meshing of Domains With Connected Regions
+  authors: A. Rushdi, S. Mitchell, C. Bajaj, M. Sbeida
+  venue: 'Proc. Of 24th Intl. Meshing Roundtable, (2015); Procedia Engineering (2015) Vol 124: pp. 96-108, doi: 10.1016/j.proeng.2015.10.125, (<a href="http://cvcweb.ices.utexas.edu/cvc/papers/2015/journal/allquad_paper.pdf">local pdf</a>)'
+  type: Journal Publications
+  year: 2015
+  month: 10
+  pdf: http://www.sciencedirect.com/science/article/pii/S1877705815032269
+  id: 504
+
+- title: Highly Symmetric and Congruently Tiled Meshes for Shells and Domes
+  authors: M. Rasheed, C. Bajaj
+  venue: |-
+    Proc. Of 24th Intl. Meshing Roundtable, (2015); Procedia Engineering, Volume 124 (2015), pp. 213-225
+     (<a href="http://cvcweb.ices.utexas.edu/cvc/papers/2015/journal/almost-regular-tiling.pdf">local pdf</a>)
+  type: Journal Publications
+  year: 2015
+  month: 10
+  pdf: http://www.sciencedirect.com/science/article/pii/S187770581503235X
+  id: 505
+
+- title: Accelerated Molecular Mechanical and Solvation Energetics on Multicore CPUs and Many-Core GPUs
+  authors: D. Cha, J. Jahan, Q. Zhang, A. Rand, R. Chowdhury, C. Bajaj
+  venue: "In <em>Proceedings of the 6th ACM Conference on Bioinformatics, Computational Biology and Health Informatics</em> (BCB '15). ACM, New York, NY, USA, 222-231.\n"
+  type: Conference Presentations & Publications
+  year: 2015
+  month: 9
+  pdf: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7347088
+  id: 506
+
+- title: Computational reconstitution of spine calcium transients from individual proteins
+  authors: T. Bartol, D. Keller, J. Kinney, C. Bajaj, K. Harris, T. Sejnowski, M. Kennedy
+  venue: Frontiers in Synaptic Neuroscience, Volume 7, Issue 17 (Oct 2015), pp. 1-24
+  type: Journal Publications
+  year: 2015
+  month: 10
+  pdf: http://journal.frontiersin.org/article/10.3389/fnsyn.2015.00017/pdf
+  id: 507
+
+- title: On the construction of general cubature formula by  flat extensions
+  authors: M.Bucero, C. Bajaj and B. Mourrain
+  venue: Linear Algebra and its Applications, Special Issue, August 1, 2016, Vol 502, pp. 104-125(<a href="http://arxiv.org/pdf/1506.00085v3.pdf">arXiv version</a>)
+  type: Journal Publications
+  year: 2015
+  month: 10
+  pdf: http://ac.els-cdn.com/S002437951500590X/1-s2.0-S002437951500590X-main.pdf?_tid=0b105924-84ce-11e5-a524-00000aab0f6c&acdnat=1446845798_3eec498e458725f992998ff11eb89ebe
+  arxiv: '1506.00085'
+  id: 508
+
+- title: Characterization and Construction of a Family of Highly Symmetric Spherical Polyhedra with Application in Modeling Self-Assembling Structures
+  authors: M. Rasheed, C. Bajaj
+  venue: arXiv:1507.08374
+  type: arXiv
+  year: 2015
+  month: 7
+  pdf: http://arxiv.org/pdf/1507.08374v1.pdf
+  arxiv: '1507.08374'
+  id: 509
+
+- title: Quantifying and Visualizing Uncertainties in Molecular Models
+  authors: M. Rasheed, N. Clement, A. Bhowmick, C. Bajaj
+  venue: arXiv:1508.03882
+  type: arXiv
+  year: 2015
+  month: 8
+  pdf: http://arxiv.org/pdf/1508.03882v1
+  arxiv: '1508.03882'
+  id: 510
+
+# 2014
+
+- title: 'VolRoverN: Enhancing surface and volumetric reconstruction for realistic dynamical simulation of cellular and subcellular function'
+  authors: J. Edwards, E. Daniel, J. Kinney, T. Bartol, T. Sejnowski, D. Johnston, K. Harris, and C. Bajaj
+  venue: |-
+    Neuroinformatics, 12(2): 277-289 (2014)  
+    <a href="http://dx.doi.org/10.1007/s12021-013-9205-2">doi:10.1007/s12021-013-9205-2</a>
+  type: Journal Publications
+  year: 2014
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2013/journal/VolRoverNpaper.pdf
+  doi: 10.1007/s12021-013-9205-2
+  id: 419
+
+- title: Quadratic Serendipity Finite Elements on Polygons using Generalized Barycentric Coordinates
+  authors: A. Rand; A. Gillette; C. Bajaj
+  venue: Mathematics for Computation,83, 2691-2716, (2014). <a href="http://www.ams.org/journals/mcom/2014-83-290/S0025-5718-2014-02807-X/">online version</a>, 2014
+  type: Journal Publications
+  year: 2014
+  month: 2
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2013/journal/barycentricSerendipity-revised-Feb2013.pdf
+  id: 415
+
+- title: From Voxel Maps to Models
+  authors: C. Bajaj
+  venue: |
+    Imaging Life: Biological Systems from Atoms to Tissues
+    ed. by G. Howard, W. Brown, and M. Auer
+    Oxford University Press, chap 15, pg 397-429. (<a href="http://cvcweb.ices.utexas.edu/cvc/papers/2014/journal/Bajaj_bookchapter_0426.pdf"> pdf </a>)
+  type: Book Chapters
+  year: 2014
+  id: 420
+
+- title: 'Electron tomography of cryo-immobilized plant tissue: a novel approach to studying 3D macromolecular architecture of mature plant cell walls in situ'
+  authors: P. Sarkar, E. Bosneaga, E. Yap Jr., J.  Das, W. Tsai, A. Cabal, E. Neuhaus, D. Maji, S. Kumar, M. Joo, S. Yakovlev, R. Csencsits, Z. Yu, C. Bajaj, K. Downing, M. Auer
+  venue: "<a href=\"http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0106928\">PLOS ONE </a>, 2014. DOI: 10.1371/journal.pone.0106928 (<a href=\"http://cvcweb.ices.utexas.edu/cvc/papers/2014/journal/Sarkar et al_PlantPhys_Manuscript.pdf\"> paper </a> and <a href=\"http://cvcweb.ices.utexas.edu/cvc/papers/2014/journal/Sarkar et al_PlantPhys_SupplementaryFigures.pdf\"> supplement </a>)\n"
+  type: Journal Publications
+  year: 2014
+  id: 421
+
+- title: 'Human Heart Conjugate Cooling Process: Unsteady Thermo-Fluid-Stress Analysis'
+  authors: |-
+    A. Abdoli, G. Dulikravich, C. Bajaj,
+    D. Stowe, M. Jahania
+  venue: 'International Journal for Numerical Methods in Biomedical Engineering (<a href="http://www.ncbi.nlm.nih.gov/pubmed/25045006"> epub ahead of print </a>), doi: 10.1002/cnm.2662 (<a href="http://cvcweb.ices.utexas.edu/cvc/papers/2014/journal/HJ1-Draft-Abdoli-Dulikravich-(DFS)-v20-cb.pdf"> pdf</a>)'
+  type: Journal Publications
+  year: 2014
+  id: 422
+
+- title: Efficient Maintenance and Update of Non-bonded Lists in Macromolecular Simulations
+  authors: R. Chowdhury, D. Beglov, M. Moghaddasi, I. Paschalidis, P. Vakili, S. Vajda, C. Bajaj, D. Kozakov
+  venue: J. Chem. Theory Comput. 2014, 10 (10), pp 4449-4454 (Online access <a href="http://pubs.acs.org/doi/abs/10.1021/ct400474w"> here </a>) <a href="http://cvcweb.ices.utexas.edu/cvc/papers/2014/journal/octree-JCTC_main.pdf">pre-print</a> and <a href="http://cvcweb.ices.utexas.edu/cvc/papers/2014/journal/octree-JCTC-supp.pdf">supplement</a> DOI:10.1021/ct400474w
+  type: Journal Publications
+  year: 2014
+  month: 9
+  id: 423
+
+- title: On Low Discrepancy Samplings in Product Spaces of Motion Groups
+  authors: C. Bajaj, A. Bhowmick, E. Chattopadhyay, D. Zuckerman
+  venue: arXiv:1411.7753v1
+  type: arXiv
+  year: 2014
+  month: 11
+  pdf: http://arxiv.org/pdf/1411.7753v1.pdf
+  arxiv: '1411.7753'
+  id: 427
+
+- title: Construction of Scalar and Vector Finite Element Families on Polygonal and Polyhedral Meshes
+  authors: A. Gillette, A. Rand, C. Bajaj
+  venue: arXiv:1405.6978
+  type: arXiv
+  year: 2014
+  month: 5
+  pdf: http://arxiv.org/pdf/1405.6978v1
+  arxiv: '1405.6978'
+  id: 511
+
+- title: Multi-scale Bio-Modeling and Visualization
+  authors: C. Bajaj
+  type: Book
+  year: 2014
+  month: 8
+  pdf: https://utexas.instructure.com/courses/1201660/files/folder/Course%20Material%20References?preview=42750476
+  id: 553
+
+# 2013
+
+- title: Surface segmentation for improved remeshing
+  authors: J. Edwards, W. Wang, and C. Bajaj
+  venue: Proceedings of 21st International Meshing Roundtable, Springer, 2013, 4013-418
+  type: Conference Presentations & Publications
+  year: 2013
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2013/conference/edwards2013imr.pdf
+  id: 410
+
+- title: Nonuniform Fourier Transforms for Rigid-Body and Multi-Dimensional Rotational Correlations
+  authors: C. Bajaj, B. Bauer, R.K. Bettadapura, A. Vollrath
+  venue: SIAM Journal of Scientific Computing, vol 35 (4), B821-B845, 2013 <a href=" http://dx.doi.org/10.1137/120892386">doi:10.1137/120892386</a>
+  type: Journal Publications
+  year: 2013
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2013/journal/Pf2Corr-r.pdf
+  doi: 10.1137/120892386
+  id: 417
+
+- title: 'On a Nanoscopically-Informed Shell Theory of Single-Wall Carbon Nanotubes '
+  authors: C. Bajaj, A. Favata and P. P. Guidugli
+  venue: European Journal of Mechanics - A/Solids, 42, 137-157, 2013
+  type: Journal Publications
+  year: 2013
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2013/journal/Carbo_Nano_EJM.pdf
+  id: 418
+
+- title: High-resolution cryo-EM structure of the unique Trypanosoma brucei 80S ribosome
+  authors: Y. Hashem , A. Georges , J. Fu , S. Buss , F. Jossinet , A. Jobe , Q. Zhang , H. Liao , R. Grassucci , C. Bajaj , E. Westhof , S. Madison-Antenucci, J. Frank
+  venue: 'Nature, 494, 385-391, 2013, <a href="http://www.nature.com/nature/journal/vaop/ncurrent/full/nature11872.html">doi:10.1038/nature11872</a>, '
+  type: Journal Publications
+  year: 2013
+  month: 2
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2013/journal/Hashem-manuscript-Nature-HR.pdf
+  id: 414
+
+- title: Extracellular sheets and tunnels modulate glutamate diffusion in hippocampal neuropil
+  authors: J. Kinney,  J. Spacek,  T. Bartol, C. Bajaj, K. Harris, T. Sejnowski
+  venue: 'Journal of Comparative Neurology, 521(2):448-464, 2013, PMID: 22740128, <a href="http://dx.doi.org/10.1002/cne.23181">doi: 10.1002/cne.23181</a>, '
+  type: Journal Publications
+  year: 2013
+  month: 2
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2012/journal/JCN_ecs_paper_jkinney_rev2.pdf
+  doi: 10.1002/cne.23181
+  id: 411
+
+- title: Protein-Protein Docking with F2Dock 2.0 and GB-Rerank
+  authors: R. Chowdhury, M. Rasheed, D. Keidel, M. Moussalem, A. Olson, C. Bajaj
+  venue: 'PLoS ONE 8(3): e51307, 2013, <a href="http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0051307">doi:10.1371/journal.pone.0051307</a>'
+  type: Journal Publications
+  year: 2013
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2013/journal/F2Dock+supp-PLOS.pdf
+  id: 416
+
+- title: 3D anisotropic diffusion on GPUs by closed-form local tensor computations
+  authors: A. Kuijper, A. Schwarzkopf, T. Kalbe, C. Bajaj, S. Roth, M. Goesele
+  venue: Numerical Mathematics Theory Methods and Applications,  6(1):72–94,  2013 (<a href="http://cvcweb.ices.utexas.edu/cvc/papers/2014/journal/aniso-diff-num-math-2013.pdf"> pdf</a>)
+  type: Journal Publications
+  year: 2013
+  month: 2
+  id: 424
+
+- title: 'Ch. 5: High-resolution Cryo-EM Structure of the Trypanosoma brucei Ribosome: A Case Study'
+  authors: Amedee des Georges, Yaser Hashem, Sarah N. Buss, Fabrice Jossinet, Qin Zhang, Hstau Y. Liao, Jie Fu, Amy Jobe, Robert A. Grassucci, Robert Langlois, Chandrajit Bajaj, Eric Westhof, Susan Madison
+  venue: Computational Methods for Three-Dimensional Microscopy Reconstruction; Part of the series Applied and Numerical Harmonic Analysis <a href="http://dx.doi.org/10.1007/978-1-4614-9521-5_5">doi:10.1007/978-1-4614-9521-5_5</a>
+  type: Book Chapters
+  year: 2013
+  month: 10
+  pdf: http://www.researchgate.net/profile/Amedee_Des_Georges2/publication/264346496_High-resolution_Cryo-EM_Structure_of_the_Trypanosoma_brucei_Ribosome_A_Case_Study/links/53d931780cf2a19eee83c157.pdf
+  doi: 10.1007/978-1-4614-9521-5_5
+  id: 431
+
+- title: 'Molecular Modeling: A Computational Science Perspective'
+  authors: C. Bajaj
+  type: Book
+  year: 2013
+  month: 1
+  pdf: https://utexas.instructure.com/courses/1214168/files/folder/Lectures?preview=44740852
+  id: 550
+
+# 2012
+
+- title: Interpolation error estimates for mean value coordinates
+  authors: A. Rand, A. Gillette, and C. Bajaj
+  venue: Advanced in Computational Mathematics, 327-347, <a href="http://arxiv.org/abs/1111.5588">arXiv:1111.5588</a>, October, 2012, doi:10.1007/s10444-011-9218-z.
+  type: Journal Publications
+  year: 2012
+  month: 10
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2012/journal/MeanValueInterpolation.pdf
+  arxiv: '1111.5588'
+  id: 412
+
+- title: Shape-based Regularization of Electron Tomographic Reconstruction
+  authors: A. Gopinath, G. Xu, D. Ress, O. Oktem, S. Subramaniam, and C. Bajaj
+  venue: 'IEEE Transactions on Medical Imaging, December, 2012, NIHMSID# 417205, 31(13):2241-2252, doi: 10.1109/TMI.2012.2214229.'
+  type: Journal Publications
+  year: 2012
+  month: 12
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2012/journal/GopinathTMI2012.pdf
+  id: 409
+
+- title: Detection of Secondary and Supersecondary Structures of Proteins for Cryo-Electron Microscopy
+  authors: C. Bajaj, S. Goswami, and Q. Zhang
+  venue: 'Journal of Structural Biology, Volume 177, Issue 2, February 2012, Pages 367-381,NIHMSID# 345060, PMC3312805, Publ.ID: YJSBI6135, <a href=http://dx.doi.org/10.1016/j.jsb.2011.11.032>doi:10.1016/j.jsb.2011.11.032</a>'
+  type: Journal Publications
+  year: 2012
+  month: 2
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2011/journal/BGZ-SecStruct2011.pdf
+  doi: 10.1016/j.jsb.2011.11.032
+  id: 406
+
+- title: Error Estimates for Generalized Barycentric Interpolation
+  authors: A. Gillette, A. Rand, C. Bajaj
+  venue: 'Advances in Computational Mathematics, Volume 37, issue 3, 2012, page 417-439, NIHMSID #283685, PMC3549276, <a href=dx.dio.org/10.1007/s10444-011-9218-z>doi:10.1007/s10444-011-9218-z</a>'
+  type: Journal Publications
+  year: 2012
+  month: 10
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2011/journal/GRB-AiCM-2011.pdf
+  id: 401
+
+- title: Macromolecular Structure Modeling from 3DEM using VOLROVER 2.0
+  authors: Q. Zhang, R. Bettadapura and C. Bajaj
+  venue: 'Biopolymers, September, 97(9):709-731, 2012, NIHMSID# 365963, PMCID: PMC3511818,  <a href="http://onlinelibrary.wiley.com/doi/10.1002/bip.22052/abstract">doi:10.1002/bip.22052</a>.'
+  type: Journal Publications
+  year: 2012
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2012/journal/ZBB_Biop_2012_inter.pdf
+  id: 407
+
+- title: Variable Radii Poisson-Disk Sampling
+  authors: S. A. Mitchell, A. Rand, M. S. Ebeida, C. Bajaj
+  venue: Proceedings of the 24th Canadian Conference on Computational Geometry 2012, Charlottetown, Prince Edward Island, Canada, August, 2012.
+  type: Conference Presentations & Publications
+  year: 2012
+  month: 8
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2012/conference/VarRadiusPoissonDiskCCCG-extended.pdf
+  id: 408
+
+- title: Interpolation Error Estimates for Mean Value Coordinates over Convex Polygons
+  authors: A. Rand, A. Gillette, C. Bajaj
+  venue: arXiv:1111.5588
+  type: arXiv
+  year: 2012
+  month: 9
+  pdf: http://arxiv.org/pdf/1111.5588v2
+  arxiv: '1111.5588'
+  id: 512
+
+- title: Quadratic Serendipity Finite Elements on Polygons Using Generalized Barycentric Coordinates
+  authors: A. Rand, A. Gillette, C. Bajaj
+  venue: arXiv:1109.3259
+  type: arXiv
+  year: 2012
+  month: 7
+  pdf: http://arxiv.org/pdf/1109.3259v2
+  arxiv: '1109.3259'
+  id: 513
+
+# 2011
+
+- title: An Algebraic Spline Model of Molecular Surfaces for Energetic Computations
+  authors: W. Zhao, G. Xu, C. Bajaj
+  venue: 'IEEE/ACM Transactions on Computational Biology and Bioinformatics, 8(6): 1458-1467, 2011 <a href="http://dx.doi.org/10.1145/1236246.1236288">http://dx.doi.org/10.1145/1236246.1236288</a>,NIHMSID153456,<a href="http://tinyurl.com/clzwrs6">http://tinyurl.com/clzwrs6</a>,PMCID: PMC3153597.'
+  type: Journal Publications
+  year: 2011
+  month: 11
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2011/journal/BajajZhao-asms-2011.pdf
+  doi: 10.1145/1236246.1236288
+  id: 380
+
+- title: 'F2Dock: Fast  Fourier Protein-Protein Docking'
+  authors: C. Bajaj, R. Chowdhury, V. Siddahanavalli
+  venue: 'IEEE/ACM Transactions on Computational Biology and Bioinformatics, 8(1):45-58 2011, NIHMSID153460, PMC3058388, <a href=http://tinyurl.com/NIHMSID153460>http://tinyurl.com/NIHMSID153460</a>, <a href=" doi: 10.1109/TCBB.2009.57"> doi: 10.1109/TCBB.2009.57</a>.'
+  type: Journal Publications
+  year: 2011
+  month: 1
+  id: 382
+
+- title: Computational Inversion of Electron Tomography Images Using L2-Gradient Flows
+  authors: G. Xu, M. Li, A. Gopinath, C. Bajaj
+  venue: 'Journal of Computational Mathematics, V29(5):501-525, 2011, <a href=http://dx.doi.org/10.4208/jcm.1106-m3302>doi: 10.4208/jcm.1106-m3302</a>,NIHMSID# 266229, PMC Journal in Process.'
+  type: Journal Publications
+  year: 2011
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2010/techReport/Xu-Liming-Ajay-Bajaj-reconstruct_ICES-TR.pdf
+  doi: 10.4208/jcm.1106-m3302
+  id: 386
+
+- title: Regularization of B-Spline Objects
+  authors: G. Xu, C. Bajaj
+  venue: 'Computer Aided Geometric Design, 258(1) 38-49, 2011, <a href=http://dx.doi.org/10.1016/j.cagd.2010.09.008>doi:10.1016/j.cagd.2010.09.008</a>, <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=Regularization of B-Spline Objects">PMID: 21218183</a>.'
+  type: Journal Publications
+  year: 2011
+  month: 1
+  doi: 10.1016/j.cagd.2010.09.008
+  id: 394
+
+- title: A Dynamic Data Structure for Flexible Molecular Maintenance and Informatics
+  authors: C. Bajaj, R. Chowdhury, M. Rasheed
+  venue: 'Bioinformatics  (2011)   27  (1):  55-62. PMCID: PMC3008647, <a href=http://bioinformatics.oxfordjournals.org/content/early/2010/11/25/bioinformatics.btq627>doi: 10.1093/bioinformatics/btq627</a>'
+  type: Journal Publications
+  year: 2011
+  month: 1
+  pdf: http://bioinformatics.oxfordjournals.org/content/27/1/55.full.pdf+html
+  id: 396
+
+- title: An Efficient Higher-Order Fast Multipole Boundary Element Solution for Poisson-Boltzmann Based molecular Electrostatics
+  authors: C. Bajaj, S.-C. Chen, and A. Rand
+  venue: 'SIAM Journal on Scientific Computing, 33(2) 826-848, 2011, NIHMSID# 266230, <a href=http://epubs.siam.org/sisc/resource/1/sjoce3/v33/i2/p826_s1>doi:10.1137/090764645</a>, <a href=http://tinyurl.com/PMC3110014>PMCID: PMC3110014</a>. '
+  type: Journal Publications
+  year: 2011
+  month: 6
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2011/journal/BajajChenRand2011.pdf
+  id: 397
+
+- title: Surface-Based Analysis Methods for High-Resolution Functional Magnetic Resonance Imaging
+  authors: R. Khan, Q. Zhang, S. Darayan, S. Dhandapani, S. Katyal, C. Greene, C. Bajaj, D. Ress
+  venue: 'Graphical Models, 73(6):313-322, 2011, NIHMSID# 268212, PMCID: PMC19036544, <a href=http://dx.doi.org/10.1016/j.gmod.2010.11.002>doi:10.1016/j.gmod.2010.11.002</a>, <a href="http://www.ncbi.nlm.nih.gov/pubmed/22125419">PMID: 22125419</a>.'
+  type: Journal Publications
+  year: 2011
+  month: 11
+  doi: 10.1016/j.gmod.2010.11.002
+  id: 398
+
+- title: Fast Streaming 3D Level Set Segmentation on the GPU for Smooth Multi-phase Segmentation
+  authors: 'O. Sharma, Q. Zhang, F. Anton, C. Bajaj '
+  venue: Transactions on Computational Sciences XIII, Lecture Notes on Computer Science, 6750:72-91, 2011, NIHMSID# 282368, PMC Journal in Process,<a href=http://www.springerlink.com/content/g33677k473163016>doi:10.1007/978-3-642-22619-9_4</a>
+  type: Journal Publications
+  year: 2011
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2011/journal/ojas-journal-tcs-2011.pdf
+  id: 399
+
+- title: Volumetric Nonlinear Anisotropic Diffusion on GPUs
+  authors: A. Schwarzkopf, T. Kalbe, A. Kuijper, M. Goesele, C. Bajaj
+  venue: Proceedings of the Third International Conference on Scale Space Methods and Variational Methods in Computer Vision, vol. 6667, 2011
+  type: Conference Presentations & Publications
+  year: 2011
+  month: 5
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2011/conference/Kalbe-GPU-SSVM.pdf
+  id: 400
+
+- title: Dual Formulations of Mixed Finite Element Methods with Applications
+  authors: A. Gillette and C. Bajaj
+  venue: 'Computer-Aided Design, Special Issue for SPM 2010, 43(10): 1213-1221, 2011 <a href=http://dx.doi.org/10.1016/j.cad.2011.06.017>doi:10.1016/j.cad.2011.06.017</a>, <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=Dual Formulations of Mixed Finite Element Methods with Applications">PMCID: PMC3185384</a>.'
+  type: Journal Publications
+  year: 2011
+  month: 10
+  doi: 10.1016/j.cad.2011.06.017
+  id: 403
+
+- title: Single-Particle Reconstruction Using L2-Gradient Flow
+  authors: M. Li, G. Xu, C. Sorzano, F. Sun, and C. Bajaj
+  venue: 'Journal of Structural Biology (2011) 176 (3): 259-267,  NIHMSID 318967, PMCID: PMC3215675, <a href=http://dx.doi.org/10.1016/j.jsb.2011.08.005> doi:10.1016/j.jsb.2011.08.005</a>, <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=Single-Particle Reconstruction Using L2-Gradient Flow">PMID: 21864687</a>.'
+  type: Journal Publications
+  year: 2011
+  month: 12
+  doi: 10.1016/j.jsb.2011.08.005
+  id: 404
+
+- title: Topologically correct reconstruction of tortuous contour forests
+  authors: J. Edwards and C. Bajaj
+  venue: 'Computer-Aided Design, 43(10): 1296-1306, 2011, NIHMSID 319941, <a href=http://dx.doi.org/10.1016/j.cad.2011.06.019>doi:10.1016/j.cad.2011.06.019</a>, <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=Topologically correct reconstruction of tortuous contour forests">PMID: 22003256</a>, PMC Journal in Process.'
+  type: Journal Publications
+  year: 2011
+  month: 10
+  doi: 10.1016/j.cad.2011.06.019
+  id: 405
+
+- title: On a Nanoscopically-Informed Shell Theory of Single-Wall Carbon Nanotubes
+  authors: C. Bajaj, A. Favata, P. Podio-Guidugli
+  venue: arXiv:1111.4574
+  type: arXiv
+  year: 2011
+  month: 11
+  pdf: http://arxiv.org/pdf/1111.4574v1
+  arxiv: '1111.4574'
+  id: 514
+
+- title: Dual Formulations of Mixed Finite Element Methods with Applications
+  authors: A. Gillette, C. Bajaj
+  venue: arXiv:1012.3929
+  type: arXiv
+  year: 2011
+  month: 4
+  pdf: http://arxiv.org/pdf/1012.3929v4
+  arxiv: '1012.3929'
+  id: 515
+
+- title: Error Estimates for Generalized Barycentric Interpolation
+  authors: A. Gillette, A. Rand, C. Bajaj
+  venue: arXiv:1010.5005
+  type: arXiv
+  year: 2011
+  month: 4
+  pdf: http://arxiv.org/pdf/1010.5005v6
+  arxiv: '1010.5005'
+  id: 518
+
+# 2010
+
+- title: Fast Molecular Solvation Energetics and Force Computation
+  authors: C. Bajaj, W. Zhao
+  venue: 'SIAM Journal on Scientific Computing, 31(6): 4524-4552, January 2010, <a href=http://dx.doi.org/10.1137/090746173>doi:10.1137/090746173</a>, <a href="http://tinyurl.com/PMC2830669">PMCID: PMC2830669</a>.'
+  type: Journal Publications
+  year: 2010
+  month: 8
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2009/journal/SISC-FastGB.pdf
+  doi: 10.1137/090746173
+  id: 383
+
+- title: Surface-Based Imaging Methods for High-Resolution Functional Magnetic Resonance Imaging
+  authors: D. Ress, S. Dhandapani, S. Katyal, and C. Greene, C. Bajaj
+  venue: |-
+    Proceedings of Second Intl. Symposium, CompIMAGE 2010:
+    Computational Modeling of Objects Represented in Images, ed. by R. Barneva, V. Brimkov, H. Hauptman, R. Jorge, J. Tavares.
+    LNCS 6026, Springer Verlag, 2010, p 130-140, NIHMSID# 187599.
+  type: Conference Presentations & Publications
+  year: 2010
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2010/conference/david-ress-compImg2010.pdf
+  id: 384
+
+- title: Cryo-Electron Microscopy Data Denoising Based on the Generalized Digitized Total Variation Method
+  authors: Q. Zhang, C. Bajaj
+  venue: 'Far East Journal of Applied Mathematics, 45(2): 83-99, 2010, NIHMSID# 187605, <a href=http://onlinelibrary.wiley.com/doi/10.1002/bip.22052/pdf>doi:10.1002/bip.22052</a>, <a href=http://tinyurl.com/PMC3106423>PMCID: PMC3106423</a>.'
+  type: Journal Publications
+  year: 2010
+  id: 385
+
+- title: Multi-Domain, Higher Order Level Set Scheme for 3D Image Segmentation on the GPU
+  authors: O. Sharma, Q. Zhang, F. Anton, C. Bajaj
+  venue: Proceedings of the IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR), 2010, NIHMSID# 192191, PMC Journal in Process
+  type: Conference Presentations & Publications
+  year: 2010
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2010/journal/cvpr-ojas-2048.pdf
+  id: 387
+
+- title: Topologically correct reconstruction of tortuous contour forests
+  authors: J. Edwards and C. Bajaj
+  venue: Proceedings of the ACM Symposium on Solid and Physical Modeling, p.51-60, September 2010
+  type: Conference Presentations & Publications
+  year: 2010
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2010/conference/jed-paper-spm.pdf
+  id: 389
+
+- title: A Generalization for Stable Mixed Finite Elements
+  authors: A. Gillette and C. Bajaj
+  venue: Proceedings of the ACM Symposium on Solid and Physical Modeling, p. 41-50, Sept. 2010
+  type: Conference Presentations & Publications
+  year: 2010
+  month: 9
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2010/conference/stableFE.pdf
+  id: 390
+
+- title: Constructing A-Spline Weight Functions for Stable WEB-Spline Finite Element Methods
+  authors: C. Bajaj, R. Bettadapura, N. Lei, A. Mollere, C. Peng,  A. Rand
+  venue: Proceedings of the ACM Symposium on Solid and Physical Modeling, p. 153-158, Sept. 2010
+  type: Conference Presentations & Publications
+  year: 2010
+  month: 9
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2010/conference/webfem.pdf
+  id: 391
+
+- title: Multi-level Grid Algorithms for Faster Molecular Energetics
+  authors: C. Bajaj and R. Chowdhury
+  venue: Proceedings of the ACM Symposium on Solid and Physical Modeling, p. 147-152, Sept. 2010
+  type: Conference Presentations & Publications
+  year: 2010
+  month: 9
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2010/conference/fastMD.pdf
+  id: 392
+
+- title: Quality Multi-Domain Meshing for Volumetric Data
+  authors: Q. Zhang, B. Subramanian, G. Xu, C. Bajaj
+  venue: 'Proceedings of 2010 3rd International Conference on Biomedical Engineering and Informatics, p. 472-476, PMCID: PMC3085488, <a href=http://tinyurl.com/PMC3085488>http://tinyurl.com/PMC3085488</a>'
+  type: Conference Presentations & Publications
+  year: 2010
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2010/conference/nihms249617.pdf
+  id: 393
+
+- title: Electric-Potential Reconstructions of Single Particles Using L2-Gradient Flows
+  authors: M. Li, G. Xu, C. Sorzano, R. Melero, and C. Bajaj
+  venue: Proceedings of 2010 3rd International Conference on Biomedical Engineering and Informatics, p. 213-217, PMCID# PMC3091820, <a href=http://tinyurl.com/PMC3091820>http://tinyurl.com/PMC3091820</a>
+  type: Conference Presentations & Publications
+  year: 2010
+  pdf: http://lsec.cc.ac.cn/~xuguo/papers/BMEI_1185.pdf
+  id: 395
+
+# 2009
+
+- title: Stable Mesh Decimation
+  authors: C. Bajaj, A. Gillette, Q. Zhang
+  venue: Proceedings of the 2009 SIAM/ACM Joint Conference on Geometric and Physical Modeling, San Francisco, CA, 2009.
+  type: Conference Presentations & Publications
+  year: 2009
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2009/conference/Bajaj-Gillet-Zhang-siamacm2009.pdf
+  id: 377
+
+- title: A Fast Variational Method for the Construction of Adaptive Resolution C^2 Smooth Molecular Surfaces
+  authors: C. Bajaj, G. Xu,  Q. Zhang
+  venue: 'Computer Methods in Applied Mechanics and Engineering, volume 198, p1684-1690 (2009) Special Issue in Honor of Professor J. T. Odenâ€™s 70th Birthday, <a href=http://dx.doi.org/10.1016/j.cma.2008.12.042>doi: 10.1016/j.cma.2008.12.042</a>, <a href=http://tinyurl.com/PMC2755577>PMCID: PMC2755577</a>.'
+  type: Journal Publications
+  year: 2009
+  doi: 10.1016/j.cma.2008.12.042
+  id: 367
+
+- title: An Automatic 3D Mesh Generation Method for Domains with Multiple Materials.
+  authors: Y. Zhang, T. J.R. Hughes, C. Bajaj
+  venue: 'Computer Methods in Applied Mechanics and Engineering (CMAME), 199(5-8): 405-415, Jan 2009, NIHMSID: 132380, Publ.ID: CMA8983, <a href=http://dx.doi.org/10.1016/j.cma.2009.06.007>doi:10.1016/j.cma.2009.06.007</a>, <a href=http://tinyurl.com/PMC2805160>PMCID: PMC2805160</a>.'
+  type: Journal Publications
+  year: 2009
+  doi: 10.1016/j.cma.2009.06.007
+  id: 369
+
+- title: The Capsid Proteins of a Large, Icosahedral dsDNA Virus
+  authors: X. Yan, Z. Yu, P. Zhang, A. Batistti, P. Chipman, C.Bajaj, M. Bergoin, M. Rossman and T. Baker
+  venue: 'Journal of Molecular Biology, 385(4):1287-1299, 2009, <a href=http://dx.doi.org/10.1016/j.jmb.2008.11.002>doi: 10.1016/j.jmb.2008.11.002</a>, <a href=http://tinyurl.com/PMID19027752>PMID: 19027752</a>, PMC2911444.'
+  type: Journal Publications
+  year: 2009
+  doi: 10.1016/j.jmb.2008.11.002
+  id: 370
+
+- title: Scalable Isosurface Visualization of Massive Datasets on Commodity off-the-shelf Clusters
+  authors: X. Zhang, C. Bajaj
+  venue: 'Journal of Parallel and Distributed Computing, 69(1):39-53, 2009, <a href=http://dx.doi.org/10.1016/j.jpdc.2008.07.006>doi: 10.1016/j.jpdc.2008.07.006</a>, <a href=http://tinyurl.com/PMC2743442>PMCID: PMC2743442</a>.'
+  type: Journal Publications
+  year: 2009
+  doi: 10.1016/j.jpdc.2008.07.006
+  id: 374
+
+- title: Topology Based Selection and Curation of Level Sets
+  authors: C. Bajaj, A. Gillette, S. Goswami
+  venue: Topology-in-Visualization, ed. by A. Wiebel, H. Hege, K. Polthier, G. Scheuermann, 2009, pages 45-58, NIHMS155079, PMC Journal
+  type: Book Chapters
+  year: 2009
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2009/book/tiv07.pdf
+  id: 375
+
+- title: Hierarchical Molecular Interfaces and Solvation Electrostatics
+  authors: C. Bajaj, A. Chen, G. Xu, Q. Zhang, W. Zhao
+  venue: Proceedings of the 2009 SIAM/ACM Joint Conference on Geometric and Physical Modeling, San Francisco, CA, 2009, NIHMSID193754, PMC Journal in Process
+  type: Conference Presentations & Publications
+  year: 2009
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2009/conference/Bajaj-Chen-Xu-Zhang-Zhao-SPMpaper09_final.pdf
+  id: 378
+
+- title: A Dynamic Data Structure for Flexible Molecular Maintenance and Informatics
+  authors: C. Bajaj, R. Chowdhury, M. Rasheed
+  venue: Proceedings of the 2009 SIAM/ACM Joint Conference on Geometric and Physical Modeling, San Francisco, CA, 2009, NIHMSID193756, PMC Journal in Process
+  type: Conference Presentations & Publications
+  year: 2009
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2009/conference/Bajaj-Chow-Rasheed-SPM-09-final.pdf
+  id: 379
+
+- title: Complementary Space for Enhanced Uncertainty and Dynamics Visualization
+  authors: C. Bajaj, A. Gillette, S. Goswami, B. Kwon, and J. Rivera
+  venue: 'Topological Data Analysis and Visualization: Theory, Algorithms and Applications, ed. by Pascucci, Tricoche, Hagen, Tierny, Springer-Verlag, in publication, 2009, NIHMSID194093, PMC Journal in Process'
+  type: Book Chapters
+  year: 2009
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2009/book/Bajaj-Gillet-Goswami-tiv2009_book.pdf
+  id: 388
+
+- title: Complementary Space for Enhanced Uncertainty and Dynamics Visualization
+  authors: C.Bajaj, A. Gillette, S. Goswami, B. J. Kwon, J. Rivera
+  venue: arXiv:0910.4084
+  type: arXiv
+  year: 2009
+  month: 10
+  pdf: http://arxiv.org/pdf/0910.4084v1
+  arxiv: '0910.4084'
+  id: 516
+
+- title: Stable Mesh Decimation
+  authors: C. Bajaj, A. Gillette, Q. Zhang
+  venue: arXiv:0910.1402
+  type: arXiv
+  year: 2009
+  month: 10
+  pdf: http://arxiv.org/pdf/0910.1402v1
+  arxiv: '0910.1402'
+  id: 517
+
+# 2008
+
+- title: Bio-Molecule Surfaces Construction Via a Higher-Order Level Set Method
+  authors: C. Bajaj, G. Xu, Q.Zhang
+  venue: 'Journal of Computer Science and Technology. 23(6):1026-1036, 2008, <a href=http://dx.crossref.org/10.1007%2Fs11390-008-9184-1>doi:10.1007/s11390-008-9184-1</a>, <a href=http://tinyurl.com/PMC2873780>PMCID: PMC2873780</a>.'
+  type: Journal Publications
+  year: 2008
+  id: 360
+
+- title: Surface Smoothing and Quality Improvement of Quadrilateral/Hexahedral Meshes using Geometric Flow
+  authors: Y. Zhang, C. Bajaj, G. Xu
+  venue: 'Comm. in Numerical Methods in Engineering, Vol. 25(1), 1-18, 2009. <a href=http://onlinelibrary.wiley.com/doi/10.1002/cnm.1067/abstract>doi:10.1002.cnm.1067</a>, <a href=http://tinyurl.com/PMC2761001>PMCID: PMC2761001</a>.'
+  type: Journal Publications
+  year: 2008
+  id: 355
+
+- title: Physically-based Surface Texture Synthesis Using a  Coupled Finite Element System
+  authors: C. Bajaj, J. Zhang, G. Xu
+  venue: 'Proceedings of Geometric Modeling and Processing, 2008, p. 344-357, NIHMSID193751, PMCID: PMC3103232, <a href=http://tinyurl.com/PMC3103232>http://tinyurl.com/PMC3103232</a>'
+  type: Conference Presentations & Publications
+  year: 2008
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2008/conference/Bajaj-Zhang-Xu-texture2008.pdf
+  id: 358
+
+- title: Boolean Set Operations with Prism Algebraic Patches
+  authors: C. Bajaj, A. Paoluzzi, S. Portuesi, N. Lei and W. Zhao
+  venue: 'Computer-Aided Design and Applications, 5(5):730-742, 2008, <a href="http://www.cadanda.com/CADandA_5_5_730-742.html">doi: 10.3722/cadaps.2008.730-742</a>, <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3080140">PMCID: PMC3080140</a>.'
+  type: Journal Publications
+  year: 2008
+  id: 361
+
+- title: 'Proto-Plasm: Parallel Language for Adaptive and Scalable Modeling of Biosystems'
+  authors: C. Bajaj , A. DiCarlo and A. Paoluzzi
+  venue: 'Philosophical Transactions of the Royal Society A, 2008 Sep 13;366(1878):3045-65, <a href=http://dx.doi.org/10.1098/rsta.2008.0076>doi:10.1098/rsta.2008.0076</a>, <a href=http://tinyurl.com/PMID18559320>PMID: 18559320</a>.'
+  type: Journal Publications
+  year: 2008
+  doi: 10.1098/rsta.2008.0076
+  id: 362
+
+- title: Multi-Component Heart Reconstruction from Volumetric Imaging
+  authors: C.Bajaj, S. Goswami
+  venue: Proceedings of the ACM Solid and Physical Modeling Symposium, Stony Brook, NY, 2008, pp. 193-202. <a href=http://doi.acm.org/10.1145/1364901.1364928>http://doi.acm.org/10.1145/1364901.1364928</a>, NIHMSID 193748, PMC Journal in Process
+  type: Conference Presentations & Publications
+  year: 2008
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2008/conference/Bajaj-Goswami-SPM2008-final.pdf
+  id: 363
+
+- title: |-
+    Three-Dimensional Geometric Modeling of Membrane-bound
+    Organelles in Ventricular Myocytes: Bridging the Gap between
+    Microscopic Imaging and Mathematical Simulation
+  authors: |-
+    Z. Yu, C. Bajaj, M. Hoshijima, M. Holst, T. Hayashi, 
+    M. Ellisman, J. McCammon
+  venue: "Journal of Structural Biology, 164(3):304-13, 2008, <a href=\t http://dx.doi.org/10.1016/j.jsb.2008.09.004>doi:10.1016/j.jsb.2008.09.004</a>, <a href=http://tinyurl.com/PMC2790379>PMCID: PMC2790379</a>."
+  type: Journal Publications
+  year: 2008
+  doi: 10.1016/j.jsb.2008.09.004
+  id: 365
+
+- title: Modeling Cardiovascular Anatomy from Patient-Specific Imaging
+  authors: C. Bajaj, S. Goswami
+  venue: |-
+    Advances in Computational Vision and Medical Image Processing, ed. by Joao Tavares and Renato Jorge, Springer, 2008, Chapter 1, pgs 1-28, NIHMS155076, <a href=http://tinyurl.com/PMC2943643>http://tinyurl.com/PMC2943643</a> 
+    PMC Journal in Process
+  type: Book Chapters
+  year: 2008
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2008/journal/cardio-2008.pdf
+  id: 368
+
+- title: Quality Meshing of a Forest of Branching Structures
+  authors: C. Bajaj and A. Gillette
+  venue: Proceedings of the 17th International Meshing Roundtable 2008, p. 433--449, October 2008. NIHMSID 193746, PMC Journal in Process
+  type: Conference Presentations & Publications
+  year: 2008
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2008/conference/Bajaj-Gillette-branching.pdf
+  id: 371
+
+- title: Three-Dimensional Architecture of Hair-Bundle Linkages Revealed by Electron-Microscopic Tomography
+  authors: M. Auer, A. Koster, U. Ziese, C. Bajaj, N. Volkmann, D-N. Wang, J. Hudspeth
+  venue: 'Journal of the Association for Research in Otolaryngology, June 2008, 9(2):215-24, <a href=http://dx.doi.org/10.1007/s10162-008-0114-2>doi:10.1007/s10162-008-0114-2</a>, <a href=http://tinyurl.com/PMC2504599>PMCID: PMC2504599</a>.'
+  type: Journal Publications
+  year: 2008
+  doi: 10.1007/s10162-008-0114-2
+  id: 372
+
+- title: Surface Reconstruction From Non-parallel Curve Networks
+  authors: C. Bajaj, L. Liu, J.O. Deasy, D.A. Low, T. Ju
+  venue: 'Computer Graphics Forum, 2008, 27(2):155-163, <a href=http://dx.doi.org/10.1111/j.1467-8659.2008.01112.x>doi: 10.1111/j.1467-8659.2008.01112.x</a>, <a href=http://tinyurl.com/PMC2733791>PMCID: PMC273379</a>.'
+  type: Journal Publications
+  year: 2008
+  doi: 10.1111/j.1467-8659.2008.01112.x
+  id: 373
+
+- title: Higher-Order Level-Set Method and Its Application in Biomolecular Surfaces Construction
+  authors: C. L. Bajaj, G.-L. Xu, Q. Zhang
+  venue: Journal of Computer Science and Technology, 23(6):1026-1036, 2008
+  type: Journal Publications
+  year: 2008
+  month: 11
+  pdf: https://link.springer.com/content/pdf/10.1007%2Fs11390-008-9184-1.pdf
+  id: 559
+
+# 2007
+
+- title: Geometric Modeling and Quantitative Visualization of Virus Ultrastructure
+  authors: C. Bajaj
+  venue: 'Modeling Biology: Structures, Behaviors, Evolution, Edited L. da Fontoura Costa and M. Laublichler, MIT Press, 2007, pp. 115-137'
+  type: Book Chapters
+  year: 2007
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2007/book/Model-Virus-MIT-Press2006.pdf
+  id: 320
+
+- title: Feature Selection of 3D Volume Data through Multi-Dimensional Transfer Functions
+  authors: S. Park, C. Bajaj
+  venue: 'Pattern Recognition Letters, 28, 3, pp. 367-374, 2007, <a href=http://dx.doi.org/10.1016/j.patrec.2006.04.008>doi: 10.1016/j.patrec.2006.04.008</a>, <a href=http://tinyurl.com/PMC2743423>PMCID: PMC2743423</a>.'
+  type: Journal Publications
+  year: 2007
+  doi: 10.1016/j.patrec.2006.04.008
+  id: 326
+
+- title: Finite element analysis of the time-dependent Smoluchowski equation for acetylcholinesterase reaction rate calculations
+  authors: Y. Cheng, J. Suen, D. Zhang, S. Bond, Y. Zhang, Y. Song, N. Baker, C. Bajaj, M. Holst, J. McCammon
+  venue: 'Biophysical Journal, 92: 3397-3406, 2007, <a href=http://dx.doi.org/10.1529/biophysj.106.102533>doi:10.1529/biophysj.106.102533</a>, <a href=http://tinyurl.com/PMC1853150>PMCID: PMC1853150</a>.'
+  type: Journal Publications
+  year: 2007
+  doi: 10.1529/biophysj.106.102533
+  id: 340
+
+- title: Computational Approaches for Automatic Structural Analysis of Large Bio-molecular Complexes
+  authors: Z. Yu, C. Bajaj
+  venue: 'IEEE/ACM Transactions on Computational Biology and Bioinformatics, 5(4):568-582, 2008, <a href=http://dx.doi.org/10.1109/TCBB.2007.70226>doi:10.1109/TCBB.2007.70226</a>, <a href=http://tinyurl.com/PMID18989044>PMID: 18989044</a>, PMC Journal in Process.'
+  type: Journal Publications
+  year: 2007
+  doi: 10.1109/TCBB.2007.70226
+  id: 343
+
+- title: An algebraic spline model of molecular surfaces
+  authors: W. Zhao, G. Xu, C. Bajaj
+  venue: Proceedings of the 2007 ACM Symposium on Solid and Physical Modeling, 2007, pp. 297-302, NIHMSID194067, PMC Journal in Process
+  type: Conference Presentations & Publications
+  year: 2007
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=1236288&type=pdf&coll=&dl=&CFID=15151515&CFTOKEN=6184618
+  id: 345
+
+- title: Extraction, Visualization and Quantification of Protein Pockets
+  authors: X. Zhang, C. Bajaj
+  venue: 'Proc. of the 6th Annual International Conference on Computational Systems Bioinformatics, CSB2007, vol 6, pp. 275 â€“ 286, http://tinyurl.com/PMID17951831PMID, : 17951831'
+  type: Conference Presentations & Publications
+  year: 2007
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2007/conference/Pocket-xiaoyu-paper.pdf
+  id: 346
+
+- title: Efficient Delaunay Mesh Generation From Sampled Scalar Functions
+  authors: S. Goswami, A. Gillette, C. Bajaj
+  venue: Proceedings of the 16th International Meshing Roundtable, Seattle, WA, October 2007. pages 495 - 511
+  type: Conference Presentations & Publications
+  year: 2007
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2007/conference/del_mesh.pdf
+  id: 347
+
+- title: Patient-Specific Vascular NURBS Modeling for Isogeometric Analysis of Blood Flow
+  authors: Y. Zhang, Y. Bazilives, S. Goswami, T. Hughes, C. Bajaj
+  venue: 'Computer Methods in Applied Mechanics and Engineering (CMAME), 196 (29-30) 2943-2959. 2007, <a href=http://dx.doi.org/10.1016/j.cma.2007.02.009>doi:10.1016/j.cma.2007.02.009</a>, NIHMSID 87598, <a href="http://tinyurl.com/PMC2839408">PMCID: PMC2839408</a>.'
+  type: Journal Publications
+  year: 2007
+  doi: 10.1016/j.cma.2007.02.009
+  id: 351
+
+- title: Dynamic Data-Driven Finite Element Models for Laser Treatment of Cancer
+  authors: J. Oden, K. Diller, C.Bajaj, J. Browne, J. Hazle, I. Babuska, J. Bass, L. Demkowicz, A. Elliott, Y. Feng, D. Fuentes, S. Prudhomme, M. Rylander, R. Stafford, Y. Zhang
+  venue: 'Journal of Numerical Methods for Partial Differential Equations, 23 (4) 901-922, 2007, <a href=http://dx.doi.org/10.1002/num.20251>doi: 10.1002/num.20251</a>, <a href="http://tinyurl.com/PMC2850081">PMCID: PMC2850081</a>.'
+  type: Journal Publications
+  year: 2007
+  doi: 10.1002/num.20251
+  id: 352
+
+- title: Bio-Molecule Surfaces Construction Via a Higher-Order Level Set Method
+  authors: C. Bajaj, G. Xu, Q. Zhang
+  venue: |
+    Proceedings of the 14th CAD/CG International Conference, 2007, Beijing, China, <a href=http://tinyurl.com/PMC2873780>http://tinyurl.com/PMC2873780 
+    </a>, PMCID: PMC2873780
+  type: Conference Presentations & Publications
+  year: 2007
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2007/conference/JCST_BajajXuZhang.pdf
+  id: 356
+
+- title: Automatic 3D Mesh Generation for a Domain with Multiple Materials
+  authors: Y. Zhang, T. Hughes, C.Bajaj
+  venue: Proceedings of the 16th International Meshing Roundtable, October 2007, pages 367-386, NIHMSID194062, PMC Journal in Process
+  type: Conference Presentations & Publications
+  year: 2007
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2007/conference/Zhang-Hughes-Bajaj-IMR-mesh_material.pdf
+  id: 353
+
+- title: 'Automatic Structure Interpretation of Single Particle Cryo-Electron Microscopy: From Images To Pseudo-Atomic Models'
+  authors: C. Bajaj
+  venue: |-
+    2007 IEEE International Symposium on Biomedical Imaging, from Nano to Macro, Washington, DC, March 2007, PubMed ID: 19424455, PMCID: 2678009, NIHMSID: 87373, <a href=http://tinyurl.com/PMC2678009>
+    http://tinyurl.com/PMC2678009 </a>
+  type: Conference Presentations & Publications
+  year: 2007
+  id: 364
+
+- title: Using Cyber-infrastructure for Dynamic Data Driven Laser Treatment of Cancer
+  authors: C. Bajaj, J. T. Oden, K. R. Diller, J. C. Browne, J. Hazle, I. Babuska, J. Bass, L. Bidaut, L. Demkowicz, A. Elliott, Y. Feng, D. Fuentes, S. Prudhomme, R. J. Stafford, Y. Zhang.
+  venue: 'Lecture Notes in Computer Science, 2007, 4487: 972-979, <a href=http://dx.doi.org/10.1007/978-3-540-72584-8_128>doi: 10.1007/978-3-540-72584-8_128</a>, <a href=http://tinyurl.com/PMC2743440>PMCID: PMC2743440</a>.'
+  type: Journal Publications
+  year: 2007
+  doi: 10.1007/978-3-540-72584-8_128
+  id: 376
+
+- title: Smooth Surface Constructions via a Higher-Order Level-Set Method
+  authors: C. Bajaj, G. Xu, Q. Zhang
+  venue: 'Computer-Aided Design and Computer Graphics 23(6): 1026-1036'
+  type: Journal Publications
+  year: 2007
+  month: 10
+  pdf: http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.90.7884&rep=rep1&type=pdf
+  id: 541
+
+# 2006
+
+- title: Adaptive and Quality Quadrilateral/Hexahedral Meshing from Volumetric Data
+  authors: Y. Zhang, C. Bajaj
+  venue: "Computer Methods in Applied Mechanics and Engineering, Volume 195, Issues 9-12, 1 February 2006, Pages 942-960, <a href=\t http://dx.doi.org/10.1016/j.cma.2005.02.016>doi:10.1016/j.cma.2005.02.016</a>, <a href=http://tinyurl.com/PMC2740490>PMCID: PMC2740490</a>"
+  type: Journal Publications
+  year: 2006
+  project: http://cvcweb.ices.utexas.edu/cvc/projects/medx/heart/index.php
+  doi: 10.1016/j.cma.2005.02.016
+  id: 303
+
+- title: Discrete Surface Modeling Using Partial Differential Equations
+  authors: G. Xu, Q. Pan, C. Bajaj
+  venue: 'Computer Aided Geometric Design, Volume 23/2, pp 125-145, 2006, <a href=http://dx.doi.org/10.1016/j.cagd.2005.05.004>doi:10.1016/j.cagd.2005.05.004</a>, <a href=http://tinyurl.com/PMC2760856>PMCID: PMC2760856</a>'
+  type: Journal Publications
+  year: 2006
+  doi: 10.1016/j.cagd.2005.05.004
+  id: 307
+
+- title: Time-Varying Contour Topology
+  authors: B. Sohn, C. Bajaj
+  venue: 'IEEE Transactions on Visualization and Computer Graphics (TVCG), 12, 1, 14-25, 2006, <a href=http://dx.doi.org/10.1109/TVCG.2006.16>doi: 10.1109/TVCG.2006.16</a>, <a href=http://tinyurl.com/PMC2703823>PMCID: PMC2703823</a>.'
+  type: Journal Publications
+  year: 2006
+  doi: 10.1109/TVCG.2006.16
+  id: 305
+
+- title: Identifying Flat and Tubular Regions of a Shape by Unstable Manifolds
+  authors: S. Goswami, T. Dey, C. Bajaj
+  venue: Proc. 11th ACM Sympos. Solid and Physical Modeling, pp. 27-37, 2006, NIHMSID194037, PMC Journal in Process
+  type: Conference Presentations & Publications
+  year: 2006
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=1128892&type=pdf&coll=ACM&dl=ACM&CFID=78222802&CFTOKEN=41483670
+  id: 324
+
+- title: Quality Meshing of Implicit Solvation Models of Biomolecular Structures
+  authors: Y. Zhang, G. Xu, C. Bajaj
+  venue: 'The special issue of Computer Aided Geometric Design (CAGD) on Applications of Geometric Modeling in the Life Sciences, Volume 23, Issue 6, August 2006, Pages 510-530, <a href=http://dx.doi.org/10.1016/j.cagd.2006.01.008>doi: 10.1016/j.cagd.2006.01.008</a>, <a href=http://tinyurl.com/PMC2756697>PMCID: PMC2756697</a>'
+  type: Journal Publications
+  year: 2006
+  doi: 10.1016/j.cagd.2006.01.008
+  id: 325
+
+- title: Progressive Conversion from B-rep to BSP for Streaming Geometric Modeling
+  authors: C. Bajaj, A. Paoluzzi, G. Scorzelli
+  venue: 'Computer-Aided Design and Applications, 3(5):577-586, 2006, <a href=http://tinyurl.com/PMC3077047>PMCID: PMC3077047</a>.'
+  type: Journal Publications
+  year: 2006
+  id: 327
+
+- title: Application of New Multiresolution Methods for the Comparison of Biomolecular Electrostatic Properties in the Absence of Structural Similarity
+  authors: X. Zhang, C. Bajaj, B. Kwon, T. Dolinsky, J. Nielsen, N. Baker
+  venue: 'Multiscale Modeling and Simulation, 2006, 5 (4), 1196-1213, <a href=http://dx.doi.org/10.1137/050647670>doi: 10.1137/050647670</a>, <a href=http://tinyurl.com/PMC2561295>PMCID: PMC2561295</a>'
+  type: Journal Publications
+  year: 2006
+  doi: 10.1137/050647670
+  id: 328
+
+- title: 'VIPERdb: a relational database for structural virology'
+  authors: C. M. Shepherd, I. A. Borelli, G. Lander, P. Natarajan, V. Siddavanahalli, C. Bajaj, J. E. Johnson, C. L. Brooks, III, V. S. Reddy
+  venue: 'Nucleic Acids Res. 2006 Jan 1; 34 (Database Issue), D386-9, 2006, <a href=http://dx.doi.org/10.1093/nar/gkj032>doi:10.1093/nar/gkj032</a>, <a href=http://tinyurl.com/PMC134735>PMCID: PMC1347395</a>'
+  type: Journal Publications
+  year: 2006
+  doi: 10.1093/nar/gkj032
+  id: 329
+
+- title: Patient-Specific Vascular NURBS Modeling for Isogeometric Analysis of Blood Flow
+  authors: Y. Zhang, Y. Bazilevs, S. Goswami, C. Bajaj, T. Hughes
+  venue: Proceedings of 15th International Meshing Roundtable, pp. 73-92. Birmingham, AL. September 17-20, 2006.
+  type: Conference Presentations & Publications
+  year: 2006
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2006/conference/Zhang-Bazilevs-cardiovascular.pdf
+  id: 331
+
+- title: Automated Segmentation of Molecular Subunits in Electron Cryomicroscopy Density Maps
+  authors: M. Baker, Z. Yu, W. Chiu, C. Bajaj
+  venue: "Journal of Structural Biology, 2006, Dec;156(3):432-41, <a href=\t http://dx.doi.org/10.1016/j.jsb.2006.05.013>doi: 10.1016/j.jsb.2006.05.013</a>, <a href=http://tinyurl.com/PMID16908194>PMID: 16908194</a>, PMC Journal in Process"
+  type: Journal Publications
+  year: 2006
+  doi: 10.1016/j.jsb.2006.05.013
+  id: 332
+
+- title: Development of a Computational Paradigm for Laser Treatment of Cancer
+  authors: J. T. Oden, K. R. Diller, C. Bajaj, J. C. Browne, J. Hazle, I. Babuska, J. Bass, L. Demkowicz, Y. Feng, D. Fuentes, S. Prudhomme, M. N. Rylander, R. J. Stafford, Y. Zhang
+  venue: 'Lecture Notes in Computer Science, 3993: 530-537, 2006, <a href=http://dx.doi.org/10.1007/11758532_70>doi: 10.1007/11758532_70</a>, PMCID: PMC2676779'
+  type: Journal Publications
+  year: 2006
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2006/journal/dddas.pdf
+  project: http://cvcweb.ices.utexas.edu/cvc/projects/medx/dddas/index.php
+  doi: 10.1007/11758532_70
+  id: 333
+
+- title: Development of a Computational Paradigm for Laser Treatment of Cancer
+  authors: J. T. Oden, K. R. Diller, C. Bajaj, J. C. Browne, J. Hazle, I. Babuska, J. Bass, L. Demkowicz, Y. Feng, D. Fuentes, S. Prudhomme, M. N. Rylander, R. J. Stafford, Y. Zhang
+  venue: 'International Conference on Computational Science (3): 530-537, 2006, NIHMSID194039, PMC Journal in Process'
+  type: Conference Presentations & Publications
+  year: 2006
+  pdf: http://dx.doi.org/10.1007/11758532_70
+  project: http://cvcweb.ices.utexas.edu/cvc/projects/medx/dddas/index.php
+  doi: 10.1007/11758532_70
+  id: 334
+
+- title: Patient Specific Heart Models from High Resolution CT
+  authors: C. Bajaj, S. Goswami, Z. Yu, Y. Zhang, Y. Bazilevs, T. Hughes
+  venue: CompIMAGE. Coimbra, Portugal. October 20-21, 2006, NIHMSID194017, PMC Journal in Process
+  type: Conference Presentations & Publications
+  year: 2006
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2006/conference/Bajaj-Goswami-mod_heart.final.pdf
+  id: 335
+
+- title: 'Isogeometric Analysis of Blood Flow: a NURBS-based Approach'
+  authors: Y. Bazilevs, Y. Zhang, V. Calo, S. Goswami, C. Bajaj, T. Hughes
+  venue: Proceedings of 15th International Meshing Roundtable, pp. 73-92, Birmingham, AL. September 17-20, 2006, NIHMSID194040, PMC Journal in Process
+  type: Conference Presentations & Publications
+  year: 2006
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2006/conference/Bazilevs-IsoGeomAnaly-CompImg06.pdf
+  id: 336
+
+- title: Artery-Vein Separation of Human Vasculature from 3D Thoracic CT Angio Scans
+  authors: S. Park, C. Bajaj, G. Gladish
+  venue: Proceedings of CompIMAGE 2006, Coimbra, Portugal. October 20-21, 2006, NIHMSID194051, PMC Journal in Process
+  type: Conference Presentations & Publications
+  year: 2006
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2006/conference/smpark_AVSeparation.compIMG.pdf
+  id: 337
+
+- title: Secondary and Tertiary Structural Fold Elucidation from 3D EM Maps of Macromolecules
+  authors: C. Bajaj, S. Goswami
+  venue: 'Proceedings of the Fifth Indian Conference on Computer Vision, Graphics & Image Processing, ICVGIP 2006, LNCS 4338, Springer Verlag, 2006, 264 â€“ 275, <a href="http://tinyurl.com/PMC2860966">http://tinyurl.com/PMC2860966</a>, PMCID: PMC2860966'
+  type: Conference Presentations & Publications
+  year: 2006
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2006/conference/Bajaj-Goswami-Springer-helsh.pdf
+  id: 338
+
+- title: Immersed finite element method and its applications to biological systems
+  authors: W. Liu, Y. Liu, D. Farrell, L. Zhang, X. Wang, Y. Fukui, N. Patankar, Y. Zhang, C. Bajaj, J. Lee, J. Hong, X. Chen, H. Hsu
+  venue: 'Computer Methods In Applied Mechanics and Engineering (CMAME), 195: 1722-1749, 2006, <a href=http://dx.doi.org/10.1016/j.cma.2005.05.049>doi:10.1016/j.cma.2005.05.049</a>, <a href="http://tinyurl.com/PMC2830735">PMCID: PMC2830735</a>'
+  type: Journal Publications
+  year: 2006
+  doi: 10.1016/j.cma.2005.05.049
+  id: 341
+
+- title: 3-D Image Registration Using Fast Fourier Transform, With Potential Applications To Geoinformatics and Bioinformatics
+  authors: R. Araiza, M. Averill, G. Keller, S. Starks, C. Bajaj
+  venue: Proceedings of the International Conference on Information Processing and Management of Uncertainty in Knowledge-Based Systems IPMU06, Paris, France, July 2-7, 2006, pp. 817-824, NIHMSID193945, PMC Journal in Process
+  type: Conference Presentations & Publications
+  year: 2006
+  pdf: http://www.cs.utep.edu/vladik/2006/tr06-11.pdf
+  id: 342
+
+- title: Volume subdivision based hexahedral finite element meshing of domains with interior 2-manifold boundaries
+  authors: C. Bajaj and L. Karlapalem
+  venue: AFRIGRAPH '06 Proceedings of the 4th international conference on Computer graphics, virtual reality, visualisation and interaction in Africa, 2006
+  type: Conference Presentations & Publications
+  year: 2006
+  month: 1
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2006/conference/hex-sub-p127-bajaj.pdf
+  id: 402
+
+# 2005
+
+- title: 3D Finite Element Meshing from Imaging Data
+  authors: Y. Zhang, C. Bajaj, B. Sohn
+  venue: 'Computer Methods in Applied Mechanics and Engineering (CMAME) on Unstructured Mesh Generation, 194, 48-49, 5083-5106, 2005,   <a href=http://dx.doi.org/10.1016/j.cma.2004.11.026>doi:10.1016/j.cma.2004.11.026</a>, <a href=http://tinyurl.com/PMC2748876>PMCID: PMC2748876</a>.'
+  type: Journal Publications
+  year: 2005
+  doi: 10.1016/j.cma.2004.11.026
+  id: 1
+
+- title: A Laguerre Voronoi Based Scheme for Meshing Particle Systems
+  authors: C. Bajaj
+  venue: "Japan Journal of Industrial and Applied Mathematics, (JJIAM), vol. 22, No. 2, Pages 167-177, June 2005, <a href=http://dx.doi.org/10.1007/BF03167436>doi: 10.1007/BF03167436</a>, <a href=http://tinyurl.com/PMC2865151>PMCID: PMC2865151</a>. \n"
+  type: Journal Publications
+  year: 2005
+  doi: 10.1007/BF03167436
+  id: 302
+
+- title: 'Tetrameric Mouse Acetylcholinesterase: Continuum Diffusion Rate Calculations by Solving the Steady-State Smoluchowski Equation Using Finite Element Methods'
+  authors: D. Zhang, J. Suen, Y. Zhang, Y. Song, Z. Radic, P. Taylor, M. Holst, C. Bajaj, N. Baker, J. McCammon
+  venue: 'Biophys. J. 88, 1659-1665 (2005), <a href=http://dx.doi.org/10.1529/biophysj.104.053850>doi: 10.1529/biophysj.104.053850</a>, <a href=http://tinyurl.com/PMC1305222>PMCID: PMC1305222</a>.'
+  type: Journal Publications
+  year: 2005
+  doi: 10.1529/biophysj.104.053850
+  id: 292
+
+- title: Extending the Photon Mapping Method for Realistic Rendering of Hot Gaseous Fluids
+  authors: B. Kang, I. Ihm, C. Bajaj
+  venue: Computer Animation and Virtual Worlds (CASA 2005), 16, 3, 353-363.
+  type: Conference Presentations & Publications
+  year: 2005
+  pdf: http://www3.interscience.wiley.com/cgi-bin/fulltext/111591690/PDFSTART
+  id: 319
+
+- title: An Adaptive Irregularly Spaced Fourier Method for Protein-Protein Docking
+  authors: J. Castrillon-Candas, C. Bajaj, V. Siddavanahalli
+  venue: |-
+    Technical Report TR-05-34, Department of Computer 
+    Sciences, The University of Texas at Austin, July 11, 2005.
+  type: Technical Reports
+  year: 2005
+  pdf: http://www.cs.utexas.edu/ftp/pub/techreports/tr05-34.pdf
+  id: 321
+
+- title: Compressed Representations of Macromolecular Structures and Properties
+  authors: C. Bajaj, J. Castrillon-Candas, V. Siddavanahalli, Z. Xu
+  venue: Structure, Volume 13, Issue 3, March 2005, Pages 463-471, <a href=http://dx.doi.org/10.1016/j.str.2005.02.004>doi:10.1016/j.str.2005.02.004</a>, <a href=http://tinyurl.com/PMID15766547>PMID15766547</a>, PMC Journal in Process.
+  type: Journal Publications
+  year: 2005
+  doi: 10.1016/j.str.2005.02.004
+  id: 304
+
+- title: Automatic Ultrastructure Segmentation of Reconstructed CryoEM Maps of Icosahedral Viruses
+  authors: Z.Yu, C. Bajaj
+  venue: 'IEEE Transactions on Image Processing: Special Issue on Molecular and Cellular Bioimaging, 2005 Sep; 14(9): 1324-37, <a href=http://dx.doi.org/10.1109/TIP.2005.852770>doi: 10.1109/TIP.2005.852770</a>, <a href=http://tinyurl.com/PMID16190468>PMCID: PMID16190468</a>, PMC Journal in Process.'
+  type: Journal Publications
+  year: 2005
+  doi: 10.1109/TIP.2005.852770
+  id: 381
+
+- title: Geometric and Signal Processing of Reconstructed 3D Maps of Molecular Complexes
+  authors: C. Bajaj, Z. Yu
+  venue: 'Handbook of Computational Molecular Biology, Edited by S. Aluru, Chapman & Hall/CRC Press, Computer and Information Science Series, December 21, 2005, ISBN: 1584884061.'
+  type: Book Chapters
+  year: 2005
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2005/conference/cryo3d-main2005.pdf
+  id: 315
+
+- title: Surface Smoothing and Quality Improvement of Quadrilateral/Hexahedral Meshes with Geometric Flow
+  authors: Y. Zhang, G. Xu, C. Bajaj,
+  venue: 'Comm. in Numerical Methods in Engineering, Vol. 24, 2008. <a href=http://onlinelibrary.wiley.com/doi/10.1002/cnm.1067/abstract>doi:10.1002/cnm.1067</a>, <a href=http://tinyurl.com/PMC2761001>PMCID: PMC2761001</a>.'
+  type: Journal Publications
+  year: 2005
+  id: 316
+
+# 2004
+
+- title: 'Continuum Diffusion Reaction Rate Calculations of Wild Type and Mutant Mouse Acetylcholinesterase: Adaptive Finite Element Analysis'
+  authors: Y. Song, Y. Zhang, C. Bajaj, N. Baker
+  venue: 'Biophysical Journal, 87(3):1558-1566, 2004, <a href=http://dx.doi.org/10.1529/biophysj.104.041517>doi: 10.1529/biophysj.104.041517</a>, <a href=http://tinyurl.com/PMC1304562>PMCID: PMC1304562</a>.'
+  type: Journal Publications
+  year: 2004
+  doi: 10.1529/biophysj.104.041517
+  id: 2
+
+- title: Finite Element Solution of the Steady-State Smoluchowski Equation for Rate Constant Calculations
+  authors: Y. Song, Y. Zhang, T. Shen, C. Bajaj, J. McCammon, N. Baker
+  venue: 'Biophysical Journal, 86(4):2017-2029, 2004, <a href=http://dx.doi.org/10.1529/biophysj.106.102533>doi: 10.1529/biophysj.106.102533</a>, <a href=http://tinyurl.com/PMC1304055>PMCID: PMC1304055</a>.'
+  type: Journal Publications
+  year: 2004
+  doi: 10.1529/biophysj.106.102533
+  id: 3
+
+- title: Volumetric Video Compression and Interactive Playback
+  authors: B. Sohn, C. Bajaj, V. Siddavanahalli
+  venue: 'Computer Vision and Image Understanding, special issue on "Model-based and Image-based 3D Scene Representation for Interactive Visualization", 96(3), Pages 435-452, 2004, <a href=http://dx.doi.org/10.1016/j.cviu.2004.03.010>doi: 10.1016/j.cviu.2004.03.010</a>, <a href=http://www.ncbi.nlm.nih.gov/pubmed/20072724>PMID: 20072724</a>.'
+  type: Journal Publications
+  year: 2004
+  doi: 10.1016/j.cviu.2004.03.010
+  id: 4
+
+- title: 'Automatic Particle Selection: Results of a comparative study'
+  authors: Y. Zhu, B. Carragher, R. Glaeser, D. Fellmann, C. Bajaj, M. Bern, F. Mouche, F. Haas, R. Hall, D. Kriegman, S. Ludtke, S. Mallick, P. Penczek, A. Roseman, F. Sigworth, N. Volkmann, C. Potter
+  venue: 'Journal of Structural Biology, Volume 145, 2004, Pages 3-14, <a href=http://dx.doi.org/10.1016/j.jsb.2003.09.033>doi: 10.1016/j.jsb.2003.09.033</a>, <a href=http://tinyurl.com/PMID15065668>PMID15065668</a>, PMC Journal In Process.'
+  type: Journal Publications
+  year: 2004
+  doi: 10.1016/j.jsb.2003.09.033
+  id: 5
+
+- title: Detecting Circular and Rectangular Particles Based on Geometric Feature Detection in Electron Micrographs
+  authors: Z. Yu, C. Bajaj
+  venue: 'Journal of Structural Biology, Volume 145, 2004, Pages 168-180, <a href=http://dx.doi.org/10.1016/j.jsb.2003.10.027>doi: 10.1016/j.jsb.2003.10.027</a>, <a href=http://tinyurl.com/PMID15065684>PMID15065684</a>, PMC Journal In Process.'
+  type: Journal Publications
+  year: 2004
+  doi: 10.1016/j.jsb.2003.10.027
+  id: 6
+
+- title: 'Auralization I: Vortex Sound Synthesis'
+  authors: Y. Shin, C. Bajaj
+  venue: Proceedings of Symposium on Visualization, Joint Eurographics - IEEE TCVG, VisSym 2004, Symposium on Visualization, pp. 193-200, Konstanz, Germany, May 19-21, 2004. Eurographics Association 2004, ISBN 3-905673-07-X.
+  type: Conference Presentations & Publications
+  year: 2004
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2004/conference/auralization-synthesis_2004.pdf
+  id: 7
+
+- title: A Fast and Adaptive Algorithm for Image Contrast Enhancement
+  authors: Z. Yu, C. Bajaj
+  venue: Proceedings of 2004 IEEE International Conference on Image Processing (ICIP'04), Volume 2,  Oct. 24-27 2004, Pages 1001-1004, Singapore.
+  type: Conference Presentations & Publications
+  year: 2004
+  pdf: http://ieeexplore.ieee.org/iel5/9716/30677/01419470.pdf?isnumber=30677&prod=CNF&arnumber=1419470&arSt=+1001&ared=+1004+Vol.2&arAuthor=Yu%2C+Z.%3B+Chandrajit+Bajaj
+  id: 8
+
+- title: A Segmentation-Free Approach for Skeletonization of Gray-Scale Images via Anisotropic Vector Diffusion
+  authors: Z. Yu, C. Bajaj
+  venue: Proceedings of 2004 IEEE International Conference on Computer Vision and Pattern Recognition (CVPR'04), Volume 1, Pages 415-420, Washington, DC.
+  type: Conference Presentations & Publications
+  year: 2004
+  pdf: http://ieeexplore.ieee.org/iel5/9183/29133/01315062.pdf?isnumber=29133&prod=CNF&arnumber=1315062&arSt=+I-415&ared=+I-420+Vol.1&arAuthor=Zeyun+Yu%3B+Chandrajit+Bajaj
+  id: 9
+
+- title: Adaptive and Quality Quadrilateral/Hexahedral Meshing from Volumetric Imaging Data
+  authors: Y. Zhang, C. Bajaj
+  venue: In Proceedings of 13th International Meshing Roundtable, pp. 365-376. Willamsburg, VA. September 19-22, 2004.
+  type: Conference Presentations & Publications
+  year: 2004
+  pdf: http://www.imr.sandia.gov/papers/imr13/zhang.pdf
+  id: 10
+
+- title: Visualization of Icosahedral Virus Structures from Reconstructed Volumetric Maps
+  authors: Z. Yu, C. Bajaj
+  venue: Technical Report TR-04-10, Department of Computer Sciences, The University of Texas at Austin, April 9, 2004.
+  type: Technical Reports
+  year: 2004
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2004/techreports/TR04-10.pdf
+  id: 12
+
+- title: Finite Element Meshing for Cardiac Analysis
+  authors: Y. Zhang, C. Bajaj
+  venue: ICES Technical Report 04-26, The University of Texas at Austin, 2004.
+  type: Technical Reports
+  year: 2004
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2004/techreports/jessica_heart04.pdf
+  id: 13
+
+- title: 'TexMol: Interactive Visual Exploration of Large Flexible Multi-component Molecular Complexes'
+  authors: C. Bajaj, P. Djeu, V. Siddavanahalli, A. Thane
+  venue: Proc. of the Annual IEEE Visualization Conference, October 2004,  Austin, Texas, IEEE Computer Society Press, pp. 243-250.
+  type: Conference Presentations & Publications
+  year: 2004
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2004/conference/TexMol-2004.pdf
+  id: 255
+
+- title: Splines and Geometric Modeling
+  authors: C. Bajaj
+  venue: Handbook of Discrete and Computational Geometry, (2004), Chap. 53, 1187-1206.
+  type: Book Chapters
+  year: 2004
+  id: 257
+
+- title: Visualization of Very Large Oceanography Time-Varying Volume Datasets
+  authors: S. Park, C. Bajaj, I. Ihm
+  venue: Lecture Notes in Computer Science (LNCS), ed. by M. Bubak et. al., ICCS 2004, Volume 3037, 2004, Pages 419-426, Springer-Verlag Heidelberg.
+  type: Book Chapters
+  year: 2004
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2004/conference/Ocean-LNCS04.pdf
+  id: 256
+
+- title: Contour Trees and Small Seed Sets for Isosurface Generation Topological Data Structures for Surfaces
+  authors: M. van Kreveld, R. van Oostrum, C. Bajaj, V. Pascucci, D. Schikore
+  venue: Chap5, pp. 71-86, 2004. ed. by S. Rana, John Wiley & Sons, Ltd, 2004.
+  type: Book Chapters
+  year: 2004
+  id: 258
+
+- title: SIMD Optimization of Linear Expressions for Programmable Graphics Hardware
+  authors: C. Bajaj, I. Ihm, J. Min, J. Oh
+  venue: 'Computer Graphics Forum, 23, 4(2004), 1-18, <a href=http://dx.doi.org/10.1111/j.1467-8659.2004.00803.x>doi: 10.1111/j.1467-8659.2004.00803.x</a>, <a href=http://tinyurl.com/PMC2782869>PMCID: PMC2782869</a>.'
+  type: Journal Publications
+  year: 2004
+  doi: 10.1111/j.1467-8659.2004.00803.x
+  id: 260
+
+- title: Multi-Dimensional Transfer Function Design for Scientific Visualization
+  authors: S. Park, C. Bajaj
+  venue: 'Proceedings of the Fourth Indian Conference on Computer Vision, Graphics & Image Processing, ICVGIP 2004: 290-295.'
+  type: Conference Presentations & Publications
+  year: 2004
+  id: 323
+
+- title: A Laguerre Voronoi Based Scheme for Meshing Particle Systems
+  authors: C. Bajaj
+  venue: Proc. of International Symposium on Voronoi Diagrams in Science and Engineering, VD2004, University of Tokyo, Japan, Sep 2004, pp. 115 -122.
+  type: Conference Presentations & Publications
+  year: 2004
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2004/conference/meshing5.pdf
+  id: 264
+
+- title: Adaptive Surfaces Fairing by Geometric Diffusion
+  authors: C. Bajaj, G. Xu
+  venue: 'Geometric Modeling: Techniques, Applications, Systems and Tools, 2004,  M. Sarfraz(ed), Kluwer Academic Publishers, ISBN: 1-4020-1817-7, Pages 32-49, <a href=http://dx.doi.org/10.1109/IV.2001.942137>doi: 10.1109/IV.2001.942137</a>.'
+  type: Journal Publications
+  year: 2004
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2004/journal/AdaptiveSurfacesFairingbyGF.pdf
+  doi: 10.1109/IV.2001.942137
+  id: 296
+
+- title: Reconstruction of G1 Surfaces with Biquartic Patches for hp FE Simulations
+  authors: D. Xue, L. Demkowicz, C. Bajaj
+  venue: In Proceedings of 13th International Meshing Roundtable, pp. 323-332. Willamsburg, VA. September 19-22, 2004.
+  type: Conference Presentations & Publications
+  year: 2004
+  pdf: http://www.imr.sandia.gov/papers/imr13/xue.pdf
+  id: 330
+
+# 2003
+
+- title: Volumetric Feature Extraction and Visualization of Tomographic Molecular Imaging
+  authors: C. Bajaj, Z. Yu, M. Auer
+  venue: Journal of Structural Biology, Volume 144, Issues 1-2, Oct. 2003, Pages 132-143, <a href=http://dx.doi.org/10.1016/j.jsb.2003.09.037>doi:10.1016/j.jsb.2003.09.037</a>, <a href=http://tinyurl.com/PMID14643216>PMID14643216</a>, PMC Journal In Process.
+  type: Journal Publications
+  year: 2003
+  doi: 10.1016/j.jsb.2003.09.037
+  id: 16
+
+- title: Applications of Bilateral Denoising Filter in Biological Electron Microscopy
+  authors: W. Jiang, M. Baker, Q. Wu, C. Bajaj, W. Chiu
+  venue: 'Journal of Structural Biology, Volume 144, Issues 1-2, October 2003, Pages 114-122, <a href=http://dx.doi.org/10.1016/j.jsb.2003.09.028>doi: 10.1016/j.jsb.2003.09.028</a>, <a href=http://tinyurl.com/PMID14643214>PMID14643214</a>, PMC Journal In Process.'
+  type: Journal Publications
+  year: 2003
+  doi: 10.1016/j.jsb.2003.09.028
+  id: 17
+
+- title: NURBS Approximation of A-splines and A-patches
+  authors: C. Bajaj, G. Xu, R. Holt, A. Netravali
+  venue: International Journal of Computational Geometry and Applications, 13, 5, (2003), 359-389.
+  type: Journal Publications
+  year: 2003
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2003/journal/spp0.pdf
+  id: 14
+
+- title: Anisotropic Diffusion of Surfaces and Functions on Surfaces
+  authors: C. Bajaj, G. Xu
+  venue: 'ACM Transactions on Graphics, 22, 1, (2003), 4-32, <a href=http://dx.doi.org/10.1145/588272.588276>doi: 10.1145/588272.588276</a>'
+  type: Journal Publications
+  year: 2003
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2003/journal/p4-l_bajaj.pdf
+  doi: 10.1145/588272.588276
+  id: 18
+
+- title: Dynamic Maintenance and Visualization of Molecular Surfaces
+  authors: C. Bajaj, V. Pascucci, A. Shamir, R. Holt, A. Netravali
+  venue: 'Discrete Applied Mathematics 127 (2003). Pages 23-51, <a href=http://dx.doi.org/10.1016/S0166-218X(02)00283-4>doi: 10.1016/S0166-218X(02)00283-4</a>.'
+  type: Journal Publications
+  year: 2003
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6TYW-4603VKV-1-C3&_cdi=5629&_user=108429&_orig=browse&_coverDate=04%2F01%2F2003&_sk=998729998&view=c&wchp=dGLbVzb-zSkWz&md5=2e54b47924087468ba65445ebfb8c87c&ie=/sdarticle.pdf
+  doi: 10.1016/S0166-218X(02)00283-4
+  id: 19
+
+- title: Curvature Computations of 2-manifolds in R^k
+  authors: G. Xu, C. Bajaj
+  venue: Journal of Computational Mathematics. vol. 21. no. 5. (2003), 681-688.
+  type: Journal Publications
+  year: 2003
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2003/journal/curvature.pdf
+  id: 20
+
+- title: A clustering-based method for particle detection in electron micrographs
+  authors: Z. Yu, C. Bajaj
+  venue: Proceedings of the 5th International Conference on Advances in Pattern Recognition(ICAPR'03), pp. 137-140, Calcutta, India, December 2003.
+  type: Conference Presentations & Publications
+  year: 2003
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2003/conference/ICAPR03.pdf
+  id: 21
+
+- title: Adaptive and Quality 3D Meshing from Imaging Data
+  authors: Y. Zhang, C. Bajaj, B. Sohn
+  venue: Proceedings of 8th ACM Symposium on Solid Modeling and Applications. Pages 286-291. Seattle, WA. June 16-20, 2003.
+  type: Conference Presentations & Publications
+  year: 2003
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=781653&type=pdf&coll=Portal&dl=ACM&CFID=71886883&CFTOKEN=43968473
+  id: 22
+
+- title: 'Interactive Poster: Interactive Symbolic Visualization of Semi-automatic Theorem Proving'
+  authors: C. Bajaj, S. Khandelwal, J Moore, V. Siddavanahalli
+  venue: IEEE Symposium on Information Visualization 2003. Seattle, WA.
+  type: Conference Presentations & Publications
+  year: 2003
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2003/conference/symbvis.pdf
+  id: 23
+
+- title: Time-Varying Contour Topology
+  authors: B. Sohn, C. Bajaj
+  venue: Technical Report TR-03-61, Department of Computer Sciences, The University of Texas at Austin, December 12, 2003.
+  type: Technical Reports
+  year: 2003
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2003/techreports/tr03-61.pdf
+  id: 24
+
+- title: Level-set Based Volumetric Anisotropic Diffusion for 3D Image Denoising
+  authors: C. Bajaj, Q. Wu, G. Xu
+  venue: ICES Technical Report 03-10, The University of Texas at Austin, 2003.
+  type: Technical Reports
+  year: 2003
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2003/techreports/lspaper.pdf
+  id: 25
+
+- title: A Geometric Feature Detection Approach to Particle Picking in Electron Micrographs
+  authors: Z. Yu, C. Bajaj
+  venue: Technical Report TR-03-30, Department of Computer Sciences, The University of Texas at Austin, July 28, 2003.
+  type: Technical Reports
+  year: 2003
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2003/techreports/ptc-pick.pdf
+  id: 26
+
+- title: Discrete Surface Modeling Using Geometric Flows
+  authors: G. Xu, Q. Pan, C. Bajaj
+  venue: Technical Report TR-03-36, Department of Computer Sciences, The University of Texas at Austin, August 17, 2003.
+  type: Technical Reports
+  year: 2003
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2003/techreports/tog-gpde-xubajaj.pdf
+  id: 27
+
+- title: Interactive Symbolic Visualization of Semi-automatic Theorem Proving
+  authors: C. Bajaj, S. Khandelwal, J Moore, V. Siddavanahalli
+  venue: Technical Report TR-03-37, Department of Computer Sciences, The University of Texas at Austin, August 2003.
+  type: Technical Reports
+  year: 2003
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2003/techreports/bajaj-symbolic-vis.pdf
+  id: 28
+
+- title: Volumetric Filtering, Feature Extraction, and Visualization of Volumetric Tomographic Molecular Imaging
+  authors: C. Bajaj, Z. Yu, M. Auer
+  venue: |-
+    Technical Report TR-03-31, Department of Computer 
+    Sciences, The University of Texas at Austin, July 28, 2003.
+  type: Technical Reports
+  year: 2003
+  pdf: http://www.cs.utexas.edu/ftp/pub/techreports/tr03-31.pdf
+  id: 322
+
+- title: Active Visualization in a Multidisplay Immersive Environment
+  authors: W. Blanke, C. Bajaj
+  venue: 'Computers & Graphics, Volume 27, Number 5, October 2003, 681-691, <a href=http://dx.doi.org/10.1016/S0097-8493(03)00141-9>doi: 10.1016/S0097-8493(03)00141-9</a>.'
+  type: Journal Publications
+  year: 2003
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6TYG-49FGM5C-2-2D&_cdi=5618&_user=108429&_orig=browse&_coverDate=10%2F31%2F2003&_sk=999729994&view=c&wchp=dGLbVlb-zSkzS&md5=8b4f6f73e7da07e59d301bd675f5bfb2&ie=/sdarticle.pdf
+  doi: 10.1016/S0097-8493(03)00141-9
+  id: 301
+
+- title: A Comparative Study of the Quantitative Accuracy of Three-Dimensional Reconstructions of Spinal Cord from Serial Histological Sections
+  authors: B. Duerstock, C. Bajaj, R. Borgens
+  venue: 'Journal of Microscopy, 210:2, (2003), 138-148, <a href=http://dx.doi.org/10.1046/j.1365-2818.2003.01130.x>doi: 10.1046/j.1365-2818.2003.01130.x</a>, <a href=http://tinyurl.com/PMID12753096>PMID12753096</a>, PMC Journal In Process.'
+  type: Journal Publications
+  year: 2003
+  doi: 10.1046/j.1365-2818.2003.01130.x
+  id: 277
+
+# 2002
+
+- title: Hierarchical Multiresolution Reconstruction of Shell Surfaces
+  authors: C. Bajaj, G. Xu, R. Holt, A. Netravali
+  venue: "Computer Aided Geometric Design, 19:2(2002), 89-112, 2002, <a href=\"\t http://dx.doi.org/10.1016/S0167-8396(01)00073-5\">doi: 10.1016/S0167-8396(01)00073-5</a>."
+  type: Journal Publications
+  year: 2002
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2002/journal/sdarticle.pdf
+  doi: 10.1016/S0167-8396(01)00073-5
+  id: 29
+
+- title: C1 Modeling with Hybrid Multiple-sided A-patches
+  authors: G. Xu, C. Bajaj, S. Evans
+  venue: Special issue on Surface and Volume Reconstructions in the International Journal of Foundations of Computer Science, 13, 2, (2002), 261-284.
+  type: Journal Publications
+  year: 2002
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2002/journal/345side.pdf
+  id: 30
+
+- title: A Subdivision Scheme for Hexahedral Meshes
+  authors: C. Bajaj, S. Schaefer, J. Warren, G. Xu
+  venue: "The Visual Computer, Vol. 18. Numbers 5-6. Pages 343-356. August 2002, <a href=\"\t http://dx.doi.org/10.1007/s003710100150\">doi: 10.1007/s003710100150</a>."
+  type: Journal Publications
+  year: 2002
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2002/journal/hexahedral.pdf
+  doi: 10.1007/s003710100150
+  id: 31
+
+- title: Acoustics Scattering on Arbitrary Manifold Surfaces
+  authors: C. Bajaj, G. Xu, J. Warren
+  venue: Geometric Modeling and Processing, Theory and Application 2002, Japan, Pages 73-82.
+  type: Conference Presentations & Publications
+  year: 2002
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2002/conference/acoustic-scattering-Xu-2002.pdf
+  id: 32
+
+- title: Parallel and Out-of-core View-dependent Isocontour Visualization Using Random Data Distribution
+  authors: X. Zhang, C. Bajaj, V. Ramachandran
+  venue: Joint Eurographics-IEEE TCVG Symposium on Visualization 2002, Pages 9-18.
+  type: Conference Presentations & Publications
+  year: 2002
+  pdf: http://www.eg.org/EG/DL/WS/VisSym02/009-018.pdf.abstract.pdf
+  id: 33
+
+- title: Active Visualization in a Multidisplay Immersive Environment
+  authors: W. Blanke, C. Bajaj
+  venue: Eighth Eurographics Workshop on Virtual Environments 2002, Pages 103-111.
+  type: Conference Presentations & Publications
+  year: 2002
+  pdf: http://www.eg.org/EG/DL/WS/EGVE02/103-111.pdf.abstract.pdf
+  id: 34
+
+- title: Normalized Gradient Vector Diffusion and Image Segmentation
+  authors: Z. Yu, C. Bajaj
+  venue: Proceedings of the 7th European Conference on Computer Vision (LNCS 2352), vol. 3, pp. 517-530, (Published by Springer Press), Copenhagen, Denmark, May 28-31, 2002.
+  type: Conference Presentations & Publications
+  year: 2002
+  pdf: http://www.springerlink.com/media/9b6atpuqun1y69qkjj1q/contributions/x/6/e/4/x6e4gumb3h7h9n8h.pdf
+  id: 35
+
+- title: Image Segmentation Using Gradient Vector Diffusion and Region Merging
+  authors: Z. Yu, C. Bajaj
+  venue: Proceedings of the 16th International Conference on Pattern Recognition, vol. 2, pp. 941-944, (Published by IEEE CS-Press), Quebec, Canada, August 11-15, 2002.
+  type: Conference Presentations & Publications
+  year: 2002
+  month: 8
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2002/conference/Zeyun-ICPR02.pdf
+  id: 36
+
+- title: Anisotropic Vector Diffusion in Image Smoothing
+  authors: Z. Yu, C. Bajaj
+  venue: Proceeding of the 9th IEEE International Conference on Image Processing, vol. 1, pp. 828-831, (Published by IEEE CS Press), Rochester, New York, September 22-25, 2002.
+  type: Conference Presentations & Publications
+  year: 2002
+  pdf: http://ieeexplore.ieee.org/iel5/8052/22252/01038153.pdf?isnumber=22252&prod=CNF&arnumber=1038153&arSt=+I-828&ared=+I-831+vol.1&arAuthor=Zeyun+Yu%3B+Bajaj%2C+C.
+  id: 37
+
+- title: 'Case Study: Interactive Rendering of Adaptive Mesh Refinement Data'
+  authors: S. Park, C. Bajaj, V. Siddavanahalli
+  venue: Proceedings of IEEE Visualization, Pages 521-524, 2002, Boston, MA.
+  type: Conference Presentations & Publications
+  year: 2002
+  pdf: http://ieeexplore.ieee.org/iel5/8436/26565/01183820.pdf?isnumber=26565&prod=CNF&arnumber=1183820&arSt=+521&ared=+524&arAuthor=Sanghun+Park%3B+Bajaj%2C+C.L.%3B+Siddavanahalli%2C+V.
+  id: 38
+
+- title: Feature Based Volumetric Video Compression for Interactive Playback
+  authors: B. Sohn, C. Bajaj, V. Siddavanahalli
+  venue: 'Proceedings of IEEE/SIGGRAPH Symposium on Volume Visualization and Graphics, Pages 89-96, 2002, Boston, MA, http://tinyurl.com/PMC2805201, PMCID: PMC2805201'
+  type: Conference Presentations & Publications
+  year: 2002
+  pdf: http://ieeexplore.ieee.org/iel5/8690/27525/01226514.pdf?isnumber=27525&prod=CNF&arnumber=1226514&arSt=+89&ared=+96&arAuthor=Bong-Soo+Sohn%3B+Bajaj%2C+C.%3B+Siddavanahalli%2C+V.
+  id: 39
+
+- title: Parallel Multi-PC Volume Rendering System
+  authors: C. Bajaj, S. Park, A. Thane
+  venue: CS  & ICES Technical Report, University of Texas at Austin, 2002.
+  type: Technical Reports
+  year: 2002
+  month: 8
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2002/techreports/Smpark-VolVis02.pdf
+  id: 40
+
+- title: Progressive Tracking of Isosurfaces in Time-Varying Scalar Fields
+  authors: C. Bajaj, A. Shamir, B. Sohn
+  venue: CS  & ICES Technical Report, University of Texas at Austin, 2002.
+  type: Technical Reports
+  year: 2002
+  month: 8
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2002/techreports/Bongbong-Vis02.pdf
+  id: 41
+
+# 2001
+
+- title: The Transfer Function Bake-off
+  authors: H. Pfister, B. Lorenson, C. Bajaj, G. Kindlmann, W. Schroeder, L. Avila, K. Raghu, R. Machiraju, J. Lee
+  venue: 'IEEE Computer Graphics and Applications, Volume 21: Issue 3. May/June 2001. Pages 16-22, 2001, <a href="http://dx.doi.org/10.1109/38.920623">doi: 10.1109/38.920623</a>.'
+  type: Journal Publications
+  year: 2001
+  pdf: http://ieeexplore.ieee.org/iel5/38/19913/00920623.pdf?isnumber=19913&prod=JNL&arnumber=920623&arSt=16&ared=22&arAuthor=Pfister%2C+H.%3B+Lorensen%2C+B.%3B+Bajaj%2C+C.%3B+Kindlmann%2C+G.%3B+Schroeder%2C+W.%3B+Avila%2C+L.S.%3B+Raghu%2C+K.M.%3B+Machiraju%2C+R
+  doi: 10.1109/38.920623
+  id: 42
+
+- title: 3D RGB Image Compression for Interactive Applications
+  authors: C. Bajaj, I. Ihm, S. Park
+  venue: "ACM Transactions on Graphics, 20, 1, (2001), 10-38, 2001, <a href=\t http://dx.doi.org/10.1145/383745.383747\">doi: 10.1145/383745.383747</a>."
+  type: Journal Publications
+  year: 2001
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=383747&type=pdf&coll=portal&dl=ACM&CFID=76478172&CFTOKEN=62344793
+  id: 43
+
+- title: Regular Algebraic Curve Segments (III) - Applications in Interactive Design and Data Fitting
+  authors: C. Bajaj, G. Xu
+  venue: "Computer Aided Geometric Design, 18:3(2001), 149-173, 2001, <a href=\"\t http://dx.doi.org/10.1016/S0167-8396(01)00010-3\">doi: 10.1016/S0167-8396(01)00010-3</a>."
+  type: Journal Publications
+  year: 2001
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2001/journal/sdarticle02.pdf
+  doi: 10.1016/S0167-8396(01)00010-3
+  id: 44
+
+- title: C1 Modeling with A-patches from Rational Trivariate Functions
+  authors: G. Xu, C. Bajaj, H. Huang
+  venue: Computer Aided Geometric Design, 18:3(2001), 221-243.
+  type: Journal Publications
+  year: 2001
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2001/journal/sdarticle01.pdf
+  id: 45
+
+- title: Scalable Isosurface Visualization of Massive Datasets on COTS-Cluster
+  authors: X. Zhang, C. Bajaj, W. Blanke
+  venue: Proc. of IEEE 2001 Symposium on Parallel and Large-Data Visualization and Graphics, pp. 51-58, San Diego, CA, 2001.
+  type: Conference Presentations & Publications
+  year: 2001
+  pdf: http://ieeexplore.ieee.org/iel5/7630/20819/00964404.pdf?isnumber=20819&prod=CNF&arnumber=964404&arSt=51&ared=150&arAuthor=Xiaoyu+Zhang%3B+Bajaj%2C+C.%3B+Blanke%2C+W.
+  id: 49
+
+- title: Anisotropic Diffusion of Noisy Surfaces and Noisy Functions on Surfaces
+  authors: C. Bajaj, G. Xu
+  venue: Proc. of Information Visualization 2001, London, UK, 2001.
+  type: Conference Presentations & Publications
+  year: 2001
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2001/conference/tog.pdf
+  id: 50
+
+- title: Visualization-Specific Compression of Large Volume Data
+  authors: C. Bajaj, I. Ihm, S. Park
+  venue: Proc. of Pacific Graphics, pp. 212-222, 2001, Tokyo, Japan, Oct 2001.
+  type: Conference Presentations & Publications
+  year: 2001
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2001/conference/pg01.pdf
+  id: 51
+
+- title: A Cluster Based Emulator for Multidisplay, Multiresolution Parallel Image Compositing
+  authors: W. Blanke, C. Bajaj, X. Zhang, D. Fussell
+  venue: CS  & TICAM Technical Report, University of Texas at Austin, 2001.
+  type: Technical Reports
+  year: 2001
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2001/techreports/tcr1.pdf
+  id: 52
+
+- title: Hardware Accelerated Multipipe Parallel Rendering of Large Data Stream
+  authors: S. Park, S. Park, C. Bajaj
+  venue: CS  & TICAM Technical Report, University of Texas at Austin, 2001.
+  type: Technical Reports
+  year: 2001
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2001/techreports/tbvr.pdf
+  id: 53
+
+- title: Effective Visualization of Very Large Oceanography Time-varying Volume Dataset
+  authors: S. Park, C. Bajaj, I. Ihm
+  venue: CS  & TICAM Technical Report, University of Texas at Austin, 2001.
+  type: Technical Reports
+  year: 2001
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2001/techreports/sot.pdf
+  id: 54
+
+- title: Adaptive fairing of surface meshes by geometric diffusion
+  authors: C. Bajaj, G. Xu
+  venue: |-
+    Proceedings of Fifth International Conference on Information Visualisation, 2001. 
+    25-27 July 2001. Page(s):731 - 737, <a href="http://dx.doi.org/10.1109/IV.2001.942137">doi: 10.1109/IV.2001.942137</a>.
+  type: Conference Presentations & Publications
+  year: 2001
+  month: 7
+  pdf: http://ieeexplore.ieee.org/iel5/7496/20385/00942137.pdf?tp=&arnumber=942137&isnumber=20385
+  doi: 10.1109/IV.2001.942137
+  id: 317
+
+- title: Smooth Shell Construction with Mixed Prism Fat Surfaces
+  authors: C. Bajaj, G. Xu
+  venue: Brunett, G., Bieri,H., Farin, G. (eds.), Geometric Modeling Computing Supplement, 14, (2001), 19-35.
+  type: Book Chapters
+  year: 2001
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2001/conference/smooth-shell-const.pdf
+  id: 288
+
+# 2000
+
+- title: Parameterization in Finite Precision
+  authors: C. Bajaj, A. Royappa
+  venue: 'Algorithmica, 27, 1, (2000), 100-114, <a href="http://dx.doi.org/10.1007/s004530010006">doi: 10.1007/s004530010006</a>.'
+  type: Journal Publications
+  year: 2000
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2000/journal/algor98.pdf
+  doi: 10.1007/s004530010006
+  id: 56
+
+- title: Regular algebraic curve segments (I)-Definitions and characteristics
+  authors: G. Xu, C. Bajaj, W. Xue
+  venue: 'Computer Aided Geometric Design, 17:6(2000), 485-501, <a href="http://dx.doi.org/10.1016/S0167-8396(00)00012-1">doi: 10.1016/S0167-8396(00)00012-1</a>.'
+  type: Journal Publications
+  year: 2000
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2000/journal/sdarticle03.pdf
+  doi: 10.1016/S0167-8396(00)00012-1
+  id: 57
+
+- title: Regular Algebraic Curve Segments (II) - Interpolation and Approximation
+  authors: G. Xu, C. Bajaj, C. Chu
+  venue: 'Computer Aided Geometric Design, 17:6(2000), 503-519, <a href="http://dx.doi.org/10.1016/S0167-8396(00)00013-3">doi: 10.1016/S0167-8396(00)00013-3</a>.'
+  type: Journal Publications
+  year: 2000
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2000/journal/sdarticle04.pdf
+  doi: 10.1016/S0167-8396(00)00013-3
+  id: 58
+
+- title: Advances in three-dimensional reconstruction of the experimental spinal cord injury
+  authors: B. Duerstock, C. Bajaj, V. Pascucci, D. Schikore. K. Lin, R. Borgens
+  venue: "Computerized Medical Imaging and Graphics, Volume 24, Issue 6, November 2000, Pages 389-406, <a href=\"\t http://dx.doi.org/10.1016/S0895-6111(00)00034-3\">doi: 10.1016/S0895-6111(00)00034-3</a>, <a href=\"http://tinyurl.com/PMID11008186\">PMID: 11008186</a>, PMC Journal in Process."
+  type: Journal Publications
+  year: 2000
+  doi: 10.1016/S0895-6111(00)00034-3
+  id: 59
+
+- title: Compression-Based 3D Texture Mapping for Real-Time Rendering
+  authors: C. Bajaj, I. Ihm, S. Park
+  venue: 'Graphical Models, 62:6, (2000), 391-410, <a href="http://dx.doi.org/10.1006/gmod.2000.0532">doi: 10.1006/gmod.2000.0532</a>.'
+  type: Journal Publications
+  year: 2000
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6WG3-45F4N3G-2-1&_cdi=6811&_user=108429&_orig=browse&_coverDate=11%2F30%2F2000&_sk=999379993&view=c&wchp=dGLbVlb-zSkzS&md5=712fc24a1e439a4951b72abdaac63b02&ie=/sdarticle.pdf
+  doi: 10.1006/gmod.2000.0532
+  id: 60
+
+- title: Multi-Resolution Dynamic Meshes with Arbitrary Deformations
+  authors: A. Shamir, V. Pascucci, C. Bajaj
+  venue: Proc of IEEE Visualization Conference 2000, Salt Lake City, Utah, pp. 423-430.
+  type: Conference Presentations & Publications
+  year: 2000
+  pdf: http://ieeexplore.ieee.org/iel5/7111/19150/00885724.pdf?isnumber=19150&prod=CNF&arnumber=885724&arSt=423&ared=430%2C+583&arAuthor=Shamir%2C+A.%3B+Pascucci%2C+V.%3B+Bajaj%2C+C.
+  id: 61
+
+- title: Time Critical Isosurface Refinement and Smoothing
+  authors: C. Bajaj, V. Pascucci
+  venue: Proceedings of the ACM/IEEE Volume Visualization and Graphics Symposium 2000, Salt lake City, Utah, pp. 33- 42.
+  type: Conference Presentations & Publications
+  year: 2000
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=353894&type=pdf&coll=portal&dl=ACM&CFID=71889654&CFTOKEN=31674778
+  id: 62
+
+- title: Compression-Based Ray Casting of Very Large Volume Data in Distributed Environments
+  authors: C. Bajaj, I. Ihm, S. Park, D. Song
+  venue: HPC-Asia 2000, Pages 720-725, Beijing, China, May 2000.
+  type: Conference Presentations & Publications
+  year: 2000
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2000/conference/hpca00.pdf
+  id: 63
+
+- title: Visualization-Specific Compression of Large Volume Data
+  authors: C. Bajaj, I. Ihm, S. Park
+  venue: 'TICAM Technical Report #00-17.'
+  type: Technical Reports
+  year: 2000
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/2000/techreports/pg01.pdf
+  id: 64
+
+- title: 'The Metabuffer: A Scalable Multiresolution Multidisplay 3-D Graphics System Using Commodity Rendering Engines'
+  authors: W. Blanke, C, Bajaj, D. Fussell, X, Zhang
+  venue: Technical Report, University of Texas at Austin.
+  type: Technical Reports
+  year: 2000
+  id: 65
+
+# 1999
+
+- title: Single Resolution Compression of Arbitrary Triangular Meshes with Properties
+  authors: C. Bajaj, V. Pascucci, G. Zhuang
+  venue: 'Computational Geometry: Theory and Applications, Volume 14, Issues 1-3, 30 November 1999, Pages 167-186.'
+  type: Journal Publications
+  year: 1999
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6TYS-3Y2WSY7-9-1&_cdi=5626&_user=108429&_orig=search&_coverDate=11%2F30%2F1999&_sk=999859998&view=c&wchp=dGLbVzz-zSkzV&md5=651e627104a523985101380a78ef4ef3&ie=/sdarticle.pdf
+  id: 47
+
+- title: A programming approach for complex animations. Part I. Methodology
+  authors: C. Bajaj, C. Baldazzi, S. Cutchin, A. Paoluzzi, V. Pascucci, M. Vicentino
+  venue: Computer Aided Design, 31,11, (1999), 695-710.
+  type: Journal Publications
+  year: 1999
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6TYR-3XYG590-5-4P&_cdi=5625&_user=108429&_orig=browse&_coverDate=09%2F30%2F1999&_sk=999689988&view=c&wchp=dGLbVlz-zSkWW&md5=5e2d2e59fce498ad8a547d6b064673e8&ie=/sdarticle.pdf
+  id: 55
+
+- title: Automatic Reconstruction of 3D CAD Models from Digital Scans
+  authors: F. Bernardini, C. Bajaj, J. Chen, D. Schikore
+  venue: Int. J. on Comp. Geom. and Appl., vol. 9, nos. 4-5, Aug & Oct 1999, pp. 327-369.
+  type: Journal Publications
+  year: 1999
+  pdf: http://www.worldscinet.com/ijcga/09/preserved-docs/0904n05/S0218195999000236.pdf
+  id: 66
+
+- title: Energy Formulations of A-Splines
+  authors: C. Bajaj, J. Chen, R. Holt, A. Netravali
+  venue: Computer Aided Geometric Design, 16:1(1999), 39-59.
+  type: Journal Publications
+  year: 1999
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6TYN-3VS8J08-3-5&_cdi=5623&_user=108429&_orig=browse&_coverDate=01%2F31%2F1999&_sk=999839998&view=c&wchp=dGLzVzz-zSkzk&md5=1e78fe581627d4d9d9a2cc20e4e88bd2&ie=/sdarticle.pdf
+  id: 67
+
+- title: 'A-Splines: Local Interpolation and Approximation Using Gk- Continuous Piecewise Real Algebraic Curves'
+  authors: C. Bajaj, G. Xu
+  venue: Computer Aided Geometric Design, 16:6(1999), 557-578.
+  type: Journal Publications
+  year: 1999
+  pdf: http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.24.7676&rep=rep1&type=pdf
+  id: 68
+
+- title: Tetrahedral Meshes from Planar Cross Sections
+  authors: C. Bajaj, E. Coyle, K. Lin
+  venue: Computer Methods in Applied Mechanics and Engineering, Vol. 179 (1999), pp. 31-52.
+  type: Journal Publications
+  year: 1999
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1999/journal/tetra-mesh-1999.pdf
+  id: 69
+
+- title: Parallel Ray Casting of Visible Human on Distributed Memory Architectures
+  authors: C. Bajaj, I. Ihm, G Koo, S. Park
+  venue: In Proceedings of Joint EUROGRAPHICS - IEEE TCVG Symposium on Visualization, May 26-28, 1999, Vienna, Austria. pp. 269-276.
+  type: Conference Presentations & Publications
+  year: 1999
+  pdf: http://citeseer.ist.psu.edu/rd/0%2C10260%2C1%2C0.25%2CDownload/http://citeseer.ist.psu.edu/cache/papers/cs/791/http:zSzzSzking.ticam.utexas.eduzSzCCVzSzpaperszSzVisSym99.pdf/bajaj99parallel.pdf
+  id: 70
+
+- title: Error Bounded Regular Algebraic Spline Curves
+  authors: C. Bajaj, G. Xu
+  venue: In Proceedings of the Fifteenth Annual ACM Symposium on Computational Geometry, June 1999, Miami Beach, FL., pp. 332-340.
+  type: Conference Presentations & Publications
+  year: 1999
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=304987&type=pdf&coll=GUIDE&dl=GUIDE&CFID=71941923&CFTOKEN=1683054
+  id: 71
+
+- title: Web based Collaborative Visualization of Distributed and Parallel Simulation
+  authors: C. Bajaj, S. Cutchin
+  venue: In Proceedings of the 1999 IEEE Symposium on Parallel Visualization and Graphics, October 24-29, 1999, San Francisco, CA, pp. 47-54.
+  type: Conference Presentations & Publications
+  year: 1999
+  pdf: http://ieeexplore.ieee.org/iel5/6587/17584/00810138.pdf?isnumber=17584&prod=CNF&arnumber=810138&arSt=47&ared=54&arAuthor=Bajaj%2C+C.%3B+Cutchin%2C+S.
+  id: 72
+
+- title: Progressive Compression and Transmission of Arbitrary Triangular Meshes
+  authors: C. Bajaj, V. Pascucci, G. Zhuang
+  venue: In Proceedings of the 10th IEEE Visualization 1999 Conference, October 24-29, 1999. San Francisco, CA, pp. 307 - 316.
+  type: Conference Presentations & Publications
+  year: 1999
+  pdf: http://ieeexplore.ieee.org/iel5/6578/17553/00809902.pdf?isnumber=17553&prod=CNF&arnumber=809902&arSt=307&ared=537&arAuthor=Bajaj%2C+C.L.%3B+Pascucci%2C+V.%3B+Zhuang%2C+G.
+  id: 73
+
+- title: Parallel Accelerated Isocontouring for Out-of-Core Visualization
+  authors: C. Bajaj, V. Pascucci, D.Thompson, X. Zhang
+  venue: In Proceedings of the 1999 IEEE Symposium on Parallel Visualization and Graphics, October 24-29, 1999, San Francisco, CA, pp. 97-104.
+  type: Conference Presentations & Publications
+  year: 1999
+  pdf: http://ieeexplore.ieee.org/iel5/6587/17584/00810144.pdf?isnumber=17584&prod=CNF&arnumber=810144&arSt=97&ared=122&arAuthor=Bajaj%2C+C.L.%3B+Pascucci%2C+V.%3B+Thompson%2C+D.%3B+Zhang%2C+X.Y.
+  id: 74
+
+- title: Making 3D Textures Practical
+  authors: C. Bajaj, I. Ihm, S. Park
+  venue: In Proceedings of Pacific Graphics, October 5-7, 1999, Seoul, Korea, Pages 259-268.
+  type: Conference Presentations & Publications
+  year: 1999
+  pdf: http://doi.ieeecomputersociety.org/10.1109/PCCGA.1999.803370
+  id: 75
+
+- title: Single Resolution Compression of Arbitrary Triangular Meshes with Properties
+  authors: C. Bajaj, V. Pascucci, G. Zhuang
+  venue: Data Compression Conference 1999. Snowbird, Utah. Pages 247-256.
+  type: Conference Presentations & Publications
+  year: 1999
+  pdf: http://ieeexplore.ieee.org/iel5/6126/16375/00755674.pdf?isnumber=16375&prod=CNF&arnumber=755674&arSt=247&ared=256&arAuthor=Bajaj%2C+C.L.%3B+Pascucci%2C+V.%3B+Zhuang%2C+G.
+  id: 76
+
+- title: Regular Algebraic Curve Segments (III) - Applications In Interactive Design And Data Fitting
+  authors: C. Bajaj, G. Xu
+  venue: 'TICAM Technical Report #99-34.'
+  type: Technical Reports
+  year: 1999
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1999/techreports/cagd99.pdf
+  id: 77
+
+- title: Seed Sets and Search Structures for Optimal Isocountour Extraction
+  authors: C. Bajaj, V. Pascucci, D. Schikore
+  venue: 'TICAM Technical Report #99-35.'
+  type: Technical Reports
+  year: 1999
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1999/techreports/cont-tog.pdf
+  id: 78
+
+- title: Progressive IsoContouring
+  authors: C. Bajaj, V. Pascucci
+  venue: 'TICAM Technical Report #99-36.'
+  type: Technical Reports
+  year: 1999
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1999/techreports/prog-iso.pdf
+  id: 79
+
+- title: Three-Dimensional Imaging of the Experimental Spinal Cord Injury
+  authors: B. Duerstock, C. Bajaj, V. Pascucci, D. Schikore. K. Lin, R. Borgens
+  venue: 'TICAM Technical Report #99-37.'
+  type: Technical Reports
+  year: 1999
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1999/techreports/scipaper.pdf
+  id: 80
+
+- title: Active Contouring of Images with Physical A-Splines
+  authors: C. Bajaj, V. Pascucci, R. Holt, A. Netravali
+  venue: 'TICAM Technical Report #99-03.'
+  type: Technical Reports
+  year: 1999
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1999/techreports/aic.pdf
+  id: 81
+
+- title: C1 Modeling with A-patches from Rational Trivariate Functions
+  authors: G. Xu, H. Huang, C. Bajaj
+  venue: 'TICAM Technical Report #99-04.'
+  type: Technical Reports
+  year: 1999
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1999/techreports/rpatch.pdf
+  id: 82
+
+- title: Smooth Reconstruction and Deformation of Free-Form Fat Surfaces
+  authors: C. Bajaj, G. Xu
+  venue: 'TICAM Technical Report #99-08.'
+  type: Technical Reports
+  year: 1999
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1999/techreports/tog.pdf
+  id: 83
+
+- title: Multiresolution Molecular Shapes
+  authors: C. Bajaj, V. Pascucci, A. Shamir, R. Holt, A. Netravali
+  venue: 'TICAM Technical Report #99-42.'
+  type: Technical Reports
+  year: 1999
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1999/techreports/mol00.pdf
+  id: 84
+
+# 1998
+
+- title: Rational Parameterizations of Nonsingular Real Cubic Surfaces
+  authors: C. Bajaj, R. Holt, A. Netravali
+  venue: ACM Transactions on Graphics, 17, 1, (1998), 1-31
+  type: Journal Publications
+  year: 1998
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=269800&type=pdf&coll=portal&dl=ACM&CFID=71943300&CFTOKEN=29877204
+  id: 85
+
+- title: Sliced Configuration Spaces for Curved Planar Bodies
+  authors: C. Bajaj, E. Sacks
+  venue: International Journal Of Robotics Research, 17, 6, (1998), 639-651.
+  type: Journal Publications
+  year: 1998
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1998/journal/slices.pdf
+  id: 86
+
+- title: Two and Three Dimensional Computer Graphics Evaluation of the Subacute Spinal Cord Injury
+  authors: L. Moriarty, B. Duerstock, C. Bajaj, K. Lin, R. Borgens
+  venue: 'Journal of Neurological Sciences, vol. 155, pp 121-137 (1998), http://tinyurl.com/PMID9562256, PMID: 9562256, PMC Journal in Process).'
+  type: Journal Publications
+  year: 1998
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6T06-3S7XKPX-1-T&_cdi=4854&_user=108429&_orig=browse&_coverDate=03%2F05%2F1998&_sk=998449997&view=c&wchp=dGLbVzb-zSkzV&md5=5504acf2f6d70f2646d8ee07f5958b1f&ie=/sdarticle.pdf
+  id: 87
+
+- title: Topology Preserving Data Simplification with Error Bounds
+  authors: C. Bajaj, D. Schikore
+  venue: Journal on Computers and Graphics, vol. 22.1, pp. 3-12, 1998.
+  type: Journal Publications
+  year: 1998
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6TYG-3V6YCXT-1-1F&_cdi=5618&_user=108429&_orig=browse&_coverDate=02%2F25%2F1998&_sk=999779998&view=c&wchp=dGLzVzz-zSkzk&md5=e0f2e315ae7a60c4a085a8e8c9e3c299&ie=/sdarticle.pdf
+  id: 88
+
+- title: Visualization Paradigms
+  authors: C. Bajaj
+  venue: Data Visualization Techniques, edited by C. Bajaj, John Wiley and Sons (1998).
+  type: Book Chapters
+  year: 1998
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1998/conference/ch1.pdf
+  id: 90
+
+- title: Accelerated IsoContouring of Scalar Fields
+  authors: C. Bajaj, V. Pascucci, D. Schikore
+  venue: Data Visualization Techniques, edited by C. Bajaj, John Wiley and Sons (1998).
+  type: Book Chapters
+  year: 1998
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1998/conference/ch3.pdf
+  id: 91
+
+- title: Dynamic Maintenance and Visualization of Molecular Surfaces
+  authors: C. Bajaj, V. Pascucci, R. Holt, A. Netravali
+  venue: Proceedings of the Tenth Canadian Conference on Computational Geometry, August 1998.
+  type: Conference Presentations & Publications
+  year: 1998
+  id: 93
+
+- title: 'Hypervolume Visualization: A Challenge in Simplicity'
+  authors: C. Bajaj, V. Pascucci, G. Ribbiolo, D. Schikore
+  venue: Proceeding of the IEEE/ACM 1998 Symposium on Volume Visualization pages 95-102 October 1998, Research Triangle Park, NC.
+  type: Conference Presentations & Publications
+  year: 1998
+  pdf: http://ieeexplore.ieee.org/iel4/5903/15742/00729590.pdf?isnumber=15742&prod=CNF&arnumber=729590&arSt=95&ared=102%2C+172&arAuthor=Bajaj%2C+C.L.%3B+Pascucci%2C+V.%3B+Rabbiolo%2C+G.%3B+Schikore%2C+D.R.
+  id: 94
+
+- title: Visualization of Scalar Topology for Structural Enhancement
+  authors: C. Bajaj, V. Pascucci, D. Schikore
+  venue: Proceeding of the IEEE Visualization, pages 51-58, October 1998, Research Triangle Park, NC.
+  type: Conference Presentations & Publications
+  year: 1998
+  pdf: http://ieeexplore.ieee.org/iel4/6019/16079/00745284.pdf?isnumber=16079&prod=CNF&arnumber=745284&arSt=51&ared=58&arAuthor=Bajaj%2C+C.L.%3B+Pascucci%2C+V.%3B+Schikore%2C+D.R.
+  id: 95
+
+- title: Web-based approach for very complex animations through geometric programming
+  authors: C. Bajaj, C. Baldazzi, S. Cutchin, A. Paoluzzi, V. Pascucci, M. Vicentino
+  type: Technical Reports
+  year: 1998
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1998/techreports/plasm-anim.pdf
+  id: 96
+
+- title: Compression and Coding of Large CAD Models
+  authors: C. Bajaj, V. Pascucci, G. Zhuang
+  type: Technical Reports
+  year: 1998
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1998/techreports/cadzip.pdf
+  id: 97
+
+- title: Error Resilient Streaming of Compressed VRML
+  authors: C. Bajaj, S. Cutchin, V. Pascucci, G. Zhuang
+  type: Technical Reports
+  year: 1998
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1998/techreports/i3dg.pdf
+  id: 98
+
+- title: Web Based Collaborative CAAD
+  authors: C. Bajaj, S. Cutchin, V. Pascucci, A. Paoluzzi, C. Morgia, G. Scorzelli
+  type: Technical Reports
+  year: 1998
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1998/techreports/collabcaad.pdf
+  id: 99
+
+- title: Data Visualization Techniques
+  authors: C. Bajaj
+  venue: John Wiley and Sons, (1998).
+  type: Edited Books
+  year: 1998
+  id: 318
+
+- title: Interrogative Visualization
+  authors: C. Bajaj
+  venue: Geometric Modeling, Computing Supplement, 13, Edited by G. Farin, H.Bieri, G. Brunnett, T. DeRose, Springer Verlag, (1998), 17-26.
+  type: Book Chapters
+  year: 1998
+  id: 286
+
+# 1997
+
+- title: Introduction to Implicit Surfaces
+  authors: C. Bajaj, J. Bloomenthal, J. Blinn, M. Gascuel, A. Rockwood, B. Wyvill, G. Wyvill
+  venue: Morgan Kaufman Publishers Inc., (1997).
+  type: Edited Books
+  year: 1997
+  id: 89
+
+- title: Spline Approximations of Real Algebraic Surfaces
+  authors: C. Bajaj, G. Xu
+  venue: Journal of Symbolic Computation, Special Isssue on Parametric Algebraic Curves and Applications, 23, 2-3, (1997), 315 - 333.
+  type: Journal Publications
+  year: 1997
+  pdf: https://www.sciencedirect.com/science/article/pii/S0747717196900917
+  id: 100
+
+- title: Piecewise Rational Approximation of Real Algebraic Curves
+  authors: C. Bajaj, G. Xu
+  venue: Journal of Computational Mathematics, vol. 15, no. 1, (1997), 55-71.
+  type: Journal Publications
+  year: 1997
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1997/journal/planecv.pdf
+  id: 104
+
+- title: Modeling and Visualization of C1 and C2 Scattered Function Data on Curved Surfaces
+  authors: C. Bajaj, G. Xu
+  venue: Proc. of 2nd Pacific Conference on Computer Graphics and Applications, PAC94, Beijing China, 19-29. Full version for Publication in Computer Aided Geometric Design, (1997).
+  type: Journal Publications
+  year: 1997
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1997/journal/sfsonsfs2.pdf
+  id: 103
+
+- title: Reconstructing Surfaces and Functions on Surfaces from Unorganized Three-Dimensional Data
+  authors: C. Bajaj, F. Bernardini, G. Xu
+  venue: Algorithmica, 19, 1-2, (1997), 243-261.
+  type: Journal Publications
+  year: 1997
+  pdf: http://www.springerlink.com/media/2pw78aqtlm1rrh34gt7r/contributions/e/y/w/c/eywc9edmv20d6c9d.pdf
+  id: 105
+
+- title: Splines and Geometric Modeling
+  authors: C. Bajaj, S. Evans
+  venue: CRC Handbook of Discrete and Computational Geometry, edited by J. Goodman and J. O'Rourke, CRC Series, Discrete and Combinatorial Mathematics, (1997), 833-849.
+  type: Book Chapters
+  year: 1997
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1997/conference/crc-chap.pdf
+  id: 106
+
+- title: Implicit Surface Patches
+  authors: C. Bajaj
+  venue: Introduction to Implicit Surfaces, edited by J. Bloomenthal, Morgan Kaufman Publishers, (1997), 98-125.
+  type: Book Chapters
+  year: 1997
+  id: 107
+
+- title: Modeling Physical Fields for Interrogative Data Visualization
+  authors: C. Bajaj
+  venue: 7th IMA Conference on the Mathematics of Surfaces, The Mathematics of Surfaces VII, edited by T.N.T. Goodman and R. Martin, Oxford University Press, (1997).
+  type: Book Chapters
+  year: 1997
+  id: 108
+
+- title: Web Based Collaboration-Aware Synthetic Environments
+  authors: C. Bajaj, S. Cutchin
+  venue: Proceedings of the 1997 GVU/NIST TEAMCAD workshop, Atlanta, GA, 1997, 143 - 150.
+  type: Conference Presentations & Publications
+  year: 1997
+  id: 109
+
+- title: The Contour Spectrum
+  authors: C. Bajaj, V. Pascucci, D.Schikore
+  venue: Proceedings of the 1997 IEEE Visualization Conference,167-173, October 1997 Phoeniz, Arizona.
+  type: Conference Presentations & Publications
+  year: 1997
+  pdf: http://ieeexplore.ieee.org/iel4/5302/14360/00663875.pdf?isnumber=14360&prod=CNF&arnumber=663875&arSt=167&ared=173%2C+539&arAuthor=Bajaj%2C+C.L.%3B+Pascucci%2C+V.%3B+Schikore%2C+D.R.
+  id: 110
+
+- title: Sampling and Reconstructing Manifolds using Alpha-Shapes
+  authors: F. Bernardini, C. Bajaj
+  venue: Proc. of the Ninth Canadian Conference on Computational Geometry, 193-198, August 1997.
+  type: Conference Presentations & Publications
+  year: 1997
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1997/conference/manirec.pdf
+  id: 111
+
+- title: A Triangulation-based Object Reconstruction Method
+  authors: F. Bernardini, C. Bajaj, J. Chen, D. Schikore
+  venue: In 6th Annual Video Review of Computational Geometry, 13th ACM Symposium on Computational Geometry. ACM, 1997.
+  type: Conference Presentations & Publications
+  year: 1997
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=263098&type=pdf&coll=GUIDE&dl=GUIDE&CFID=76542727&CFTOKEN=28220507
+  id: 112
+
+- title: Contour Trees and Small Seed Sets for Isosurface Traversal
+  authors: M. van Kreveld, R. van Oostrum, C. Bajaj, V. Pascucci, D. Schikore
+  venue: In Proceedings Thirteenth ACM Symposium on Computational Geometry (Theoretical Track), (Nice, France, June 4-6, (1997), ACM Press, pp. 212-219.
+  type: Conference Presentations & Publications
+  year: 1997
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=269238&type=pdf&coll=GUIDE&dl=GUIDE&CFID=76542571&CFTOKEN=54825229
+  id: 113
+
+- title: NURBS based B-rep Models from Macromolecules and their Properties
+  authors: C. Bajaj, H. Lee, R. Merkert, V. Pascucci
+  venue: In Proceedings of Fourth Symposium on Solid Modeling and Applications, Atlanta,Georgia, 1997, C. Hoffmann and W. Bronsvort Eds., ACM Press. pp. 217-228.
+  type: Conference Presentations & Publications
+  year: 1997
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=267787&type=pdf&coll=portal&dl=ACM&CFID=76542826&CFTOKEN=59141155
+  id: 114
+
+- title: Comprehensive Analysis of Joints from Patient Clinical Data
+  authors: C. Bajaj, F. Bernardini, S. Cutchin, K. Lin, E. Sacks, D. Schikore
+  venue: Technical Report 97-019, Purdue University, Computer Sciences, (1997).
+  type: Technical Reports
+  year: 1997
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1997/techreports/cagd97.pdf
+  id: 116
+
+# 1996
+
+- title: Arbitrary Topology Shape Reconstruction from Planar Cross Sections
+  authors: C. Bajaj, E. Coyle, K. Lin
+  venue: Graphical Models and Image Processing, 58:6, (1996), 524-543.
+  type: Journal Publications
+  year: 1996
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1996/journal/tiling-1996.pdf
+  id: 118
+
+- title: The Combinatorics of Real Algebraic Splines over a Simplicial Complex
+  authors: C. Bajaj
+  venue: Real Number Algorithms, edited by J. Renegar, M. Shub, and S. Smale, AMS Lecture Notes in Mathematics, (1996).
+  type: Book Chapters
+  year: 1996
+  id: 120
+
+- title: Free-Form Modeling with Implicit Surface Patches
+  authors: C. Bajaj
+  venue: Implicit Surfaces, edited by J. Bloomenthal abd B. Wyvill, Morgan Kaufman Publishers, (1996).
+  type: Book Chapters
+  year: 1996
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1996/conference/all.pdf
+  id: 121
+
+- title: Error-Bounded Reduction of Triangle Meshes with Multivariate Data
+  authors: C. Bajaj, D. Schikore
+  venue: 'Proceedings: Visual Data Exploration and Analysis III, SPIE vol 2656, (1996), 34-45.'
+  type: Conference Presentations & Publications
+  year: 1996
+  pdf: http://spiedl.aip.org/getpdf/servlet/GetPDFServlet?filetype=pdf&id=PSISDG002656000001000034000001&idtype=cvips&prog=normal
+  id: 122
+
+- title: Splitting a Complex of Convex Polytopes in Any Dimension
+  authors: C. Bajaj, V. Pascucci
+  venue: 'Proceedings: 12th Annual ACM Symposium on Computational Geometry, ACM Press, (1996), Philadelphia, PA, 88-97.'
+  type: Conference Presentations & Publications
+  year: 1996
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=237246&type=pdf&coll=portal&dl=ACM&CFID=1262340&CFTOKEN=90535216
+  id: 123
+
+- title: Fast Isocontouring for Improved Interactivity
+  authors: C. Bajaj, V. Pascucci, D. Schikore
+  venue: 'Proceedings: ACM Siggraph/IEEE Symposium on Volume Visualization, ACM Press, (1996), San Francisco, CA. Pages: 39-46 (text) 99 (color plate).'
+  type: Conference Presentations & Publications
+  year: 1996
+  pdf: http://ieeexplore.ieee.org/iel3/4135/12156/00558041.pdf?isnumber=12156&prod=CNF&arnumber=558041&arSt=39&ared=46%2C+99&arAuthor=Bajaj%2C+C.L.%3B+Pascucci%2C+V.%3B+Schikore%2C+D.R.
+  id: 124
+
+- title: Automatic Reconstruction of 3D CAD Models
+  authors: C. Bajaj, F. Bernardini, J. Chen, D. Schikore
+  venue: 'Proceedings: International Conference on Theory and Practice of Geometric Modeling, Blaubeuren, (1996), Springer-Verlag.'
+  type: Conference Presentations & Publications
+  year: 1996
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1996/conference/sharp.pdf
+  id: 125
+
+- title: Physical Simulation of the Visible Human Joints
+  authors: C. Bajaj, F. Bernardini, K. Lin, E. Sacks, D. Schikore
+  venue: The Visible Human Project Conference, 1996.
+  type: Conference Presentations & Publications
+  year: 1996
+  id: 126
+
+- title: Interrogative Visualization of the Visible Human Datasets
+  authors: C. Bajaj, F. Bernardini, V. Pascucci, D. Schikore
+  venue: The Visible Human Project Conference, 1996.
+  type: Conference Presentations & Publications
+  year: 1996
+  id: 127
+
+- title: Boundary and 3D Triangular Meshes from Planar Cross Sections
+  authors: C. Bajaj, E. Coyle, K. Lin
+  venue: 'Proceedings: The Fifth International Meshing Roundtable, Sandia National Lab., Sandia Report SAND96-2301, UC-405, (1996), Pittsburgh, PA, 169-178.'
+  type: Conference Presentations & Publications
+  year: 1996
+  id: 128
+
+- title: 'NLS: Collaborative Virtual Environment to Promote Shared Awareness'
+  authors: C. Bajaj, N. Osumi, M. Shinya, T. Mori, T. Sunaga, D. Cutchin, R. Merkert
+  venue: 'Proceedings: Workshop on New Paradigms in Information Visualization and Manipulation, NPIV''96, In conjunction with Fifth ACM International Conference on Information and Knowledge Management (CIKM''96), (1996), pp. 41-45.'
+  type: Conference Presentations & Publications
+  year: 1996
+  id: 129
+
+- title: Computational Geometry for Interrogative Visualization
+  authors: C. Bajaj
+  venue: Proceedings of the 8th Canadian Conference on Computational Geometry (CCCG'96). Ottawa, Ontario, Canada. Pages 99-100.
+  type: Conference Presentations & Publications
+  year: 1996
+  pdf: http://www.cccg.ca/proceedings/1996/cccg1996_0017.pdf
+  id: 130
+
+- title: Visualization of Scalar Topology for Structural Enhancement
+  authors: D. Schikore, C. Bajaj
+  venue: Technical Report 96-006, Purdue University, Computer Sciences (1996).
+  type: Technical Reports
+  year: 1996
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1996/techreports/scalartop.pdf
+  id: 131
+
+- title: Object Based Constraint Management for Collaborative Systems
+  authors: C. Bajaj, P. Zhang
+  venue: Technical Report 96-039, Purdue University, Computer Sciences (1996).
+  type: Technical Reports
+  year: 1996
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1996/techreports/main.pdf
+  id: 132
+
+- title: Automatic Generation of 3D CAD Models
+  authors: C. Bajaj, F. Bernardini, J. Chen, D. Schikore
+  venue: Technical Report 96-015, Purdue University, Computer Sciences (1996).
+  type: Technical Reports
+  year: 1996
+  id: 133
+
+- title: Fast Isocontouring for Improved Interactivity
+  authors: C. Bajaj, V. Pascucci, D. Schikore
+  venue: Technical Report 96-024, Purdue University, Computer Sciences (1996).
+  type: Technical Reports
+  year: 1996
+  id: 134
+
+- title: Energy Formulations of A-Splines
+  authors: C. Bajaj, J. Chen, R. Holt, A. Netravali
+  venue: Technical Report 96-031, Purdue University, Computer Sciences (1996).
+  type: Technical Reports
+  year: 1996
+  id: 135
+
+# 1995
+
+- title: Finite Representations of Real Parametric Curves and Surfaces
+  authors: C. Bajaj, A. Royappa
+  venue: International Journal of Computational Geometry and Applications, 5, 3, (1995), 313-326.
+  type: Journal Publications
+  year: 1995
+  pdf: http://www.worldscinet.com/ijcga/05/preserved-docs/0503/S0218195995000180.pdf
+  id: 265
+
+- title: Modeling with Cubic A-patches
+  authors: C. Bajaj, J. Chen, G. Xu
+  venue: ACM Transactions on Graphics, 14:2, (1995), 103-133.
+  type: Journal Publications
+  year: 1995
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=221662&type=pdf&dl=portal&dl=ACM&CFID=76546844&CFTOKEN=18952851
+  id: 137
+
+- title: Automatic Reconstruction of Surfaces and Scalar Fields from 3D Scans
+  authors: C. Bajaj, F. Bernardini, G. Xu
+  venue: 'Proceedings: Computer Graphics (1995), Annual Conference Series, SIGGRAPH 95, ACM SIGGRAPH, 109-118.'
+  type: Journal Publications
+  year: 1995
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=218424&type=pdf&coll=portal&dl=ACM&CFID=76547035&CFTOKEN=11439708
+  id: 138
+
+- title: Custom Prosthesis Design and Prototyping Using Multimedia
+  authors: C. Bajaj, V. Anupam, D. Schikore
+  venue: Multimedia Medical Education, edited by Roy Rada and Claude Ghaoui, Intellect Books, Oxford, England, (1995), chapter 3, 39-47, ISBN 1-871516-63-3.
+  type: Book Chapters
+  year: 1995
+  id: 141
+
+- title: Sparse Smooth Connection between Bezier/Bspline Curves
+  authors: C. Bajaj, G. Xu
+  venue: Graphics Gems V, edited by A. Paeth, Academic Press, New York, (1995), chapter IV.6, 191-198.
+  type: Book Chapters
+  year: 1995
+  id: 142
+
+- title: Interactive Visualization of Multidimensional Data
+  authors: C. Bajaj
+  venue: Computer Graphics and Applications, edited by S. Y. Shin, T. Kunii, World Scientific Publishing, (Invited Paper), (1995), 63-77.
+  type: Book Chapters
+  year: 1995
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1995/conference/pg95.pdf
+  id: 143
+
+- title: Collaborative Multimedia in SHASTRA
+  authors: C. Bajaj, S. Cutchin
+  venue: 3rd International Conference on Multimedia, 1995. San Francisco, CA. Pages 365-366.
+  type: Conference Presentations & Publications
+  year: 1995
+  pdf: http://delivery.acm.org/10.1145/220000/215294/p365-bajaj.htm?key1=215294&key2=6271148411&coll=GUIDE&dl=GUIDE&CFID=71956492&CFTOKEN=24888752
+  id: 144
+
+- title: Interactive Shape Control and Rapid Display of A-Patches
+  authors: C. Bajaj, J. Chen, G. Xu
+  venue: Eurographics International Workshop on Implicit Surfaces, Grenoble, France, (1995), 197-215.
+  type: Conference Presentations & Publications
+  year: 1995
+  pdf: http://citeseer.ist.psu.edu/rd/80399384%2C2632%2C1%2C0.25%2CDownload/http://citeseer.ist.psu.edu/cache/papers/cs/206/ftp:zSzzSzftp.cs.purdue.eduzSzpubzSzshastrazSzpubszSzapshape.pdf/bajaj95interactive.pdf
+  id: 145
+
+- title: Brokered Collaborative Infrastructure for CSCW
+  authors: C. Bajaj, P. Zhang, A. Chaturvedi
+  venue: 'Proceedings: Fourth IEEE Workshop on Enabling Technologies: Infrastructure for Collaborative Enterprises, Berkeley Springs, West Virginia, IEEE Computer Society Press, (1995), 207-213.'
+  type: Conference Presentations & Publications
+  year: 1995
+  pdf: http://ieeexplore.ieee.org/iel2/3481/10310/00484565.pdf?isnumber=10310&prod=CNF&arnumber=484565&arSt=207&ared=213&arAuthor=Bajaj%2C+C.%3B+Peinan+Zhang%3B+Chaturvedi%2C+A.
+  id: 146
+
+- title: C1 and C2 Reconstruction of Surfaces and Scalar Fields
+  authors: C. Bajaj, F. Bernardini, J. Chen, G. Xu
+  venue: Fourth SIAM Conference on Geometric Design, Nashville, TN, (Nov. 1995).
+  type: Conference Presentations & Publications
+  year: 1995
+  id: 147
+
+- title: Modeling with C2 Quintic A-patches
+  authors: C. Bajaj, J. Chen, G. Xu
+  venue: Fourth SIAM Conference on Geometric Design, Nashville, TN, (Nov. 1995).
+  type: Conference Presentations & Publications
+  year: 1995
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1995/conference/quintic.pdf
+  id: 148
+
+- title: Distributed and Collaborative Synthetic Environments
+  authors: C. Bajaj, F. Bernardini
+  venue: Human-Computer Interaction and Virtual Environments, number 3320, NASA Conference Publication, Hampton, Virginia, April 1995. NASA.
+  type: Conference Presentations & Publications
+  year: 1995
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1995/conference/dcve.pdf
+  id: 149
+
+- title: Adaptive Modeling of Dense Scattered Volumetric and Manifold Data
+  authors: C. Bajaj, F. Bernardini, G. Xu
+  venue: Technical Report 95-028, Purdue University, Computer Sciences (1995).
+  type: Technical Reports
+  year: 1995
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1995/techreports/box2.pdf
+  id: 150
+
+- title: Decimation of 2D Scalar Data with Error Control
+  authors: D. Schikore, C. Bajaj
+  venue: Technical Report, Feb 1995 , Purdue University, Computer Sciences (1995) . <br>Color Plates, pp. 7-9
+  type: Technical Reports
+  year: 1995
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1995/techreports/decim.pdf
+  id: 151
+
+- title: Algebraic Geometry and its Applications
+  authors: C. Bajaj
+  venue: Springer Verlag, 1995.
+  type: Edited Books
+  year: 1995
+  id: 291
+
+- title: Approximation of Polyhedron with C^2 A-Patches
+  authors: C. Bajaj, G. Xu, J. Chen
+  venue: report on Fourth SIAM Conference on Geometric Design, November 6-9, 1995, Nashville, Tennessee.
+  type: Journal Publications
+  year: 1995
+  id: 300
+
+# 1994
+
+- title: NURBS Approximation of Surface/Surface Intersection Curves
+  authors: C. Bajaj, G. Xu
+  venue: "Advances in Computational Mathematics, 2, 1, (1994), 1-21, <a href=\"\t http://dx.doi.org/10.1007/BF02519033\">\t doi: 10.1007/BF02519033</a>."
+  type: Journal Publications
+  year: 1994
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1994/journal/space-nurb.pdf
+  doi: 10.1007/BF02519033
+  id: 152
+
+- title: Scientific Problem Solving in a Distributed and Collaborative Multimedia Environment
+  authors: V. Anupam, C. Bajaj, F. Bernardini, S. Cutchin, J. Chen, D. Schikore, G. Xu, P. Zhang, W. Zhang
+  venue: Mathematics and Computers in Simulation, 36, 433-442, North Holland, (1994). (Special Issue on Problem Solving Environments for Computational Science and Engineering, edited by E. Houstis).
+  type: Journal Publications
+  year: 1994
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6V0T-45GMGGT-4J-1&_cdi=5655&_user=108429&_orig=browse&_coverDate=10%2F31%2F1994&_sk=999639995&view=c&wchp=dGLbVtb-zSkWA&md5=ff1107d6bfd3ac4374753b4c72e917c0&ie=/sdarticle.pdf
+  id: 154
+
+- title: Distributed and Collaborative Visualization
+  authors: V. Anupam, C. Bajaj, D. Schikore, M. Schikore
+  venue: IEEE Computer, 27, 7, (July, 1994), 37-43.
+  type: Journal Publications
+  year: 1994
+  pdf: http://ieeexplore.ieee.org/iel1/2/7409/00299409.pdf?isnumber=7409&prod=JNL&arnumber=299409&arSt=37&ared=43&arAuthor=Anupam%2C+V.%3B+Bajaj%2C+C.%3B+Schikore%2C+D.%3B+Schikore%2C+M.
+  id: 155
+
+- title: Using Algebraic Geometry for Multivariate Polynomial Interpolation
+  authors: C. Bajaj
+  venue: 'Studies in Computer Science, Special Issue of Proceedings: Symposium to Honor Sam Conte, ed by J. Rice and R. DeMillo, Plenum Press, N.Y., (1994), Chap 8, 181-190.'
+  type: Book Chapters
+  year: 1994
+  id: 157
+
+- title: Converting a Rational Curve to a Standard Rational Bezier Representation
+  authors: C. Bajaj, G. Xu
+  venue: Graphics Gems IV, edited by P. Heckbert, Academic Press, New York, (1994), 256-260.
+  type: Book Chapters
+  year: 1994
+  id: 158
+
+- title: Rational Spline Approximations of Real Algebraic Curves and Surfaces
+  authors: C. Bajaj, G. Xu
+  venue: Advances in Computational Mathematics, edited by H.P. Dikshit and C. Michelli, World Scientific Publishing Co., Approximations and Decomposition Series, vol 4., (1994), 73-85.
+  type: Book Chapters
+  year: 1994
+  id: 159
+
+- title: Modeling Scattered Function Data on Curved Surfaces
+  authors: C. Bajaj, G. Xu
+  venue: Fundamentals of Computer Graphics, edited by J. Chen, N. Thalmann, Z. Tang, and D. Thalmann, World Scientific Publishing Co., (1994), 19-29.
+  type: Book Chapters
+  year: 1994
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1994/conference/sfsonsfs2.pdf
+  id: 160
+
+- title: Free-Form Surface Design with A-Patches
+  authors: C. Bajaj, J. Chen, G. Xu
+  venue: 'Proceedings: Graphics Interface ''94, GI94, Vancouver, Canada, Canadian Information Processing Society (1994), 174-191.'
+  type: Conference Presentations & Publications
+  year: 1994
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1994/conference/apatch.pdf
+  id: 161
+
+- title: Constructive Solid Geometry on a MIMD Distributed-Memory Machines
+  authors: C. Bajaj, G. Xu, T. Dey
+  venue: 'Proceedings: Set-theoretic Solid Modeling Techniques and Applications, CSG94, Information Geometers Press, Winchester, U.K. (1994), 213-223.'
+  type: Conference Presentations & Publications
+  year: 1994
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1994/conference/apatch.pdf
+  id: 162
+
+- title: Data Fitting with Cubic A-splines
+  authors: C. Bajaj, G. Xu
+  venue: 'Proceedings: Computer Graphics International, CGI94, Melbourne, Australia, (1994).'
+  type: Conference Presentations & Publications
+  year: 1994
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1994/conference/cubic-aspl.pdf
+  id: 163
+
+- title: Distributed Volume Modeling and Collaborative Visualization
+  authors: C. Bajaj, D. Schikore, G. Xu
+  venue: 'Proceedings: Fifth Eurographics Workshop on Visualization in Scientific Computing, Rostock, Germany, (1994).'
+  type: Conference Presentations & Publications
+  year: 1994
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1994/conference/modviz94.pdf
+  id: 164
+
+- title: Custom Prosthesis Design, Visualization, and Prototyping
+  authors: C. Bajaj, D. Schikore
+  venue: Proceedings of SPIE, Volume 2359. Visualization in Biomedical Computing 1994, Richard A. Robb, Editor, September 1994, pp. 504-510.
+  type: Conference Presentations & Publications
+  year: 1994
+  pdf: http://spiedl.aip.org/getpdf/servlet/GetPDFServlet?filetype=pdf&id=PSISDG002359000001000504000001&idtype=cvips&prog=normal
+  id: 165
+
+- title: Triangulation and Display of Rational Parametric Surfaces
+  authors: C. Bajaj, A. Royappa
+  venue: 'Proceedings: IEEE Visualization ''94 Conference, Washington, DC, edited by R. Bergeron, A. Kaufman, IEEE Computer Society Press, (1994), 69-76.'
+  type: Conference Presentations & Publications
+  year: 1994
+  pdf: http://ieeexplore.ieee.org/iel2/1007/8039/00346335.pdf?isnumber=8039&prod=CNF&arnumber=346335&arSt=69&ared=76%2C+CP6&arAuthor=Bajaj%2C+C.L.%3B+Royappa%2C+A.
+  id: 166
+
+- title: Distributed Medical Modeling, Design Prototyping and Collaborative Visualization
+  authors: C. Bajaj
+  venue: 'Proceedings: Applications of Computer Vision in Medical Image Processing, AAAI 1994 Spring Symposium, AIM-94, Stanford, CA, (1994).'
+  type: Conference Presentations & Publications
+  year: 1994
+  id: 167
+
+- title: Scalar Field Modeling and Visualization on the Intel Delta
+  authors: C. Bajaj, K. Lin
+  venue: 'Proceedings: Intel Supercomputing User''s Group, ISUG ''94, June, (1994), San Diego, CA. Technical Report 94-039, Purdue University, Computer Sciences (6/94).'
+  type: Conference Presentations & Publications
+  year: 1994
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1994/conference/isug94.pdf
+  id: 168
+
+- title: Reconstructing and Visualizing Scalar Fields in Three Dimensions
+  authors: C. Bajaj
+  venue: 'Proceedings: The 14th IMACS World Congress on Computational and Applied Mathematics, ed. by W. Ames, vol. 3, 1994, 1092-1095.'
+  type: Conference Presentations & Publications
+  year: 1994
+  id: 169
+
+- title: Distributed Modeling and Visualization of Timed Clinical Data
+  authors: C. Bajaj
+  venue: 'Proceedings: The Artificial Intelligence in Medicine, AAAI 1994 Spring Symposium, AIM-94, Stanford, CA, (1994).'
+  type: Conference Presentations & Publications
+  year: 1994
+  id: 170
+
+- title: Path-planning for a mobile robot sweeper
+  authors: C. Bajaj, F. Bernardini, S. Cutchin, K. Sugihara
+  venue: 'Presented at: The 2-nd Workshop on Robot Motion Planning, L''Escala, Spain, October 1994.'
+  type: Conference Presentations & Publications
+  year: 1994
+  id: 171
+
+- title: Polynomial Surface Patch Representations
+  authors: C. Bajaj
+  venue: Technical Report 94-038 (25 pages), Purdue University, Computer Sciences (5/94).
+  type: Technical Reports
+  year: 1994
+  id: 173
+
+- title: A Geometric Approach to Molecular Docking and Similarity
+  authors: C. Bajaj, F. Bernardini, K. Sugihara
+  venue: Technical Report 94-017 (20 pages), Purdue University, Computer Sciences (3/94).
+  type: Technical Reports
+  year: 1994
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1994/techreports/dock.pdf
+  id: 174
+
+- title: Converting a Rational Surface to a Standard Rational Bernstein-Bezier Surface
+  authors: C. Bajaj, G. Xu
+  venue: Technical Report 94-044 (7 pages), Purdue University, Computer Sciences (6/94).
+  type: Technical Reports
+  year: 1994
+  id: 175
+
+- title: Smooth Low Degree Approximations of Polyhedra
+  authors: C. Bajaj, J. Chen, G. Xu
+  venue: Technical Report 94-002 (24 pages), Purdue University, Computer Sciences (1/94).
+  type: Technical Reports
+  year: 1994
+  id: 176
+
+- title: Cooperating Brokers to Support Cooperative Work
+  authors: V. Anupam, C. Bajaj, P. Zhang
+  venue: Technical Report 94-009, Purdue University, Computer Sciences (2/94).
+  type: Technical Reports
+  year: 1994
+  id: 177
+
+- title: SHASTRA - An Architecture for Development of Collaborative Applications
+  authors: C. Bajaj, V. Anupam
+  venue: International Journal of Intelligent and Cooperative Information Systems, 3, 2, (1994), 155-172.
+  type: Journal Publications
+  year: 1994
+  id: 267
+
+- title: 'Shastra: Multimedia Collaborative Design Environment'
+  authors: V. Anupam, C. Bajaj
+  venue: IEEE Multimedia, 1, 2, (1994), 39-49.
+  type: Journal Publications
+  year: 1994
+  pdf: http://ieeexplore.ieee.org/iel4/93/7557/00311655.pdf?isnumber=7557&prod=JNL&arnumber=311655&arSt=39&ared=49&arAuthor=Anupam%2C+V.%3B+Bajaj%2C+C.L.
+  id: 266
+
+- title: Some Applications of Constructive Real Algebraic Geometry
+  authors: C. Bajaj
+  venue: Algebraic Geometry and Applications, Special Issue of Symposium on the occasion of Shreeram Abhyankar's 60th Birthday, edited by C. Bajaj, Springer Verlag, (1994), Chapter 25, 393-405.
+  type: Book Chapters
+  year: 1994
+  id: 287
+
+# 1993
+
+- title: Finite Representations of Real Parametric Curves and Surfaces
+  authors: C. Bajaj, A. Royappa
+  venue: 'Proceedings: IFIP TC 5/WG 5.10 II Conference on Geometric Modeling in Computer Graphics, (1993),  ed. by B. Falcidieno, T. Kunii, Springer Verlag, 347-358.'
+  type: Conference Presentations & Publications
+  year: 1993
+  id: 136
+
+- title: Collaborative Multimedia in Scientific Design
+  authors: V. Anupam, C. Bajaj
+  venue: 'Proceedings: First ACM Multimedia Conference, ACM MULTIMEDIA 93, Anaheim, California, ACM Press, (1993), 447-456.'
+  type: Conference Presentations & Publications
+  year: 1993
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1993/conference/shaMM.pdf
+  id: 153
+
+- title: SHASTRA - An Architecture for Development of Collaborative Applications
+  authors: V. Anupam, C. Bajaj
+  venue: 'Proceedings: Second IEEE Workshop on Enabling Technologies: Infrastructure for Collaborative Enterprises, 155-166, (1993), Morgantown.'
+  type: Journal Publications
+  year: 1993
+  pdf: http://ieeexplore.ieee.org/iel2/469/6618/00263053.pdf?isnumber=6618&prod=CNF&arnumber=263053&arSt=155&ared=166&arAuthor=Anupam%2C+V.%3B+Bajaj%2C+C.
+  id: 156
+
+- title: The Emergence of Algebraic Curves and Surfaces in Geometric Design
+  authors: C. Bajaj
+  venue: Directions in Geometric Computing, edited by R. Martin, Information Geometers Press, United Kingdom (1993), Chapter 1, 1-29.
+  type: Book Chapters
+  year: 1993
+  id: 180
+
+- title: Multi-dimensional Hermite Interpolation and Approximation for Modeling and Visualization
+  authors: C. Bajaj
+  venue: |-
+    Proceedings: The IFIP TC5/WG5.2/WG5.10 CSI International Conference on Computer Graphics, ICCG93, (1993), IFIP Transactions B-9, North Holland, 335-348.
+    Graphics, Design and Visualization, ed. by S. Mudur, S. Pattanaik.
+  type: Conference Presentations & Publications
+  year: 1993
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1993/conference/multidim.pdf
+  id: 181
+
+- title: Distributed Design of Hip Prosthesis using BHAUTIK
+  authors: C. Bajaj, D. Schikore
+  venue: 'Proceedings: The 1993 ACM/SIGAPP Symposium on Applied Computing, (1993), Indianapolis, Indiana, ACM Press, 36-39.'
+  type: Conference Presentations & Publications
+  year: 1993
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=162792&type=pdf&coll=ACM&dl=ACM&CFID=76561300&CFTOKEN=84755449
+  id: 182
+
+- title: The VAIDAK Medical Image Model Reconstruction Toolkit
+  authors: C. Bajaj, M. Fields
+  venue: 'Proceedings: The 1993 ACM/SIGAPP Symposium on Applied Computing, (1993), Indianapolis, Indiana, ACM Press, 28-35.'
+  type: Conference Presentations & Publications
+  year: 1993
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=162788&type=pdf&coll=ACM&dl=ACM&CFID=76561300&CFTOKEN=84755449
+  id: 183
+
+- title: Low Degree Approximations of Surfaces for Revolved Objects
+  authors: C. Bajaj, I. Ihm
+  venue: 'Proceedings: Graphics Interface ''93, (1993) Toronto, Canada, Canadian Information Processing Society, 33-41.'
+  type: Conference Presentations & Publications
+  year: 1993
+  id: 184
+
+- title: The GATI Client-Server Animation Toolkit
+  authors: C. Bajaj, S. Cutchin
+  venue: 'Proceedings: Computer Graphics International, CGI93, Communicating with Virtual Worlds, edited by N. Thalmann and D. Thalmann, Springer Verlag, (1993), 413-423.'
+  type: Conference Presentations & Publications
+  year: 1993
+  id: 185
+
+- title: Distributed and Collaborative Modeling and Visualization
+  authors: C. Bajaj
+  venue: 'Proceedings: The IEEE Visualization ''93 Workshop on Intelligent Visualization Systems, San Jose, Ca, Chapter 12, (1993).'
+  type: Conference Presentations & Publications
+  year: 1993
+  id: 186
+
+- title: Scientific Problem Solving in a Distributed and Collaborative Geometric Environment
+  authors: V. Anupam, C. Bajaj, S. Cutchin, S. Evans, I. Ihm, J. Chen, A. Royappa, D. Schikore, G. Xu
+  venue: 3rd International Conference on Expert Systems for Numerical Computing, May 17-19, 1993, West Lafayette, IN.
+  type: Conference Presentations & Publications
+  year: 1993
+  id: 187
+
+- title: Distributed Modeling and Rendering of Splines Using Ganith
+  authors: C. Bajaj, J. Chen, S. Evans
+  venue: Technical Report 93-006 (29 pages), Purdue University, Computer Sciences (1/93).
+  type: Technical Reports
+  year: 1993
+  id: 188
+
+- title: Collaborative multimedia game environments
+  authors: V. Anupam, C. Bajaj
+  venue: Technical Report 93-086 (13 pages), Purdue University, Computer Sciences (12/93).
+  type: Technical Reports
+  year: 1993
+  id: 189
+
+- title: Trivariate Interpolation for Scientific Visualization
+  authors: C. Bajaj, G. Xu
+  venue: Technical Report 93-032, Purdue University, Computer Sciences (6/93).
+  type: Technical Reports
+  year: 1993
+  id: 190
+
+- title: Higher-Order Interpolation and Least-Squares Approximation Using Implicit Algebraic Surfaces
+  authors: C. Bajaj, I. Ihm, J. Warren
+  venue: ACM Transactions on Graphics, 12, 4, (1993), 327-347.
+  type: Journal Publications
+  year: 1993
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=159734&type=pdf&dl=portal&dl=ACM&CFID=76560209&CFTOKEN=18054146
+  id: 261
+
+- title: Factoring Rational Polynomials over the Complexes
+  authors: C. Bajaj, J. Canny, T. Garrity, J. Warren
+  venue: Siam Journal on Computing, 22, 2, (1993), 318-331.
+  type: Journal Publications
+  year: 1993
+  pdf: http://locus.siam.org/fulltext/SICOMP/volume-22/0222024.pdf
+  id: 268
+
+# 1992
+
+- title: Smoothing Polyhedra using Implicit Algebraic Splines
+  authors: C. Bajaj, I. Ihm
+  venue: 'Computer Graphics, 26, 2, (1992), 79-88. Proceedings: 1992 ACM Transactions on Graphics, SIGGRAPH 92, Chicago, Illinois.'
+  type: Journal Publications
+  year: 1992
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=134014&type=pdf&coll=portal&dl=ACM&CFID=76562359&CFTOKEN=73152559
+  id: 194
+
+- title: Delaunay Triangulations in Three Dimensions with Finite Precision Arithmetic
+  authors: T. Dey, K. Sugihara, C. Bajaj
+  venue: Computer Aided Geometric Design, 9:6(1992), 457-470.
+  type: Journal Publications
+  year: 1992
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6TYN-45D9TCJ-6-1&_cdi=5623&_user=108429&_orig=browse&_coverDate=12%2F31%2F1992&_sk=999909993&view=c&wchp=dGLbVtb-zSkWW&md5=be0c5df6961a742ee3994af7f4b68c6b&ie=/sdarticle.pdf
+  id: 195
+
+- title: Surface Fitting with Implicit Algebraic Surface Patches
+  authors: C. Bajaj
+  venue: Topics in Surface Modeling, edited by H. Hagen, SIAM Publications, (1992), Chapter 2, 23-52.
+  type: Book Chapters
+  year: 1992
+  id: 196
+
+- title: Robust Display of Arbitrary Rational Parametric Surfaces
+  authors: C. Bajaj, A. Royappa
+  venue: 'Curves and Surfaces in Computer Vision and Graphics III <br>Proceedings: Symposium on Electronic Imaging Science and Technology, Boston, Massachusetts, vol. 1830, (1992), 70-80.'
+  type: Conference Presentations & Publications
+  year: 1992
+  pdf: http://spiedl.aip.org/getpdf/servlet/GetPDFServlet?filetype=pdf&id=PSISDG001830000001000070000001&idtype=cvips&prog=normal
+  id: 197
+
+- title: Parameterization in Finite Precision
+  authors: C. Bajaj, A. Royappa
+  venue: 'Proceedings: Graphics Interface ''92, (1992), Vancouver, Canada, Canadian Information Processing Society, 29-36.'
+  type: Conference Presentations & Publications
+  year: 1992
+  id: 198
+
+- title: Algebraic Surface Design and Finite Element Meshes
+  authors: C. Bajaj
+  venue: 'Proceedings: The NASA Workshop on Software Systems for Surface Modeling and Grid Generation, NASA Langley Research Publication 3143, (1992), 121-131.'
+  type: Conference Presentations & Publications
+  year: 1992
+  id: 199
+
+- title: 'A-splines: Local interpolation and approximation using continuous piecewise real algebraic curves'
+  authors: C. Bajaj, G. Xu
+  venue: Technical Report 92-095, Purdue University, Computer Sciences (12/92).
+  type: Technical Reports
+  year: 1992
+  id: 200
+
+- title: Geometric Search and Replace in Solid Modeling Editing
+  authors: C. Bajaj, K. Sugihara
+  venue: Technical Report 92-078 (11 pages), Purdue University, Computer Sciences (10/14/92).
+  type: Technical Reports
+  year: 1992
+  id: 201
+
+- title: The Shilp Solid Modeling and Display Toolkit in v 1.1
+  authors: V. Anupam, C. Bajaj
+  venue: Technical Report 92-072 (43 pages), Purdue University, Computer Sciences (10/92).
+  type: Technical Reports
+  year: 1992
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1992/techreports/shilp-man.pdf
+  id: 202
+
+- title: Algebraic Surface Design with Hermite Interpolation
+  authors: C. Bajaj, I. Ihm
+  venue: ACM Transactions on Graphics, 11, 1, (1992), 61-91.
+  type: Journal Publications
+  year: 1992
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=120081&type=pdf&dl=portal&dl=ACM&CFID=76562641&CFTOKEN=45257950
+  id: 269
+
+- title: Convex Decomposition of Polyhedra and Robustness
+  authors: C. Bajaj, T. Dey
+  venue: Siam Journal on Computing, 21, 2, (1992), 339-364.
+  type: Journal Publications
+  year: 1992
+  pdf: http://locus.siam.org/fulltext/SICOMP/volume-21/0221025.pdf
+  id: 270
+
+- title: On Good Triangulations in Three Dimensions
+  authors: T. Dey, C. Bajaj, K. Sugihara
+  venue: International Journal of Computational Geometry and Applications, 2, 1, (1992), 75-95.
+  type: Journal Publications
+  year: 1992
+  pdf: http://www.worldscinet.com/ijcga/02/preserved-docs/0201/S0218195992000068.pdf
+  id: 271
+
+# 1991
+
+- title: On Good Triangulations in Three Dimensions
+  authors: T. Dey, C. Bajaj, K. Sugihara
+  venue: 'Proceedings: The ACM Symposium on Solid Modeling Foundations and CAD/CAM Applications, (1991), 431-441.'
+  type: Journal Publications
+  year: 1991
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=112578&type=pdf&coll=ACM&dl=ACM&CFID=76562125&CFTOKEN=50986033
+  id: 193
+
+- title: 'Electronic Skeletons: Modeling Skeletal Structures with Piecewise Algebraic Surfaces'
+  authors: C. Bajaj
+  venue: 'Curves and Surfaces in Computer Vision and Graphics 2: Proceedings of the Symposium on Electronic Imaging Science and Technology, volume 1610, pages 230-237, Boston, MA, 1991.'
+  type: Conference Presentations & Publications
+  year: 1991
+  pdf: http://spiedl.aip.org/getpdf/servlet/GetPDFServlet?filetype=pdf&id=PSISDG001610000001000230000001&idtype=cvips&prog=normal
+  id: 203
+
+- title: The Vaidak Medical Imaging and Model Reconstruction Toolkit
+  authors: B. Bailey, C. Bajaj, M. Fields
+  venue: Technical Report 91-066 (21 pages), Purdue University, Computer Sciences (8/30/91).
+  type: Technical Reports
+  year: 1991
+  pdf: http://cvcweb.ices.utexas.edu/cvc/papers/1991/techreports/vaidak-man.pdf
+  id: 204
+
+- title: Portable 3D Graphics in a Heterogeneous Distributed Environment
+  authors: V. Anupam, C. Bajaj, M. Fields, A. Royappa
+  venue: Technical Report 91-074 (7 pages), Purdue University, Computer Sciences (10/17/91).
+  type: Technical Reports
+  year: 1991
+  id: 205
+
+- title: 'XS: A Hardware Independent Graphics and Windowing Library'
+  authors: V. Anupam, C. Bajaj, A. Burnett, M. Fields, A. Royappa, D. Schikore
+  venue: Technical Report 91-062 (16 pages), Purdue University, Computer Sciences (8/28/91) CAPO-91-28 1991.
+  type: Technical Reports
+  year: 1991
+  id: 206
+
+# 1990
+
+- title: Convex Hulls of Objects bounded by Algebraic Curves
+  authors: C. Bajaj, M. Kim
+  venue: Algorithmica, 6, 1, (1990), 533-553.
+  type: Journal Publications
+  year: 1990
+  pdf: http://www.springerlink.com/(5ki02haxqu1oi43cis4az4u3)/app/home/contribution.asp?referrer=parent&backto=issue,28,47;journal,162,167;linkingpublicationresults,1:100117,1
+  id: 208
+
+- title: Sorting Points along an Algebraic Curve
+  authors: J. Johnstone, C. Bajaj
+  venue: Siam Journal on Computing, 19, 5, (1990), 925-967.
+  type: Journal Publications
+  year: 1990
+  pdf: http://locus.siam.org/fulltext/SICOMP/volume-19/0219065.pdf
+  id: 209
+
+- title: Rational Hypersurface Display
+  authors: C. Bajaj
+  venue: 'Computer Graphics, 24, 2, (1990), 117-127. Proceedings: 1990 ACM Symposium on Interactive 3D Graphics, Snowbird, Utah.'
+  type: Journal Publications
+  year: 1990
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=91428&type=pdf&coll=portal&dl=ACM&CFID=71964949&CFTOKEN=32193995
+  id: 210
+
+- title: Robust Computations of Polygon Nesting
+  authors: C. Bajaj, T. Dey
+  venue: 'Proceedings: International Workshop on Discrete Algorithms and Complexity, Fukuoka, Japan, (1989), 33-40.'
+  type: Journal Publications
+  year: 1990
+  id: 211
+
+- title: Geometric Modeling with Algebraic Surfaces
+  authors: C. Bajaj
+  venue: 'The Mathematics of Surfaces III, edited by D. Handscomb, Oxford University Press, (1990), Chapter I, 3-48. <br>Invited Paper: 3rd IMA, Conference on the Mathematics of Surfaces.'
+  type: Book Chapters
+  year: 1990
+  id: 212
+
+- title: The GANITH Algebraic Geometry Toolkit
+  authors: C. Bajaj, A. Royappa
+  venue: 'Proceedings: 1st Annual Conference on the Design and Implementation of Symbolic Computation Systems, Lecture Notes in Computer Science, No. 429, Springer-Verlag, (1990), 268-269.'
+  type: Conference Presentations & Publications
+  year: 1990
+  id: 213
+
+- title: Geometric Computations with Algebraic Varieties of Bounded Degree
+  authors: C. Bajaj
+  venue: 'Proceedings: 6th Annual ACM Symposium on Computational Geometry, (1990) Berkeley, California, 148-156.'
+  type: Conference Presentations & Publications
+  year: 1990
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=98557&type=pdf&coll=portal&dl=ACM&CFID=71965503&CFTOKEN=98919752
+  id: 214
+
+- title: Dynamic Voronoi Diagrams and Delaunay Triangulations
+  authors: C. Bajaj, W. Bouma
+  venue: 'Proceedings: The 2nd Annual Canadian Conference on Computational Geometry, (1990), Ottawa, Canada, 273-277.'
+  type: Conference Presentations & Publications
+  year: 1990
+  id: 215
+
+- title: G1 Interpolation Using Piecewise Quadric and Cubic Surfaces
+  authors: C. Bajaj
+  venue: Proceedings of SPIE - Volume 1251, Curves and Surfaces in Computer Vision and Graphics, Leonard A. Ferrari, Rui J. P. de Figueiredo, Editors, August 1990, pp. 82-93.
+  type: Conference Presentations & Publications
+  year: 1990
+  pdf: http://spiedl.aip.org/getpdf/servlet/GetPDFServlet?filetype=pdf&id=PSISDG001251000001000082000001&idtype=cvips&prog=normal
+  id: 216
+
+- title: 'Parametric, and Surface. Unifying Parametric and Implicit Surface Representations for Computer Graphics: Surface Display and Algebraic Fitting'
+  authors: C. Bajaj
+  venue: Technical Report 995 (25 pages), Purdue University, Computer Sciences (7-18-90).
+  type: Technical Reports
+  year: 1990
+  id: 217
+
+- title: Polygon Nesting and Robustness
+  authors: C. Bajaj, T. Dey
+  venue: Information Processing Letters, 35, 1, (1990), 23-32.
+  type: Journal Publications
+  year: 1990
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6V0F-45D9TV8-21-1&_cdi=5645&_user=108429&_orig=browse&_coverDate=06%2F15%2F1990&_sk=999649998&view=c&wchp=dGLbVtb-zSkWz&md5=2e878c924a34141f9c027c3bcdadfdc5&ie=/sdarticle.pdf
+  id: 273
+
+- title: 'Generation of Configuration Space Obstacles: The Case of Moving Algebraic Surfaces'
+  authors: C. Bajaj, M. Kim
+  venue: International Journal of Robotics Research, 9, 1, (1990), 92-112.
+  type: Journal Publications
+  year: 1990
+  id: 272
+
+# 1989
+
+- title: Factoring Rational Polynomials over the Complexes
+  authors: C. Bajaj, J. Canny, T. Garrity, J. Warren
+  venue: |-
+    Proceedings of the ACM-SIGSAM 1989 international symposium on Symbolic and algebraic computation 
+    1989, Portland, Oregon, United States, July 17 - 19, 1989, 81-90.
+  type: Journal Publications
+  year: 1989
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=74551&type=pdf&coll=portal&dl=ACM&CFID=76559993&CFTOKEN=82249037
+  id: 178
+
+- title: Hermite Interpolation of Rational Space Curves using Real Algebraic Surfaces
+  authors: C. Bajaj, I. Ihm
+  venue: 'Proceedings: 5th Annual ACM Symposium on Computational Geometry, Saarbrucken, West Germany, (1989), 94-103.'
+  type: Journal Publications
+  year: 1989
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=73844&type=pdf&coll=portal&dl=ACM&CFID=76561841&CFTOKEN=9452841
+  id: 191
+
+- title: Robust Decompositions of Polyhedra
+  authors: C. Bajaj, T. Dey
+  venue: 'Proceedings: Ninth Conference on Foundations of Software Technology and Theoretical Computer Science, Lecture Notes in Computer Science, No. 405, Springer-Verlag, (1989), 267-279.'
+  type: Journal Publications
+  year: 1989
+  id: 192
+
+- title: Geometric Optimization and D^P -Completeness
+  authors: C. Bajaj, M. Li
+  venue: Discrete and Computational Geometry, 4, 1, (1989), 3-13. <br>Abstract appears in Zentralblatt fur Mathematik.
+  type: Journal Publications
+  year: 1989
+  pdf: http://www.springerlink.com/(q3b3l455gm520euueajhud55)/app/home/contribution.asp?referrer=parent&backto=issue,2,43;journal,89,92;linkingpublicationresults,1:100356,1
+  id: 218
+
+- title: 'Automatic Parameterization of Rational Curves and Surfaces IV: Algebraic Space Curves'
+  authors: S. Abhyankar, C. Bajaj
+  venue: ACM Transactions on Graphics, 8, 4, (1989), 325-334.
+  type: Journal Publications
+  year: 1989
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=77273&type=pdf&coll=portal&dl=ACM&CFID=71966325&CFTOKEN=40825847
+  id: 220
+
+- title: Computations with Algebraic Curves
+  authors: C. Bajaj, S. Abhyankar
+  venue: 'Proceedings: International Symposium on Symbolic and Algebraic Computation, ISSAC88, Lecture Notes in Computer Science, No. 358, Springer-Verlag, (1989), 279-284.'
+  type: Conference Presentations & Publications
+  year: 1989
+  id: 221
+
+- title: Local Parameterization, Implicitization and Inversion of Real Algebraic Curves
+  authors: C. Bajaj
+  venue: 'Proceedings: The International Conference on Applied Algebra, Algebraic Algorithms, And Error Correcting Codes, (AAECC-7), (1989), Toulouse, France.'
+  type: Conference Presentations & Publications
+  year: 1989
+  id: 222
+
+- title: Quadric and Cubic Hypersurface Parameterization
+  authors: C. Bajaj
+  venue: Technical Report 881, Purdue University, Computer Sciences (4/27/89).
+  type: Technical Reports
+  year: 1989
+  id: 223
+
+- title: Curvature Adjusted Parameterization of Curves
+  authors: R. Patterson, C. Bajaj
+  venue: Technical Report 907 (16 pages), Purdue University, Computer Sciences (9/19/89).
+  type: Technical Reports
+  year: 1989
+  id: 224
+
+- title: 'Generation of Configuration Space Obstacles: The Case of Moving Algebraic Curves'
+  authors: C. Bajaj, M. Kim
+  venue: Algorithmica, 4, 1, (1989), 157-172.
+  type: Journal Publications
+  year: 1989
+  pdf: http://www.springerlink.com/(mdsq3n45wimsv355c12bjxfn)/app/home/contribution.asp?referrer=parent&backto=issue,9,36;journal,164,167;linkingpublicationresults,1:100117,1
+  id: 274
+
+# 1988
+
+- title: The Algebraic Degree of Geometric Optimization Problems
+  authors: C. Bajaj
+  venue: Discrete and Computational Geometry, 3, 1, (1988), 177-191.
+  type: Journal Publications
+  year: 1988
+  pdf: http://www.springerlink.com/(igmrlrblncy1mn55mninnnib)/app/home/contribution.asp?referrer=parent&backto=issue,14,28;journal,90,92;linkingpublicationresults,1:100356,1
+  id: 225
+
+- title: Generalized Unfoldings for Shortest Paths in Euclidean 3-Space
+  authors: C. Bajaj, T. Moh
+  venue: International Journal of Robotics Research, 7, 1, (1988), 71-76.
+  type: Journal Publications
+  year: 1988
+  id: 226
+
+- title: 'Generation of Configuration Space Obstacles: The Case of Moving Spheres'
+  authors: C. Bajaj, M. Kim
+  venue: IEEE Journal of Robotics and Automation, 4, 1, (1988), 94-99.
+  type: Journal Publications
+  year: 1988
+  pdf: http://ieeexplore.ieee.org/iel1/56/50/00000777.pdf?isnumber=50&prod=JNL&arnumber=777&arSt=94&ared=99&arAuthor=Bajaj%2C+C.%3B+Kim%2C+M.-S.
+  id: 227
+
+- title: Face Area Evaluation Algorithm for Solids
+  authors: M. Wu, C. Bajaj, C. Liu
+  venue: Computer Aided Design, 20, 2, (1988), 75-82.
+  type: Journal Publications
+  year: 1988
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6TYR-481DYDD-1B3-1&_cdi=5625&_user=108429&_orig=browse&_coverDate=03%2F31%2F1988&_sk=999799997&view=c&wchp=dGLbVtz-zSkWW&md5=68fdc3f582eb7a4ab520f2a79ef0052d&ie=/sdarticle.pdf
+  id: 228
+
+- title: Tracing Surface Intersections
+  authors: C. Bajaj, C. Hoffmann, R. Lynch, J. Hopcroft
+  venue: Computer Aided Geometric Design, 5:4(1988), 285-307.
+  type: Journal Publications
+  year: 1988
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6TYN-484N6V1-33-2&_cdi=5623&_user=108429&_orig=browse&_coverDate=11%2F30%2F1988&_sk=999949995&view=c&wchp=dGLbVlb-zSkWb&md5=876df702bb9d7ac21c1da61b41554f1d&ie=/sdarticle.pdf
+  id: 229
+
+- title: 'Automatic Parameterization of Rational Curves and Surfaces III: Algebraic Plane Curves'
+  authors: S. Abhyankar, C. Bajaj
+  venue: Computer Aided Geometric Design, 5:4(1988), 309-321.
+  type: Journal Publications
+  year: 1988
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6TYN-484N6V1-34-2&_cdi=5623&_user=108429&_orig=browse&_coverDate=11%2F30%2F1988&_sk=999949995&view=c&wchp=dGLbVtb-zSkzS&md5=c9f4e3a877483c9316de9c4d69b7c928&ie=/sdarticle.pdf
+  id: 230
+
+- title: Algorithms for Planar Geometric Models
+  authors: C. Bajaj, M. Kim
+  venue: 'Proceedings: The Fifteenth International Colloquium on Automata, Languages and Programming, ICALP 88. <br>Lecture Notes in Computer Science, Springer-Verlag, 317, (1988), 67-81.'
+  type: Conference Presentations & Publications
+  year: 1988
+  id: 231
+
+- title: Computing About Physical Objects
+  authors: C. Bajaj, W. Dyksen, C. Hoffmann, E. Houstis, T. Korb, J. Rice
+  venue: 'Proceedings: The 12th IMACS World Congress, Paris, (1988), 642-645.'
+  type: Conference Presentations & Publications
+  year: 1988
+  id: 232
+
+- title: Mathematical Techniques in Solid Modeling
+  authors: C. Bajaj
+  venue: 'Proceedings: International Conference on Computer Integrated Manufacturing, RPI Troy, NY, (1988), 290-295.'
+  type: Conference Presentations & Publications
+  year: 1988
+  id: 233
+
+- title: Approximation Methods for Algebraic Curves and Surfaces
+  authors: C. Bajaj
+  venue: Technical Report 822, Purdue University, Computer Sciences (11/15/88).
+  type: Technical Reports
+  year: 1988
+  id: 234
+
+- title: Algorithmic Implicitization of Algebraic Curves and Surfaces
+  authors: C. Bajaj
+  venue: Technical Report 742, Purdue University, Computer Sciences (2/5/88).
+  type: Technical Reports
+  year: 1988
+  id: 235
+
+- title: On the Applications of Multi-Equational Resultants
+  authors: C. Bajaj, T. Garrity, J. Warren
+  venue: Technical Report 826, Purdue University, Computer Sciences (11/21/88).
+  type: Technical Reports
+  year: 1988
+  id: 236
+
+# 1987
+
+- title: Compliant Motion Planning with Geometric Models
+  authors: C. Bajaj, M. Kim
+  venue: 'Proceedings: 3rd ACM Symposium on Computational Geometry, Waterloo, Canada, (1987), 171-180.'
+  type: Conference Presentations & Publications
+  year: 1987
+  pdf: http://portal.acm.org/ft_gateway.cfm?id=41976&type=pdf&coll=ACM&dl=ACM&CFID=71965418&CFTOKEN=25451112
+  id: 207
+
+- title: 'Generation of Configuration Space Obstacles: The Case of Moving Algebraic Curves'
+  authors: C. Bajaj, M. Kim
+  venue: 'Proceedings: 1987 IEEE International Conference on Robotics and Automation, Raleigh, North Carolina, volume 4, (March 1987), 979-984.'
+  type: Journal Publications
+  year: 1987
+  pdf: http://ieeexplore.ieee.org/iel5/8153/23644/01087939.pdf?tp=&arnumber=1087939&isnumber=23644
+  id: 219
+
+- title: Efficient Algorithms for Common Transversals
+  authors: M. Atallah, C. Bajaj
+  venue: Information Processing Letters, 25, 2, (1987), 87-91.
+  type: Journal Publications
+  year: 1987
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6V0F-486T2Y1-3-2&_cdi=5645&_user=108429&_orig=browse&_coverDate=05%2F06%2F1987&_sk=999749997&view=c&wchp=dGLbVzz-zSkzS&md5=70ac9fc0c05f385737a27355c5c6bd24&ie=/sdarticle.pdf
+  id: 238
+
+- title: 'Automatic Parameterization of Rational Curves and Surfaces II: Cubics and Cubicoids'
+  authors: S. Abhyankar, C. Bajaj
+  venue: Computer Aided Design, 19, 9, (1987), 499-502.
+  type: Journal Publications
+  year: 1987
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6TYR-481MR4F-1D9-1&_cdi=5625&_user=108429&_orig=browse&_coverDate=11%2F30%2F1987&_sk=999809990&view=c&wchp=dGLbVlb-zSkWz&md5=b96024af0034be6ff734c432c111758e&ie=/sdarticle.pdf
+  id: 239
+
+- title: 'Automatic Parameterization of Rational Curves and Surfaces I: Conics and Conicoids'
+  authors: S. Abhyankar, C. Bajaj
+  venue: Computer Aided Design, 19, 1, (1987), 11-14.
+  type: Journal Publications
+  year: 1987
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6TYR-481MMYD-8P-1&_cdi=5625&_user=108429&_orig=browse&_coverDate=02%2F28%2F1987&_sk=999809998&view=c&wchp=dGLbVtb-zSkWb&md5=ebf32e4ae675fdc96c218686782620aa&ie=/sdarticle.pdf
+  id: 240
+
+- title: A Note on an Efficient Implementation of the Sylvester Resultant for Multivariate Polynomials
+  authors: C. Bajaj, A. Royappa
+  venue: Technical Report 718, Purdue University, Computer Sciences (10/23/87).
+  type: Technical Reports
+  year: 1987
+  id: 242
+
+- title: Geometric Optimization and the Polynomial Hierarchy
+  authors: C. Bajaj
+  venue: Theoretical Computer Science, 54, 1, (1987), 87-102.
+  type: Journal Publications
+  year: 1987
+  pdf: http://www.sciencedirect.com/science?_ob=MImg&_imagekey=B6V1G-45W3WMK-K-1&_cdi=5674&_user=108429&_orig=browse&_coverDate=09%2F30%2F1987&_sk=999459998&view=c&wchp=dGLbVzb-zSkWz&md5=371f27fec33e50e0d0f5a153441224e9&ie=/sdarticle.pdf
+  id: 275
+
+# 1986
+
+- title: 'Proving Geometric Algorithm Non-Solvability: An Application of Factoring Polynomials'
+  authors: C. Bajaj
+  venue: Journal of Symbolic Computation, 2, (1986), 99-102.
+  type: Journal Publications
+  year: 1986
+  id: 243
+
+- title: 'Limitations to Algorithmic Solvability: Galois Methods and Models of Computation'
+  authors: C. Bajaj
+  venue: 'Proceedings: ACM Symposium on Symbolic and Algebraic Computation, SYMSAC86, Waterloo, Canada, (1986), 71-76.'
+  type: Conference Presentations & Publications
+  year: 1986
+  id: 244
+
+- title: An Efficient Parallel Solution for Euclidean Shortest Paths in 3-Dimensions
+  authors: C. Bajaj
+  venue: 'Proceedings: 1986 IEEE International Conference on Robotics and Automation, San Francisco, California, (1986), volume 3, 1897-1900.'
+  type: Conference Presentations & Publications
+  year: 1986
+  pdf: http://ieeexplore.ieee.org/iel5/8152/23643/01087478.pdf?tp=&arnumber=1087478&isnumber=23643
+  id: 245
+
+# 1985
+
+- title: Geometric Optimization and the Polynomial Hierarchy
+  authors: C. Bajaj
+  venue: 'Proceedings: Fifth Conference on Foundations of Software Technology and Theoretical Computer Science, Lecture Notes in Computer Science, 206, Springer-Verlag, (1985), 176-195.'
+  type: Journal Publications
+  year: 1985
+  id: 237
+
+- title: The Algebraic Complexity of Shortest Paths in Polyhedral Spaces
+  authors: C. Bajaj
+  venue: 'Proceedings: 23rd Annual Allerton Conference on Communication, Control and Computing, Monticello, Illinois, (1985), 510-517.'
+  type: Conference Presentations & Publications
+  year: 1985
+  id: 246

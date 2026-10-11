@@ -1,11 +1,17 @@
 # Add People
 
-1. Go to CVC Personnel Google Sheet
-2. Add new row, then input name, select position, then select TRUE if current student.
-3. For the image, if student does not have one it can be left blank.
-4. Website will be automatically updated
-5. To add an image for the student, complete the following:
-6. Go to CVC-Website repo
-7. Add new image to `src/images/people`
-8. Add that exact file name under Image column in the Google Sheet
-9. Follow build and deployment instructions in README.md
+1. Add the portrait to `src/images/people/`. Without a portrait, leave `image` out (or use `placeholder.png`) and the card shows the placeholder.
+2. Open `src/data/site/people.js`.
+3. Add an entry to the list:
+
+   ```javascript
+   {
+     name: '',
+     image: 'file_name.png', // file name inside src/images/people
+     position: 'PhD Student',
+     status: 'current', // 'current' or 'alumni'; it selects the tab on /people/
+   },
+   ```
+
+4. The group a person appears in on `/people/` is derived from `position` by `groupKeyFor()` in `src/components/cards.js`: positions mentioning "graduate" (but not "undergraduate") or "PhD" go to Graduate Students, `Undergraduate Student` and `High School Student` to their own groups, "Director" or "Principal Investigator" to Principal Investigator, "Researcher" (but not "Postdoctoral") or "Research Scientist" to Researchers, and everything else to Staff & Postdocs. Within a group, people are sorted by `POSITION_ORDER` in the same file, then by name.
+5. Run `npm test` (it checks the status and that the portrait exists), then follow the build and deployment instructions in README.md.

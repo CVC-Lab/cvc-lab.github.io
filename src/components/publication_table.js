@@ -1,185 +1,210 @@
 import * as React from 'react'
-import DOMPurify from 'isomorphic-dompurify'
-import { Link } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { useCardImage } from '../hooks/useCardImages'
-import { FaArrowUp, FaTimes } from 'react-icons/fa'
 import PropTypes from 'prop-types'
+import DOMPurify from 'isomorphic-dompurify'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { FaArrowUp } from 'react-icons/fa'
+import { useCardImage } from '../hooks/useCardImages'
+import { scrollBehavior } from '../hooks/motion'
+import { PUBLICATION_TYPES, isPresent, normalizeTitle } from '../data/publications-schema'
+import PageHeader from './ui/PageHeader'
+import SmartLink, { resolveLink } from './ui/SmartLink'
+import Lightbox from './ui/Lightbox'
+import { useIsoLayoutEffect } from './query-state'
+import { useIsClientRender } from './useIsClientRender'
 import './publication_table.css'
 
-const publicationTypeOrder = [
-  'Journal Publications',
-  'arXiv',
-  'Conference Presentations & Publications',
-  'Technical Reports',
-  'Book',
-  'Edited Books',
-  'Book Chapters',
-]
+const NEW_TAB_NOTE = ' (opens in a new tab)'
 
-const groupByYearAndType = publications => {
-  return publications.reduce((groupedPublications, publication) => {
-    const year = publication.PublishedDateYear
-    const type = publication.PublicationType
+// Lower case without accents, so "vitanyi" also finds "Vitányi".
+const foldText = text =>
+  text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
 
-    if (!groupedPublications[year]) {
-      groupedPublications[year] = {}
-    }
-
-    if (!groupedPublications[year][type]) {
-      groupedPublications[year][type] = []
-    }
-
-    groupedPublications[year][type].push(publication)
-    return groupedPublications
-  }, {})
-}
-
-// Types are listed in a fixed order, but anything the data carries that is not
-// in that list is appended rather than dropped — a publication with an
-// unexpected PublicationType would otherwise never render at all.
-const orderTypes = types => {
-  const known = publicationTypeOrder.filter(type => types[type])
-  const unknown = Object.keys(types)
-    .filter(type => !publicationTypeOrder.includes(type))
-    .sort()
-  return [...known, ...unknown]
-}
-
-const generatePublicationKey = (publication, index) => {
-  const titlePart = publication.Title ? publication.Title.substring(0, 20).replace(/\s+/g, '_') : ''
-  const authorPart = publication.Authors
-    ? publication.Authors.substring(0, 20).replace(/\s+/g, '_')
-    : ''
-  return `${titlePart}_${authorPart}_${index}`
-}
-
-const publicationThumbnailMap = {
-  'Scalable Risk-Averse Well-Placement Optimization Using Quadratic Knapsack Problem and Randomized Singular Value Decomposition':
-    {
-      img: 'publications/PUB_Scalable Risk-Averse',
-      alt: 'Scalable Risk-Averse Well-Placement Optimization publication thumbnail',
-    },
-  'Computer Algebra Meets Hamiltonian Geometry': {
-    img: 'publications/PUB_Computer Algebra',
-    alt: 'Computer Algebra Meets Hamiltonian Geometry publication thumbnail',
-  },
-  'The Physics, Information, and Computation of Perennial Learning: Kolmogorov Complexity, Information Distance and Port-Hamiltonian Thermodynamics':
-    {
-      img: 'publications/PUB_Perennial Learning',
-      alt: 'Perennial Learning via Port-Hamiltonian Dynamics publication thumbnail',
-    },
-  'Learning Material-Aware Hamiltonian Risk Fields for Safe Navigation': {
-    img: 'projects/Learning Material-Aware Hamiltonian_Thumbnail',
-    alt: 'Learning Material-Aware Hamiltonian Risk Fields for Safe Navigation publication thumbnail',
-  },
-  'When Descent Is Too Stable: Event-Triggered Hamiltonian Learning to Optimize': {
-    img: 'projects/When Descent Is Too Stable_Thumbnail',
-    alt: 'When Descent Is Too Stable publication thumbnail',
-  },
-  'PHAST: Port-Hamiltonian Architecture for Structured Temporal Dynamics Forecasting': {
-    img: 'publications/PUB_PHASTPort-Hamiltonian',
-    alt: 'PHAST publication thumbnail',
-  },
-  'QC-PHAST Search: Classical--Quantum Query Benchmarks for Finite-Pool Rare-Regime Discovery': {
-    img: 'publications/PUB_QC-PHAST_Search',
-    alt: 'QC-PHAST Search publication thumbnail',
-  },
-  'GRL-SNAM: Geometric Reinforcement Learning with Path Differential Hamiltonians for Simultaneous Navigation and Mapping in Unknown Environments':
-    {
-      img: 'publications/PUB_GRL‑SNAM',
-      alt: 'GRL-SNAM publication thumbnail',
-    },
-  'A Prior-Robust Sensitivity and Factorial-Necessity Analysis of Tri-Modal Viral-Ultrasound Gene Delivery for Lysosomal Neurodegeneration':
-    {
-      img: 'publications/PUB_Tri-Modal Sensitivity Audit',
-      alt: 'Tri-modal gene-therapy sensitivity audit publication thumbnail',
-    },
-  'A Novel Tri-Modal Viral–Ultrasound Gene-Delivery Therapy Protocol for Lysosomal Neurodegeneration via Stochastic Model Optimization with Uncertainty Quantification and Generalizability':
-    {
-      img: 'publications/PUB_Tri-Modal Gene Therapy',
-      alt: 'Tri-modal viral ultrasound gene-delivery therapy publication thumbnail',
-    },
-  'Scalable Robust Bayesian Co-Clustering with Compositional ELBOs': {
-    img: 'publications/PUB_Compositional ELBOs',
-    alt: 'Compositional ELBOs publication thumbnail',
-  },
-  'A Differential and Pointwise Control Approach to Reinforcement Learning': {
-    img: 'publications/PUB_Differential and Pointwise',
-    alt: 'Differential and Pointwise Control publication thumbnail',
-  },
-  '4drecons: 4d neural implicit deformable objects reconstruction from a single rgb-d camera with geometrical and topological regularizations':
-    {
-      img: 'publications/PUB_4drecons',
-      alt: '4drecons publication thumbnail',
-    },
-  'Learning Generalized Hamiltonian Dynamics with Stability from Noisy Trajectory Data': {
-    img: 'publications/PUB_Hamiltonian_noisyTrajectory',
-    alt: 'Hamiltonian dynamics from noisy trajectories publication thumbnail',
-  },
-  'Pathway Anchored Multimodal Clustering Reveals Circuit Level Signatures in Parkinsons Disease': {
-    img: 'publications/PUB_Pathway Anchored Multimodal',
-    alt: 'Pathway anchored multimodal clustering publication thumbnail',
-  },
-  'Posterior-calibrated multimodal motor states reveal longitudinal and imaging-associated heterogeneity in Parkinson’s disease':
-    {
-      img: 'publications/PUB_Posterior-Aware Phenotyping',
-      alt: 'Posterior-calibrated multimodal motor states publication thumbnail',
-    },
-  'Integrated Genetic, Molecular, and Wearable Sensor Biomarkers Enable Bayesian Machine Learning-Driven Precision Stratification in Parkinson’s Disease: A Comprehensive Multi-Cohort Validation Study':
-    {
-      img: 'publications/PUB_Wearable Sensor Biomarkers',
-      alt: 'Wearable sensor biomarkers publication thumbnail',
-    },
-  'Bayesian Port–Hamiltonian Surrogate for Three-Phase Reservoir Flow Simulation': {
-    img: 'publications/PUB_Three-Phase Reservoir',
-    alt: 'Three-phase reservoir flow publication thumbnail',
-  },
-  'Field-Scale Bayesian Production Forecasting via Spectral Gaussian-Process Mixtures': {
-    img: 'publications/PUB_Field-Scale Bayesian',
-    alt: 'Field-scale Bayesian production forecasting publication thumbnail',
-  },
-  'Stochastic Differential Policy Optimization: A Rough Path Approach to Reinforcement Learning': {
-    img: 'publications/PUB_A Rough Path Approach',
-    alt: 'Rough path reinforcement learning publication thumbnail',
-  },
-  'Self-balancing, Memory Efficient, Dynamic Metric Space Data Maintenance, for Rapid Multi-kernel Estimation':
-    {
-      img: 'publications/PUB_Rapid Multi-kernel Estimation',
-      alt: 'Rapid multi-kernel estimation publication thumbnail',
-    },
-}
-
-const CVC_SITE_ORIGIN = 'https://cvc-lab.github.io'
+const toDoiOrg = href => href.replace(/^http:\/\/dx\.doi\.org\//i, 'https://doi.org/')
 
 const resolvePdfLink = pdfLink => {
-  if (!pdfLink || pdfLink === 'NULL') return null
-
-  const normalizedPdfLink = pdfLink.trim()
-
-  if (
-    normalizedPdfLink.startsWith('http://') ||
-    normalizedPdfLink.startsWith('https://') ||
-    normalizedPdfLink.startsWith('/')
-  ) {
-    return normalizedPdfLink
-  }
-
-  return null
+  if (!isPresent(pdfLink)) return null
+  const href = pdfLink.trim()
+  return /^(https?:\/\/|\/)/i.test(href) ? toDoiOrg(href) : null
 }
 
 const PREPRINT_LOCATION_PATTERN = /^\s*(arXiv|bioRxiv|medRxiv)/i
 
-const getPaperLinkConfig = publication => {
+const getPaperLink = publication => {
+  const href = resolvePdfLink(publication.pdf)
+  if (!href) return null
+
   const isPreprint =
-    publication.PublicationType === 'arXiv' ||
-    PREPRINT_LOCATION_PATTERN.test(publication.Location || '')
+    publication.type === 'arXiv' || PREPRINT_LOCATION_PATTERN.test(publication.venue || '')
+  // Outside the preprint servers a link is only called PDF when it points at one.
+  const isPdf = !isPreprint && /pdf/i.test(href)
 
   return {
+    href,
     className: isPreprint ? 'pub-link-paper' : 'pub-link-pdf',
-    iconId: isPreprint ? 'pub-icon-paper' : 'pub-icon-pdf',
-    label: isPreprint ? 'Paper' : 'PDF',
+    iconId: isPdf ? 'pub-icon-pdf' : 'pub-icon-paper',
+    label: isPdf ? 'PDF' : 'Paper',
   }
+}
+
+const resolveProjectLink = projectLink => {
+  if (!isPresent(projectLink)) return null
+  const to = projectLink.trim()
+  const { kind } = resolveLink(to)
+  if (kind === 'anchor') return null
+  return { to, external: kind === 'external' }
+}
+
+// Venue cells may carry markup. Sanitised once per record: links that are not
+// http(s) become plain text, dx.doi.org links move to https://doi.org/, and the
+// rest open in a new tab and say so. `text` is the venue without that note.
+const sanitizeVenue = location => {
+  const body = DOMPurify.sanitize(`<i>${location}</i>`, { RETURN_DOM: true })
+  const text = body.textContent
+
+  body.querySelectorAll('a').forEach(link => {
+    const href = (link.getAttribute('href') || '').trim()
+    if (!/^https?:\/\//i.test(href)) {
+      link.replaceWith(...Array.from(link.childNodes))
+      return
+    }
+    link.setAttribute('href', toDoiOrg(href))
+    link.setAttribute('target', '_blank')
+    link.setAttribute('rel', 'noopener noreferrer')
+    const note = body.ownerDocument.createElement('span')
+    note.className = 'visually-hidden'
+    note.textContent = NEW_TAB_NOTE
+    link.appendChild(note)
+  })
+
+  return { html: body.innerHTML, text }
+}
+
+const getThumbnail = (publication, resolveCardImage) => {
+  if (!isPresent(publication.thumbnail)) return null
+  const image = getImage(resolveCardImage(publication.thumbnail.trim()))
+  return image ? { image, alt: publication.thumbnail_alt } : null
+}
+
+// Entries come from src/data/publications.yaml, checked by gatsby-node.js.
+const preparePublications = (publicationData, resolveCardImage) =>
+  publicationData.map((publication, index) => {
+    const title = normalizeTitle(publication.title)
+    const year = String(publication.year).trim()
+    const type = (publication.type || '').trim()
+    const venue = isPresent(publication.venue) ? sanitizeVenue(publication.venue) : null
+
+    return {
+      id: index,
+      year,
+      type,
+      title,
+      authors: publication.authors,
+      venueHtml: venue ? venue.html : '',
+      pdf: getPaperLink(publication),
+      project: resolveProjectLink(publication.project),
+      thumbnail: getThumbnail(publication, resolveCardImage),
+      haystack: foldText(
+        [title, publication.authors || '', venue ? venue.text : '', year, type].join(' ')
+      ),
+    }
+  })
+
+// Types are listed in a fixed order, but anything the data carries that is not
+// in that list is appended rather than dropped — a publication with an
+// unexpected type would otherwise never render at all.
+const orderTypes = types => {
+  const known = PUBLICATION_TYPES.filter(type => types.includes(type))
+  const unknown = types.filter(type => !PUBLICATION_TYPES.includes(type)).sort()
+  return [...known, ...unknown]
+}
+
+// [{ year, types: [{ type, items }] }], newest year first.
+const groupByYearAndType = publications => {
+  const years = new Map()
+  publications.forEach(publication => {
+    if (!years.has(publication.year)) years.set(publication.year, new Map())
+    const types = years.get(publication.year)
+    if (!types.has(publication.type)) types.set(publication.type, [])
+    types.get(publication.type).push(publication)
+  })
+
+  return [...years.keys()]
+    .sort((a, b) => Number(b) - Number(a))
+    .map(year => {
+      const types = years.get(year)
+      return {
+        year,
+        types: orderTypes([...types.keys()]).map(type => ({ type, items: types.get(type) })),
+      }
+    })
+}
+
+// The filter is kept in this history entry's state, not in the URL, so Back to the page
+// renders the same list before Gatsby restores the saved scroll offset.
+const EMPTY_FILTER = { query: '', type: '' }
+
+const readSavedFilter = () => {
+  const saved = window.history.state?.pubFilter
+  return {
+    query: typeof saved?.query === 'string' ? saved.query : '',
+    type: typeof saved?.type === 'string' ? saved.type : '',
+  }
+}
+
+const saveFilter = (query, type) => {
+  const { pubFilter: saved, ...state } = window.history.state || {}
+  const isFiltered = query !== '' || type !== ''
+  if (isFiltered ? saved?.query === query && saved?.type === type : !saved) return
+  try {
+    // Same state otherwise (Gatsby's location key) and same URL.
+    window.history.replaceState(isFiltered ? { ...state, pubFilter: { query, type } } : state, '')
+  } catch {
+    // Safari throws after 100 history calls in 30 seconds; the next change writes again.
+  }
+}
+
+// A reload, or Back/Forward into this document: the cases in which the shell restores the saved
+// scroll offset too (gatsby-browser.js). Chromium and WebKit also keep history.state when a
+// link or the address bar loads the URL already shown; that is a new visit.
+const isHistoryLoad = () => {
+  try {
+    const type = window.performance.getEntriesByType('navigation')[0]?.type
+    return type === 'reload' || type === 'back_forward'
+  } catch {
+    return false
+  }
+}
+
+// The offset Gatsby saved for this history entry, which the shell restores on such a load
+// (gatsby-browser.js writes the same sessionStorage key).
+const savedOffset = () => {
+  try {
+    const key = `@@scroll|${window.location.pathname}|${window.history.state?.key}`
+    const offset = JSON.parse(window.sessionStorage.getItem(key))
+    return Number.isFinite(offset) ? offset : null
+  } catch {
+    return null
+  }
+}
+
+// Without JavaScript the search and type controls cannot filter anything.
+const NO_SCRIPT_CSS = '.pub-filter{display:none}'
+
+const jumpToYear = (event, year) => {
+  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+    return
+  }
+  const section = document.getElementById(`year-${year}`)
+  if (!section) return
+  event.preventDefault()
+  // Always instant: a smooth jump across this page lands short in WebKit.
+  section.scrollIntoView({ behavior: 'instant', block: 'start' })
+  // Same history entry and state, so Gatsby's scroll bookkeeping survives.
+  window.history.replaceState(window.history.state, '', `#year-${year}`)
+  section.querySelector('.year-header')?.focus({ preventScroll: true })
 }
 
 // One <symbol> per icon, referenced with <use>. Rendering react-icons inline put
@@ -206,262 +231,484 @@ const PubIcon = ({ id }) => (
 
 PubIcon.propTypes = { id: PropTypes.string.isRequired }
 
-const resolveProjectLink = projectLink => {
-  if (!projectLink || projectLink === 'NULL') return null
+const publicationShape = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  authors: PropTypes.string,
+  venueHtml: PropTypes.string,
+  pdf: PropTypes.shape({
+    href: PropTypes.string.isRequired,
+    className: PropTypes.string.isRequired,
+    iconId: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  }),
+  project: PropTypes.shape({
+    to: PropTypes.string.isRequired,
+    external: PropTypes.bool.isRequired,
+  }),
+  thumbnail: PropTypes.shape({
+    image: PropTypes.object.isRequired,
+    alt: PropTypes.string,
+  }),
+})
 
-  if (projectLink.startsWith(CVC_SITE_ORIGIN)) {
-    const internalPath = projectLink.slice(CVC_SITE_ORIGIN.length)
-    return {
-      to: internalPath || '/',
-      isInternal: true,
-    }
-  }
+// The content of one card. Memoised: opening the preview, scrolling or filtering
+// never re-renders (or re-sanitises) the cards themselves.
+const PublicationCard = React.memo(function PublicationCard({ publication, onPreview }) {
+  const { title, authors, venueHtml, pdf, project, thumbnail } = publication
 
-  if (projectLink.startsWith('/')) {
-    return {
-      to: projectLink,
-      isInternal: true,
-    }
-  }
+  return (
+    <>
+      {thumbnail && (
+        <button
+          type="button"
+          className="publication-thumbnail"
+          onClick={event => onPreview(publication, event.currentTarget)}
+          aria-label={`Preview thumbnail for ${title}`}
+        >
+          <GatsbyImage
+            image={thumbnail.image}
+            alt={thumbnail.alt}
+            sizes="235px"
+            objectFit="contain"
+          />
+        </button>
+      )}
+      <div className="lower-container-pubs">
+        <h4 className="pub-title">{title}</h4>
+        <p className="pub-authors">{authors}</p>
+        {venueHtml && <p className="pub-venue" dangerouslySetInnerHTML={{ __html: venueHtml }} />}
+        {(pdf || project) && (
+          <div className="pub-links">
+            {pdf && (
+              <a
+                href={pdf.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`pub-link-btn ${pdf.className}`}
+                aria-label={`${pdf.label}: ${title}${NEW_TAB_NOTE}`}
+              >
+                <PubIcon id={pdf.iconId} />
+                {pdf.label}
+              </a>
+            )}
+            {project && (
+              <SmartLink
+                to={project.to}
+                newTab={project.external}
+                className="pub-link-btn pub-link-project"
+                aria-label={`Project Page: ${title}${project.external ? NEW_TAB_NOTE : ''}`}
+              >
+                <PubIcon id="pub-icon-external" />
+                Project Page
+              </SmartLink>
+            )}
+          </div>
+        )}
+      </div>
+    </>
+  )
+})
 
-  if (projectLink.startsWith('http://') || projectLink.startsWith('https://')) {
-    return {
-      to: projectLink,
-      isInternal: false,
-    }
-  }
-
-  return null
+PublicationCard.propTypes = {
+  publication: publicationShape.isRequired,
+  onPreview: PropTypes.func.isRequired,
 }
 
-const scrollToYear = yearId => {
-  if (typeof document === 'undefined') return
-  const el = document.getElementById(yearId)
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
+// Every card stays mounted; a filter only toggles `hidden`, so clearing it does
+// not rebuild 480 cards. `matches` is null when nothing is filtered.
+const PublicationList = React.memo(function PublicationList({ groups, matches, onPreview }) {
+  const isShown = publication => !matches || matches.has(publication.id)
+
+  return (
+    <div className="publication-list">
+      {groups.map(({ year, types }) => (
+        <div
+          key={year}
+          id={`year-${year}`}
+          className="year-section"
+          hidden={!types.some(({ items }) => items.some(isShown))}
+        >
+          <h2 className="year-header" tabIndex={-1}>
+            {year}
+          </h2>
+          <hr className="year-divider" aria-hidden="true" />
+          {types.map(({ type, items }) => (
+            <div key={type} className="type-section" hidden={!items.some(isShown)}>
+              <h3 className="type-header">{type}</h3>
+              <ul className="pub-type-list">
+                {items.map(publication => (
+                  <li
+                    key={publication.id}
+                    className="publication-card"
+                    hidden={!isShown(publication)}
+                  >
+                    <PublicationCard publication={publication} onPreview={onPreview} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+})
+
+PublicationList.propTypes = {
+  groups: PropTypes.arrayOf(
+    PropTypes.shape({
+      year: PropTypes.string.isRequired,
+      types: PropTypes.arrayOf(
+        PropTypes.shape({
+          type: PropTypes.string.isRequired,
+          items: PropTypes.arrayOf(publicationShape).isRequired,
+        })
+      ).isRequired,
+    })
+  ).isRequired,
+  matches: PropTypes.instanceOf(Set),
+  onPreview: PropTypes.func.isRequired,
 }
 
-const scrollToTop = () => {
-  if (typeof window === 'undefined') return
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+const YearNav = React.memo(function YearNav({ years }) {
+  if (years.length === 0) return null
+
+  return (
+    <nav className="year-nav" aria-label="Jump to year">
+      {years.map(year => (
+        <a
+          key={year}
+          className="year-nav-btn"
+          href={`#year-${year}`}
+          onClick={event => jumpToYear(event, year)}
+        >
+          {year}
+        </a>
+      ))}
+    </nav>
+  )
+})
+
+YearNav.propTypes = {
+  years: PropTypes.arrayOf(PropTypes.string).isRequired,
+}
+
+const PublicationFilters = ({
+  query,
+  type,
+  typeOptions,
+  total,
+  shown,
+  onQueryChange,
+  onTypeChange,
+  onClear,
+  onBlur,
+  restored,
+}) => {
+  const inputRef = React.useRef(null)
+  const isFiltered = query !== '' || type !== ''
+  const countText =
+    shown === null ? `${total} publications` : `Showing ${shown} of ${total} publications`
+
+  // One status message once typing has paused, not one per keystroke; none for the first render
+  // or for a filter restored after a reload.
+  const [announcement, setAnnouncement] = React.useState('')
+  const announced = React.useRef(null)
+  React.useEffect(() => {
+    if (announced.current === null || restored) {
+      announced.current = countText
+      return undefined
+    }
+    const timer = setTimeout(() => {
+      if (countText === announced.current) return
+      announced.current = countText
+      setAnnouncement(countText)
+    }, 500)
+    return () => clearTimeout(timer)
+  }, [countText, query, type, restored])
+
+  const clear = () => {
+    onClear()
+    inputRef.current?.focus({ preventScroll: true })
+  }
+
+  return (
+    <form
+      className="pub-filter"
+      role="search"
+      aria-label="Filter publications"
+      onSubmit={event => event.preventDefault()}
+      onBlur={onBlur}
+    >
+      <div className="pub-filter__field pub-filter__field--search">
+        <label className="pub-filter__label" htmlFor="pub-filter-q">
+          Search
+        </label>
+        <input
+          ref={inputRef}
+          id="pub-filter-q"
+          className="pub-filter__input"
+          type="search"
+          placeholder="Title, author or venue"
+          autoComplete="off"
+          spellCheck={false}
+          value={query}
+          onChange={event => onQueryChange(event.target.value)}
+        />
+      </div>
+      <div className="pub-filter__field pub-filter__field--type">
+        <label className="pub-filter__label" htmlFor="pub-filter-type">
+          Type
+        </label>
+        <select
+          id="pub-filter-type"
+          className="pub-filter__select"
+          value={type}
+          onChange={event => onTypeChange(event.target.value)}
+        >
+          <option value="">All types ({total})</option>
+          {typeOptions.map(option => (
+            <option key={option.type} value={option.type}>
+              {option.type} ({option.count})
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="pub-filter__status">
+        <p className="pub-filter__count">{countText}</p>
+        <p className="visually-hidden" role="status">
+          {announcement}
+        </p>
+        {/* Always laid out, so the first keystroke does not move the page. Hidden, not disabled:
+            Firefox carries a button's disabled state across a reload, past the server HTML. */}
+        <button
+          type="button"
+          className={`pub-filter__clear${isFiltered ? '' : ' pub-filter__clear--idle'}`}
+          onClick={clear}
+        >
+          Clear
+        </button>
+      </div>
+    </form>
+  )
+}
+
+PublicationFilters.propTypes = {
+  query: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  typeOptions: PropTypes.arrayOf(
+    PropTypes.shape({ type: PropTypes.string.isRequired, count: PropTypes.number.isRequired })
+  ).isRequired,
+  total: PropTypes.number.isRequired,
+  shown: PropTypes.number,
+  onQueryChange: PropTypes.func.isRequired,
+  onTypeChange: PropTypes.func.isRequired,
+  onClear: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  restored: PropTypes.bool.isRequired,
+}
+
+const BackToTop = () => {
+  const [visible, setVisible] = React.useState(false)
+
+  React.useEffect(() => {
+    const update = () => setVisible(window.scrollY > 400)
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    return () => window.removeEventListener('scroll', update)
+  }, [])
+
+  if (!visible) return null
+
+  const backToTop = () => {
+    window.scrollTo({ top: 0, behavior: scrollBehavior() })
+    if (window.location.hash) {
+      window.history.replaceState(
+        window.history.state,
+        '',
+        window.location.pathname + window.location.search
+      )
+    }
+    // Keyboard users continue from the top of the page, not from the vanished button.
+    document.getElementById('main-content')?.focus({ preventScroll: true })
+  }
+
+  return (
+    <button type="button" className="back-to-top" onClick={backToTop} aria-label="Back to top">
+      <FaArrowUp aria-hidden="true" focusable="false" />
+    </button>
+  )
 }
 
 const PublicationTable = ({ publicationData = [] }) => {
   const resolveCardImage = useCardImage()
-  const [showBackToTop, setShowBackToTop] = React.useState(false)
-  const [previewPublication, setPreviewPublication] = React.useState(null)
+  const publications = React.useMemo(
+    () => preparePublications(publicationData, resolveCardImage),
+    [publicationData, resolveCardImage]
+  )
+  const groups = React.useMemo(() => groupByYearAndType(publications), [publications])
+  const typeOptions = React.useMemo(() => {
+    const counts = new Map()
+    publications.forEach(({ type }) => counts.set(type, (counts.get(type) || 0) + 1))
+    return orderTypes([...counts.keys()]).map(type => ({ type, count: counts.get(type) }))
+  }, [publications])
 
-  React.useEffect(() => {
-    if (typeof window === 'undefined') return
-    const handleScroll = () => {
-      setShowBackToTop(window.scrollY > 400)
+  const isClientRender = useIsClientRender()
+  const [hydrating] = React.useState(!isClientRender)
+  const [initialFilter] = React.useState(() => (isClientRender ? readSavedFilter() : EMPTY_FILTER))
+  const [query, setQuery] = React.useState(initialFilter.query)
+  const [type, setType] = React.useState(initialFilter.type)
+  // A filter restored after hydration is listed at once, without the delay typing gets.
+  const [restoredFilter, setRestoredFilter] = React.useState(null)
+  const deferredQuery = React.useDeferredValue(query)
+  const deferredType = React.useDeferredValue(type)
+  const listQuery = restoredFilter ? restoredFilter.query : deferredQuery
+  const listType = restoredFilter ? restoredFilter.type : deferredType
+
+  // The server HTML, and so the hydrating render, is unfiltered. After a reload, or Back to this
+  // document from another one, the entry's saved filter is applied before the next paint, and
+  // the saved offset, which the shell has just restored against the unfiltered list, is
+  // restored again against the filtered one. On a new visit a filter left in the entry is
+  // dropped.
+  const restoredOffset = React.useRef(null)
+  useIsoLayoutEffect(() => {
+    if (!hydrating) return
+    const saved = readSavedFilter()
+    if (saved.query === '' && saved.type === '') return
+    if (!isHistoryLoad()) {
+      saveFilter('', '')
+      return
     }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    restoredOffset.current = savedOffset()
+    setRestoredFilter(saved)
+    setQuery(saved.query)
+    setType(saved.type)
+  }, [hydrating])
+  useIsoLayoutEffect(() => {
+    if (restoredFilter === null || restoredOffset.current === null) return
+    window.scrollTo(0, restoredOffset.current)
+    restoredOffset.current = null
+  }, [restoredFilter])
+
+  const matches = React.useMemo(() => {
+    const tokens = foldText(listQuery).split(/\s+/).filter(Boolean)
+    if (tokens.length === 0 && !listType) return null
+    return new Set(
+      publications
+        .filter(
+          publication =>
+            (!listType || publication.type === listType) &&
+            tokens.every(token => publication.haystack.includes(token))
+        )
+        .map(publication => publication.id)
+    )
+  }, [publications, listQuery, listType])
+
+  const years = React.useMemo(
+    () =>
+      groups
+        .filter(
+          ({ types }) =>
+            !matches || types.some(({ items }) => items.some(({ id }) => matches.has(id)))
+        )
+        .map(({ year }) => year),
+    [groups, matches]
+  )
+
+  const changeQuery = React.useCallback(value => {
+    setRestoredFilter(null)
+    setQuery(value)
+  }, [])
+  const changeType = React.useCallback(value => {
+    setRestoredFilter(null)
+    setType(value)
+  }, [])
+  const clearFilters = React.useCallback(() => {
+    setRestoredFilter(null)
+    setQuery('')
+    setType('')
   }, [])
 
-  const closeButtonRef = React.useRef(null)
-
-  // Dialog behaviour: move focus in, keep Tab inside, lock page scroll, and put
-  // focus back on the thumbnail that opened it when it closes.
+  // Saved once typing pauses and when focus leaves the controls (before a click on a link), and
+  // only to the history entry the change was made on. Nothing is saved on mount: the entry
+  // already holds what the first render shows or what the restore above applies.
+  const filterEntry = React.useRef(undefined)
+  const saveToEntry = React.useCallback(() => {
+    if (window.history.state?.key === filterEntry.current) saveFilter(query, type)
+  }, [query, type])
+  const isFirstSave = React.useRef(true)
   React.useEffect(() => {
-    if (!previewPublication || typeof window === 'undefined') return undefined
-
-    const opener = document.activeElement
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    closeButtonRef.current?.focus()
-
-    const handleKeyDown = event => {
-      if (event.key === 'Escape') {
-        setPreviewPublication(null)
-      } else if (event.key === 'Tab') {
-        // The close button is the only focusable control inside the dialog.
-        event.preventDefault()
-        closeButtonRef.current?.focus()
-      }
+    filterEntry.current = window.history.state?.key
+    if (isFirstSave.current) {
+      isFirstSave.current = false
+      return undefined
     }
+    const timer = setTimeout(saveToEntry, 250)
+    return () => clearTimeout(timer)
+  }, [saveToEntry])
+  // The entry can change while this page stays on screen (the skip link's #main-content, the
+  // header's Publications link, which replaces it, Back between them): it gets the filter too.
+  const pagePath = React.useRef(null)
+  React.useEffect(() => {
+    if (pagePath.current === null) pagePath.current = window.location.pathname
+    const key = window.history.state?.key
+    if (key === filterEntry.current || window.location.pathname !== pagePath.current) return
+    filterEntry.current = key
+    saveFilter(query, type)
+  })
 
-    window.addEventListener('keydown', handleKeyDown)
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = previousOverflow
-      if (opener && typeof opener.focus === 'function') opener.focus()
-    }
-  }, [previewPublication])
-
-  const groupedPublications = React.useMemo(
-    () => groupByYearAndType(publicationData),
-    [publicationData]
-  )
-  const sortedYears = React.useMemo(
-    () => Object.keys(groupedPublications).sort((a, b) => b - a),
-    [groupedPublications]
-  )
+  const [preview, setPreview] = React.useState(null)
+  const previewOpener = React.useRef(null)
+  const openPreview = React.useCallback((publication, opener) => {
+    previewOpener.current = opener
+    setPreview({
+      title: publication.title,
+      image: publication.thumbnail.image,
+      alt: publication.thumbnail.alt,
+    })
+  }, [])
+  const closePreview = React.useCallback(() => {
+    setPreview(null)
+    // Safari does not focus a clicked button, so the dialog would hand focus back to <main>.
+    window.requestAnimationFrame(() => previewOpener.current?.focus({ preventScroll: true }))
+  }, [])
 
   return (
     <div className="publications-class" id="publications">
       <PubIconSprite />
-      <div className="publication-container">
-        <h1 className="header-sub">Publications</h1>
-
-        {/* Year navigation bar */}
-        {sortedYears.length > 0 && (
-          <nav className="year-nav" aria-label="Jump to year">
-            {sortedYears.map(year => (
-              <button
-                key={year}
-                className="year-nav-btn"
-                onClick={() => scrollToYear(`year-${year}`)}
-              >
-                {year}
-              </button>
-            ))}
-          </nav>
-        )}
-
-        <div className="publication-list">
-          {sortedYears.map(year => {
-            const types = groupedPublications[year]
-            return (
-              <div key={year} id={`year-${year}`} className="year-section">
-                <h3 className="year-header">{year}</h3>
-                <hr className="year-divider" />
-                {orderTypes(types).map(type => (
-                  <div key={type} className="type-section">
-                    <h4 className="type-header">{type}</h4>
-                    {types[type].map((publication, index) => {
-                      const thumbnail = publicationThumbnailMap[publication.Title]
-                      const thumbnailImage = thumbnail
-                        ? getImage(resolveCardImage(thumbnail.img))
-                        : null
-                      const pdfLink = resolvePdfLink(publication.PDFLink)
-                      const paperLinkConfig = getPaperLinkConfig(publication)
-
-                      return (
-                        <div
-                          key={generatePublicationKey(publication, index)}
-                          className="publication-card"
-                        >
-                          {thumbnailImage && (
-                            <button
-                              type="button"
-                              className="publication-thumbnail"
-                              onClick={() =>
-                                setPreviewPublication({
-                                  title: publication.Title,
-                                  image: thumbnailImage,
-                                  alt: thumbnail.alt,
-                                })
-                              }
-                              aria-label={`Preview thumbnail for ${publication.Title}`}
-                            >
-                              <GatsbyImage image={thumbnailImage} alt={thumbnail.alt} />
-                            </button>
-                          )}
-                          <div className="lower-container-pubs">
-                            <h3>{publication.Title}</h3>
-                            <p className="pub-authors">{publication.Authors}</p>
-                            {publication.Location && publication.Location !== 'NULL' && (
-                              <p
-                                className="pub-venue"
-                                dangerouslySetInnerHTML={{
-                                  __html: DOMPurify.sanitize(`<i>${publication.Location}</i>`),
-                                }}
-                              ></p>
-                            )}
-                            <div className="pub-links">
-                              {pdfLink && (
-                                <a
-                                  href={pdfLink}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className={`pub-link-btn ${paperLinkConfig.className}`}
-                                >
-                                  <PubIcon id={paperLinkConfig.iconId} />
-                                  {paperLinkConfig.label}
-                                </a>
-                              )}
-                              {(() => {
-                                const projectLink = resolveProjectLink(publication.ProjectLink)
-
-                                if (!projectLink) return null
-
-                                const content = (
-                                  <>
-                                    <PubIcon id="pub-icon-external" />
-                                    Project Page
-                                  </>
-                                )
-
-                                return projectLink.isInternal ? (
-                                  <Link
-                                    to={projectLink.to}
-                                    className="pub-link-btn pub-link-project"
-                                  >
-                                    {content}
-                                  </Link>
-                                ) : (
-                                  <a
-                                    href={projectLink.to}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="pub-link-btn pub-link-project"
-                                  >
-                                    {content}
-                                  </a>
-                                )
-                              })()}
-                            </div>
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
-                ))}
-              </div>
-            )
-          })}
-        </div>
+      <div className="page-container">
+        <PageHeader title="Publications" />
+        <noscript>
+          <style dangerouslySetInnerHTML={{ __html: NO_SCRIPT_CSS }} />
+        </noscript>
+        <PublicationFilters
+          query={query}
+          type={type}
+          typeOptions={typeOptions}
+          total={publications.length}
+          shown={matches ? matches.size : null}
+          onQueryChange={changeQuery}
+          onTypeChange={changeType}
+          onClear={clearFilters}
+          onBlur={saveToEntry}
+          restored={restoredFilter !== null}
+        />
+        <YearNav years={years} />
+        {matches && matches.size === 0 && <p className="pub-empty">No publications match.</p>}
+        <PublicationList groups={groups} matches={matches} onPreview={openPreview} />
       </div>
 
-      {/* Back to top button */}
-      {showBackToTop && (
-        <button className="back-to-top" onClick={scrollToTop} aria-label="Back to top">
-          <FaArrowUp />
-        </button>
-      )}
+      <BackToTop />
 
-      {previewPublication && (
-        <div
-          className="publication-preview-modal"
-          role="dialog"
-          aria-modal="true"
-          aria-label={`Preview image for ${previewPublication.title}`}
-        >
-          <button
-            type="button"
-            tabIndex={-1}
-            className="publication-preview-modal__backdrop"
-            onClick={() => setPreviewPublication(null)}
-            aria-label="Close image preview"
-          />
-          <div className="publication-preview-modal__content">
-            <button
-              ref={closeButtonRef}
-              type="button"
-              className="publication-preview-modal__close"
-              onClick={() => setPreviewPublication(null)}
-              aria-label="Close image preview"
-            >
-              <FaTimes />
-            </button>
-            <GatsbyImage image={previewPublication.image} alt={previewPublication.alt} />
-            <p>{previewPublication.title}</p>
-          </div>
-        </div>
-      )}
+      <Lightbox
+        open={Boolean(preview)}
+        onClose={closePreview}
+        label={preview ? `Preview image for ${preview.title}` : 'Image preview'}
+        caption={preview?.title}
+        image={preview?.image}
+        alt={preview?.alt}
+      />
     </div>
   )
 }
@@ -469,13 +716,15 @@ const PublicationTable = ({ publicationData = [] }) => {
 PublicationTable.propTypes = {
   publicationData: PropTypes.arrayOf(
     PropTypes.shape({
-      Title: PropTypes.string,
-      Location: PropTypes.string,
-      PublicationType: PropTypes.string,
-      PublishedDateYear: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      PDFLink: PropTypes.string,
-      Authors: PropTypes.string,
-      ProjectLink: PropTypes.string,
+      title: PropTypes.string,
+      authors: PropTypes.string,
+      venue: PropTypes.string,
+      type: PropTypes.string,
+      year: PropTypes.number,
+      pdf: PropTypes.string,
+      project: PropTypes.string,
+      thumbnail: PropTypes.string,
+      thumbnail_alt: PropTypes.string,
     })
   ),
 }

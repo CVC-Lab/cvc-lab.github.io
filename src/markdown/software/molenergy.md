@@ -3,7 +3,7 @@ title: "MolEnergy"
 slug: "/software/molenergy"
 ---
 
-![](http://www.cs.utexas.edu/~bajaj/cvc/software/images/1A2K-1.png "MolEnergy-1A2K-1")![](http://www.cs.utexas.edu/~bajaj/cvc/software/images/1A2K-2.png "MolEnergy-1A2k-3")![](http://www.cs.utexas.edu/~bajaj/cvc/software/images/1A2K-3.png "MolEnergy-1A2K-3")  
+<img src="https://www.cs.utexas.edu/~bajaj/cvc/software/images/1A2K-1.png" alt="" title="MolEnergy-1A2K-1" width="255" height="162"><img src="https://www.cs.utexas.edu/~bajaj/cvc/software/images/1A2K-2.png" alt="" title="MolEnergy-1A2k-3" width="255" height="162"><img src="https://www.cs.utexas.edu/~bajaj/cvc/software/images/1A2K-3.png" alt="" title="MolEnergy-1A2K-3" width="255" height="162">  
 _MolEnergy_ is a library of routines for efficiently computing molecular free energies. The primary components are:
 
 - Octree-based approximation algorithms for computing pairwise Lennard-Jones and Coulombic potentials, Born radii and generalized Born polarization energy,

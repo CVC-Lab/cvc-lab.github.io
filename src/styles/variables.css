@@ -1,53 +1,63 @@
-/* 
- * CVC Lab / Oden Institute at UT Austin
- * Global Design System Variables
+/*
+ * CVC Lab design tokens: the single source of truth.
+ * Loaded once from gatsby-browser.js (through global.css), so every stylesheet can use
+ * these custom properties without importing this file.
  */
 
 :root {
-  /* UT Austin Brand Colors */
-  --ut-burnt-orange: #bf5700; /* Primary brand color */
-  --ut-burnt-orange-light: #e2957e; /* Lighter variant */
-  --ut-burnt-orange-dark: #8c3f00; /* Darker variant */
+  /* UT Austin brand colours */
+  --ut-burnt-orange: #bf5700;
+  --ut-burnt-orange-light: #e2957e;
+  --ut-burnt-orange-dark: #8c3f00;
 
-  --ut-charcoal: #333f48; /* Secondary color */
-  --ut-charcoal-light: #5d6a75; /* Lighter variant */
-  --ut-charcoal-dark: #1d2429; /* Darker variant */
+  --ut-charcoal: #333f48;
+  --ut-charcoal-light: #5d6a75;
+  --ut-charcoal-dark: #1d2429;
 
-  /* Extended palette */
   --ut-limestone: #d6d2c4;
   --ut-limestone-light: #f2f1ed;
   --ut-limestone-dark: #ada594;
 
   --ut-white: #ffffff;
   --ut-off-white: #f8f8f8;
-  --ut-light-gray: #eeeeee;
-  --ut-medium-gray: #6f6f6f; /* 5.0:1 on white; #999999 was 2.85:1 and used for body text */
+  --ut-medium-gray: #6f6f6f; /* 5.0:1 on white */
   --ut-dark-gray: #666666;
 
-  /* Accent colors */
   --ut-blue: #005eb8;
   --ut-green: #43695b;
-  --ut-yellow: #f2a900;
 
-  /* State colors */
-  --ut-success: #43b02a;
-  --ut-warning: #f2a900;
   --ut-error: #d6001c;
-  --ut-info: #0082ca;
 
-  /* Typography */
-  --font-primary: 'Libre Franklin', 'Helvetica Neue', Arial, sans-serif;
-  --font-secondary: 'Georgia', 'Times New Roman', serif;
-  --font-monospace: 'Consolas', 'Monaco', monospace;
+  /* Semantic colours */
+  --color-primary: var(--ut-burnt-orange);
+  --color-primary-dark: var(--ut-burnt-orange-dark);
+  /* Burnt-orange text on off-white or limestone: #bf5700 is 4.32:1 there, this is 4.87:1. */
+  --color-primary-on-tint: #b35000;
 
-  /* Font weights */
-  --font-weight-light: 300;
+  --color-gray-300: var(--ut-limestone);
+  --color-gray-200: var(--ut-limestone-light);
+  --color-white: var(--ut-white);
+
+  --color-text-primary: var(--ut-charcoal);
+  --color-text-secondary: var(--ut-dark-gray);
+  --color-text-muted: var(--ut-medium-gray);
+  --color-text-inverse: var(--ut-white);
+
+  --color-bg-primary: var(--ut-white);
+  --color-bg-secondary: var(--ut-off-white);
+
+  /* Typefaces: the only two families the site may name */
+  --font-primary:
+    'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  /* Font sizes - based on a modular scale */
+  /* Type scale. The four largest steps shrink at <=768px (end of this file) and stay ordered. */
   --text-xs: 0.75rem; /* 12px */
   --text-sm: 0.875rem; /* 14px */
   --text-base: 1rem; /* 16px */
@@ -58,65 +68,102 @@
   --text-3xl: 2.25rem; /* 36px */
   --text-4xl: 3rem; /* 48px */
 
-  /* Line heights */
-  --leading-none: 1;
+  --font-size-xs: var(--text-xs);
+  --font-size-sm: var(--text-sm);
+  --font-size-base: var(--text-base);
+  --font-size-lg: var(--text-lg);
+  --font-size-xl: var(--text-xl);
+  --font-size-2xl: var(--text-2xl);
+  --font-size-3xl: var(--text-3xl);
+  --font-size-4xl: var(--text-4xl);
+  /* The h1 of a page (PageHeader): 28px up to 360px wide, 36px from 760px up. */
+  --font-size-page-title: clamp(1.75rem, 1.3rem + 2vw, 2.25rem);
+
   --leading-tight: 1.25;
   --leading-snug: 1.375;
   --leading-normal: 1.5;
   --leading-relaxed: 1.625;
-  --leading-loose: 2;
+
+  --line-height-tight: var(--leading-tight);
+  --line-height-normal: var(--leading-normal);
+  --line-height-relaxed: var(--leading-relaxed);
 
   /* Spacing */
-  --spacing-0: 0;
-  --spacing-1: 0.25rem; /* 4px */
-  --spacing-2: 0.5rem; /* 8px */
-  --spacing-3: 0.75rem; /* 12px */
-  --spacing-4: 1rem; /* 16px */
-  --spacing-5: 1.25rem; /* 20px */
-  --spacing-6: 1.5rem; /* 24px */
-  --spacing-8: 2rem; /* 32px */
-  --spacing-10: 2.5rem; /* 40px */
-  --spacing-12: 3rem; /* 48px */
-  --spacing-16: 4rem; /* 64px */
-  --spacing-20: 5rem; /* 80px */
-  --spacing-24: 6rem; /* 96px */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
 
-  /* Borders */
-  --border-radius-sm: 0.125rem; /* 2px */
-  --border-radius-md: 0.25rem; /* 4px */
-  --border-radius-lg: 0.5rem; /* 8px */
-  --border-radius-xl: 1rem; /* 16px */
+  --space-xs: var(--spacing-1);
+  --space-sm: var(--spacing-2);
+  --space-md: var(--spacing-4);
+  --space-lg: var(--spacing-6);
+  --space-xl: var(--spacing-8);
+  --space-2xl: var(--spacing-10);
+  --space-3xl: var(--spacing-12);
+
+  /* Radii */
+  --border-radius-sm: 0.125rem;
+  --border-radius-md: 0.25rem;
+  --border-radius-lg: 0.5rem;
+  --border-radius-xl: 1rem;
   --border-radius-full: 9999px;
+
+  --radius-sm: var(--border-radius-sm);
+  --radius-md: var(--border-radius-md);
+  --radius-full: var(--border-radius-full);
 
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
 
-  /* Transitions */
+  /* Motion (durations) */
   --transition-fast: 150ms;
   --transition-normal: 300ms;
-  --transition-slow: 500ms;
 
-  /* Z-index */
-  --z-0: 0;
-  --z-10: 10;
-  --z-20: 20;
-  --z-30: 30;
-  --z-40: 40;
-  --z-50: 50;
-  --z-auto: auto;
+  /* Layers. No raw z-index above 10 outside these. */
+  --z-subnav: 900;
+  --z-header: 1100;
+  --z-drawer-overlay: 1150;
+  --z-drawer: 1200;
+  --z-modal: 1300;
+  --z-skip-link: 1400;
 
-  /* Container */
-  --container-max-width: 1280px;
-  --container-padding: var(--spacing-4);
+  /* Page container */
+  --page-max-width: 1200px;
+  --page-gutter: clamp(1rem, 4vw, 2.5rem);
+  --prose-max-width: 72ch;
 
-  /* Page sections */
-  --section-padding-y: var(--spacing-16);
+  /* Height of the bar pinned to the top of the viewport: 4rem at every width. The Header
+     component refines it inline on <html> with the measured height. Without JavaScript the
+     bar is not pinned below 1024px, and the header's noscript style sets 0px there. */
+  --site-header-height: 4rem;
+  /* Height of a page-level sticky bar stuck under the header (sub-nav, year filter).
+     A page that has one sets this on html, e.g. html:has(.ai4pd-nav) { ... }, only in the
+     media range where the bar is sticky. A bar that holds controls also gets the zero scroll
+     margin of global.css (the AI4PD sub-nav's rule), in the same media range. */
+  --page-subnav-height: 0px;
 
-  /* Component specific variables */
-  --header-height: 80px;
-  --footer-padding: var(--spacing-12);
+  /* Focus ring */
+  --focus-ring-color: var(--ut-burnt-orange);
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 2px;
+}
+
+/* Must stay after the block above: same specificity, so order decides. */
+@media (max-width: 768px) {
+  :root {
+    --text-xl: 1.375rem; /* 22px */
+    --text-2xl: 1.5rem; /* 24px */
+    --text-3xl: 1.75rem; /* 28px */
+    --text-4xl: 2rem; /* 32px */
+  }
 }

@@ -1,27 +1,34 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
-import { useSiteMetadata } from '../context/SiteContext'
+import { useStaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
 import Footer from './footer'
+import menuLinks from '../data/site/menu'
 import './layout.css'
 
 const Layout = ({ children, headerVariant = 'default' }) => {
-  const { title, menuLinks } = useSiteMetadata()
+  const { site } = useStaticQuery(graphql`
+    query SiteTitleQuery {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
 
   return (
-    <>
+    <div className="site-shell">
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>
-      <Header menuLinks={menuLinks} siteTitle={title} variant={headerVariant} />
-      <div>
-        <main id="main-content" tabIndex={-1} style={{ minHeight: '90vh' }}>
-          {children}
-        </main>
-      </div>
+      <Header menuLinks={menuLinks} siteTitle={site.siteMetadata.title} variant={headerVariant} />
+      <main id="main-content" className="site-main" tabIndex={-1}>
+        {children}
+      </main>
       <Footer />
-    </>
+    </div>
   )
 }
 

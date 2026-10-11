@@ -1,15 +1,14 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import PublicationTable from '../components/publication_table'
-import publicationData from '../data/papers.json'
 
-const PublicationsPage = () => {
+// pageContext.publications: src/data/publications.yaml, read and checked by gatsby-node.js.
+const PublicationsPage = ({ pageContext }) => {
   return (
     <Layout>
-      <PublicationTable id="publications" publicationData={publicationData}></PublicationTable>
+      <PublicationTable publicationData={pageContext.publications} />
     </Layout>
   )
 }
@@ -23,7 +22,3 @@ export const Head = ({ location }) => (
     pathname={location.pathname}
   />
 )
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

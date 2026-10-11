@@ -130,5 +130,5 @@ A CVaR tail-risk objective focuses gradient updates on rare but consequential ri
 
 ### Related Work at CVC
 
-- [GRL-SNAM: Geometric Reinforcement Learning for Simultaneous Navigation and Mapping](/projects/grl-snam)
-- [Event-Triggered Hamiltonian Learning to Optimize](/projects/event-triggered-hamiltonian-optimization)
+- [GRL-SNAM: Geometric Reinforcement Learning for Simultaneous Navigation and Mapping](/projects/grl-snam/)
+- [Event-Triggered Hamiltonian Learning to Optimize](/projects/event-triggered-hamiltonian-optimization/)

@@ -3,11 +3,15 @@ const react = require('eslint-plugin-react')
 const reactHooks = require('eslint-plugin-react-hooks')
 const jsxA11y = require('eslint-plugin-jsx-a11y')
 const babelParser = require('@babel/eslint-parser')
+const globals = require('globals')
 
 module.exports = [
+  {
+    ignores: ['node_modules/', '.cache/', 'public/', 'static/', 'coverage/', '*.min.js'],
+  },
   js.configs.recommended,
   {
-    files: ['**/*.{js,jsx,ts,tsx}'],
+    files: ['**/*.{js,jsx}'],
     plugins: {
       react,
       'react-hooks': reactHooks,
@@ -16,38 +20,24 @@ module.exports = [
     languageOptions: {
       parser: babelParser,
       parserOptions: {
-        ecmaVersion: 2020,
+        ecmaVersion: 'latest',
         sourceType: 'module',
         ecmaFeatures: {
           jsx: true,
         },
+        // Parse without .babelrc: babel-preset-gatsby needs .cache/babelState.json, which only
+        // exists after a Gatsby build.
+        requireConfigFile: false,
+        babelOptions: {
+          babelrc: false,
+          configFile: false,
+          parserOpts: { plugins: ['jsx'] },
+        },
       },
       globals: {
+        ...globals.browser,
+        ...globals.node,
         __PATH_PREFIX__: 'readonly',
-        browser: true,
-        node: true,
-        es6: true,
-        process: 'readonly',
-        require: 'readonly',
-        module: 'readonly',
-        __dirname: 'readonly',
-        exports: 'readonly',
-        console: 'readonly',
-        setTimeout: 'readonly',
-        clearTimeout: 'readonly',
-        setInterval: 'readonly',
-        clearInterval: 'readonly',
-        Promise: 'readonly',
-        Buffer: 'readonly',
-        global: 'readonly',
-        window: 'readonly',
-        document: 'readonly',
-        navigator: 'readonly',
-        fetch: 'readonly',
-        localStorage: 'readonly',
-        sessionStorage: 'readonly',
-        HTMLElement: 'readonly',
-        Event: 'readonly',
       },
     },
     settings: {
@@ -55,8 +45,12 @@ module.exports = [
         version: 'detect',
       },
     },
+    // The recommended sets come first so the project settings below override them. JSX uses the
+    // classic runtime (.babelrc), so react/react-in-jsx-scope and react/jsx-uses-react stay on.
     rules: {
-      'react/prop-types': 'off',
+      ...react.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      ...jsxA11y.configs.recommended.rules,
       'react/display-name': 'off',
       'jsx-a11y/anchor-is-valid': [
         'error',
@@ -67,29 +61,25 @@ module.exports = [
       ],
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-      'react/jsx-uses-react': 'off',
-      'react/react-in-jsx-scope': 'off',
-      ...react.configs.recommended.rules,
-      ...reactHooks.configs.recommended.rules,
-      ...jsxA11y.configs.recommended.rules,
     },
   },
   {
-    ignores: [
-      'node_modules/',
-      '.cache/',
-      'public/',
-      'static/',
-      'build/',
-      '*.min.js',
-      'gatsby-browser.js',
-      'gatsby-node.js',
-      'gatsby-ssr.js',
-      'gatsby-config.js',
-      'jest.setup.js',
-      'jest.config.js',
-      '.babelrc',
-      '__mocks__/**',
-    ],
+    // Gatsby supplies page and Head props. Head must not carry static properties: develop mode
+    // strips the export, so a leftover `Head.propTypes = ...` throws.
+    files: ['src/pages/**/*.js'],
+    rules: {
+      'react/prop-types': 'off',
+    },
+  },
+  {
+    files: ['tests/**/*.js', 'jest.setup.js', '__mocks__/**/*.js'],
+    languageOptions: {
+      globals: {
+        ...globals.jest,
+      },
+    },
+    rules: {
+      'react/prop-types': 'off',
+    },
   },
 ]

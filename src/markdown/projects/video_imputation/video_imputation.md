@@ -73,16 +73,16 @@ where $\Delta t$ is the temporal difference between frames and $\{\gamma_1, \gam
 
 ### Results
 
-![](https://i.imgur.com/zcZbUnZ.png)
-![](https://i.imgur.com/W4nGOSe.png)
-![](https://i.imgur.com/UjzSG7X.png)
+<p><img src="https://i.imgur.com/zcZbUnZ.png" alt="" width="1400" height="602">
+<img src="https://i.imgur.com/W4nGOSe.png" alt="" width="1400" height="624">
+<img src="https://i.imgur.com/UjzSG7X.png" alt="" width="1400" height="622"></p>
 
-![](https://i.imgur.com/GVR5Wwn.png)
-![](https://i.imgur.com/yVsH2IK.png)
-![](https://i.imgur.com/lqUzqUy.png)
-![](https://i.imgur.com/yMoFLI4.png)
-![](https://i.imgur.com/Os1nUPw.png)
-![](https://i.imgur.com/xODUubq.jpg)
+<p><img src="https://i.imgur.com/GVR5Wwn.png" alt="" width="1194" height="708">
+<img src="https://i.imgur.com/yVsH2IK.png" alt="" width="1238" height="874">
+<img src="https://i.imgur.com/lqUzqUy.png" alt="" width="1186" height="884">
+<img src="https://i.imgur.com/yMoFLI4.png" alt="" width="1566" height="958">
+<img src="https://i.imgur.com/Os1nUPw.png" alt="" width="1216" height="766">
+<img src="https://i.imgur.com/xODUubq.jpg" alt="" width="3520" height="1634"></p>
 
 `video: https://www.youtube.com/watch?v=sxsnwkKISWE`
 `video: https://youtu.be/qTN-vRF3zwo`

@@ -1,12 +1,11 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import Ai4pdLayout, {
-  Ai4pdHead,
-  Ai4pdFigure,
-  LinkIcon,
-} from '../../../components/ai4pd/Ai4pdLayout'
+import Ai4pdLayout, { Ai4pdHead, LinkIcon } from '../../../components/ai4pd/Ai4pdLayout'
+import Ai4pdFigure from '../../../components/ai4pd/Ai4pdFigure'
 import { AI4PD_BASE, PATIENT_PORTAL_URL } from '../../../components/ai4pd/links'
+import SmartLink from '../../../components/ui/SmartLink'
+// The original is linked from the enlarged view: the processed copies stop at 800px.
+import multiAgentFull from '../../../images/projects/ai4pd/ai4pd-multi-agent-architecture.jpg'
 
 const thrusts = [
   {
@@ -80,7 +79,7 @@ const outputs = [
 const ApproachPage = () => (
   <Ai4pdLayout section="approach">
     <section className="ai4pd-hero">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <p className="ai4pd-eyebrow">How AI4PD works</p>
         <h1>A structure-preserving digital twin that reconstructs hidden Parkinson&apos;s state</h1>
         <p className="ai4pd-lead">
@@ -106,6 +105,7 @@ const ApproachPage = () => (
         </div>
         <Ai4pdFigure
           wide
+          zoom
           name="ai4pd-architecture-figure1"
           alt="AI4PD architecture: clinical partners and multimodal evidence feed a Texas-core AI platform that maintains a patient-specific twin and returns clinician-facing guidance"
           loading="eager"
@@ -115,14 +115,29 @@ const ApproachPage = () => (
     </section>
 
     <section className="ai4pd-section ai4pd-section--tight">
-      <div className="ai4pd-shell">
-        <nav className="ai4pd-jump" aria-label="On this page">
-          On this page: <a href="#twin-core">the twin core</a> · <a href="#thrusts">inputs</a> ·{' '}
-          <a href="#agents">reasoning</a> · <a href="#dbs">DBS</a> ·{' '}
-          <a href="#clinician-view">clinician view</a>
+      <div className="page-container">
+        <nav className="ai4pd-jump ai4pd-jump--inline" aria-label="On this page">
+          <p className="ai4pd-jump__label">On this page</p>
+          <ul className="ai4pd-jump__list">
+            <li>
+              <a href="#twin-core">the twin core</a>
+            </li>
+            <li>
+              <a href="#thrusts">inputs</a>
+            </li>
+            <li>
+              <a href="#agents">reasoning</a>
+            </li>
+            <li>
+              <a href="#dbs">DBS</a>
+            </li>
+            <li>
+              <a href="#clinician-view">clinician view</a>
+            </li>
+          </ul>
         </nav>
 
-        <div className="ai4pd-prose ai4pd-anchor" id="twin-core">
+        <div className="ai4pd-prose" id="twin-core">
           <p className="ai4pd-eyebrow">The living twin</p>
           <h2>One living model per patient, organized by a port-Hamiltonian core</h2>
           <p>
@@ -158,8 +173,8 @@ const ApproachPage = () => (
       </div>
     </section>
 
-    <section className="ai4pd-section ai4pd-section--soft ai4pd-anchor" id="thrusts">
-      <div className="ai4pd-shell">
+    <section className="ai4pd-section ai4pd-section--soft" id="thrusts">
+      <div className="page-container">
         <div className="ai4pd-section-heading">
           <p className="ai4pd-eyebrow">Inputs</p>
           <h2>Four method thrusts turn raw evidence into features the twin can use</h2>
@@ -175,7 +190,8 @@ const ApproachPage = () => (
               <h3>{t.label}</h3>
               <p>{t.text}</p>
               <Link to={t.to} className="ai4pd-card__link">
-                Read the brief <LinkIcon kind="internal" />
+                Read the brief<span className="visually-hidden">: {t.label}</span>{' '}
+                <LinkIcon to={t.to} />
               </Link>
             </article>
           ))}
@@ -183,9 +199,9 @@ const ApproachPage = () => (
       </div>
     </section>
 
-    <section className="ai4pd-section ai4pd-anchor" id="agents">
-      <div className="ai4pd-shell">
-        <div className="ai4pd-grid ai4pd-grid--2">
+    <section className="ai4pd-section" id="agents">
+      <div className="page-container">
+        <div className="ai4pd-grid ai4pd-grid--2 ai4pd-grid--media">
           <div className="ai4pd-prose">
             <p className="ai4pd-eyebrow">Reasoning</p>
             <h2>Modality-specialized agents with evidence arbitration</h2>
@@ -219,6 +235,8 @@ const ApproachPage = () => (
             </ul>
           </div>
           <Ai4pdFigure
+            zoom
+            fullSizeHref={multiAgentFull}
             name="ai4pd-multi-agent-architecture"
             alt="AI4PD multi-agent reasoning: a secure portal connects to the patient twin; diagnostic and therapy-planning agents reason over it; a dynamic knowledge network updates context; evidence arbitration returns clinician guidance"
           />
@@ -226,33 +244,35 @@ const ApproachPage = () => (
       </div>
     </section>
 
-    <section className="ai4pd-section ai4pd-section--soft ai4pd-anchor" id="dbs">
-      <div className="ai4pd-shell ai4pd-prose">
-        <p className="ai4pd-eyebrow">A research direction</p>
-        <h2>Planning DBS changes in the twin (not yet validated)</h2>
-        <p>
-          At the circuit level, Parkinson&apos;s motor signs are associated with pathological
-          beta-band hypersynchrony in the subthalamic–cortical loop, and desynchronization is the
-          therapeutic principle behind deep brain stimulation. Reactive and adaptive DBS have
-          already reached the clinic. This is background motivation, not an AI4PD result.
-        </p>
-        <p>
-          AI4PD&apos;s intended contribution is a planning step: simulate candidate stimulation
-          changes inside the patient-specific twin before any patient setting is changed, a
-          prospective capability still subject to clinical validation. Whether a patient-specific
-          twin can faithfully predict an individual&apos;s response to a given stimulation change is
-          itself unproven; any in-twin simulation is a hypothesis to be tested against observed
-          clinical response, never a basis for changing settings on its own. The twin does not set
-          DBS candidacy or stimulation targets and does not prescribe. Framing intervention as
-          controlled movement through structured patient state is a research direction (
-          <Link to="/projects/differential-and-pointwise-control-rl/">Hamiltonian control</Link>),
-          not a present clinical feature.
-        </p>
+    <section className="ai4pd-section ai4pd-section--soft" id="dbs">
+      <div className="page-container">
+        <div className="ai4pd-prose">
+          <p className="ai4pd-eyebrow">A research direction</p>
+          <h2>Planning DBS changes in the twin (not yet validated)</h2>
+          <p>
+            At the circuit level, Parkinson&apos;s motor signs are associated with pathological
+            beta-band hypersynchrony in the subthalamic–cortical loop, and desynchronization is the
+            therapeutic principle behind deep brain stimulation. Reactive and adaptive DBS have
+            already reached the clinic. This is background motivation, not an AI4PD result.
+          </p>
+          <p>
+            AI4PD&apos;s intended contribution is a planning step: simulate candidate stimulation
+            changes inside the patient-specific twin before any patient setting is changed, a
+            prospective capability still subject to clinical validation. Whether a patient-specific
+            twin can faithfully predict an individual&apos;s response to a given stimulation change
+            is itself unproven; any in-twin simulation is a hypothesis to be tested against observed
+            clinical response, never a basis for changing settings on its own. The twin does not set
+            DBS candidacy or stimulation targets and does not prescribe. Framing intervention as
+            controlled movement through structured patient state is a research direction (
+            <Link to="/projects/differential-and-pointwise-control-rl/">Hamiltonian control</Link>),
+            not a present clinical feature.
+          </p>
+        </div>
       </div>
     </section>
 
-    <section className="ai4pd-section ai4pd-anchor" id="clinician-view">
-      <div className="ai4pd-shell">
+    <section className="ai4pd-section" id="clinician-view">
+      <div className="page-container">
         <div className="ai4pd-prose">
           <p className="ai4pd-eyebrow">What the clinician sees</p>
           <h2>Decision support, returned to the clinician</h2>
@@ -274,19 +294,18 @@ const ApproachPage = () => (
             </React.Fragment>
           ))}
         </dl>
-        <p className="ai4pd-prose">
-          Interactive view:{' '}
-          <a href={PATIENT_PORTAL_URL} target="_blank" rel="noopener noreferrer">
-            the patient portal
-          </a>{' '}
-          · full walkthrough on the{' '}
-          <Link to={`${AI4PD_BASE}/clinician-workflow/`}>clinician workflow page</Link>.
-        </p>
+        <div className="ai4pd-prose">
+          <p>
+            Interactive view: <SmartLink to={PATIENT_PORTAL_URL}>the patient portal</SmartLink> ·
+            full walkthrough on the{' '}
+            <Link to={`${AI4PD_BASE}/clinician-workflow/`}>clinician workflow page</Link>.
+          </p>
+        </div>
       </div>
     </section>
 
     <section className="ai4pd-section ai4pd-section--tight">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <div className="ai4pd-callout">
           <h2>Decision support, with a human in the loop</h2>
           <p>
@@ -313,7 +332,3 @@ export const Head = ({ location }) => (
     description="How AI4PD works: a structure-preserving, port-Hamiltonian digital twin per patient, four method thrusts that turn multimodal evidence into features, and modality-specialized agents with evidence arbitration."
   />
 )
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

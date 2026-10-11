@@ -35,7 +35,7 @@ const homepageThemes = [
       },
       {
         label: 'Posterior-aware motor phenotyping',
-        href: '/projects/posterior-aware-pd-phenotyping',
+        href: '/projects/posterior-aware-pd-phenotyping/',
       },
       {
         label: 'MICCAI 2026 accepted paper',
@@ -43,11 +43,11 @@ const homepageThemes = [
       },
       {
         label: 'Pathway-anchored PD clustering',
-        href: '/projects/pathway-anchored-pd-clustering',
+        href: '/projects/pathway-anchored-pd-clustering/',
       },
       {
         label: 'Integrated precision stratification',
-        href: '/projects/integrated-pd-precision-stratification',
+        href: '/projects/integrated-pd-precision-stratification/',
       },
       {
         label: 'Approach: the digital twin',
@@ -72,11 +72,11 @@ const homepageThemes = [
     visualCaption:
       'PHAST compares structured Hamiltonian dynamics against learned baselines across physical systems.',
     featuredProjects: [
-      { label: 'Dynamic Belief Games', href: '/projects/dynamic-belief-games' },
-      { label: 'Ski Jumper Digital Twin', href: '/projects/ski-jumper-digital-twin' },
-      { label: 'Piano Digital Twin', href: '/projects/piano-digital-twin' },
+      { label: 'Dynamic Belief Games', href: '/projects/dynamic-belief-games/' },
+      { label: 'Ski Jumper Digital Twin', href: '/projects/ski-jumper-digital-twin/' },
+      { label: 'Piano Digital Twin', href: '/projects/piano-digital-twin/' },
     ],
-    href: '/projects?theme=world-models',
+    href: '/projects/?theme=world-models',
     ctaLabel: 'Browse World Models',
   },
   {
@@ -93,25 +93,16 @@ const homepageThemes = [
     visualCaption:
       'Scientific machine learning brings simulation, uncertainty, and visual reasoning into one workflow.',
     featuredProjects: [
-      { label: 'Molecular dynamics / protein folding', href: '/projects/protein-sidechain' },
-      { label: 'Subsurface Flow Modeling', href: '/projects/subsurface-modeling' },
+      { label: 'Molecular dynamics / protein folding', href: '/projects/protein-sidechain/' },
+      { label: 'Subsurface Flow Modeling', href: '/projects/subsurface-modeling/' },
       {
         label: 'Scalable Risk-Averse Well-Placement',
-        href: '/projects/scalable-risk-averse-well-placement',
+        href: '/projects/scalable-risk-averse-well-placement/',
       },
     ],
-    href: '/projects?theme=ai-for-science',
+    href: '/projects/?theme=ai-for-science',
     ctaLabel: 'Explore AI for Science',
   },
 ]
 
-const homepageThemeById = homepageThemes.reduce((themesById, theme) => {
-  themesById[theme.id] = theme
-  return themesById
-}, {})
-
-module.exports = {
-  defaultHomepageThemeId: homepageThemes[0].id,
-  homepageThemes,
-  homepageThemeById,
-}
+module.exports = { homepageThemes }

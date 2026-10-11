@@ -34,11 +34,11 @@ We implement a simplified virtual environment abstracting the essential elements
 
 Leveraging the model presented above, we propose the following architecture for event-based object detection. The agent controls both the size of the temporal window along the event stream as well as the spatial window to process. The events within each selected window are passed through the feature extraction and recurrent layers to update the predicted detection boxes. The agent then proceeds to update its internal state and sample the next window to process.
 
-![](https://i.imgur.com/kt3QFSy.png)
+<p><img src="https://i.imgur.com/kt3QFSy.png" alt="" width="960" height="720"></p>
 
 The process graph below provides further details for each step of the proposed workflow.
 
-![](https://i.imgur.com/epy9hOJ.png)
+<p><img src="https://i.imgur.com/epy9hOJ.png" alt="" width="1364" height="597"></p>
 
 <!-- ## Codes
 * GitHub repo for the OpenAI Gym environment: [microscope](https://utexas.box.com/s/88bwhaa5s020frbe5lbkwbjts9ovt49x) -->

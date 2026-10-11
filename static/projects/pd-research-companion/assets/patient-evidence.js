@@ -155,7 +155,7 @@
       el('circle', {cx: x(record.gap), cy: y(value), r: 5, fill: '#984a43', stroke: '#fff', 'stroke-width': 1})
       el('text', {x: x(record.gap) - 7, y: y(value) - 12, 'text-anchor': 'end', fill: '#784239', 'font-size': 13}, fmt(value, paper === 'paper1' ? 0 : 2))
     } else {
-      el('text', {x: x(0) + 9, y: top + 18, fill: '#6a777e', 'font-size': 12}, 'Future hidden')
+      el('text', {x: x(0) + 9, y: top + 18, fill: '#5e6a72', 'font-size': 12}, 'Future hidden')
     }
     holder.replaceChildren(svg)
   }

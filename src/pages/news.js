@@ -1,72 +1,28 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
-import { Suspense, lazy } from 'react'
-import { useSiteMetadata } from '../context/SiteContext'
-
 import Layout from '../components/layout'
 import Seo from '../components/seo'
-import LoadingFallback from '../components/LoadingFallback'
+import NewsTiles, { categoryGateScript } from '../components/news_tiles'
+import newsTiles from '../data/site/news'
 
-// Lazy load component
-const NewsTiles = lazy(() => import('../components/news_tiles'))
-
-const ErrorFallback = () => (
-  <div
-    style={{
-      padding: '2rem',
-      textAlign: 'center',
-      color: '#333f48',
-      minHeight: '300px',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}
-  >
-    <h2>Unable to load news data</h2>
-    <p style={{ maxWidth: '600px', margin: '1rem auto' }}>
-      We&apos;re experiencing a technical issue loading the news content. Please try refreshing the
-      page or check back later.
-    </p>
-  </div>
+const NewsPage = ({ location }) => (
+  <Layout>
+    <NewsTiles
+      newsTiles={newsTiles}
+      locationSearch={location?.search || ''}
+      locationKey={location?.key}
+    />
+  </Layout>
 )
-
-const NewsPage = () => {
-  // Get site metadata with error handling
-  let newsTiles = []
-  let hasError = false
-
-  try {
-    const siteMetadata = useSiteMetadata()
-    newsTiles = siteMetadata.newsTiles || []
-    hasError = siteMetadata.hasError
-  } catch {
-    hasError = true
-  }
-
-  return (
-    <Layout>
-      {hasError ? (
-        <ErrorFallback />
-      ) : (
-        <Suspense fallback={<LoadingFallback />}>
-          <NewsTiles id="news" newsTiles={newsTiles} />
-        </Suspense>
-      )}
-    </Layout>
-  )
-}
 
 export default NewsPage
 
 export const Head = ({ location }) => (
-  <Seo
-    title="News"
-    description="News, announcements and seminars from the Computational Visualization Center"
-    pathname={location.pathname}
-  />
+  <>
+    <Seo
+      title="News"
+      description="News, announcements and seminars from the Computational Visualization Center"
+      pathname={location.pathname}
+    />
+    <script dangerouslySetInnerHTML={{ __html: categoryGateScript }} />
+  </>
 )
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

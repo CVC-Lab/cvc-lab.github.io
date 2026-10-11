@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { usePersonImage } from '../hooks/usePersonImages'
-import personPlaceholder from '../images/people/placeholder.png'
 import './PeopleCondensed.css'
 
 // Priority order for faculty/staff
@@ -19,51 +18,59 @@ const FACULTY_POSITIONS = [
 // Grad student positions to include
 const GRAD_POSITIONS = ['PhD Candidate', 'PhD Student', 'Graduate Student']
 
-const PeopleCondensed = ({ peopleCards }) => {
-  // Get current members only
-  const currentMembers = peopleCards.filter(
-    person => person.status === 'current' || person.status === true || person.Current === true
+const rankOf = (positions, position = '') => positions.findIndex(pos => position.startsWith(pos))
+
+const personShape = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  position: PropTypes.string,
+  image: PropTypes.string,
+  status: PropTypes.string,
+})
+
+const PersonCard = ({ person }) => {
+  const resolvePersonImage = usePersonImage()
+  const image = getImage(resolvePersonImage(person.image) || resolvePersonImage('placeholder.png'))
+
+  return (
+    <li className="person-card-condensed">
+      <div className="person-image-wrapper">
+        {image && <GatsbyImage image={image} alt="" sizes="80px" className="person-image" />}
+      </div>
+      <p className="person-name">{person.name}</p>
+      <p className="person-position">{person.position}</p>
+    </li>
   )
+}
 
-  // Get faculty/staff members
-  const facultyMembers = currentMembers.filter(person => {
-    const position = person.position || person.Position
-    return FACULTY_POSITIONS.some(pos => position?.includes(pos) || pos.includes(position))
-  })
+PersonCard.propTypes = {
+  person: personShape.isRequired,
+}
 
-  // Sort faculty by position order
-  const sortedFaculty = facultyMembers.sort((a, b) => {
-    const posA = a.position || a.Position
-    const posB = b.position || b.Position
-    const indexA = FACULTY_POSITIONS.findIndex(p => posA?.includes(p) || p.includes(posA))
-    const indexB = FACULTY_POSITIONS.findIndex(p => posB?.includes(p) || p.includes(posB))
-    return indexA - indexB
-  })
-
-  // Get grad students (PhD Candidates, PhD Students, Graduate Students - but NOT undergrad)
-  const gradStudents = currentMembers.filter(person => {
-    const position = person.position || person.Position
-    return GRAD_POSITIONS.some(pos => position?.includes(pos))
-  })
-
-  // Combine faculty and grad students
-  const displayMembers = [...sortedFaculty, ...gradStudents]
+const PeopleCondensed = ({ peopleCards }) => {
+  const currentMembers = peopleCards.filter(person => person.status === 'current')
+  const faculty = currentMembers
+    .filter(person => rankOf(FACULTY_POSITIONS, person.position) !== -1)
+    .sort((a, b) => rankOf(FACULTY_POSITIONS, a.position) - rankOf(FACULTY_POSITIONS, b.position))
+  const gradStudents = currentMembers.filter(
+    person => rankOf(GRAD_POSITIONS, person.position) !== -1
+  )
+  const displayMembers = [...faculty, ...gradStudents]
 
   return (
     <section className="people-condensed" id="people">
-      <div className="people-condensed-container">
+      <div className="page-container people-condensed-container">
         <div className="people-condensed-header">
           <h2 className="people-condensed-title">Our Team</h2>
-          <Link to="/people" className="people-view-all">
-            View Full Team →
+          <Link to="/people/" className="people-view-all">
+            View Full Team <span aria-hidden="true">→</span>
           </Link>
         </div>
 
-        <div className="people-condensed-grid">
+        <ul className="people-condensed-grid">
           {displayMembers.map(person => (
-            <PersonCard key={person.name || person.Name} person={person} />
+            <PersonCard key={person.name} person={person} />
           ))}
-        </div>
+        </ul>
 
         <div className="people-condensed-footer">
           <p className="people-count">
@@ -75,58 +82,8 @@ const PeopleCondensed = ({ peopleCards }) => {
   )
 }
 
-const PersonCard = ({ person }) => {
-  const resolvePersonImage = usePersonImage()
-  const name = person.name || person.Name
-  const position = person.position || person.Position
-  const imageName = person.image || person.Image || 'placeholder.png'
-  const imageFile = person.imageFile || resolvePersonImage(imageName)
-
-  return (
-    <div className="person-card-condensed">
-      <div className="person-image-wrapper">
-        {imageFile && imageFile.childImageSharp ? (
-          <GatsbyImage
-            image={getImage(imageFile)}
-            alt={`${name}'s profile`}
-            className="person-image"
-          />
-        ) : (
-          <img src={personPlaceholder} alt={`${name}'s profile`} className="person-image" />
-        )}
-      </div>
-      <h3 className="person-name">{name}</h3>
-      <p className="person-position">{position}</p>
-    </div>
-  )
-}
-
 PeopleCondensed.propTypes = {
-  peopleCards: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      Name: PropTypes.string,
-      position: PropTypes.string,
-      Position: PropTypes.string,
-      status: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-      Current: PropTypes.bool,
-      image: PropTypes.string,
-      Image: PropTypes.string,
-      imageFile: PropTypes.object,
-    })
-  ).isRequired,
-}
-
-PersonCard.propTypes = {
-  person: PropTypes.shape({
-    name: PropTypes.string,
-    Name: PropTypes.string,
-    position: PropTypes.string,
-    Position: PropTypes.string,
-    image: PropTypes.string,
-    Image: PropTypes.string,
-    imageFile: PropTypes.object,
-  }).isRequired,
+  peopleCards: PropTypes.arrayOf(personShape).isRequired,
 }
 
 export default PeopleCondensed

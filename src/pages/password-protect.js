@@ -1,15 +1,13 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import Layout from '../components/layout'
 import PasswordProtect from '../components/password-protect/PasswordProtect'
 import Seo from '../components/seo'
 
-const PasswordProtectPage = ({ location }) => {
-  return <PasswordProtect location={location} />
-}
-
-PasswordProtectPage.propTypes = {
-  location: PropTypes.object,
-}
+const PasswordProtectPage = ({ location }) => (
+  <Layout headerVariant="compact">
+    <PasswordProtect location={location} />
+  </Layout>
+)
 
 export default PasswordProtectPage
 

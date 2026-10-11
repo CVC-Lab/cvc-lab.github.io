@@ -1,110 +1,117 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
-import { getRoutePasswordForPath, PENDING_REDIRECT_KEY, usePassword } from './PasswordContext'
+import BackLink from '../ui/BackLink'
+import {
+  DEFAULT_GATED_PATH,
+  PENDING_REDIRECT_KEY,
+  gateStorage,
+  getGateScope,
+  isProtectedPath,
+  usePassword,
+} from './PasswordContext'
+import './password-gate.css'
 
-const styles = {
-  wrapper: {
-    height: '100vh',
-    background: '#FFFFFF',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  input: {
-    width: '100%',
-    height: '48px',
-    borderRadius: '4px',
-  },
-  button: {
-    width: '100%',
-    height: '48px',
-    background: '#BF5700',
-    color: '#FFFFFF',
-    border: '1px solid #BF5700',
-    borderRadius: '4px',
-    marginTop: '16px',
-    textTransform: 'uppercase',
-    fontWeight: '300',
-    fontFamily: 'sans-serif',
-  },
-  buttonHover: {
-    background: '#333f48',
-    color: '#000000',
-  },
-  errorMessage: {
-    color: 'red',
-    marginTop: '10px',
-  },
-  helperText: {
-    color: '#6b6b6b',
-    marginTop: '10px',
-    fontSize: '14px',
-    textAlign: 'center',
-  },
+const AREA_LABELS = {
+  site: 'the CVC internal links page',
+  dbg: 'the Dynamic Belief Games internal pages',
 }
 
 const PasswordProtect = ({ location }) => {
-  const [password, setPassword] = useState('')
-  const [isButtonHovered, buttonHover] = useState(false)
+  const [ready, setReady] = useState(false)
   const [error, setError] = useState('')
+  const [failures, setFailures] = useState(0)
+  const [target, setTarget] = useState(null)
+  const inputRef = useRef(null)
   const { login } = usePassword()
+  const requestedPath = location?.state?.redirectTo
 
-  const pendingRedirect =
-    typeof window !== 'undefined' ? window.sessionStorage.getItem(PENDING_REDIRECT_KEY) : null
-  const redirectTo = location?.state?.redirectTo || pendingRedirect || '/internal'
-  const allowEmptyPassword = Boolean(location?.state?.allowEmptyPassword)
-  const routePassword = location?.state?.routePassword || getRoutePasswordForPath(redirectTo)
+  // Before hydration (or without JavaScript) the server-rendered form would submit natively,
+  // a GET to this page. The button stays disabled until then, which also blocks Enter.
+  // Its autoComplete="off" stops Firefox from restoring the enabled state on a reload.
+  useEffect(() => {
+    setReady(true)
+  }, [])
+
+  // Resolved after hydration: history state and sessionStorage do not exist during SSR.
+  useEffect(() => {
+    const candidate = requestedPath || gateStorage.get(PENDING_REDIRECT_KEY)
+    setTarget(isProtectedPath(candidate) ? candidate : DEFAULT_GATED_PATH)
+  }, [requestedPath])
+
+  // Deferred one frame: after a client-side redirect the router focuses
+  // #gatsby-focus-wrapper from a parent effect that runs after this one.
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => inputRef.current?.focus())
+    return () => window.cancelAnimationFrame(frame)
+  }, [])
 
   const onSubmit = event => {
     event.preventDefault()
-    const success = login(password, {
-      allowEmptyPassword,
-      routePassword,
-      transientPath: allowEmptyPassword || routePassword ? redirectTo : undefined,
-    })
+    const redirectTo = target || DEFAULT_GATED_PATH
 
-    if (success) {
-      if (typeof window !== 'undefined') {
-        window.sessionStorage.removeItem(PENDING_REDIRECT_KEY)
-      }
-      navigate(redirectTo)
-    } else {
-      setError('Incorrect password. Please try again.')
+    if (login(inputRef.current?.value ?? '', redirectTo)) {
+      gateStorage.remove(PENDING_REDIRECT_KEY)
+      navigate(redirectTo, { replace: true })
+      return
     }
+
+    setError('Incorrect password. Please try again.')
+    setFailures(count => count + 1)
+    inputRef.current?.focus()
+    inputRef.current?.select()
   }
 
+  const area = target ? AREA_LABELS[getGateScope(target)] : null
+
   return (
-    <div style={styles.wrapper}>
-      <h4 style={{ color: '#333f48' }}>Enter Password</h4>
+    <div className="password-gate">
+      <div className="password-gate__panel">
+        <h1 className="password-gate__title">Enter password</h1>
+        <p className="password-gate__lede">
+          {area ? `Enter the password for ${area}.` : 'Enter the password to continue.'}
+        </p>
 
-      <form onSubmit={onSubmit} style={{ width: '320px' }}>
-        <input
-          name="password"
-          type="password"
-          value={password}
-          onChange={event => setPassword(event.target.value)}
-          style={styles.input}
-        />
+        <form className="password-gate__form" onSubmit={onSubmit}>
+          <label className="password-gate__label" htmlFor="password-gate-input">
+            Password
+          </label>
+          {/* Uncontrolled and unnamed: text typed before hydration survives it, and no
+              submit can ever serialise the value into the URL. */}
+          <input
+            ref={inputRef}
+            id="password-gate-input"
+            className="password-gate__input"
+            type="password"
+            autoComplete="current-password"
+            required
+            onChange={() => setError('')}
+            aria-invalid={error ? 'true' : undefined}
+            aria-describedby={error ? 'password-gate-error' : undefined}
+          />
 
-        <button
-          type="submit"
-          style={{
-            ...styles.button,
-            ...(isButtonHovered ? styles.buttonHover : null),
-          }}
-          onMouseEnter={() => buttonHover(true)}
-          onMouseLeave={() => buttonHover(false)}
-        >
-          Enter
-        </button>
+          <button
+            className="password-gate__submit"
+            type="submit"
+            disabled={!ready}
+            autoComplete="off"
+          >
+            Enter
+          </button>
 
-        {error && <p style={styles.errorMessage}>{error}</p>}
-        {allowEmptyPassword && (
-          <p style={styles.helperText}>Temporary gate: press Enter to continue.</p>
-        )}
-      </form>
+          <noscript>
+            <p className="password-gate__hint">This form needs JavaScript.</p>
+          </noscript>
+
+          {/* Always mounted so screen readers track it as a live region. The keyed
+              span is re-inserted on every failure, so a repeat is announced again. */}
+          <p className="password-gate__error" id="password-gate-error" role="alert">
+            {error ? <span key={failures}>{error}</span> : null}
+          </p>
+        </form>
+
+        <BackLink to="/">Back to home</BackLink>
+      </div>
     </div>
   )
 }
@@ -113,8 +120,6 @@ PasswordProtect.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
       redirectTo: PropTypes.string,
-      allowEmptyPassword: PropTypes.bool,
-      routePassword: PropTypes.string,
     }),
   }),
 }

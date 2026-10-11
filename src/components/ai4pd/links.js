@@ -5,6 +5,8 @@ export const PATIENT_PORTAL_URL = 'https://ai4pd-portal.secure.cvc-lab.org/'
 // Static research companion for the two 2026 manuscripts (static/projects/pd-research-companion).
 export const COMPANION_URL = '/projects/pd-research-companion/'
 export const CONTACT_EMAIL = 'bajaj@cs.utexas.edu'
+// Oden Institute contact page, linked from Partners and Resources.
+export const ODEN_CONTACT_URL = 'https://www.oden.utexas.edu/contact/'
 
 export const AI4PD_NAV = [
   { key: 'overview', label: 'Overview', to: `${AI4PD_BASE}/` },

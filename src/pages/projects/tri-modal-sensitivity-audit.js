@@ -1,23 +1,14 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import Seo from '../../components/seo'
-import { Link } from 'gatsby'
-import 'katex/dist/katex.min.css'
-import './tri-modal-gene-therapy.css'
+import TriModalPage, { figureSizes } from '../../components/tri-modal/TriModalPage'
+import { renderMath } from '../../components/tri-modal/renderMath'
 
-const projectTitle =
-  'A Prior-Robust Sensitivity and Factorial-Necessity Analysis of Tri-Modal Viral-Ultrasound Gene Delivery for Lysosomal Neurodegeneration'
+// The full paper title is the page's <h1>; this is the short form for <title> and link previews.
+const seoTitle = 'Prior-Robust Sensitivity Analysis of Tri-Modal Gene Delivery'
 
 const assetBase = '/projects/tri-modal-sensitivity-audit'
 
-const pageMarkup = String.raw`
-<div class="back">
-  <a href="/projects">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    Back to Projects
-  </a>
-</div>
-
+const pageMarkup = renderMath(String.raw`
 <div class="hero">
   <div class="hero-tag">Manuscript under submission · September 2026</div>
 
@@ -41,17 +32,17 @@ const pageMarkup = String.raw`
 
   <div class="hero-links">
     <a href="${assetBase}/Nekkanti-Bajaj-prior-robust-audit-sep2026.pdf">Paper</a>
-    <span class="sep">|</span>
+    <span class="sep" aria-hidden="true">|</span>
     <a href="https://doi.org/10.5281/zenodo.21985843">Data &amp; Outputs (Zenodo)</a>
-    <span class="sep">|</span>
-    <a href="/projects/tri-modal-gene-therapy">Original Model (May 2026)</a>
+    <span class="sep" aria-hidden="true">|</span>
+    <a href="/projects/tri-modal-gene-therapy/">Original Model (May 2026)</a>
   </div>
 </div>
 
 <div class="content">
   <div class="followup-note">
     <strong>Follow-up study.</strong> This paper audits the headline result of our
-    <a href="/projects/tri-modal-gene-therapy">May 2026 tri-modal gene-therapy model</a>, which reported that
+    <a href="/projects/tri-modal-gene-therapy/">May 2026 tri-modal gene-therapy model</a>, which reported that
     blood–brain-barrier entry dominates GM2 outcome variance (\(S_T = 0.909\)). Under converged sampling and corrected
     input-uncertainty specifications, that ranking reverses: enzyme-kinetic and synthesis parameters dominate, and focused
     ultrasound adds a statistically detectable but practically negligible benefit by day 365.
@@ -80,7 +71,7 @@ const pageMarkup = String.raw`
 <div class="content">
   <h2 class="section-head">From Initial Claim to Corrected Finding</h2>
   <div class="fig-wrap">
-    <img src="${assetBase}/fig1_audit_overview.png" alt="Figure 1: Flow from the original BBB-entry claim through three audit checks to the corrected enzyme-kinetics finding" loading="lazy" />
+    <img src="${assetBase}/fig1_audit_overview_1800.webp" srcset="${assetBase}/fig1_audit_overview_800.webp 800w, ${assetBase}/fig1_audit_overview_1800.webp 1800w" sizes="${figureSizes}" alt="Figure 1: Flow from the original BBB-entry claim through three audit checks to the corrected enzyme-kinetics finding" width="1800" height="1100" loading="lazy" decoding="async" />
     <p class="fig-caption"><strong>Figure 1.</strong> <em>(A)</em> The initial, as-documented analysis. <em>(B)</em> Three independent audit checks: convergence, prior-width robustness, and saturation / factorial necessity. <em>(C)</em> The corrected finding these checks converge on. <em>(D)</em> The general methodological lesson. Separately, external validation against published data (bottom) identifies absolute-accuracy limitations that are orthogonal to, and do not resolve, the audit logic in (A)–(D).</p>
   </div>
 </div>
@@ -93,7 +84,7 @@ const pageMarkup = String.raw`
   <div class="diag-tier-grid">
     <div class="diag-tier-item">
       <div class="diag-tier-num">Step 1 · Convergence</div>
-      <div class="diag-tier-head">Are the indices numerically stable?</div>
+      <h3 class="diag-tier-head">Are the indices numerically stable?</h3>
       <ul>
         <li>Sobol total-order indices at \(N = 64\)–\(1{,}024\)</li>
         <li>Top-five ranking unchanged for \(N \ge 128\)</li>
@@ -102,7 +93,7 @@ const pageMarkup = String.raw`
     </div>
     <div class="diag-tier-item">
       <div class="diag-tier-num">Step 2 · Prior Robustness</div>
-      <div class="diag-tier-head">Does the ranking survive corrected priors?</div>
+      <h3 class="diag-tier-head">Does the ranking survive corrected priors?</h3>
       <ul>
         <li>As-documented, equal-width, and Tier-1-promoted input distributions</li>
         <li>Same estimator, sample size, and seed across scenarios</li>
@@ -111,7 +102,7 @@ const pageMarkup = String.raw`
     </div>
     <div class="diag-tier-item">
       <div class="diag-tier-num">Step 3 · Saturation</div>
-      <div class="diag-tier-head">Is the parameter at a ceiling?</div>
+      <h3 class="diag-tier-head">Is the parameter at a ceiling?</h3>
       <ul>
         <li>25-point sweep of \(k_{T4,\text{entry}}\) over twelve orders of magnitude</li>
         <li>50 stochastic realizations per point</li>
@@ -120,7 +111,7 @@ const pageMarkup = String.raw`
     </div>
     <div class="diag-tier-item">
       <div class="diag-tier-num">Step 4 · Necessity</div>
-      <div class="diag-tier-head">Is the intervention needed at all?</div>
+      <h3 class="diag-tier-head">Is the intervention needed at all?</h3>
       <ul>
         <li>Full \(2^3 = 8\)-arm factorial over SRT, AAV, and FUS</li>
         <li>200 matched-seed realizations per arm, paired contrasts</li>
@@ -129,7 +120,7 @@ const pageMarkup = String.raw`
     </div>
   </div>
 
-  <div class="table-wrap">
+  <div class="table-wrap" role="region" aria-label="BBB-entry Sobol index by analysis stage">
     <table>
       <thead>
         <tr>
@@ -156,7 +147,7 @@ const pageMarkup = String.raw`
 <div class="content">
   <h2 class="section-head">BBB Entry Is Already Saturated</h2>
   <div class="fig-wrap">
-    <img src="${assetBase}/fig2_saturation.png" alt="Figure 2: Convergence of the BBB-entry Sobol index, flat terminal burden across a twelve-order sweep, and near-zero local elasticity" loading="lazy" />
+    <img src="${assetBase}/fig2_saturation_1800.webp" srcset="${assetBase}/fig2_saturation_800.webp 800w, ${assetBase}/fig2_saturation_1800.webp 1800w" sizes="${figureSizes}" alt="Figure 2: Convergence of the BBB-entry Sobol index, flat terminal burden across a twelve-order sweep, and near-zero local elasticity" width="1800" height="556" loading="lazy" decoding="async" />
     <p class="fig-caption"><strong>Figure 2.</strong> <em>(A)</em> Total-order Sobol index for \(k_{T4,\text{entry}}\) across \(N = 64\)–\(1{,}024\) with bootstrap standard errors (\(B = 1{,}000\)); the estimate stabilizes from \(N = 128\). <em>(B)</em> Terminal substrate burden across a 25-point log-spaced sweep of \(k_{T4,\text{entry}}\) (\(10^{-18}\) to \(10^{-6}\), 50 realizations per point); burden changes by less than 0.1% (226.83 → 226.63 nmol/g). The calibrated value (dashed line, 0.06) sits in the same saturated regime. <em>(C)</em> Local elasticity \(E(k) = \partial \log Y / \partial \log k\) stays within \(5.3 \times 10^{-4}\) of zero.</p>
   </div>
   <p>At the administered AAV dose, the entry pathway runs far faster than the timescale over which the rest of the system evolves. The entry rate is therefore numerically irrelevant to the outcome across its full range of biologically plausible uncertainty, and no Sobol analysis at realistic widths can detect entry-rate sensitivity in this model — whatever the sample size. Delivery is still <em>necessary</em>: driving \(k_{T4,\text{entry}} \to 0\) returns the model to the untreated baseline. It is simply already sufficient.</p>
@@ -167,11 +158,11 @@ const pageMarkup = String.raw`
 <div class="content">
   <h2 class="section-head">Enzyme Kinetics Dominate Under Every Prior Specification</h2>
   <div class="fig-wrap">
-    <img src="${assetBase}/fig3_sobol_forest.png" alt="Figure 3: Forest plots showing enzyme and synthesis parameters dominate Sobol indices for GM2 and across ten lysosomal disease parameterizations" loading="lazy" />
+    <img src="${assetBase}/fig3_sobol_forest_1800.webp" srcset="${assetBase}/fig3_sobol_forest_800.webp 800w, ${assetBase}/fig3_sobol_forest_1800.webp 1800w" sizes="${figureSizes}" alt="Figure 3: Forest plots showing enzyme and synthesis parameters dominate Sobol indices for GM2 and across ten lysosomal disease parameterizations" width="1800" height="872" loading="lazy" decoding="async" />
     <p class="fig-caption"><strong>Figure 3.</strong> <em>(A)</em> Total-order Sobol indices for the audited GM2 parameters under three prior specifications (marker shape encodes scenario; delivery-related parameters in blue, enzyme/synthesis parameters in vermillion). <em>(B)</em> Each disease's dominant parameter (vermillion) versus its BBB-entry rate (blue), with bootstrap 95% confidence intervals, across all ten disease parameterizations. The dotted line at \(S_T = 1\) marks the theoretical upper bound.</p>
   </div>
 
-  <div class="table-wrap">
+  <div class="table-wrap" role="region" aria-label="Total-order Sobol indices">
     <table>
       <thead>
         <tr>
@@ -204,13 +195,13 @@ const pageMarkup = String.raw`
 <div class="content">
   <h2 class="section-head">Sensitivity Is Not Necessity: The Factorial Test</h2>
   <div class="fig-wrap">
-    <img src="${assetBase}/fig6_factorial.png" alt="Figure 6: Day-365 GM2 burden for all eight SRT, AAV, and FUS intervention combinations, 200 realizations each" loading="lazy" />
+    <img src="${assetBase}/fig6_factorial_1800.webp" srcset="${assetBase}/fig6_factorial_800.webp 800w, ${assetBase}/fig6_factorial_1800.webp 1800w" sizes="${figureSizes}" alt="Figure 6: Day-365 GM2 burden for all eight SRT, AAV, and FUS intervention combinations, 200 realizations each" width="1800" height="1145" loading="lazy" decoding="async" />
     <p class="fig-caption"><strong>Figure 6.</strong> All \(n = 200\) per-seed day-365 GM2 burden realizations for each of the eight intervention combinations (jittered for visibility), with mean ± one standard deviation. Adding FUS to any arm leaves the distribution essentially unchanged.</p>
   </div>
   <p>Sobol and Shapley indices ask whether varying a parameter changes the outcome <em>given</em> an intervention is active; they never switch the mechanism off. The full factorial design does. Every paired FUS contrast at day 365 has a 95% confidence interval that excludes zero, but the largest effect (−0.032 nmol/g) is 1.3% of a pre-defined practical-equivalence threshold of 2.51 nmol/g — two to three orders of magnitude smaller than the effect of AAV or SRT themselves. FUS is therefore <strong>statistically detectable but practically negligible</strong> by one year.</p>
 
   <div class="fig-wrap">
-    <img src="${assetBase}/fig5_fus_shapley.png" alt="Figure 5: Shapley attribution of tri-modal benefit over time, with FUS contribution falling from 2.14 percent at day 45 to near zero" loading="lazy" />
+    <img src="${assetBase}/fig5_fus_shapley_1800.webp" srcset="${assetBase}/fig5_fus_shapley_800.webp 800w, ${assetBase}/fig5_fus_shapley_1800.webp 1800w" sizes="${figureSizes}" alt="Figure 5: Shapley attribution of tri-modal benefit over time, with FUS contribution falling from 2.14 percent at day 45 to near zero" width="1800" height="720" loading="lazy" decoding="async" />
     <p class="fig-caption"><strong>Figure 5.</strong> <em>(A)</em> Shapley-attributed share of total tri-modal benefit for AAV, SRT, and FUS at days 45, 90, 180, and 365 (day 365: AAV 94.88%, SRT 5.12%). <em>(B)</em> FUS alone: a small, real early contribution (2.14% at day 45) that decays and turns slightly negative by day 365.</p>
   </div>
   <p>The early-but-fading FUS contribution is consistent with a model in which FUS multiplies an entry rate that is already saturated once AAV or SRT is active, and whose benefit fades as AAV expression itself wanes after its peak around day 250–300. The conclusion holds when the FUS gain is recomputed from a literature-bounded, infant-permissive acoustic threshold. We treat the time course as a model-specific interaction requiring further mechanistic verification.</p>
@@ -231,119 +222,26 @@ const pageMarkup = String.raw`
   <h2 class="section-head">People</h2>
   <ul class="people-list">
     <li><a href="https://www.cs.utexas.edu/~bajaj/">Chandrajit Bajaj</a></li>
-    <li><a href="#people">Kartheek Nekkanti</a></li>
+    <li>Kartheek Nekkanti</li>
   </ul>
 </div>
+`)
 
-<hr />
-
-<footer>
-  <div class="footer-inner">
-    <p>Oden Institute for Computational Engineering and Sciences · The University of Texas at Austin</p>
-    <p>Peter O'Donnell Jr. Building (POB) 2.102 · 201 E 24th St · Austin, TX 78712 · bajaj@oden.utexas.edu</p>
-    <p style="margin-top:0.75rem;">© 2026 The University of Texas at Austin. All rights reserved.</p>
-  </div>
-</footer>
-`
-
-const TriModalSensitivityAuditPage = () => {
-  const pageRef = React.useRef(null)
-
-  React.useEffect(() => {
-    if (!pageRef.current) return
-
-    import('katex/contrib/auto-render').then(module => {
-      const renderMathInElement = module.default || module
-      renderMathInElement(pageRef.current, {
-        delimiters: [
-          { left: '\\[', right: '\\]', display: true },
-          { left: '\\(', right: '\\)', display: false },
-        ],
-        throwOnError: false,
-      })
-    })
-  }, [])
-
-  return (
-    <div className="trimod-page" ref={pageRef}>
-      <nav className="navbar">
-        <Link className="nav-brand" to="/">
-          <svg
-            width="34"
-            height="34"
-            viewBox="0 0 60 60"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="30" cy="30" r="30" fill="#BF5700" />
-            <text
-              x="50%"
-              y="55%"
-              dominantBaseline="middle"
-              textAnchor="middle"
-              fill="white"
-              fontSize="21"
-              fontWeight="800"
-              fontFamily="Georgia, serif"
-            >
-              UT
-            </text>
-          </svg>
-          <div>
-            <div className="nav-brand-text">
-              Oden Institute
-              <span className="nav-brand-sub">The University of Texas at Austin</span>
-            </div>
-          </div>
-        </Link>
-        <ul className="nav-links">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/projects">Projects</Link>
-          </li>
-          <li>
-            <Link to="/people">People</Link>
-          </li>
-          <li>
-            <Link to="/publications">Publications</Link>
-          </li>
-          <li>
-            <Link to="/news">News</Link>
-          </li>
-          <li>
-            <Link to="/software">Software</Link>
-          </li>
-          <li>
-            <Link to="/#about">About</Link>
-          </li>
-        </ul>
-      </nav>
-      <div dangerouslySetInnerHTML={{ __html: pageMarkup }} />
-    </div>
-  )
-}
+const TriModalSensitivityAuditPage = () => (
+  <TriModalPage>
+    <div dangerouslySetInnerHTML={{ __html: pageMarkup }} />
+  </TriModalPage>
+)
 
 export const Head = ({ location }) => (
-  <>
-    <Seo
-      title={projectTitle}
-      description="A four-part audit (convergence, prior robustness, saturation, factorial necessity) that reverses the BBB-entry bottleneck claim of a tri-modal GM2 gene-therapy model: enzyme kinetics dominate, and focused ultrasound is practically negligible by day 365."
-      pathname={location.pathname}
-      image={`${assetBase}/fig1_audit_overview.png`}
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-  </>
+  <Seo
+    title={seoTitle}
+    description="A four-part audit (convergence, prior robustness, saturation, factorial necessity) that reverses the BBB-entry bottleneck claim of a tri-modal GM2 gene-therapy model: enzyme kinetics dominate, and focused ultrasound is practically negligible by day 365."
+    pathname={location.pathname}
+    image={`${assetBase}/fig1_audit_overview.png`}
+    imageAlt="Figure 1: Flow from the original BBB-entry claim through three audit checks to the corrected enzyme-kinetics finding"
+    type="article"
+  />
 )
 
 export default TriModalSensitivityAuditPage
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

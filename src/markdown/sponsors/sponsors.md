@@ -11,7 +11,7 @@ The Computational Visualization Center (CVC) is a cross disciplinary effort whos
 
 **Army Futures Command**
 
-- [Dynamic Belief Games: Optimally Controlled Reinforced Training/Testing Framework for Predictive Intelligent Networking](/projects/dbg) - AFC UTDD (C5ISR) (04/2024 - 01/2027)
+- [Dynamic Belief Games: Optimally Controlled Reinforced Training/Testing Framework for Predictive Intelligent Networking](/projects/dynamic-belief-games/) - AFC UTDD (C5ISR) (04/2024 - 01/2027)
 
 - [Intelligent Machine Learning for Real-Time Processing of Hyperspectral Video Streams](https://cvc-lab.github.io/afc-website/) (09/2020 - 09/2021)
 
@@ -125,7 +125,7 @@ The Computational Visualization Center (CVC) is a cross disciplinary effort whos
 
 - Algebraic Methods in Solid Modeling (1988)
 
-# Projects Before 1997
+## Projects Before 1997
 
 [**National Science Foundation**](https://www.nsf.gov/)
 

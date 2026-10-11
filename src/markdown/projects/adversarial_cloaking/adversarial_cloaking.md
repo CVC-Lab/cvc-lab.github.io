@@ -17,9 +17,9 @@ This project we’ve developed a novel patch-based adversarial attack pipeline t
 <div align="center">
   
 | Strong | Medium | Weak |
-|--------------|-----------|------------|
-| ![demo example](../../../images/projects/adversarial_cloaking/demo_video_med.gif) | ![demo example](../../../images/projects/adversarial_cloaking/demo_video2_med.gif)    | ![demo example](../../../images/projects/adversarial_cloaking/demo_video3_med.gif)       |
-| ![demo example](../../../images/projects/adversarial_cloaking/demo_video4_med.gif)      | ![demo example](../../../images/projects/adversarial_cloaking/demo_video5_med.gif) | ![demo example](../../../images/projects/adversarial_cloaking/demo_video6_med.gif) |
+| :---: | :---: | :---: |
+| <video autoplay muted loop playsinline controls width="208" height="208" poster="../../../images/projects/adversarial_cloaking/demo_video_med.jpg" src="../../../images/projects/adversarial_cloaking/demo_video_med.mp4" aria-label="demo example"></video> | <video autoplay muted loop playsinline controls width="208" height="208" poster="../../../images/projects/adversarial_cloaking/demo_video2_med.jpg" src="../../../images/projects/adversarial_cloaking/demo_video2_med.mp4" aria-label="demo example"></video>    | <video autoplay muted loop playsinline controls width="208" height="208" poster="../../../images/projects/adversarial_cloaking/demo_video3_med.jpg" src="../../../images/projects/adversarial_cloaking/demo_video3_med.mp4" aria-label="demo example"></video>       |
+| <video autoplay muted loop playsinline controls width="208" height="208" poster="../../../images/projects/adversarial_cloaking/demo_video4_med.jpg" src="../../../images/projects/adversarial_cloaking/demo_video4_med.mp4" aria-label="demo example"></video>      | <video autoplay muted loop playsinline controls width="208" height="208" poster="../../../images/projects/adversarial_cloaking/demo_video5_med.jpg" src="../../../images/projects/adversarial_cloaking/demo_video5_med.mp4" aria-label="demo example"></video> | <video autoplay muted loop playsinline controls width="208" height="208" poster="../../../images/projects/adversarial_cloaking/demo_video6_med.jpg" src="../../../images/projects/adversarial_cloaking/demo_video6_med.mp4" aria-label="demo example"></video> |
 
 </div>
 

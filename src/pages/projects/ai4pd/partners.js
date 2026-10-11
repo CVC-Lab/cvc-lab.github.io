@@ -1,7 +1,7 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import Ai4pdLayout, { Ai4pdHead } from '../../../components/ai4pd/Ai4pdLayout'
-import { CONTACT_EMAIL } from '../../../components/ai4pd/links'
+import { CONTACT_EMAIL, ODEN_CONTACT_URL } from '../../../components/ai4pd/links'
+import SmartLink from '../../../components/ui/SmartLink'
 
 const steps = [
   [
@@ -97,7 +97,7 @@ const donors = [
 const PartnersPage = () => (
   <Ai4pdLayout section="partners">
     <section className="ai4pd-hero">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <p className="ai4pd-eyebrow">Partner with AI4PD</p>
         <h1>
           Validate a Parkinson&apos;s progression model on your cohort, and keep the cross-site
@@ -113,7 +113,7 @@ const PartnersPage = () => (
           infrastructure. Your site keeps ownership, and you keep the validation evidence your
           cohort helps produce.
         </p>
-        <p className="ai4pd-lead" style={{ fontSize: '1.05rem' }}>
+        <p className="ai4pd-lead ai4pd-lead--small">
           We partner with movement-disorders neurologists and cohort custodians:{' '}
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
         </p>
@@ -121,20 +121,22 @@ const PartnersPage = () => (
     </section>
 
     <section className="ai4pd-section">
-      <div className="ai4pd-shell ai4pd-prose">
-        <h2>How engagement works</h2>
-        <ol className="ai4pd-list ai4pd-list--steps">
-          {steps.map(([t, d]) => (
-            <li key={t}>
-              <strong>{t}.</strong> {d}
-            </li>
-          ))}
-        </ol>
+      <div className="page-container">
+        <div className="ai4pd-prose">
+          <h2>How engagement works</h2>
+          <ol className="ai4pd-list ai4pd-list--steps">
+            {steps.map(([t, d]) => (
+              <li key={t}>
+                <strong>{t}.</strong> {d}
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
 
     <section className="ai4pd-section ai4pd-section--soft">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <div className="ai4pd-prose">
           <h2>Your data, your terms</h2>
         </div>
@@ -150,59 +152,63 @@ const PartnersPage = () => (
     </section>
 
     <section className="ai4pd-section">
-      <div className="ai4pd-shell ai4pd-prose">
-        <h2>What a clinical partner contributes</h2>
-        <p>
-          No site is asked to hand over a finished, cleaned dataset. Harmonization is done jointly,
-          and each data stream arrives on whatever clock your clinic already generates it.
-        </p>
-        <ul className="ai4pd-list">
-          {contributes.map(([t, d]) => (
-            <li key={t}>
-              <strong>{t}.</strong> {d}
-            </li>
-          ))}
-        </ul>
-        <p>The timeline grows at the pace your clinic already works.</p>
+      <div className="page-container">
+        <div className="ai4pd-prose">
+          <h2>What a clinical partner contributes</h2>
+          <p>
+            No site is asked to hand over a finished, cleaned dataset. Harmonization is done
+            jointly, and each data stream arrives on whatever clock your clinic already generates
+            it.
+          </p>
+          <ul className="ai4pd-list">
+            {contributes.map(([t, d]) => (
+              <li key={t}>
+                <strong>{t}.</strong> {d}
+              </li>
+            ))}
+          </ul>
+          <p>The timeline grows at the pace your clinic already works.</p>
 
-        <h2 style={{ marginTop: '3rem' }}>What a partner gets</h2>
-        <h3>Decision support, returned to the physician first</h3>
-        <p>
-          The core target is 12-month progression forecasting against named endpoints
-          (MDS-UPDRS-III, time-to-motor-fluctuation), each output returned with explicit uncertainty
-          and named evidence gaps. This is the capability your cohort would help validate; it is in
-          development and not yet prospectively validated, and we say so on every output.
-        </p>
-        <p>
-          Around that target, the collaboration aims to produce: current-state estimation,
-          differential-diagnosis and levodopa-response support, DBS programming support where
-          applicable, and ranked therapy and monitoring plans. Every output is human-in-the-loop
-          decision support, returned to the physician. The system never diagnoses or prescribes
-          autonomously.
-        </p>
-        <h3>Validation evidence your cohort produced</h3>
-        <ul className="ai4pd-list">
-          <li>
-            <strong>Cross-site results.</strong> How the model performs on a cohort like yours,
-            including where it fails.
-          </li>
-          <li>
-            <strong>Calibration you can check.</strong> Whether its confidence is honest: when it
-            says it is 80% sure, is it right about 80% of the time. Methods detail (baseline
-            comparisons and ablations) is in the validation report.
-          </li>
-        </ul>
-        <h3>A harmonized, de-identified patient timeline</h3>
-        <ul className="ai4pd-list">
-          <li>Schema mapping co-developed from your source systems.</li>
-          <li>Audit trails over the de-identified longitudinal timeline.</li>
-          <li>A reusable asset for your own downstream research, on the use terms above.</li>
-        </ul>
+          <h2 className="ai4pd-subsection">What a partner gets</h2>
+          <h3>Decision support, returned to the physician first</h3>
+          <p>
+            The core target is 12-month progression forecasting against named endpoints
+            (MDS-UPDRS-III, time-to-motor-fluctuation), each output returned with explicit
+            uncertainty and named evidence gaps. This is the capability your cohort would help
+            validate; it is in development and not yet prospectively validated, and we say so on
+            every output.
+          </p>
+          <p>
+            Around that target, the collaboration aims to produce: current-state estimation,
+            differential-diagnosis and levodopa-response support, DBS programming support where
+            applicable, and ranked therapy and monitoring plans. Every output is human-in-the-loop
+            decision support, returned to the physician. The system never diagnoses or prescribes
+            autonomously.
+          </p>
+          <h3>Validation evidence your cohort produced</h3>
+          <ul className="ai4pd-list">
+            <li>
+              <strong>Cross-site results.</strong> How the model performs on a cohort like yours,
+              including where it fails.
+            </li>
+            <li>
+              <strong>Calibration you can check.</strong> Whether its confidence is honest: when it
+              says it is 80% sure, is it right about 80% of the time. Methods detail (baseline
+              comparisons and ablations) is in the validation report.
+            </li>
+          </ul>
+          <h3>A harmonized, de-identified patient timeline</h3>
+          <ul className="ai4pd-list">
+            <li>Schema mapping co-developed from your source systems.</li>
+            <li>Audit trails over the de-identified longitudinal timeline.</li>
+            <li>A reusable asset for your own downstream research, on the use terms above.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section className="ai4pd-section ai4pd-section--soft ai4pd-anchor" id="governance">
-      <div className="ai4pd-shell">
+    <section className="ai4pd-section ai4pd-section--soft" id="governance">
+      <div className="page-container">
         <div className="ai4pd-prose">
           <h2>Governance, stated honestly</h2>
         </div>
@@ -218,16 +224,14 @@ const PartnersPage = () => (
     </section>
 
     <section className="ai4pd-section">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <div className="ai4pd-grid ai4pd-grid--2">
           <div className="ai4pd-prose">
             <h2>Funding partners</h2>
             <ul className="ai4pd-list">
               {donors.map(d => (
                 <li key={d.name}>
-                  <a href={d.link} target="_blank" rel="noopener noreferrer">
-                    {d.name}
-                  </a>
+                  <SmartLink to={d.link}>{d.name}</SmartLink>
                 </li>
               ))}
             </ul>
@@ -242,13 +246,9 @@ const PartnersPage = () => (
               <li>
                 <strong>Texas Advanced Computing Center (TACC).</strong> High-performance GPU
                 clusters for large-scale modeling and validation.{' '}
-                <a
-                  href="https://www.tacc.utexas.edu/use-tacc/allocations/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <SmartLink to="https://www.tacc.utexas.edu/use-tacc/allocations/">
                   Learn more
-                </a>
+                </SmartLink>
               </li>
             </ul>
           </div>
@@ -257,32 +257,20 @@ const PartnersPage = () => (
     </section>
 
     <section className="ai4pd-section ai4pd-section--tight">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <div className="ai4pd-callout">
           <h2>How to start</h2>
           <p>
             For clinical-cohort, data-sharing, and validation partnerships, write to the PI
             directly: <strong>Prof. Chandrajit Bajaj</strong> (Principal Investigator),{' '}
             <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> (
-            <a href="https://www.cs.utexas.edu/~bajaj/" target="_blank" rel="noopener noreferrer">
-              faculty profile
-            </a>
+            <SmartLink to="https://www.cs.utexas.edu/~bajaj/">faculty profile</SmartLink>
             ). For institutional or partnership inquiries, use the{' '}
-            <a
-              href="https://www.oden.utexas.edu/contact/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Oden Institute contact portal
-            </a>
-            . To discuss philanthropic support, the{' '}
-            <a
-              href="https://give.utexas.edu/?utm_source=microsite&utm_medium=pages"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <SmartLink to={ODEN_CONTACT_URL}>Oden Institute contact portal</SmartLink>. To discuss
+            philanthropic support, the{' '}
+            <SmartLink to="https://give.utexas.edu/?utm_source=microsite&utm_medium=pages">
               UT Austin giving page
-            </a>{' '}
+            </SmartLink>{' '}
             is here.
           </p>
         </div>
@@ -300,7 +288,3 @@ export const Head = ({ location }) => (
     description="Partner with AI4PD: validate a Parkinson's progression model on your cohort under a signed data-use agreement, with de-identification at your site, honest governance, and the cross-site evidence returned to you."
   />
 )
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

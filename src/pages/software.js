@@ -1,25 +1,14 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
-import { Suspense, lazy } from 'react'
-import { useSiteMetadata } from '../context/SiteContext'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
-import LoadingFallback from '../components/LoadingFallback'
+import SoftwareList from '../components/software_list'
+import softwareProjects from '../data/site/software'
 
-// Lazy load component
-const SoftwareList = lazy(() => import('../components/software_list'))
-
-const SoftwarePage = () => {
-  const { softwareProjects } = useSiteMetadata()
-
-  return (
-    <Layout>
-      <Suspense fallback={<LoadingFallback />}>
-        <SoftwareList softwareProjects={softwareProjects} />
-      </Suspense>
-    </Layout>
-  )
-}
+const SoftwarePage = () => (
+  <Layout>
+    <SoftwareList softwareProjects={softwareProjects} />
+  </Layout>
+)
 
 export default SoftwarePage
 
@@ -30,7 +19,3 @@ export const Head = ({ location }) => (
     pathname={location.pathname}
   />
 )
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

@@ -1,27 +1,21 @@
-@import '../../styles/design-system.css';
-
 /* =============================================================
    AI4PD program pages. Built on the CVC tokens; one visual system
    for the hub and every subpage.
    ============================================================= */
 
 .ai4pd-page {
+  --ai4pd-accent-on-dark: #f3b681;
+
   background: var(--ut-white);
   color: var(--ut-charcoal);
 }
 
-.ai4pd-shell {
-  width: calc(100% - 3rem);
-  max-width: var(--container-max-width);
-  margin: 0 auto;
-  box-sizing: border-box;
+.ai4pd-page :where(p) {
+  margin: 0;
 }
 
 /* ---------- sub-navigation ---------- */
 .ai4pd-nav {
-  position: sticky;
-  top: 0;
-  z-index: var(--z-30);
   border-bottom: 1px solid var(--ut-limestone);
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(8px);
@@ -29,7 +23,7 @@
 
 .ai4pd-nav__inner {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 1.5rem;
   min-height: 3.5rem;
 }
@@ -37,6 +31,7 @@
 .ai4pd-nav__brand {
   display: flex;
   flex-direction: column;
+  align-self: center;
   line-height: 1.1;
   color: var(--ut-charcoal);
   font-weight: var(--font-weight-bold);
@@ -48,25 +43,29 @@
 
 .ai4pd-nav__brand span {
   color: var(--ut-dark-gray);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: var(--font-weight-medium);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
+/* Scrolling, edge fade and the current tab kept in view come from .ui-scroll-strip.
+   The strip clips anything outside it, so rings (on the links, and on the strip itself
+   where Firefox makes it a tab stop) are drawn inside. */
 .ai4pd-nav__links {
+  --focus-ring-offset: -3px;
+
   display: flex;
   flex: 1 1 auto;
   gap: 0.25rem;
+  min-width: 0;
   margin: 0;
   padding: 0;
   list-style: none;
-  overflow-x: auto;
-  scrollbar-width: none;
 }
 
-.ai4pd-nav__links::-webkit-scrollbar {
-  display: none;
+.ai4pd-nav__links li {
+  margin: 0;
 }
 
 .ai4pd-nav__links a {
@@ -83,15 +82,32 @@
     border-color var(--transition-fast);
 }
 
+/* On-tint text: the translucent bar turns grey over the charcoal sections. */
 .ai4pd-nav__links a:hover,
 .ai4pd-nav__links a.is-active {
-  color: var(--ut-burnt-orange);
+  color: var(--color-primary-on-tint);
   border-bottom-color: var(--ut-burnt-orange);
 }
 
-.ai4pd-nav__portal {
+.ai4pd-nav .ai4pd-nav__portal {
   flex: 0 0 auto;
+  align-self: center;
+  width: auto;
   padding: 0.55rem 1rem;
+}
+
+/* One row from 769px, stuck under the site header; 3.5rem + 1px is its height. A landscape
+   phone is wide enough for the row but too short to give up the height. */
+@media (min-width: 769px) and (min-height: 500px) {
+  html:has(.ai4pd-nav) {
+    --page-subnav-height: calc(3.5rem + 1px);
+  }
+
+  .ai4pd-nav {
+    position: sticky;
+    top: var(--site-header-height);
+    z-index: var(--z-subnav);
+  }
 }
 
 /* ---------- buttons ---------- */
@@ -101,7 +117,7 @@
   gap: 0.55rem;
   padding: 0.85rem 1.4rem;
   border: 2px solid var(--ut-burnt-orange);
-  border-radius: 999px;
+  border-radius: var(--border-radius-full);
   font-size: var(--text-sm);
   font-weight: var(--font-weight-bold);
   letter-spacing: 0.02em;
@@ -126,18 +142,13 @@
 
 .ai4pd-button--quiet {
   background: transparent;
-  color: var(--ut-burnt-orange);
+  color: var(--color-primary-on-tint);
 }
 
 .ai4pd-button--quiet:hover,
 .ai4pd-button--quiet:focus-visible {
   background: rgba(191, 87, 0, 0.08);
   color: var(--ut-burnt-orange-dark);
-}
-
-.ai4pd-button:focus-visible {
-  outline: 3px solid var(--ut-burnt-orange);
-  outline-offset: 3px;
 }
 
 .ai4pd-actions {
@@ -153,12 +164,14 @@
   background: var(--ut-off-white);
 }
 
-.ai4pd-eyebrow {
+.ai4pd-page .ai4pd-eyebrow {
+  flex: none;
   margin: 0 0 0.75rem;
-  color: var(--ut-burnt-orange);
+  color: var(--color-primary-on-tint);
   font-size: var(--text-sm);
   font-weight: var(--font-weight-bold);
   letter-spacing: 0.08em;
+  line-height: 1.4;
   text-transform: uppercase;
 }
 
@@ -184,8 +197,12 @@
   line-height: 1.65;
 }
 
-.ai4pd-lead a {
-  color: var(--ut-burnt-orange);
+.ai4pd-lead--small {
+  font-size: 1.05rem;
+}
+
+.ai4pd-lead--small:not(:last-child) {
+  margin-bottom: 1rem;
 }
 
 .ai4pd-status {
@@ -198,9 +215,10 @@
 }
 
 .ai4pd-status li {
+  margin: 0;
   padding: 0.35rem 0.8rem;
   border: 1px solid var(--ut-limestone);
-  border-radius: 999px;
+  border-radius: var(--border-radius-full);
   background: var(--ut-white);
   color: var(--ut-charcoal);
   font-size: 0.8rem;
@@ -210,7 +228,7 @@
 .ai4pd-trust {
   margin: 1rem 0 0;
   color: var(--ut-medium-gray);
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
 }
 
 /* ---------- sections ---------- */
@@ -223,6 +241,8 @@
 }
 
 .ai4pd-section--dark {
+  --focus-ring-color: var(--ut-white);
+
   background: var(--ut-charcoal);
   color: var(--ut-white);
 }
@@ -236,8 +256,7 @@
   margin-bottom: 2rem;
 }
 
-.ai4pd-section-heading h2,
-.ai4pd-section > .ai4pd-shell > h2 {
+.ai4pd-section h2 {
   margin: 0 0 0.9rem;
   color: var(--ut-charcoal);
   font-size: 2.3rem;
@@ -251,8 +270,8 @@
   color: var(--ut-white);
 }
 
-.ai4pd-section--dark .ai4pd-eyebrow {
-  color: #f3b681;
+.ai4pd-page .ai4pd-section--dark .ai4pd-eyebrow {
+  color: var(--ai4pd-accent-on-dark);
 }
 
 .ai4pd-section-heading p {
@@ -262,23 +281,25 @@
   line-height: 1.7;
 }
 
+.ai4pd-section .ai4pd-subsection {
+  margin-top: 3rem;
+}
+
 .ai4pd-prose {
   max-width: 820px;
 }
 
-.ai4pd-prose p,
+/* :where() keeps one class plus one element; a lightbox opened from a figure inside
+   prose keeps its own type. */
+.ai4pd-prose p:where(:not(.ui-lightbox *)),
 .ai4pd-prose li {
   color: var(--ut-charcoal);
   font-size: 1.02rem;
   line-height: 1.7;
 }
 
-.ai4pd-prose p {
+.ai4pd-prose p:where(:not(.ui-lightbox *)) {
   margin: 0 0 1.1rem;
-}
-
-.ai4pd-prose a {
-  color: var(--ut-burnt-orange);
 }
 
 .ai4pd-prose h3 {
@@ -294,6 +315,74 @@
   font-size: 1.05rem;
 }
 
+.ai4pd-follow {
+  margin-top: 1.5rem;
+}
+
+/* ---------- text links ---------- */
+/* Links inside running text are underlined; the arrow links (.ai4pd-card__link,
+   .ai4pd-inline-link) and buttons carry classes and keep their own look. */
+.ai4pd-lead a,
+.ai4pd-section-heading a,
+.ai4pd-prose a:not([class]),
+.ai4pd-jump a,
+.ai4pd-team a,
+.ai4pd-footer a {
+  color: var(--color-primary-on-tint);
+}
+
+.ai4pd-lead a,
+.ai4pd-section-heading a,
+.ai4pd-prose a:not([class]),
+.ai4pd-callout p a,
+.ai4pd-jump a,
+.ai4pd-team a,
+.ai4pd-footer a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+.ai4pd-lead a:hover,
+.ai4pd-section-heading a:hover,
+.ai4pd-prose a:not([class]):hover,
+.ai4pd-jump a:hover,
+.ai4pd-team a:hover,
+.ai4pd-footer a:hover {
+  color: var(--ut-burnt-orange-dark);
+  text-decoration-thickness: 2px;
+}
+
+.ai4pd-section--dark .ai4pd-section-heading a {
+  color: var(--ai4pd-accent-on-dark);
+}
+
+.ai4pd-callout p a:hover,
+.ai4pd-section--dark .ai4pd-section-heading a:hover {
+  color: var(--ut-white);
+  text-decoration-thickness: 2px;
+}
+
+/* Stand-alone text links (link lists, team cards, the paper list, the navigation line of a
+   markdown sub-page): padding on the inline box makes the target at least 24px tall without
+   moving any text. In running text it stays inside the line spacing, so links on adjacent
+   lines never overlap. The footer's line is too tight for that: its links set a line height
+   that holds the padded box, and still wrap like text. */
+.ai4pd-list a:not([class]),
+.ai4pd-page .ai4pd-markdown a:not([class]) {
+  padding-block: 0.2rem;
+}
+
+.ai4pd-team a:not([class]),
+.ai4pd-paper-list a:not([class]) {
+  padding-block: 0.25rem;
+}
+
+.ai4pd-footer a:not([class]) {
+  padding-block: 0.25em;
+  line-height: 1.8;
+}
+
 .ai4pd-list {
   margin: 0 0 1.25rem;
   padding-left: 1.25rem;
@@ -301,6 +390,15 @@
 
 .ai4pd-list li {
   margin-bottom: 0.65rem;
+}
+
+.ai4pd-list--columns {
+  columns: 18rem 2;
+  column-gap: 2rem;
+}
+
+.ai4pd-list--columns li {
+  break-inside: avoid;
 }
 
 .ai4pd-list--steps {
@@ -368,6 +466,11 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.ai4pd-grid > .ai4pd-figure {
+  align-self: start;
+  margin: 0;
+}
+
 .ai4pd-card {
   display: flex;
   flex-direction: column;
@@ -383,15 +486,22 @@
   border-top: 4px solid var(--ut-burnt-orange);
 }
 
-.ai4pd-card .ai4pd-eyebrow {
-  font-size: 0.72rem;
+.ai4pd-page .ai4pd-card .ai4pd-eyebrow {
   margin-bottom: 0.5rem;
+  font-size: 0.75rem;
 }
 
-.ai4pd-card h3 {
+/* Four cards in a row: two-line eyebrows keep every title on one line. */
+.ai4pd-page .ai4pd-grid--4 .ai4pd-card .ai4pd-eyebrow {
+  min-height: 2.8em;
+}
+
+.ai4pd-card h3,
+.ai4pd-card .ai4pd-card__title {
   margin: 0 0 0.6rem;
   color: var(--ut-charcoal);
   font-size: 1.2rem;
+  font-weight: var(--font-weight-semibold);
   line-height: 1.3;
   letter-spacing: 0;
 }
@@ -404,16 +514,24 @@
   line-height: 1.6;
 }
 
+/* The padding gives a 40px target; the negative margin keeps the layout as it was. */
 .ai4pd-card__link,
 .ai4pd-inline-link {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
   width: fit-content;
-  color: var(--ut-burnt-orange);
+  margin-block: -0.6rem;
+  padding-block: 0.6rem;
+  color: var(--color-primary-on-tint);
   font-size: var(--text-sm);
   font-weight: var(--font-weight-semibold);
   text-decoration: none;
+}
+
+.ai4pd-card__link svg,
+.ai4pd-inline-link svg {
+  flex: none;
 }
 
 .ai4pd-card__link:hover,
@@ -421,19 +539,16 @@
   color: var(--ut-burnt-orange-dark);
 }
 
+/* The thumbnail sets its own height: nothing is cropped. */
 .ai4pd-card__image {
   margin: -1.35rem -1.35rem 1rem;
-  aspect-ratio: 1.6 / 1;
   overflow: hidden;
   border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
   background: var(--ut-limestone-light);
 }
 
-.ai4pd-card__image .gatsby-image-wrapper,
-.ai4pd-card__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.ai4pd-card__image .gatsby-image-wrapper {
+  display: block;
 }
 
 /* ---------- patient portal highlight ---------- */
@@ -472,11 +587,13 @@
 .ai4pd-portal__intro > p.ai4pd-note {
   margin: 0;
   color: var(--ut-medium-gray);
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
 }
 
+/* minmax(0, …): with enlarged text a long word wraps instead of widening the page. */
 .ai4pd-portal__points {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
   margin: 0;
   padding: 0;
@@ -484,6 +601,7 @@
 }
 
 .ai4pd-portal__points li {
+  margin: 0;
   padding: 1.1rem 1.25rem;
   border-radius: var(--border-radius-md);
   background: var(--ut-off-white);
@@ -491,7 +609,7 @@
 
 .ai4pd-portal__points h3 {
   margin: 0 0 0.35rem;
-  color: var(--ut-burnt-orange);
+  color: var(--color-primary-on-tint);
   font-size: 0.95rem;
   letter-spacing: 0.02em;
 }
@@ -514,9 +632,11 @@
 }
 
 /* A CONSTRAINED image must not be forced wider than its sizer, or its
-   cover-fit <img> is cropped; centre it and let FULL_WIDTH figures fill. */
+   cover-fit <img> is cropped: fit-content stops it at its own width in a
+   wider frame. Centre it and let FULL_WIDTH figures fill. */
 .ai4pd-figure .gatsby-image-wrapper {
   display: block;
+  width: fit-content;
   margin: 0 auto;
 }
 
@@ -531,10 +651,31 @@
   line-height: 1.55;
 }
 
+/* The zoom link. The figure clips anything outside it, so the ring is drawn inside. The
+   image is positioned and would paint over that ring: inside the isolated link it sits
+   one layer down instead. */
+.ai4pd-figure__zoom {
+  --focus-ring-offset: -3px;
+
+  display: block;
+  width: 100%;
+  color: inherit;
+  cursor: zoom-in;
+  isolation: isolate;
+}
+
+.ai4pd-figure__zoom .gatsby-image-wrapper {
+  z-index: -1;
+}
+
 .ai4pd-figure-row {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
+}
+
+.ai4pd-figure-row .ai4pd-figure:first-child {
+  grid-column: 1 / -1;
 }
 
 .ai4pd-figure-row .ai4pd-figure {
@@ -546,12 +687,21 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.ai4pd-steps > div {
+.ai4pd-steps > li {
+  margin: 0;
   padding: 1.2rem;
   border-radius: var(--border-radius-md);
   background: var(--ut-off-white);
+}
+
+.ai4pd-section--soft .ai4pd-steps > li {
+  border: 1px solid var(--ut-limestone);
+  background: var(--ut-white);
 }
 
 .ai4pd-steps span {
@@ -567,10 +717,13 @@
   text-align: center;
 }
 
-.ai4pd-steps h4 {
+.ai4pd-steps h3 {
   margin: 0 0 0.4rem;
   color: var(--ut-charcoal);
   font-size: 1rem;
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-tight);
+  letter-spacing: 0;
 }
 
 .ai4pd-steps p {
@@ -587,15 +740,48 @@
   font-size: 0.9rem;
 }
 
-.ai4pd-jump a {
-  color: var(--ut-burnt-orange);
+.ai4pd-jump__label {
+  margin: 0 0 0.35rem;
+  color: var(--ut-charcoal);
+  font-size: inherit;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.5;
 }
 
-.ai4pd-anchor {
-  scroll-margin-top: 5rem;
+.ai4pd-jump__list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.ai4pd-jump__list li {
+  margin: 0;
+}
+
+/* Block, so a wrapped title keeps its list number on the first line. */
+.ai4pd-jump__list a {
+  display: block;
+  width: fit-content;
+  padding-block: 0.3rem;
+}
+
+.ai4pd-jump--inline .ai4pd-jump__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.ai4pd-hero .ai4pd-jump {
+  max-width: 820px;
+  margin: 1.5rem 0 0;
 }
 
 /* ---------- evidence page ---------- */
+.ai4pd-evidence-list {
+  padding-bottom: 2rem;
+}
+
 .ai4pd-evidence {
   max-width: 900px;
   padding: 3rem 0;
@@ -610,7 +796,7 @@
   display: inline-block;
   margin-bottom: 0.75rem;
   padding: 0.25rem 0.7rem;
-  border-radius: 999px;
+  border-radius: var(--border-radius-full);
   background: rgba(191, 87, 0, 0.1);
   color: var(--ut-burnt-orange-dark);
   font-size: 0.75rem;
@@ -657,13 +843,18 @@
   margin-top: 0;
 }
 
-.ai4pd-evidence__link {
+/* Two classes: the .ai4pd-prose paragraph margin would win otherwise. */
+.ai4pd-evidence .ai4pd-evidence__link {
   margin-top: 1.25rem;
 }
 
-.ai4pd-evidence__muted {
-  color: var(--ut-medium-gray);
+.ai4pd-evidence .ai4pd-evidence__back {
+  margin: 1.25rem 0 0;
   font-size: 0.9rem;
+}
+
+.ai4pd-evidence .ai4pd-evidence__back a {
+  padding-block: 0.6rem;
 }
 
 /* ---------- paper quick list ---------- */
@@ -676,6 +867,7 @@
 
 .ai4pd-paper-list li {
   display: grid;
+  margin: 0;
   grid-template-columns: 3.5rem minmax(0, 1fr);
   gap: 1rem;
   padding: 1.25rem 0;
@@ -683,7 +875,7 @@
 }
 
 .ai4pd-paper-list .ai4pd-paper__number {
-  color: #f3b681;
+  color: var(--ai4pd-accent-on-dark);
   font-size: 1.1rem;
   font-weight: var(--font-weight-bold);
 }
@@ -703,7 +895,7 @@
 }
 
 .ai4pd-paper-list a {
-  color: #f3b681;
+  color: var(--ai4pd-accent-on-dark);
 }
 
 .ai4pd-paper-list a:hover {
@@ -721,6 +913,7 @@
 }
 
 .ai4pd-team li {
+  margin: 0;
   padding: 0.85rem 1rem;
   border-radius: var(--border-radius-md);
   background: var(--ut-off-white);
@@ -738,12 +931,13 @@
 }
 
 .ai4pd-team a {
-  color: var(--ut-burnt-orange);
   font-size: 0.9rem;
 }
 
 /* ---------- callout ---------- */
 .ai4pd-callout {
+  --focus-ring-color: var(--ut-white);
+
   padding: 2.5rem;
   border-radius: var(--border-radius-lg);
   background: var(--ut-charcoal);
@@ -754,6 +948,7 @@
   margin: 0 0 0.75rem;
   color: var(--ut-white);
   font-size: 1.9rem;
+  line-height: 1.2;
   letter-spacing: 0;
 }
 
@@ -764,8 +959,12 @@
   line-height: 1.7;
 }
 
+.ai4pd-callout > :last-child {
+  margin-bottom: 0;
+}
+
 .ai4pd-callout a:not(.ai4pd-button) {
-  color: #f3b681;
+  color: var(--ai4pd-accent-on-dark);
 }
 
 .ai4pd-callout .ai4pd-actions {
@@ -773,8 +972,8 @@
 }
 
 .ai4pd-callout .ai4pd-button--quiet {
-  border-color: #f3b681;
-  color: #f3b681;
+  border-color: var(--ai4pd-accent-on-dark);
+  color: var(--ai4pd-accent-on-dark);
 }
 
 /* ---------- footer strip ---------- */
@@ -792,27 +991,85 @@
   line-height: 1.6;
 }
 
-.ai4pd-footer a {
-  color: var(--ut-burnt-orange);
+/* ---------- markdown sub-pages (thrust briefs, background parts) ---------- */
+.ai4pd-hero {
+  --back-link-color: var(--color-primary-on-tint);
 }
 
-/* ---------- table (background experiments) ---------- */
-.ai4pd-table {
+.ai4pd-hero .back-link {
+  margin-bottom: 0.5rem;
+}
+
+.ai4pd-hero h1:last-child {
+  margin-bottom: 0;
+}
+
+.ai4pd-doc {
+  padding: 3rem 0 4.5rem;
+}
+
+/* (0,2,1): the markdown template's .post-body rules are (0,1,1). */
+.ai4pd-page .ai4pd-markdown :is(h2, h3, h4) {
+  color: var(--ut-charcoal);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0;
+}
+
+.ai4pd-page .ai4pd-markdown h2 {
+  margin: 2.5rem 0 0.75rem;
+  font-size: 1.7rem;
+  line-height: 1.25;
+}
+
+.ai4pd-page .ai4pd-markdown h3 {
+  margin: 2rem 0 0.75rem;
+  font-size: 1.35rem;
+  line-height: 1.3;
+}
+
+.ai4pd-page .ai4pd-markdown h4 {
+  margin: 1.5rem 0 0.5rem;
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
+.ai4pd-page .ai4pd-markdown p,
+.ai4pd-page .ai4pd-markdown li {
+  color: var(--ut-charcoal);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.ai4pd-page .ai4pd-markdown p {
+  margin: 0 0 1.1rem;
+}
+
+.ai4pd-page .ai4pd-markdown :is(ul, ol) {
+  margin: 0 0 1.25rem;
+  padding-left: 1.25rem;
+}
+
+.ai4pd-page .ai4pd-markdown li {
+  margin: 0 0 0.65rem;
+}
+
+.ai4pd-page .ai4pd-markdown > * > :first-child {
+  margin-top: 0;
+}
+
+.ai4pd-page .ai4pd-markdown table {
   width: 100%;
   max-width: 640px;
-  margin: 0 0 1.5rem;
   border-collapse: collapse;
   font-size: 0.95rem;
 }
 
-.ai4pd-table th,
-.ai4pd-table td {
+.ai4pd-page .ai4pd-markdown :is(th, td) {
   padding: 0.5rem 0.75rem;
   border-bottom: 1px solid var(--ut-limestone);
-  text-align: left;
 }
 
-.ai4pd-table th {
+.ai4pd-page .ai4pd-markdown th {
   color: var(--ut-charcoal);
   font-weight: var(--font-weight-bold);
 }
@@ -824,8 +1081,21 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .ai4pd-portal__card {
+  .ai4pd-grid--media,
+  .ai4pd-figure-row {
     grid-template-columns: 1fr;
+  }
+
+  .ai4pd-figure-row .ai4pd-figure:first-child {
+    grid-column: auto;
+  }
+
+  .ai4pd-page .ai4pd-grid--4 .ai4pd-card .ai4pd-eyebrow {
+    min-height: 0;
+  }
+
+  .ai4pd-portal__card {
+    grid-template-columns: minmax(0, 1fr);
     gap: 1.75rem;
   }
 
@@ -836,36 +1106,45 @@
   .ai4pd-team {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+/* The brand's tagline needs the room the links take below 1200px. */
+@media (max-width: 1199.98px) {
+  .ai4pd-nav__brand {
+    padding-block: 0.75rem;
+  }
 
   .ai4pd-nav__brand span {
     display: none;
   }
 }
 
-@media (max-width: 720px) {
-  .ai4pd-shell {
-    width: min(calc(100% - 2rem), calc(100vw - 2rem));
-  }
-
+/* Not sticky: brand and portal on one row, the tabs scroll on the next. */
+@media (max-width: 768px) {
   .ai4pd-nav__inner {
     flex-wrap: wrap;
     gap: 0.5rem 1rem;
-    padding: 0.5rem 0;
+    min-height: 0;
+    padding-top: 0.5rem;
   }
 
   .ai4pd-nav__links {
     order: 3;
-    width: 100%;
+    flex-basis: 100%;
   }
 
   .ai4pd-nav__links a {
-    padding: 0.6rem 0.6rem;
+    padding: 0.6rem;
   }
 
-  .ai4pd-nav__portal {
+  /* With enlarged text the portal drops to a row of its own and wraps rather than overflow. */
+  .ai4pd-nav .ai4pd-nav__portal {
+    flex-shrink: 1;
     margin-left: auto;
   }
+}
 
+@media (max-width: 720px) {
   .ai4pd-hero {
     padding: 2.5rem 0 2.5rem;
   }
@@ -883,18 +1162,22 @@
     padding: 3rem 0;
   }
 
-  .ai4pd-section-heading h2,
-  .ai4pd-section > .ai4pd-shell > h2 {
+  .ai4pd-section h2 {
     font-size: 1.8rem;
   }
 
+  .ai4pd-callout h2 {
+    font-size: 1.6rem;
+  }
+
+  /* minmax(0, …): with enlarged text a long word wraps instead of widening the page. */
   .ai4pd-grid,
   .ai4pd-grid--2,
   .ai4pd-grid--4,
   .ai4pd-figure-row,
   .ai4pd-steps,
   .ai4pd-team {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .ai4pd-dl {
@@ -920,10 +1203,6 @@
     justify-content: center;
   }
 
-  .ai4pd-nav__portal {
-    width: auto;
-  }
-
   .ai4pd-callout {
     padding: 1.5rem;
   }
@@ -931,5 +1210,26 @@
   .ai4pd-paper-list li {
     grid-template-columns: 2.25rem minmax(0, 1fr);
     gap: 0.75rem;
+  }
+
+  /* Markdown sub-pages: long titles, and the body starts on the first screen. */
+  .ai4pd-hero--doc {
+    padding: 1.5rem 0;
+  }
+
+  .ai4pd-hero--doc h1 {
+    font-size: clamp(1.75rem, 1rem + 4vw, 2.5rem);
+  }
+
+  .ai4pd-doc {
+    padding: 1.5rem 0 3rem;
+  }
+
+  .ai4pd-page .ai4pd-markdown h2 {
+    font-size: 1.5rem;
+  }
+
+  .ai4pd-page .ai4pd-markdown h3 {
+    font-size: 1.25rem;
   }
 }

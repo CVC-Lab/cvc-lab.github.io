@@ -18,8 +18,8 @@ We consider the information in the data as a combination of embeddings in multi-
 
 ## Results
 
-![](https://hackmd.io/_uploads/BkDMW81_F.png)
-![](https://hackmd.io/_uploads/BJ_QbIJOK.png)
+<p><img src="https://hackmd.io/_uploads/BkDMW81_F.png" alt="" width="1166" height="826">
+<img src="https://hackmd.io/_uploads/BJ_QbIJOK.png" alt="" width="1100" height="704"></p>
 
 ## Links to Code and Paper
 

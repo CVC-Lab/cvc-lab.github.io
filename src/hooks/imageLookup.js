@@ -15,3 +15,14 @@ export const toLookup = nodes => {
   lookupCache.set(nodes, lookup)
   return lookup
 }
+
+const warned = new Set()
+
+// A missing image renders nothing, so say so where it will be seen: the browser
+// console under `gatsby develop`, and the terminal while `gatsby build` renders HTML.
+export const warnMissing = (hook, key, hint) => {
+  const visible = process.env.NODE_ENV !== 'production' || typeof window === 'undefined'
+  if (!visible || warned.has(`${hook}:${key}`)) return
+  warned.add(`${hook}:${key}`)
+  console.warn(`[${hook}] no processed image for "${key}". ${hint}`)
+}

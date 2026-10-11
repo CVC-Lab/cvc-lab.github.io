@@ -1,13 +1,13 @@
 import * as React from 'react'
-import { Link } from 'gatsby'
+import BackLink from '../ui/BackLink'
+import SmartLink from '../ui/SmartLink'
 import './dbg-microsite.css'
-import resultsImage from '../../images/projects/dynamic_belief_games/integrated_network_v4.png'
-import demoImage from '../../images/projects/dynamic_belief_games/drone-swarm.jpg'
-
-const RELEASE_BASE = 'https://github.com/CVC-Lab/cvc-lab.github.io/releases/download/assets-v1'
-const heroImage = `${RELEASE_BASE}/DBG_Main.png`
-const gymImage = `${RELEASE_BASE}/3dgym_example.png`
-const frameworkImage = `${RELEASE_BASE}/dynamic_belief_games_diagram.png`
+// WebP derivatives; the full-size originals live in the assets-v1 GitHub release.
+import heroImage from '../../images/projects/dynamic_belief_games/DBG_Main.webp'
+import frameworkImage from '../../images/projects/dynamic_belief_games/dynamic_belief_games_diagram.webp'
+import gymImage from '../../images/projects/dynamic_belief_games/3dgym_example.webp'
+import resultsImage from '../../images/projects/dynamic_belief_games/integrated_network_v4.webp'
+import demoImage from '../../images/projects/dynamic_belief_games/drone-swarm.webp'
 
 const proofItems = [
   '3D digital twin for training and testing',
@@ -62,19 +62,19 @@ const resources = [
     title: 'Project archive',
     description:
       'Reference the earlier project-page text while the new microsite is being developed.',
-    to: '/projects/dynamic-belief-games-archive',
+    to: '/projects/dynamic-belief-games-archive/',
     cta: 'Open archive',
   },
   {
     title: 'Ryan Farell',
     description: 'Lead research scientist and main technical contact for current DBG work.',
-    href: 'mailto:ryan.farell@utexas.edu',
+    to: 'mailto:ryan.farell@utexas.edu',
     cta: 'Email Ryan',
   },
   {
     title: 'Chandrajit Bajaj',
     description: 'Principal investigator for the project and broader research direction.',
-    href: 'mailto:bajaj@cs.utexas.edu',
+    to: 'mailto:bajaj@cs.utexas.edu',
     cta: 'Email Chandrajit',
   },
 ]
@@ -83,23 +83,21 @@ const workstreams = [
   {
     title: 'Systems & Protocols',
     body: 'Radio simulation, PIN control overlays, SDR and AR integration, cyber-autonomy baselines, and cross-repo engineering work.',
-    to: '/projects/dynamic-belief-games/internal/systems-protocols',
+    to: '/projects/dynamic-belief-games/internal/systems-protocols/',
   },
   {
     title: 'DBG Gym & Visualization',
     body: '3D simulation, digital-twin views, terrain/material controls, and interactive scenario visualization.',
-    to: '/projects/dynamic-belief-games/internal/dbg-gym-visualization',
+    to: '/projects/dynamic-belief-games/internal/dbg-gym-visualization/',
   },
 ]
 
 const DbgMicrosite = () => (
   <div className="dbg-page">
     <section className="dbg-hero">
-      <div className="dbg-shell dbg-hero__grid">
+      <div className="page-container dbg-hero__grid">
         <div className="dbg-hero__content">
-          <Link className="dbg-back-link" to="/projects/dynamic-belief-games">
-            ← Back to DBG home
-          </Link>
+          <BackLink to="/projects/dynamic-belief-games/">Back to DBG home</BackLink>
           <p className="dbg-eyebrow">Project Microsite</p>
           <h1>Dynamic Belief Games</h1>
           <p className="dbg-hero__subtitle">
@@ -132,6 +130,8 @@ const DbgMicrosite = () => (
           <img
             src={heroImage}
             alt="Dynamic Belief Games system diagram: PIN-enabled soldier radio network with Layer-7 overlay, DBG differentiable policy optimization loop, and high-fidelity synthetic training visuals"
+            width="1600"
+            height="1229"
             decoding="async"
           />
         </div>
@@ -139,7 +139,7 @@ const DbgMicrosite = () => (
     </section>
 
     <section className="dbg-section">
-      <div className="dbg-shell">
+      <div className="page-container">
         <div className="dbg-section__intro">
           <p className="dbg-section__eyebrow">The Challenge</p>
           <h2>Why current mobile networks fail under real mission conditions</h2>
@@ -160,7 +160,7 @@ const DbgMicrosite = () => (
     </section>
 
     <section className="dbg-section dbg-section--alt">
-      <div className="dbg-shell dbg-section__split">
+      <div className="page-container dbg-section__split">
         <div>
           <p className="dbg-section__eyebrow">How DBG Works</p>
           <h2>Separate the framework, the agents, and the platform</h2>
@@ -182,6 +182,8 @@ const DbgMicrosite = () => (
           <img
             src={frameworkImage}
             alt="Dynamic Belief Games conceptual framework diagram"
+            width="1411"
+            height="771"
             loading="lazy"
             decoding="async"
           />
@@ -190,11 +192,13 @@ const DbgMicrosite = () => (
     </section>
 
     <section className="dbg-section" id="dbg-gym">
-      <div className="dbg-shell dbg-section__split">
+      <div className="page-container dbg-section__split">
         <div className="dbg-visual-card">
           <img
             src={gymImage}
             alt="DBG Gym control-tower view with layered terrain and squad paths"
+            width="1600"
+            height="792"
             loading="lazy"
             decoding="async"
           />
@@ -217,7 +221,7 @@ const DbgMicrosite = () => (
     </section>
 
     <section className="dbg-section dbg-section--alt" id="validation">
-      <div className="dbg-shell dbg-section__split">
+      <div className="page-container dbg-section__split">
         <div>
           <p className="dbg-section__eyebrow">Validation</p>
           <h2>Ground the digital twin in real-world RF behavior</h2>
@@ -236,6 +240,8 @@ const DbgMicrosite = () => (
           <img
             src={resultsImage}
             alt="Dynamic Belief Games integrated network mission visual"
+            width="965"
+            height="659"
             loading="lazy"
             decoding="async"
           />
@@ -244,7 +250,7 @@ const DbgMicrosite = () => (
     </section>
 
     <section className="dbg-section" id="results">
-      <div className="dbg-shell">
+      <div className="page-container">
         <div className="dbg-section__intro">
           <p className="dbg-section__eyebrow">Demonstrated Capability</p>
           <h2>Demo 1 &mdash; Platoon Coverage vs Uptime</h2>
@@ -260,6 +266,8 @@ const DbgMicrosite = () => (
             <img
               src={demoImage}
               alt="Austin-area scenario playback in DBG Gym showing platoon routes with blue and red trajectories and communication-radius overlays"
+              width="1600"
+              height="808"
               loading="lazy"
               decoding="async"
             />
@@ -290,7 +298,7 @@ const DbgMicrosite = () => (
     </section>
 
     <section className="dbg-section dbg-section--alt">
-      <div className="dbg-shell">
+      <div className="page-container">
         <div className="dbg-section__intro">
           <p className="dbg-section__eyebrow">Resources</p>
           <h2>Resources and contacts</h2>
@@ -305,20 +313,9 @@ const DbgMicrosite = () => (
             <article key={resource.title} className="dbg-card dbg-resource-card">
               <h3>{resource.title}</h3>
               <p>{resource.description}</p>
-              {resource.to ? (
-                <Link className="dbg-text-link" to={resource.to}>
-                  {resource.cta}
-                </Link>
-              ) : (
-                <a
-                  className="dbg-text-link"
-                  href={resource.href}
-                  target={resource.href?.startsWith('http') ? '_blank' : undefined}
-                  rel={resource.href?.startsWith('http') ? 'noreferrer' : undefined}
-                >
-                  {resource.cta}
-                </a>
-              )}
+              <SmartLink className="dbg-text-link" to={resource.to}>
+                {resource.cta}
+              </SmartLink>
             </article>
           ))}
         </div>
@@ -326,51 +323,49 @@ const DbgMicrosite = () => (
     </section>
 
     <section className="dbg-section">
-      <div className="dbg-shell dbg-section__split">
-        <div>
+      <div className="page-container">
+        <div className="dbg-section__intro">
           <p className="dbg-section__eyebrow">Team and Contact</p>
           <h2>Leadership, contributors, and project continuity</h2>
-          <div className="dbg-team-groups">
-            <div>
-              <h3>Leadership</h3>
-              <ul className="dbg-bullet-list">
-                <li>Chandrajit Bajaj, Principal Investigator</li>
-                <li>Ryan Farell, Co-Principal Investigator</li>
-              </ul>
-            </div>
-            <div>
-              <h3>Contributors</h3>
-              <ul className="dbg-bullet-list">
-                <li>Andrew Farell</li>
-                <li>Logan Kronforst</li>
-                <li>Brian Kim</li>
-                <li>Callihan Bertley</li>
-                <li>Luke McLennan</li>
-              </ul>
-            </div>
-            <div>
-              <h3>Administration</h3>
-              <ul className="dbg-bullet-list">
-                <li>Catherine Andersson, Administrator</li>
-              </ul>
-            </div>
-            <div>
-              <h3>Funding and opportunities</h3>
-              <ul className="dbg-bullet-list">
-                <li>Funded by Army &ndash; AFC UTDD (C5ISR); DOD Award W911NF-24-C-0006.</li>
-                <li>Phase II runs 06 Apr 2025 through 08 Jan 2027.</li>
-                <li>
-                  For research opportunities, contact Ryan Farell or Chandrajit Bajaj directly.
-                </li>
-              </ul>
-            </div>
+        </div>
+        <div className="dbg-team-groups">
+          <div>
+            <h3>Leadership</h3>
+            <ul className="dbg-bullet-list">
+              <li>Chandrajit Bajaj, Principal Investigator</li>
+              <li>Ryan Farell, Co-Principal Investigator</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Contributors</h3>
+            <ul className="dbg-bullet-list">
+              <li>Andrew Farell</li>
+              <li>Logan Kronforst</li>
+              <li>Brian Kim</li>
+              <li>Callihan Bertley</li>
+              <li>Luke McLennan</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Administration</h3>
+            <ul className="dbg-bullet-list">
+              <li>Catherine Andersson, Administrator</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Funding and opportunities</h3>
+            <ul className="dbg-bullet-list">
+              <li>Funded by Army &ndash; AFC UTDD (C5ISR); DOD Award W911NF-24-C-0006.</li>
+              <li>Phase II runs 06 Apr 2025 through 08 Jan 2027.</li>
+              <li>For research opportunities, contact Ryan Farell or Chandrajit Bajaj directly.</li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
     <section className="dbg-section dbg-section--alt">
-      <div className="dbg-shell">
+      <div className="page-container">
         <div className="dbg-section__intro">
           <p className="dbg-section__eyebrow">Internal Workstreams</p>
           <h2>Convenience-gated collaborator pages for engineering progress and visual systems</h2>
@@ -388,9 +383,9 @@ const DbgMicrosite = () => (
               </div>
               <h3>{item.title}</h3>
               <p>{item.body}</p>
-              <Link className="dbg-text-link" to={item.to}>
+              <SmartLink className="dbg-text-link" to={item.to}>
                 Enter protected page
-              </Link>
+              </SmartLink>
             </article>
           ))}
         </div>

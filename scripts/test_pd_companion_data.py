@@ -11,6 +11,39 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "static/projects/pd-research-companion"
 
 
+def png_size(path):
+    header = path.read_bytes()[:24]
+    return int.from_bytes(header[16:20], "big"), int.from_bytes(header[20:24], "big")
+
+
+def lossless_webp_size(path):
+    header = path.read_bytes()[:25]
+    assert header[12:16] == b"VP8L", path
+    bits = int.from_bytes(header[21:25], "little")
+    return (bits & 0x3FFF) + 1, ((bits >> 14) & 0x3FFF) + 1
+
+
+def webp_size(path):
+    header = path.read_bytes()[:30]
+    chunk = header[12:16]
+    if chunk == b"VP8L":
+        return lossless_webp_size(path)
+    if chunk == b"VP8X":
+        return int.from_bytes(header[24:27], "little") + 1, int.from_bytes(header[27:30], "little") + 1
+    assert chunk == b"VP8 ", path
+    return (int.from_bytes(header[26:28], "little") & 0x3FFF,
+            int.from_bytes(header[28:30], "little") & 0x3FFF)
+
+
+def srcset_candidates(value):
+    candidates = []
+    for item in value.split(","):
+        url, descriptor = item.split()
+        assert descriptor.endswith("w"), value
+        candidates.append((url, int(descriptor[:-1])))
+    return candidates
+
+
 def payload():
     text = (SITE / "assets/patient-evidence-data.js").read_text()
     return json.loads(text.split("window.PD_PATIENT_EVIDENCE = ", 1)[1].rstrip(";\n"))
@@ -19,7 +52,7 @@ def payload():
 class Page(HTMLParser):
     def __init__(self, path):
         super().__init__()
-        self.ids, self.refs, self.images = [], [], []
+        self.ids, self.refs, self.images, self.figures = [], [], [], []
         self.feed(path.read_text())
 
     def handle_starttag(self, tag, attrs):
@@ -29,8 +62,12 @@ class Page(HTMLParser):
         for key in ["href", "src", "data-figure-open"]:
             if key in attrs:
                 self.refs.append(attrs[key])
+        if "srcset" in attrs:
+            self.refs.extend(url for url, _ in srcset_candidates(attrs["srcset"]))
         if tag == "img":
             self.images.append(attrs)
+        if "data-figure-open" in attrs:
+            self.figures.append(attrs["data-figure-open"])
 
 
 class CompanionTests(unittest.TestCase):
@@ -110,6 +147,44 @@ class CompanionTests(unittest.TestCase):
                 if parsed.fragment:
                     self.assertIn(parsed.fragment, Page(target).ids, (path.name, link))
             self.assertTrue(all(img.get("alt") for img in page.images))
+
+    def test_inline_figures_are_lossless_copies_of_the_full_figures(self):
+        # Rebuild a copy with: cwebp -lossless -z 9 -quiet NAME.png -o NAME.webp
+        for path in SITE.rglob("*.html"):
+            page = Page(path)
+            inline = {img["src"]: img for img in page.images}
+            for full in page.figures:
+                copy = full[:-len(".png")] + ".webp"
+                self.assertIn(copy, inline, (path.name, full))
+                size = png_size(path.parent / full)
+                self.assertEqual(lossless_webp_size(path.parent / copy), size, copy)
+                self.assertEqual((int(inline[copy]["width"]), int(inline[copy]["height"])), size, copy)
+
+    def test_inline_images_offer_display_size_copies(self):
+        # Rebuild a figure copy with sharp: resize({ width: 1200 }).webp({ quality: 90, effort: 6 })
+        for path in SITE.rglob("*.html"):
+            page = Page(path)
+            inline = {img["src"]: img for img in page.images}
+            for full in page.figures:
+                self.assertIn("srcset", inline[full[:-len(".png")] + ".webp"], (path.name, full))
+            for img in page.images:
+                if "srcset" not in img:
+                    continue
+                self.assertTrue(img.get("sizes"), img["src"])
+                width, height = int(img["width"]), int(img["height"])
+                candidates = srcset_candidates(img["srcset"])
+                self.assertEqual(candidates[-1], (img["src"], width), img["src"])
+                self.assertEqual(webp_size(path.parent / img["src"]), (width, height), img["src"])
+                for url, descriptor in candidates[:-1]:
+                    self.assertLess(descriptor, width, url)
+                    copy_width, copy_height = webp_size(path.parent / url)
+                    self.assertEqual(copy_width, descriptor, url)
+                    self.assertLessEqual(abs(copy_height - descriptor * height / width), 1, url)
+
+    def test_main_site_links_are_root_relative(self):
+        for path in SITE.rglob("*.html"):
+            for link in Page(path).refs:
+                self.assertFalse(link.startswith("https://cvc-lab.github.io/"), (path.name, link))
 
     def test_source_glossaries_and_repository_access_are_explicit(self):
         for slug in ["pd-validity-gates", "pd-signed-laterality"]:

@@ -8,7 +8,7 @@ date: '2024-10-20'
 
 We are developing advanced computational methods for modeling and visualizing subsurface flow dynamics, with applications to groundwater management, environmental remediation, and hydrocarbon reservoir simulation. Our research combines high-performance computing, machine learning, and innovative visualization techniques to provide accurate predictions of fluid behavior in complex geological formations.
 
-<video width="100%" controls autoplay muted loop style="border-radius: 8px; margin: 1.5rem 0;">
+<video width="640" height="480" controls autoplay muted loop playsinline style="display: block; border-radius: 8px; margin: 1.5rem auto;">
   <source src="./hydro6A80.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>

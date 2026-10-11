@@ -1,8 +1,8 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import Ai4pdLayout, { Ai4pdHead } from '../../../components/ai4pd/Ai4pdLayout'
-import { AI4PD_BASE } from '../../../components/ai4pd/links'
+import Ai4pdLayout, { Ai4pdHead, LinkIcon } from '../../../components/ai4pd/Ai4pdLayout'
+import { AI4PD_BASE, ODEN_CONTACT_URL } from '../../../components/ai4pd/links'
+import SmartLink from '../../../components/ui/SmartLink'
 
 const datasets = [
   {
@@ -63,7 +63,7 @@ const engagement = [
     'Oden Institute contact portal',
     'For media inquiries, philanthropy, or institutional partnerships, contact the Oden Institute communications team.',
     'Open contact page',
-    'https://www.oden.utexas.edu/contact/',
+    ODEN_CONTACT_URL,
   ],
   [
     'Texas Advanced Computing Center',
@@ -76,7 +76,7 @@ const engagement = [
 const ResourcesPage = () => (
   <Ai4pdLayout section="resources">
     <section className="ai4pd-hero">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <p className="ai4pd-eyebrow">Resources</p>
         <h1>Resources and collaboration</h1>
         <p className="ai4pd-lead">
@@ -87,7 +87,7 @@ const ResourcesPage = () => (
     </section>
 
     <section className="ai4pd-section">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <div className="ai4pd-prose">
           <h2>Core datasets</h2>
         </div>
@@ -96,14 +96,10 @@ const ResourcesPage = () => (
             <article key={d.name} className="ai4pd-card">
               <h3>{d.name}</h3>
               <p>{d.text}</p>
-              <a
-                href={d.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ai4pd-card__link"
-              >
-                Access resource
-              </a>
+              <SmartLink to={d.link} className="ai4pd-card__link">
+                Access resource<span className="visually-hidden">: {d.name}</span>{' '}
+                <LinkIcon to={d.link} />
+              </SmartLink>
             </article>
           ))}
         </div>
@@ -111,27 +107,27 @@ const ResourcesPage = () => (
     </section>
 
     <section className="ai4pd-section ai4pd-section--soft">
-      <div className="ai4pd-shell ai4pd-prose">
-        <h2>Lab documentation</h2>
-        <p>
-          Protocol drafts, segmentation benchmarks, and reproducible notebooks. The 2023 SBR
-          extraction study that started the imaging line of work is written up on the{' '}
-          <Link to={`${AI4PD_BASE}/background/`}>background page</Link>.
-        </p>
-        <ul className="ai4pd-list">
-          {docs.map(([label, href]) => (
-            <li key={href}>
-              <a href={href} target="_blank" rel="noopener noreferrer">
-                {label}
-              </a>
-            </li>
-          ))}
-        </ul>
+      <div className="page-container">
+        <div className="ai4pd-prose">
+          <h2>Lab documentation</h2>
+          <p>
+            Protocol drafts, segmentation benchmarks, and reproducible notebooks. The 2023 SBR
+            extraction study that started the imaging line of work is written up on the{' '}
+            <Link to={`${AI4PD_BASE}/background/`}>background page</Link>.
+          </p>
+          <ul className="ai4pd-list">
+            {docs.map(([label, href]) => (
+              <li key={href}>
+                <SmartLink to={href}>{label}</SmartLink>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
 
     <section className="ai4pd-section">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <div className="ai4pd-prose">
           <h2>Open-source roadmap</h2>
         </div>
@@ -147,7 +143,7 @@ const ResourcesPage = () => (
     </section>
 
     <section className="ai4pd-section ai4pd-section--soft">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <div className="ai4pd-prose">
           <h2>Engage with us</h2>
         </div>
@@ -156,9 +152,9 @@ const ResourcesPage = () => (
             <article key={t} className="ai4pd-card">
               <h3>{t}</h3>
               <p>{d}</p>
-              <a href={href} target="_blank" rel="noopener noreferrer" className="ai4pd-card__link">
-                {label}
-              </a>
+              <SmartLink to={href} className="ai4pd-card__link">
+                {label} <LinkIcon to={href} />
+              </SmartLink>
             </article>
           ))}
         </div>
@@ -166,7 +162,7 @@ const ResourcesPage = () => (
     </section>
 
     <section className="ai4pd-section ai4pd-section--tight">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <div className="ai4pd-callout">
           <h2>Responsible data stewardship</h2>
           <p>
@@ -192,7 +188,3 @@ export const Head = ({ location }) => (
     description="AI4PD resources: the core Parkinson's datasets the program rests on (PPMI, synapse.org, Mindboggle-101), lab documentation and playbooks, the open-source roadmap, and how to engage."
   />
 )
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

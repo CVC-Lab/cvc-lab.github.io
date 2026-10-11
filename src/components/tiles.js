@@ -1,397 +1,87 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'gatsby'
-import { Container, Tabs, Tab } from '@mui/material'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { useCardImage } from '../hooks/useCardImages'
 import { FaArrowRight, FaSearch, FaTimes } from 'react-icons/fa'
+import { useCardImage } from '../hooks/useCardImages'
+import PageHeader from './ui/PageHeader'
+import SmartLink from './ui/SmartLink'
+import Tabs, { tabPanelProps } from './ui/Tabs'
+import {
+  isHydrated,
+  prepaintGateScript,
+  readQueryParam,
+  useIsoLayoutEffect,
+  useMarkHydrated,
+  useReleasePrepaintGate,
+  useRescrollToHash,
+  writeQueryParams,
+} from './query-state'
 import './tiles-modern.css'
 
-const projectTabs = ['All', 'Healthcare AI', 'World Models', 'AI for Science']
-const parkinsonsHealthcareAiTitle = "AI4PD: Parkinson's Disease"
-const projectTabQueryParam = 'theme'
-
-const projectTabSlugs = {
-  All: 'all',
-  'Healthcare AI': 'healthcare-ai',
-  'World Models': 'world-models',
-  'AI for Science': 'ai-for-science',
-}
-
-const getProjectTabFromLocation = () => {
-  if (typeof window === 'undefined') {
-    return 'All'
-  }
-
-  const requestedSlug = new window.URLSearchParams(window.location.search).get(projectTabQueryParam)
-  return projectTabs.find(tab => projectTabSlugs[tab] === requestedSlug) || 'All'
-}
-
-const updateProjectTabInUrl = tab => {
-  if (typeof window === 'undefined') {
-    return
-  }
-
-  const url = new window.URL(window.location.href)
-  if (tab === 'All') {
-    url.searchParams.delete(projectTabQueryParam)
-  } else {
-    url.searchParams.set(projectTabQueryParam, projectTabSlugs[tab])
-  }
-
-  window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`)
-}
-
-const worldModelProjectNames = new Set([
-  'PHAST',
-  'GRL-SNAM',
-  'Dynamic Belief Games',
-  'Subsurface Flow Modeling',
-  'Scalable Risk-Averse Well-Placement',
-  'Optimal Control',
-  'Sample Complexity',
-  'Theoretical Bound for OCF Algorithm',
-  'Differential and Pointwise Control RL',
-  'The Physics, Information, and Computation of Perennial Learning: Kolmogorov Complexity, Information Distance and Port-Hamiltonian Thermodynamics',
-])
-
-const getProjectThemes = tile => {
-  if (tile.themes && tile.themes.length > 0) {
-    return tile.themes
-  }
-
-  if (tile.tags.includes('Health AI/ML')) {
-    return ['Healthcare AI']
-  }
-
-  if (worldModelProjectNames.has(tile.name) || tile.tags.includes('Reinforcement Learning')) {
-    return ['World Models']
-  }
-
-  return ['AI for Science']
-}
-
-// Featured project names - these are shown in the FeaturedResearch carousel on homepage
-const FEATURED_PROJECTS = [
-  'PHAST',
-  'GRL-SNAM',
-  'Dynamic Belief Games',
-  parkinsonsHealthcareAiTitle,
-  'Subsurface Flow Modeling',
+// Values are the ?theme= slugs; labels match the `themes` entries in src/data/site/projects.js.
+const PROJECT_TABS = [
+  { value: 'all', label: 'All' },
+  { value: 'healthcare-ai', label: 'Healthcare AI' },
+  { value: 'world-models', label: 'World Models' },
+  { value: 'ai-for-science', label: 'AI for Science' },
 ]
 
-const PROJECTS_PAGE_FEATURED_PROJECTS = ['PHAST', 'GRL-SNAM', parkinsonsHealthcareAiTitle]
+const PAST_PROJECTS_BEFORE = new Date('2023-01-01')
 
-const projectsPageFeaturedProjectNames = new Set(PROJECTS_PAGE_FEATURED_PROJECTS)
+// Hides the unfiltered server-rendered list on a hard load of a filtered URL (tiles-modern.css).
+const GATE_CLASS = 'projects-filter-pending'
 
-const useDebounce = (value, delay) => {
-  const [debouncedValue, setDebouncedValue] = React.useState(value)
-  React.useEffect(() => {
-    const timer = setTimeout(() => setDebouncedValue(value), delay)
-    return () => clearTimeout(timer)
-  }, [value, delay])
-  return debouncedValue
+export const filterGateScript = prepaintGateScript(GATE_CLASS, {
+  q: true,
+  theme: PROJECT_TABS.filter(tab => tab.value !== 'all').map(tab => tab.value),
+})
+
+const CARD_SIZES =
+  '(min-width: 1200px) 300px, (min-width: 960px) 31vw, (min-width: 600px) 47vw, 92vw'
+const FEATURED_CARD_SIZES =
+  '(min-width: 1200px) 400px, (min-width: 960px) 31vw, (min-width: 600px) 47vw, 92vw'
+
+// Lower case without accents; curly apostrophes made straight and dashes made spaces, so
+// "port hamiltonian" finds "Port-Hamiltonian".
+const normalise = value =>
+  value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[-\u2010-\u2015]/g, ' ')
+
+const projectCount = count => `${count} project${count === 1 ? '' : 's'}`
+
+const isCurrent = tile => new Date(tile.date) >= PAST_PROJECTS_BEFORE
+
+const themeFromUrl = () => {
+  const theme = readQueryParam('theme')
+  return PROJECT_TABS.some(tab => tab.value === theme) ? theme : 'all'
 }
 
-const ProjectCardLink = ({ tile, children, className = 'project-card-link' }) => {
-  if (tile.link.startsWith('http')) {
-    return (
-      <a href={tile.link} target="_blank" rel="noopener noreferrer" className={className}>
-        {children}
-      </a>
-    )
-  }
+const queryFromUrl = () => readQueryParam('q') || ''
 
-  return (
-    <Link to={tile.link} className={className}>
-      {children}
-    </Link>
-  )
-}
+const ProjectCardLink = ({ tile, children }) => (
+  <SmartLink to={tile.link} className="project-card-link">
+    {children}
+  </SmartLink>
+)
 
-const Tiles = ({ projectTiles, showAllProjects = false, locationSearch = '' }) => {
-  // Server-render the 'All' tab and only read the ?theme= query after mount, so the
-  // first client render matches the HTML and deep links do not force a re-hydrate.
-  const [activeTab, setActiveTab] = React.useState('All')
+const ProjectCard = ({ tile, featured = false }) => {
+  const image = getImage(tile.image)
 
-  React.useEffect(() => {
-    setActiveTab(getProjectTabFromLocation())
-  }, [locationSearch])
-  const [searchInput, setSearchInput] = React.useState('')
-  const debouncedSearch = useDebounce(searchInput, 300)
-  const hasSearchInput = searchInput.trim().length > 0
-
-  const handleTabChange = (event, newValue) => {
-    setActiveTab(newValue)
-    updateProjectTabInUrl(newValue)
-  }
-
-  const clearFilters = () => {
-    setActiveTab('All')
-    setSearchInput('')
-    updateProjectTabInUrl('All')
-  }
-
-  const resolveCardImage = useCardImage()
-
-  const sortedProjectTiles = React.useMemo(() => {
-    if (!projectTiles || projectTiles.length === 0) {
-      return []
-    }
-    return projectTiles
-      .map(tile => ({ ...tile, image: tile.image || resolveCardImage(tile.img_name) }))
-      .sort((a, b) => new Date(b.date) - new Date(a.date))
-  }, [projectTiles, resolveCardImage])
-
-  // On dedicated projects page, show all projects; on homepage, exclude featured ones
-  const regularProjects = React.useMemo(() => {
-    if (showAllProjects) {
-      return sortedProjectTiles
-    }
-    return sortedProjectTiles.filter(tile => !FEATURED_PROJECTS.includes(tile.name))
-  }, [sortedProjectTiles, showAllProjects])
-
-  const { currentProjects, pastProjects } = React.useMemo(() => {
-    const cutoffDate = new Date('2023-01-01')
-    const current = regularProjects.filter(tile => new Date(tile.date) >= cutoffDate)
-    const past = regularProjects.filter(tile => new Date(tile.date) < cutoffDate)
-    return { currentProjects: current, pastProjects: past }
-  }, [regularProjects])
-
-  const featuredProjects = React.useMemo(() => {
-    if (!showAllProjects) {
-      return []
-    }
-
-    const projectsByName = new Map(sortedProjectTiles.map(tile => [tile.name, tile]))
-    return PROJECTS_PAGE_FEATURED_PROJECTS.map(name => projectsByName.get(name)).filter(Boolean)
-  }, [showAllProjects, sortedProjectTiles])
-
-  const matchesSearch = React.useCallback(
-    tile => {
-      if (!debouncedSearch) return true
-      const query = debouncedSearch.toLowerCase()
-      return (
-        tile.name.toLowerCase().includes(query) ||
-        tile.description.toLowerCase().includes(query) ||
-        tile.tags.some(tag => tag.toLowerCase().includes(query)) ||
-        getProjectThemes(tile).some(theme => theme.toLowerCase().includes(query))
-      )
-    },
-    [debouncedSearch]
-  )
-
-  const filteredCurrentProjects = React.useMemo(() => {
-    let projects = currentProjects
-    if (activeTab !== 'All') {
-      projects = projects.filter(tile => getProjectThemes(tile).includes(activeTab))
-    }
-    return projects.filter(matchesSearch)
-  }, [currentProjects, activeTab, matchesSearch])
-
-  const filteredPastProjects = React.useMemo(() => {
-    let projects = pastProjects
-    if (activeTab !== 'All') {
-      projects = projects.filter(tile => getProjectThemes(tile).includes(activeTab))
-    }
-    return projects.filter(matchesSearch)
-  }, [pastProjects, activeTab, matchesSearch])
-
-  const totalVisibleProjects = filteredCurrentProjects.length + filteredPastProjects.length
-  const hasActiveFilters = activeTab !== 'All' || hasSearchInput
-  const activeSearchLabel = debouncedSearch.trim()
-  const showFeaturedProjects = showAllProjects && !hasActiveFilters && featuredProjects.length > 0
-
-  const gridCurrentProjects = React.useMemo(() => {
-    if (!showFeaturedProjects) {
-      return filteredCurrentProjects
-    }
-
-    return filteredCurrentProjects.filter(tile => !projectsPageFeaturedProjectNames.has(tile.name))
-  }, [filteredCurrentProjects, showFeaturedProjects])
-
-  const gridPastProjects = React.useMemo(() => {
-    if (!showFeaturedProjects) {
-      return filteredPastProjects
-    }
-
-    return filteredPastProjects.filter(tile => !projectsPageFeaturedProjectNames.has(tile.name))
-  }, [filteredPastProjects, showFeaturedProjects])
-
-  const resultsSummary = React.useMemo(() => {
-    if (hasActiveFilters) {
-      if (activeSearchLabel && activeTab !== 'All') {
-        return `Showing ${totalVisibleProjects} project${
-          totalVisibleProjects === 1 ? '' : 's'
-        } for "${activeSearchLabel}" in ${activeTab}`
-      }
-
-      if (activeSearchLabel) {
-        return `Showing ${totalVisibleProjects} project${
-          totalVisibleProjects === 1 ? '' : 's'
-        } for "${activeSearchLabel}"`
-      }
-
-      return `Showing ${totalVisibleProjects} project${
-        totalVisibleProjects === 1 ? '' : 's'
-      } in ${activeTab}`
-    }
-
-    return `Showing ${regularProjects.length} projects: ${currentProjects.length} current and ${pastProjects.length} past`
-  }, [
-    activeSearchLabel,
-    activeTab,
-    currentProjects.length,
-    hasActiveFilters,
-    pastProjects.length,
-    regularProjects.length,
-    totalVisibleProjects,
-  ])
-
-  const tabsMarkup = (
-    <Tabs
-      value={activeTab}
-      onChange={handleTabChange}
-      variant="scrollable"
-      scrollButtons="auto"
-      aria-label="project categories"
-    >
-      {projectTabs.map(tab => (
-        <Tab label={tab} value={tab} key={tab} />
-      ))}
-    </Tabs>
-  )
-
-  return (
-    <div
-      className={`tiles-container ${showAllProjects ? 'tiles-container--all-projects' : ''}`}
-      id="projects"
-    >
-      <Container maxWidth="lg">
-        {showAllProjects ? (
-          <h1 className="section-title">All Projects</h1>
-        ) : (
-          <h2 className="section-title">Research</h2>
-        )}
-        <p className="section-subtitle">
-          Browse current research across Healthcare AI, World Models, and AI for Science.
-        </p>
-
-        {showAllProjects ? (
-          <div className="project-controls">
-            <div className="project-search-wrapper">
-              <FaSearch className="project-search-icon" />
-              <input
-                type="text"
-                className="project-search-input"
-                placeholder="Search projects..."
-                value={searchInput}
-                onChange={e => setSearchInput(e.target.value)}
-                aria-label="Search projects"
-              />
-              {hasSearchInput && (
-                <button
-                  className="project-search-clear"
-                  onClick={() => setSearchInput('')}
-                  aria-label="Clear search"
-                >
-                  <FaTimes />
-                </button>
-              )}
-            </div>
-
-            <div className="tabs-container tabs-container--controls">{tabsMarkup}</div>
-
-            <div className="project-controls-footer">
-              <p className="project-results-summary">{resultsSummary}</p>
-              {hasActiveFilters && (
-                <button
-                  type="button"
-                  className="project-clear-filters-button"
-                  onClick={clearFilters}
-                >
-                  Clear filters
-                </button>
-              )}
-            </div>
-          </div>
-        ) : (
-          <div className="tabs-container">{tabsMarkup}</div>
-        )}
-
-        {showFeaturedProjects && (
-          <section className="featured-section" aria-labelledby="featured-projects-title">
-            <h3 id="featured-projects-title" className="featured-title">
-              Featured Projects
-            </h3>
-            <div className="featured-projects-grid">
-              {featuredProjects.map(tile => (
-                <ProjectCardLink
-                  key={tile.name}
-                  tile={tile}
-                  className="project-card-link project-card-link--featured"
-                >
-                  <ProjectCard tile={tile} />
-                </ProjectCardLink>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Current Projects Section */}
-        {gridCurrentProjects.length > 0 && (
-          <>
-            <div className="projects-grid">
-              {gridCurrentProjects.map(tile => (
-                <div key={tile.name}>
-                  <ProjectCardLink tile={tile}>
-                    <ProjectCard tile={tile} />
-                  </ProjectCardLink>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-
-        {/* Past Projects Section */}
-        {gridPastProjects.length > 0 && (
-          <div className="past-projects-section">
-            <h3 className="subsection-title">Past Projects</h3>
-            <div className="projects-grid">
-              {gridPastProjects.map(tile => (
-                <div key={tile.name}>
-                  <ProjectCardLink tile={tile}>
-                    <ProjectCard tile={tile} />
-                  </ProjectCardLink>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {filteredCurrentProjects.length === 0 &&
-          filteredPastProjects.length === 0 &&
-          debouncedSearch && (
-            <p className="section-subtitle" style={{ textAlign: 'center', marginTop: '2rem' }}>
-              No projects found matching &ldquo;{debouncedSearch}&rdquo;
-            </p>
-          )}
-      </Container>
-    </div>
-  )
-}
-
-// Standard Project Card
-const ProjectCard = ({ tile }) => {
   return (
     <div className="project-card">
       <div className="project-card-image">
         <div className="project-card-image-frame">
-          {getImage(tile.image) && (
+          {image && (
             <GatsbyImage
-              image={getImage(tile.image)}
-              alt={`${tile.name} project preview`}
-              loading="lazy"
+              image={image}
+              alt=""
+              loading={featured ? 'eager' : 'lazy'}
+              objectFit="contain"
+              sizes={featured ? FEATURED_CARD_SIZES : CARD_SIZES}
             />
           )}
         </div>
@@ -415,41 +105,288 @@ const ProjectCard = ({ tile }) => {
   )
 }
 
+const ProjectGrid = ({ tiles, className = 'projects-grid', featured = false }) => (
+  <ul className={className}>
+    {tiles.map(tile => (
+      <li key={tile.name}>
+        <ProjectCardLink tile={tile}>
+          <ProjectCard tile={tile} featured={featured} />
+        </ProjectCardLink>
+      </li>
+    ))}
+  </ul>
+)
+
+const Tiles = ({ projectTiles, locationSearch = '', locationKey }) => {
+  const [activeTab, setActiveTab] = React.useState(() => (isHydrated() ? themeFromUrl() : 'all'))
+  const [searchInput, setSearchInput] = React.useState(() => (isHydrated() ? queryFromUrl() : ''))
+  const [urlSynced, setUrlSynced] = React.useState(isHydrated)
+  const [announcement, setAnnouncement] = React.useState('')
+  const announcedSummary = React.useRef(null)
+  const inputRef = React.useRef(null)
+
+  useMarkHydrated()
+
+  // Apply the URL before the first paint after hydration, and again on every router
+  // navigation (Back, or the header link while filtered).
+  useIsoLayoutEffect(() => {
+    setActiveTab(themeFromUrl())
+    setSearchInput(queryFromUrl())
+    setUrlSynced(true)
+  }, [locationSearch, locationKey])
+
+  useReleasePrepaintGate(GATE_CLASS, urlSynced)
+
+  const searchLabel = searchInput.trim()
+  // Words of the query, single-space separated; a project matches when it contains every one.
+  const query = normalise(searchLabel).split(/\s+/).filter(Boolean).join(' ')
+  const hasQuery = query !== ''
+  const activeTabLabel = PROJECT_TABS.find(tab => tab.value === activeTab).label
+  const hasActiveFilters = activeTab !== 'all' || hasQuery
+
+  useRescrollToHash(urlSynced, hasActiveFilters)
+
+  React.useEffect(() => {
+    if (!urlSynced) return undefined
+    const timer = setTimeout(() => writeQueryParams({ q: searchLabel }), 300)
+    return () => clearTimeout(timer)
+  }, [urlSynced, searchLabel])
+
+  const handleTabChange = value => {
+    setActiveTab(value)
+    writeQueryParams({ theme: value === 'all' ? '' : value })
+  }
+
+  const clearSearch = () => {
+    setSearchInput('')
+    writeQueryParams({ q: '' })
+    inputRef.current?.focus({ preventScroll: true })
+  }
+
+  const clearFilters = () => {
+    setActiveTab('all')
+    setSearchInput('')
+    writeQueryParams({ theme: '', q: '' })
+    inputRef.current?.focus({ preventScroll: true })
+  }
+
+  const resolveCardImage = useCardImage()
+
+  const sortedProjectTiles = React.useMemo(
+    () =>
+      projectTiles
+        .map(tile => ({
+          ...tile,
+          image: resolveCardImage(tile.img_name),
+          searchText: normalise(
+            [tile.name, tile.description, ...tile.tags, ...tile.themes].join(' ')
+          ),
+        }))
+        .sort((a, b) => new Date(b.date) - new Date(a.date)),
+    [projectTiles, resolveCardImage]
+  )
+
+  const featuredProjects = React.useMemo(
+    () =>
+      sortedProjectTiles
+        .filter(tile => tile.featuredRank)
+        .sort((a, b) => a.featuredRank - b.featuredRank),
+    [sortedProjectTiles]
+  )
+
+  const visibleProjects = React.useMemo(() => {
+    const words = query ? query.split(' ') : []
+    return sortedProjectTiles.filter(
+      tile =>
+        (activeTab === 'all' || tile.themes.includes(activeTabLabel)) &&
+        words.every(word => tile.searchText.includes(word))
+    )
+  }, [sortedProjectTiles, activeTab, activeTabLabel, query])
+
+  const showFeaturedProjects = !hasActiveFilters && featuredProjects.length > 0
+  const gridProjects = showFeaturedProjects
+    ? visibleProjects.filter(tile => !tile.featuredRank)
+    : visibleProjects
+  const currentProjects = gridProjects.filter(isCurrent)
+  const pastProjects = gridProjects.filter(tile => !isCurrent(tile))
+  const totalVisibleProjects = visibleProjects.length
+
+  let resultsSummary
+  if (hasQuery && activeTab !== 'all') {
+    resultsSummary = `Showing ${projectCount(totalVisibleProjects)} for "${searchLabel}" in ${activeTabLabel}`
+  } else if (hasQuery) {
+    resultsSummary = `Showing ${projectCount(totalVisibleProjects)} for "${searchLabel}"`
+  } else if (activeTab !== 'all') {
+    resultsSummary = `Showing ${projectCount(totalVisibleProjects)} in ${activeTabLabel}`
+  } else {
+    const currentCount = sortedProjectTiles.filter(isCurrent).length
+    resultsSummary = `Showing ${sortedProjectTiles.length} projects: ${currentCount} current and ${
+      sortedProjectTiles.length - currentCount
+    } past`
+  }
+
+  // One status message per settled result, none per keystroke and none for the initial state.
+  React.useEffect(() => {
+    if (!urlSynced) return undefined
+    if (announcedSummary.current === null) {
+      announcedSummary.current = resultsSummary
+      return undefined
+    }
+    if (resultsSummary === announcedSummary.current) return undefined
+    const timer = setTimeout(() => {
+      announcedSummary.current = resultsSummary
+      setAnnouncement(resultsSummary)
+    }, 500)
+    return () => clearTimeout(timer)
+  }, [urlSynced, resultsSummary])
+
+  return (
+    <div className="tiles-container" id="projects">
+      <div className="page-container">
+        <PageHeader
+          title="All Projects"
+          lede="Browse current research across Healthcare AI, World Models, and AI for Science."
+        />
+
+        <div className="project-controls">
+          <div className="project-search-wrapper" role="search">
+            <FaSearch className="project-search-icon" aria-hidden="true" />
+            <input
+              ref={inputRef}
+              type="text"
+              inputMode="search"
+              enterKeyHint="search"
+              autoComplete="off"
+              className="project-search-input"
+              placeholder="Search projects..."
+              value={searchInput}
+              onChange={e => setSearchInput(e.target.value)}
+              onKeyDown={e => {
+                if (e.key === 'Escape' && searchInput !== '') {
+                  e.preventDefault()
+                  clearSearch()
+                }
+              }}
+              onBlur={() => writeQueryParams({ q: searchLabel })}
+              aria-label="Search projects"
+            />
+            {searchInput !== '' && (
+              <button
+                type="button"
+                className="project-search-clear"
+                onClick={clearSearch}
+                aria-label="Clear search"
+              >
+                <FaTimes aria-hidden="true" />
+              </button>
+            )}
+          </div>
+
+          <Tabs
+            className="project-tabs"
+            label="Filter projects by theme"
+            idBase="project-theme"
+            value={activeTab}
+            onChange={handleTabChange}
+            items={PROJECT_TABS}
+            wrap
+          />
+
+          <div className="project-controls-footer">
+            <p className="project-results-summary">{resultsSummary}</p>
+            <p className="visually-hidden" role="status">
+              {announcement}
+            </p>
+            {/* Always rendered, so the first filter does not push the results down. Idle, it is only
+                hidden: Firefox would restore a disabled state on reload, against the server HTML. */}
+            <button
+              type="button"
+              className={`project-clear-filters-button${hasActiveFilters ? '' : ' project-clear-filters-button--idle'}`}
+              onClick={clearFilters}
+              aria-hidden={hasActiveFilters ? undefined : 'true'}
+            >
+              Clear filters
+            </button>
+          </div>
+        </div>
+
+        {/* tabIndex -1: the panel holds 41 links, so it is not a tab stop of its own. */}
+        <div
+          {...tabPanelProps('project-theme', activeTab)}
+          tabIndex={-1}
+          className="project-results"
+        >
+          {showFeaturedProjects && (
+            <section className="project-section" aria-labelledby="featured-projects-title">
+              <h2 id="featured-projects-title" className="project-section-heading">
+                Featured Projects
+              </h2>
+              <ProjectGrid tiles={featuredProjects} className="featured-projects-grid" featured />
+            </section>
+          )}
+
+          {currentProjects.length > 0 && (
+            <section className="project-section" aria-labelledby="current-projects-title">
+              <h2 id="current-projects-title" className="project-section-heading visually-hidden">
+                Current Projects
+              </h2>
+              <ProjectGrid tiles={currentProjects} />
+            </section>
+          )}
+
+          {pastProjects.length > 0 && (
+            <section
+              className="project-section past-projects-section"
+              aria-labelledby="past-projects-title"
+            >
+              <h2 id="past-projects-title" className="project-section-heading">
+                Past Projects
+              </h2>
+              <ProjectGrid tiles={pastProjects} />
+            </section>
+          )}
+
+          {totalVisibleProjects === 0 && hasQuery && (
+            <p className="project-empty">No projects found matching &ldquo;{searchLabel}&rdquo;</p>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const tileShape = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  img_name: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  themes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  featuredRank: PropTypes.number,
+  date: PropTypes.string,
+  image: PropTypes.object,
+})
+
 Tiles.propTypes = {
-  projectTiles: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      img_name: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
-      tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-      themes: PropTypes.arrayOf(PropTypes.string),
-      date: PropTypes.string,
-      image: PropTypes.object,
-    })
-  ).isRequired,
-  showAllProjects: PropTypes.bool,
+  projectTiles: PropTypes.arrayOf(tileShape).isRequired,
   locationSearch: PropTypes.string,
+  locationKey: PropTypes.string,
 }
 
 ProjectCardLink.propTypes = {
-  tile: PropTypes.shape({
-    link: PropTypes.string.isRequired,
-  }).isRequired,
+  tile: PropTypes.shape({ link: PropTypes.string.isRequired }).isRequired,
   children: PropTypes.node.isRequired,
-  className: PropTypes.string,
 }
 
 ProjectCard.propTypes = {
-  tile: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    img_name: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    themes: PropTypes.arrayOf(PropTypes.string),
-    image: PropTypes.object,
-  }).isRequired,
+  tile: tileShape.isRequired,
+  featured: PropTypes.bool,
+}
+
+ProjectGrid.propTypes = {
+  tiles: PropTypes.arrayOf(tileShape).isRequired,
+  className: PropTypes.string,
+  featured: PropTypes.bool,
 }
 
 export default Tiles

@@ -5,7 +5,7 @@ import { FaArrowDown, FaArrowRight } from 'react-icons/fa'
 const HeroSection = () => (
   <section className="research-home-hero">
     <div className="research-home-hero__backdrop" aria-hidden="true" />
-    <div className="research-themes-shell research-home-hero__content">
+    <div className="page-container research-themes-shell research-home-hero__content">
       <div className="research-home-hero__copy">
         <p className="research-home-hero__eyebrow">Computational Visualization Center</p>
         <p className="research-home-hero__meta">
@@ -20,7 +20,7 @@ const HeroSection = () => (
           <a href="#research-themes" className="research-home-button research-home-button--primary">
             Explore research themes <FaArrowDown aria-hidden="true" />
           </a>
-          <Link to="/publications" className="research-home-button research-home-button--quiet">
+          <Link to="/publications/" className="research-home-button research-home-button--quiet">
             Read the research <FaArrowRight aria-hidden="true" />
           </Link>
         </div>

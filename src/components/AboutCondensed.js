@@ -1,10 +1,11 @@
 import * as React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
+import SmartLink from './ui/SmartLink'
 import './AboutCondensed.css'
 
 const AboutCondensed = () => (
   <section className="about-condensed" id="about">
-    <div className="about-condensed-container">
+    <div className="page-container about-condensed-container">
       <div className="about-condensed-content">
         <h2 className="about-condensed-title">About the Center</h2>
         <p className="about-condensed-text">
@@ -16,32 +17,38 @@ const AboutCondensed = () => (
           applications.
         </p>
         <div className="about-condensed-logos">
-          <a
-            href="https://www.oden.utexas.edu/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <SmartLink
+            to="https://www.oden.utexas.edu/"
             className="about-logo-link"
-            aria-label="Visit Oden Institute website"
+            aria-label="Visit Oden Institute website (opens in a new tab)"
           >
-            <img
-              src={require('../images/oden.png').default}
+            <StaticImage
+              src="../images/oden.png"
               alt="Oden Institute logo"
               className="about-logo"
+              layout="constrained"
+              width={210}
+              placeholder="none"
+              objectFit="contain"
+              formats={['auto', 'webp']}
             />
-          </a>
-          <a
-            href="https://www.cs.utexas.edu/"
-            target="_blank"
-            rel="noopener noreferrer"
+          </SmartLink>
+          <SmartLink
+            to="https://www.cs.utexas.edu/"
             className="about-logo-link"
-            aria-label="Visit UT Computer Science website"
+            aria-label="Visit UT Computer Science website (opens in a new tab)"
           >
-            <img
-              src={require('../images/cs.png').default}
+            <StaticImage
+              src="../images/cs.png"
               alt="UT CS logo"
               className="about-logo"
+              layout="constrained"
+              width={210}
+              placeholder="none"
+              objectFit="contain"
+              formats={['auto', 'webp']}
             />
-          </a>
+          </SmartLink>
         </div>
       </div>
       <div className="about-condensed-photo-wrapper">

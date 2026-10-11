@@ -1,91 +1,129 @@
-import React, { createContext, useState, useEffect, useContext, useCallback } from 'react'
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
-import Cookies from 'js-cookie'
 import { navigate } from 'gatsby'
+import './password-gate.css'
 
-// SECURITY NOTE: This is a basic password protection mechanism suitable only
-// for low-security content. For production applications requiring real security,
-// implement proper authentication with:
-// - Server-side authentication
-// - Secure token-based auth (JWT)
-// - OAuth/SAML integration
-// - Proper session management
-// Current implementation stores passwords in plain text in cookies.
+// This gate is a convenience screen, not access control. The site is static and
+// public: gated page content ships in page-data JSON and JS chunks, and both
+// passwords can be read from the client bundle. Nothing sensitive may rely on it.
 
-const COOKIE_NAME = 'password-protect'
+export const GATE_PATH = '/password-protect/'
+export const DEFAULT_GATED_PATH = '/internal/'
 export const PENDING_REDIRECT_KEY = 'password-protect-redirect'
-const PASSWORD = process.env.GATSBY_INTERNAL_LINKS_PASSWORD
-const normalizePassword = value => (typeof value === 'string' ? value.trim().toLowerCase() : '')
-const configuredPassword = normalizePassword(PASSWORD)
-const hasConfiguredPassword = configuredPassword.length > 0
+const UNLOCKED_KEY = 'password-protect-unlocked'
+const DBG_INTERNAL_PATH = '/projects/dynamic-belief-games/internal'
+export const PROTECTED_PATHS = ['/internal', DBG_INTERNAL_PATH]
 const DBG_INTERNAL_PASSWORD = 'dbg2026'
+
+const normalizePassword = value => (typeof value === 'string' ? value.trim().toLowerCase() : '')
+// An unset or empty password never matches anything, so the gate fails closed.
+const EXPECTED_PASSWORDS = {
+  site: normalizePassword(process.env.GATSBY_INTERNAL_LINKS_PASSWORD),
+  dbg: normalizePassword(DBG_INTERNAL_PASSWORD),
+}
+
 export const normalizeRoutePath = value =>
   typeof value === 'string' ? value.replace(/\/+$/, '') || '/' : '/'
-const isDbgInternalPage = pathname =>
-  normalizeRoutePath(pathname).startsWith('/projects/dynamic-belief-games/internal')
-export const getRoutePasswordForPath = pathname =>
-  isDbgInternalPage(pathname) ? DBG_INTERNAL_PASSWORD : undefined
+const isUnder = (pathname, base) => pathname === base || pathname.startsWith(`${base}/`)
 
-// Create context
+export const isProtectedPath = pathname => {
+  const normalized = normalizeRoutePath(pathname)
+  return PROTECTED_PATHS.some(base => isUnder(normalized, base))
+}
+
+export const getGateScope = pathname => {
+  const normalized = normalizeRoutePath(pathname)
+  if (isUnder(normalized, DBG_INTERNAL_PATH)) return 'dbg'
+  return isProtectedPath(normalized) ? 'site' : null
+}
+
+// sessionStorage throws when storage is blocked and does not exist during SSR.
+export const gateStorage = {
+  get: key => {
+    try {
+      return window.sessionStorage.getItem(key)
+    } catch {
+      return null
+    }
+  },
+  set: (key, value) => {
+    try {
+      window.sessionStorage.setItem(key, value)
+    } catch {
+      // The unlock then lasts until the next page load.
+    }
+  },
+  remove: key => {
+    try {
+      window.sessionStorage.removeItem(key)
+    } catch {
+      // Nothing was stored.
+    }
+  },
+}
+
+const LOCKED = { site: false, dbgPath: null }
 const PasswordContext = createContext()
 
-// Provider component
 export const PasswordProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [transientPath, setTransientPath] = useState(null)
+  const [access, setAccess] = useState(LOCKED)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Only trust a stored password when a real password is configured.
-    const storedPassword = Cookies.get(COOKIE_NAME)
-    if (hasConfiguredPassword && normalizePassword(storedPassword) === configuredPassword) {
-      setIsAuthenticated(true)
+    // Read in an effect so the server-rendered shell and the first client render match.
+    if (EXPECTED_PASSWORDS.site && gateStorage.get(UNLOCKED_KEY) === 'site') {
+      setAccess(current => ({ ...current, site: true }))
     }
     setIsLoading(false)
   }, [])
 
-  const login = useCallback((passwordCandidate, options = {}) => {
-    const allowEmptyPassword = Boolean(options.allowEmptyPassword)
-    const routePassword = normalizePassword(options.routePassword)
-    const normalizedCandidate = normalizePassword(passwordCandidate)
-    const hasRoutePassword = routePassword.length > 0
-    const routePasswordMatches = routePassword.length > 0 && normalizedCandidate === routePassword
-    const configuredPasswordMatches =
-      hasConfiguredPassword && normalizedCandidate === configuredPassword
-    const canAuthenticate =
-      allowEmptyPassword ||
-      routePasswordMatches ||
-      (!hasRoutePassword && (!hasConfiguredPassword || configuredPasswordMatches))
+  const login = useCallback((candidate, targetPath) => {
+    const scope = getGateScope(targetPath)
+    const expected = scope ? EXPECTED_PASSWORDS[scope] : ''
+    if (!expected || normalizePassword(candidate) !== expected) return false
 
-    if (canAuthenticate) {
-      if (configuredPasswordMatches && !routePasswordMatches && !allowEmptyPassword) {
-        Cookies.set(COOKIE_NAME, configuredPassword)
-      }
-      setTransientPath(options.transientPath ? normalizeRoutePath(options.transientPath) : null)
-      setIsAuthenticated(true)
-      return true
+    if (scope === 'site') {
+      // A flag, never the password.
+      gateStorage.set(UNLOCKED_KEY, 'site')
+      setAccess(current => ({ ...current, site: true }))
+    } else {
+      setAccess(current => ({ ...current, dbgPath: normalizeRoutePath(targetPath) }))
     }
-    return false
+    return true
   }, [])
 
   const logout = useCallback(() => {
-    Cookies.remove(COOKIE_NAME)
-    setTransientPath(null)
-    setIsAuthenticated(false)
+    gateStorage.remove(UNLOCKED_KEY)
+    setAccess(LOCKED)
   }, [])
 
-  return (
-    <PasswordContext.Provider value={{ isAuthenticated, isLoading, login, logout, transientPath }}>
-      {children}
-    </PasswordContext.Provider>
+  const hasAccess = useCallback(
+    pathname => {
+      const scope = getGateScope(pathname)
+      if (!scope) return true
+      return scope === 'site' ? access.site : access.dbgPath === normalizeRoutePath(pathname)
+    },
+    [access]
   )
+
+  const value = useMemo(
+    () => ({
+      isAuthenticated: access.site || Boolean(access.dbgPath),
+      isLoading,
+      hasAccess,
+      login,
+      logout,
+    }),
+    [access, isLoading, hasAccess, login, logout]
+  )
+
+  return <PasswordContext.Provider value={value}>{children}</PasswordContext.Provider>
 }
 
 PasswordProvider.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-// Custom hook to use the password context
 export const usePassword = () => {
   const context = useContext(PasswordContext)
   if (!context) {
@@ -94,86 +132,53 @@ export const usePassword = () => {
   return context
 }
 
-// Helper function to check if a page is protected
-export const isProtectedPage = (pathname, pagePaths, partialMatching = false) => {
-  const normalizedPathname = normalizeRoutePath(pathname)
-  const isProtected = pagePaths.find(path => {
-    const normalizedPath = normalizeRoutePath(path)
-    const isIndexPage = normalizedPathname === '/'
+// Without JavaScript the status never resolves, so the notice replaces it.
+const GateStatus = () => (
+  <div className="password-gate-status">
+    <p className="password-gate-status__loading" role="status">
+      Loading...
+    </p>
+    <noscript>
+      <style>{'.password-gate-status__loading{display:none}'}</style>
+      <p>
+        This page needs JavaScript. <a href="/">Go to the CVC home page</a>
+      </p>
+    </noscript>
+  </div>
+)
 
-    if (partialMatching && !isIndexPage) {
-      return (
-        normalizedPathname === normalizedPath || normalizedPathname.startsWith(`${normalizedPath}/`)
-      )
-    }
+// For an unknown URL Gatsby renders its 404 page (the dev 404 page in development) under
+// that URL. It has nothing to gate, and its server HTML is the 404 page.
+const NOT_FOUND_PAGE = /^\/(404|dev-404-page)(\/|\.html)?$/
 
-    return normalizedPath === normalizedPathname
-  })
-
-  return Boolean(isProtected)
-}
-
-// Protected route component
-export const ProtectedRoute = ({
-  children,
-  location,
-  pagePaths = [
-    '/internal',
-    '/internal/',
-    '/cvc-website/internal',
-    '/cvc-website/internal/',
-    '/projects/dynamic-belief-games/internal',
-    '/projects/dynamic-belief-games/internal/',
-  ],
-  partialMatching = true,
-}) => {
-  const { isAuthenticated, isLoading, logout, transientPath } = usePassword()
+export const ProtectedRoute = ({ children, location, pageResources }) => {
+  const { isAuthenticated, isLoading, hasAccess, logout } = usePassword()
   const pathname = location.pathname
-  const isProtected = isProtectedPage(pathname, pagePaths, partialMatching)
-  const dbgInternalPage = isDbgInternalPage(pathname)
-  const hasRouteAccess =
-    isAuthenticated &&
-    (!dbgInternalPage || normalizeRoutePath(transientPath) === normalizeRoutePath(pathname))
+  const isNotFound = NOT_FOUND_PAGE.test(pageResources?.page?.path ?? '')
+  const isProtected = !isNotFound && isProtectedPath(pathname)
+  const isGate = normalizeRoutePath(pathname) === normalizeRoutePath(GATE_PATH)
 
+  // Leaving the gated pages locks them again.
   useEffect(() => {
-    const normalizedPathname = normalizeRoutePath(pathname)
-    if (
-      !isLoading &&
-      !isProtected &&
-      normalizedPathname !== '/password-protect' &&
-      isAuthenticated
-    ) {
+    if (!isLoading && !isProtected && !isGate && isAuthenticated) {
       logout()
     }
-  }, [isAuthenticated, isLoading, isProtected, logout, pathname])
+  }, [isAuthenticated, isGate, isLoading, isProtected, logout])
 
-  const shouldRedirectToPassword = !isLoading && isProtected && !hasRouteAccess
+  const shouldRedirectToPassword = !isLoading && isProtected && !hasAccess(pathname)
 
   useEffect(() => {
     if (!shouldRedirectToPassword) return
 
-    if (typeof window !== 'undefined') {
-      window.sessionStorage.setItem(PENDING_REDIRECT_KEY, pathname)
-    }
-
-    navigate('/password-protect', {
-      replace: true,
-      state: {
-        redirectTo: pathname,
-        routePassword: getRoutePasswordForPath(pathname),
-      },
-    })
+    gateStorage.set(PENDING_REDIRECT_KEY, pathname)
+    navigate(GATE_PATH, { replace: true, state: { redirectTo: pathname } })
   }, [pathname, shouldRedirectToPassword])
 
-  // Only a protected route has to wait for the cookie check. Blocking every
+  // Only a protected route has to wait for the stored-flag check. Blocking every
   // route on it made each page server-render as the loading shell, because
   // isLoading is cleared from an effect that never runs during SSR.
-  if (isLoading && isProtected) {
-    return <div>Loading...</div>
-  }
-
-  if (shouldRedirectToPassword) {
-    return null
+  if (isProtected && (isLoading || shouldRedirectToPassword)) {
+    return <GateStatus />
   }
 
   return children
@@ -184,8 +189,10 @@ ProtectedRoute.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
-  pagePaths: PropTypes.arrayOf(PropTypes.string),
-  partialMatching: PropTypes.bool,
+  // Browser only; the server render has no pageResources and keeps the gate.
+  pageResources: PropTypes.shape({
+    page: PropTypes.shape({ path: PropTypes.string }),
+  }),
 }
 
 export default PasswordContext

@@ -1,18 +1,50 @@
-@import url('../../styles/design-system.css');
-
 .dbg-page {
-  background: var(--color-background);
+  background: var(--color-bg-primary);
   color: var(--color-text-primary);
 }
 
-.dbg-shell {
-  width: min(1280px, calc(100% - 2.5rem));
-  margin: 0 auto;
+.dbg-page .back-link {
+  margin-bottom: var(--space-sm);
 }
 
 .dbg-project-home {
+  --back-link-color: rgba(255, 255, 255, 0.72);
+  --back-link-hover-color: white;
+  --focus-ring-color: var(--ut-white);
+
+  position: relative;
+  isolation: isolate;
   min-height: 100vh;
   overflow: hidden;
+  /* Clips the viewport-fixed ::before texture to this box. Unlike
+     background-attachment: fixed, this also works on iOS. */
+  clip-path: inset(0);
+  background: linear-gradient(135deg, #07111f 0%, #101820 52%, #07111f 100%);
+  color: white;
+}
+
+.dbg-project-home::before,
+.dbg-project-home::after {
+  content: '';
+  pointer-events: none;
+}
+
+.dbg-project-home::before {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100vh;
+  height: 100lvh;
+  background: url('../../images/projects/dynamic_belief_games/background_image.webp') center / cover
+    no-repeat;
+}
+
+.dbg-project-home::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background:
     linear-gradient(
       90deg,
@@ -21,11 +53,11 @@
       rgba(3, 10, 18, 0.45) 100%
     ),
     radial-gradient(circle at 85% 12%, rgba(53, 178, 211, 0.2), transparent 30%),
-    radial-gradient(circle at 16% 22%, rgba(191, 87, 0, 0.18), transparent 26%),
-    url('https://github.com/CVC-Lab/cvc-lab.github.io/releases/download/assets-v1/background_image.png')
-      center center / cover no-repeat fixed,
-    linear-gradient(135deg, #07111f 0%, #101820 52%, #07111f 100%);
-  color: white;
+    radial-gradient(circle at 16% 22%, rgba(191, 87, 0, 0.18), transparent 26%);
+}
+
+.dbg-project-home .back-link {
+  margin-bottom: var(--space-lg);
 }
 
 .dbg-home-hero {
@@ -53,25 +85,6 @@
   align-items: center;
 }
 
-.dbg-home-back-link,
-.dbg-home-branch {
-  color: inherit;
-  text-decoration: none;
-}
-
-.dbg-home-back-link {
-  display: inline-flex;
-  margin-bottom: var(--space-xl);
-  color: rgba(255, 255, 255, 0.72);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-}
-
-.dbg-home-back-link:hover,
-.dbg-home-back-link:focus-visible {
-  color: white;
-}
-
 .dbg-home-eyebrow {
   margin: 0 0 var(--space-sm);
   color: #82eaff;
@@ -84,21 +97,23 @@
 .dbg-home-hero h1 {
   margin: 0;
   max-width: 11ch;
-  font-size: clamp(3.25rem, 6vw, 5.9rem);
-  line-height: 0.94;
-  letter-spacing: -0.065em;
+  font-size: clamp(3.25rem, 5.6vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
 }
 
 .dbg-home-hero__content > p:last-child,
-.dbg-home-tree__header p,
+.dbg-home-stack p:not(.dbg-home-eyebrow),
+.dbg-home-tree__header p:not(.dbg-home-eyebrow),
 .dbg-home-branch p {
+  margin: 0;
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.75;
 }
 
 .dbg-home-hero__content > p:last-child {
   max-width: 42rem;
-  margin: var(--space-xl) 0 0;
+  margin-top: var(--space-xl);
   font-size: clamp(1.05rem, 1.5vw, 1.28rem);
 }
 
@@ -106,8 +121,6 @@
   position: relative;
   width: min(100%, 820px);
   justify-self: end;
-  aspect-ratio: 1.88 / 1;
-  min-height: clamp(22rem, 38vw, 34rem);
   overflow: hidden;
   border: 1px solid rgba(130, 234, 255, 0.22);
   border-radius: 2rem;
@@ -130,120 +143,26 @@
   pointer-events: none;
 }
 
-.dbg-home-visual__video,
+/* In flow: the width/height attributes set the box, so the picture is never cropped,
+   and the caption sits under it instead of over its labels. */
 .dbg-home-visual__image {
-  position: absolute;
-  inset: 0;
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: left center;
-}
-
-.dbg-home-visual__image {
-  object-position: center center;
-}
-
-.dbg-home-visual__grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(130, 234, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(130, 234, 255, 0.08) 1px, transparent 1px);
-  background-size: 36px 36px;
-  transform: perspective(700px) rotateX(56deg) translateY(18%);
-  transform-origin: bottom;
-}
-
-.dbg-home-visual__ring {
-  position: absolute;
-  inset: 18%;
-  border: 1px solid rgba(130, 234, 255, 0.34);
-  border-radius: 50%;
-  animation: dbgPulse 4s ease-in-out infinite;
-}
-
-.dbg-home-visual__ring--two {
-  inset: 31%;
-  border-color: rgba(191, 87, 0, 0.45);
-  animation-delay: 1.2s;
-}
-
-.dbg-home-visual__route {
-  position: absolute;
-  height: 2px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, transparent, #82eaff, #bf5700, transparent);
-  filter: drop-shadow(0 0 12px rgba(130, 234, 255, 0.7));
-  opacity: 0.9;
-}
-
-.dbg-home-visual__route--one {
-  top: 46%;
-  left: 15%;
-  width: 72%;
-  transform: rotate(-16deg);
-  animation: dbgScan 3.5s ease-in-out infinite;
-}
-
-.dbg-home-visual__route--two {
-  top: 61%;
-  left: 18%;
-  width: 66%;
-  transform: rotate(22deg);
-  animation: dbgScan 3.5s ease-in-out infinite reverse;
-}
-
-.dbg-home-visual__node {
-  position: absolute;
-  width: 0.9rem;
-  height: 0.9rem;
-  border-radius: 50%;
-  background: #82eaff;
-  box-shadow:
-    0 0 0 8px rgba(130, 234, 255, 0.13),
-    0 0 28px rgba(130, 234, 255, 0.85);
-}
-
-.dbg-home-visual__node--a {
-  top: 42%;
-  left: 17%;
-}
-
-.dbg-home-visual__node--b {
-  top: 33%;
-  right: 18%;
-}
-
-.dbg-home-visual__node--c {
-  bottom: 29%;
-  left: 29%;
-  background: #bf5700;
-  box-shadow:
-    0 0 0 8px rgba(191, 87, 0, 0.16),
-    0 0 28px rgba(191, 87, 0, 0.85);
-}
-
-.dbg-home-visual__node--d {
-  right: 24%;
-  bottom: 23%;
+  height: auto;
 }
 
 .dbg-home-visual__caption {
-  position: absolute;
+  position: relative;
   z-index: 1;
-  right: 1.25rem;
-  bottom: 1.25rem;
-  left: 1.25rem;
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   align-items: center;
+  margin: 0.75rem;
   padding: 1rem 1.1rem;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 1rem;
   background: rgba(4, 10, 18, 0.72);
-  backdrop-filter: blur(18px);
   color: rgba(255, 255, 255, 0.68);
   font-size: var(--font-size-sm);
 }
@@ -268,14 +187,12 @@
   max-width: 12ch;
   color: white;
   font-size: clamp(2rem, 4vw, 3.6rem);
-  line-height: 0.98;
-  letter-spacing: -0.055em;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
 }
 
 .dbg-home-stack p:not(.dbg-home-eyebrow) {
   max-width: 34rem;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.75;
 }
 
 .dbg-home-stack__figure {
@@ -296,18 +213,15 @@
   pointer-events: none;
 }
 
-.dbg-home-stack__figure img {
+/* The figure clips everything outside the video, so its focus ring goes inside. */
+.dbg-home-stack__video {
+  --focus-ring-offset: -3px;
+
   display: block;
   width: 100%;
   height: auto;
-}
-
-.dbg-home-stack__video {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1.88 / 1;
-  object-fit: cover;
-  object-position: left center;
+  aspect-ratio: 1600 / 852;
+  border-radius: inherit;
 }
 
 .dbg-home-tree {
@@ -322,14 +236,16 @@
   margin: 0 0 var(--space-md);
   color: white;
   font-size: clamp(2rem, 4vw, 3.5rem);
-  letter-spacing: -0.05em;
+  letter-spacing: -0.025em;
 }
 
 .dbg-home-tree__map {
+  --dbg-tree-gap: clamp(1.5rem, 4vw, 3rem);
+
   position: relative;
   display: grid;
   grid-template-columns: 9rem minmax(0, 1fr);
-  gap: clamp(1.5rem, 4vw, 3rem);
+  gap: var(--dbg-tree-gap);
   align-items: stretch;
   margin-top: var(--space-2xl);
 }
@@ -359,6 +275,11 @@
   background: linear-gradient(90deg, rgba(130, 234, 255, 0.48), rgba(130, 234, 255, 0));
 }
 
+/* One branch: stop the connector at the card (9rem column - 8rem root + the grid gap). */
+.dbg-home-tree__map--single .dbg-home-tree__trunk {
+  width: calc(1rem + var(--dbg-tree-gap));
+}
+
 .dbg-home-tree__branches {
   display: grid;
   gap: var(--space-lg);
@@ -382,6 +303,8 @@
     linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)),
     rgba(255, 255, 255, 0.06);
   box-shadow: 0 20px 55px rgba(0, 0, 0, 0.24);
+  color: inherit;
+  text-decoration: none;
   transition:
     transform var(--transition-fast),
     border-color var(--transition-fast),
@@ -415,7 +338,7 @@
   border: 1px solid rgba(130, 234, 255, 0.24);
   border-radius: 999px;
   color: #82eaff;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: var(--font-weight-bold);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -428,35 +351,9 @@
   line-height: 1.1;
 }
 
-.dbg-home-branch p {
-  margin: 0;
-}
-
-@keyframes dbgPulse {
-  0%,
-  100% {
-    opacity: 0.38;
-    transform: scale(0.96);
-  }
-
-  50% {
-    opacity: 0.9;
-    transform: scale(1.04);
-  }
-}
-
-@keyframes dbgScan {
-  0%,
-  100% {
-    opacity: 0.35;
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
 .dbg-hero {
+  --back-link-color: var(--color-primary-on-tint);
+
   padding: var(--space-3xl) 0 var(--space-2xl);
   background:
     radial-gradient(circle at top right, rgba(191, 87, 0, 0.08), transparent 28%),
@@ -475,29 +372,32 @@
   grid-template-columns: minmax(0, 0.85fr) minmax(440px, 1.15fr);
 }
 
-.dbg-back-link,
 .dbg-text-link {
   color: var(--color-primary);
   font-weight: var(--font-weight-semibold);
   text-decoration: none;
 }
 
-.dbg-back-link:hover,
-.dbg-back-link:focus-visible,
 .dbg-text-link:hover,
 .dbg-text-link:focus-visible {
   color: var(--color-primary-dark);
 }
 
 .dbg-eyebrow,
-.dbg-section__eyebrow,
-.dbg-callout__eyebrow {
+.dbg-section__eyebrow {
   margin: 0 0 var(--space-sm);
   color: var(--color-primary);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+/* On the tinted bands and hero gradients #bf5700 drops to 4.2:1; the on-tint orange stays
+   above 4.5:1. The heroes pass the same colour to their back links. */
+.dbg-section--alt .dbg-section__eyebrow,
+.dbg-hero .dbg-eyebrow {
+  color: var(--color-primary-on-tint);
 }
 
 .dbg-hero h1 {
@@ -515,18 +415,19 @@
   max-width: 30ch;
 }
 
+/* Body copy. The :not()s keep eyebrows and badges out: this selector outranks their own rules. */
 .dbg-hero__copy,
-.dbg-section__intro p,
-.dbg-card p,
-.dbg-step p,
-.dbg-callout p,
-.dbg-workstream p {
+.dbg-section__intro p:not(.dbg-section__eyebrow),
+.dbg-section__split p:not(.dbg-section__eyebrow),
+.dbg-card p:not(.dbg-section__eyebrow):not(.dbg-workstream-card__badge),
+.dbg-step p {
+  margin: 0;
   color: var(--color-text-secondary);
   line-height: 1.7;
 }
 
 .dbg-hero__copy {
-  margin: var(--space-lg) 0 0;
+  margin-top: var(--space-lg);
   font-size: var(--font-size-lg);
   max-width: 62ch;
 }
@@ -578,15 +479,13 @@
 
 .dbg-proof-strip {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-md);
   margin-top: var(--space-xl);
 }
 
 .dbg-proof-strip__item,
 .dbg-card,
-.dbg-step,
-.dbg-callout {
+.dbg-step {
   border: 1px solid rgba(51, 63, 72, 0.12);
   background: white;
   border-radius: 1.25rem;
@@ -605,13 +504,13 @@
   display: block;
   width: 100%;
   height: auto;
+  margin: 0;
   border-radius: 1.5rem;
   box-shadow: var(--shadow-lg);
 }
 
 .dbg-section {
   padding: var(--space-3xl) 0;
-  scroll-margin-top: 96px;
 }
 
 .dbg-section--alt {
@@ -631,6 +530,16 @@
   letter-spacing: -0.03em;
 }
 
+.dbg-section__split h3,
+.dbg-team-groups h3 {
+  margin: 0 0 var(--space-md);
+  font-size: var(--font-size-xl);
+}
+
+.dbg-section__split .dbg-bullet-list + h3 {
+  margin-top: var(--space-lg);
+}
+
 .dbg-card-grid {
   display: grid;
   gap: var(--space-lg);
@@ -645,30 +554,33 @@
 }
 
 .dbg-card,
-.dbg-step,
-.dbg-callout {
+.dbg-step {
   padding: 1.4rem;
 }
 
 .dbg-card h3,
-.dbg-step h3,
-.dbg-callout h3,
-.dbg-workstream h4 {
+.dbg-step h3 {
   margin: 0 0 var(--space-sm);
   font-size: var(--font-size-xl);
   color: var(--color-text-primary);
 }
 
 .dbg-step-list,
-.dbg-team-groups,
-.dbg-workstream-list {
+.dbg-team-groups {
   display: grid;
   gap: var(--space-md);
   margin-top: var(--space-lg);
 }
 
 .dbg-step-list {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.dbg-team-groups {
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+  gap: var(--space-xl);
+  align-items: start;
+  margin-top: 0;
 }
 
 .dbg-bullet-list {
@@ -678,20 +590,24 @@
   line-height: 1.7;
 }
 
+.dbg-bullet-list li {
+  margin: 0;
+}
+
 .dbg-bullet-list li + li {
   margin-top: 0.5rem;
+}
+
+.dbg-bullet-list a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 .dbg-visual-card {
   padding: 0;
 }
 
-.dbg-resource-card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-}
-
+.dbg-resource-card,
 .dbg-workstream-card {
   display: flex;
   flex-direction: column;
@@ -706,24 +622,18 @@
   flex-wrap: wrap;
 }
 
-.dbg-workstream-card__badge,
-.dbg-workstream-card__owner {
+.dbg-workstream-card__badge {
   margin: 0;
+  color: var(--color-primary);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
-}
-
-.dbg-workstream-card__badge {
-  color: var(--color-primary);
-  text-transform: uppercase;
   letter-spacing: 0.05em;
-}
-
-.dbg-workstream-card__owner {
-  color: var(--color-text-secondary);
+  text-transform: uppercase;
 }
 
 .dbg-internal-hero {
+  --back-link-color: var(--color-primary-on-tint);
+
   padding: var(--space-3xl) 0 var(--space-xl);
   background:
     radial-gradient(circle at top right, rgba(191, 87, 0, 0.08), transparent 28%),
@@ -732,7 +642,7 @@
 
 .dbg-internal-hero__meta {
   margin: 0 0 var(--space-sm);
-  color: var(--color-primary);
+  color: var(--color-primary-on-tint);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
   letter-spacing: 0.08em;
@@ -765,6 +675,9 @@
 .dbg-meta-grid {
   display: grid;
   gap: var(--space-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .dbg-meta-grid--three {
@@ -772,6 +685,7 @@
 }
 
 .dbg-mini-card {
+  margin: 0;
   padding: 1.2rem;
   border: 1px solid rgba(51, 63, 72, 0.12);
   border-radius: 1.25rem;
@@ -790,54 +704,31 @@
   line-height: 1.65;
 }
 
-.dbg-callout {
-  background: var(--color-text-primary);
-  color: white;
-}
-
-.dbg-callout h3,
-.dbg-callout__eyebrow,
-.dbg-callout p,
-.dbg-workstream h4,
-.dbg-workstream p {
-  color: white;
-}
-
-.dbg-workstream {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-md);
-  padding-top: var(--space-md);
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
-}
-
-.dbg-workstream__owner {
-  flex-shrink: 0;
-  padding: 0.35rem 0.7rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-}
-
 @media (max-width: 1100px) {
+  /* minmax(0, …): with enlarged text a long word wraps instead of widening the page. */
   .dbg-home-hero__grid,
   .dbg-hero__grid,
   .dbg-section__split,
   .dbg-card-grid--three,
   .dbg-card-grid--two,
   .dbg-meta-grid--three,
-  .dbg-step-list {
-    grid-template-columns: 1fr;
-  }
-
-  .dbg-proof-strip {
-    grid-template-columns: 1fr;
+  .dbg-home-tree__map,
+  .dbg-home-stack__grid,
+  .dbg-home-tree__branches {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .dbg-home-hero__grid {
     gap: var(--space-2xl);
+  }
+
+  .dbg-home-hero h1,
+  .dbg-home-stack h2 {
+    max-width: 100%;
+  }
+
+  .dbg-home-hero h1 {
+    font-size: clamp(2.75rem, 14vw, 4.5rem);
   }
 
   .dbg-home-visual {
@@ -845,33 +736,19 @@
     justify-self: stretch;
   }
 
-  .dbg-home-tree__map {
-    grid-template-columns: 1fr;
-  }
-
-  .dbg-home-stack__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .dbg-home-stack h2 {
-    max-width: 100%;
-  }
-
   .dbg-home-tree__root,
   .dbg-home-tree__trunk {
     display: none;
   }
 
-  .dbg-home-tree__branches {
-    grid-template-columns: 1fr;
+  /* Single-column hero: the subtitle shrinks with the viewport, so the copy steps down to
+     body size to stay below it. */
+  .dbg-hero__copy {
+    font-size: var(--font-size-base);
   }
 }
 
 @media (max-width: 720px) {
-  .dbg-shell {
-    width: min(100% - 1.25rem, 100%);
-  }
-
   .dbg-hero,
   .dbg-section {
     padding: var(--space-2xl) 0;
@@ -881,14 +758,7 @@
     padding-top: var(--space-2xl);
   }
 
-  .dbg-home-hero h1 {
-    max-width: 100%;
-    font-size: clamp(3rem, 15vw, 5rem);
-    letter-spacing: -0.06em;
-  }
-
   .dbg-home-visual {
-    min-height: 20rem;
     border-radius: 1.35rem;
   }
 
@@ -898,12 +768,16 @@
   }
 
   .dbg-card,
-  .dbg-step,
-  .dbg-callout {
+  .dbg-step {
     padding: 1.15rem;
   }
+}
 
-  .dbg-hero__copy {
-    font-size: var(--font-size-base);
+@media (prefers-reduced-motion: reduce) {
+  .dbg-home-branch:hover,
+  .dbg-home-branch:focus-visible,
+  .dbg-button:hover,
+  .dbg-button:focus-visible {
+    transform: none;
   }
 }

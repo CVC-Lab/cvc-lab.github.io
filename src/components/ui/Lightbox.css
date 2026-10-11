@@ -1,0 +1,113 @@
+/* No display here: a closed <dialog> must stay display: none. */
+.ui-lightbox {
+  --ui-lightbox-viewport-height: 100vh;
+  /* Everything in the dialog that is not the image: margins, padding, bar, gaps, link. */
+  --ui-lightbox-chrome: 11rem;
+
+  width: min(1072px, calc(100vw - 2 * var(--page-gutter, 1rem)));
+  max-width: none;
+  max-height: calc(var(--ui-lightbox-viewport-height) - 2rem);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 0;
+  border-radius: var(--border-radius-lg);
+  background: var(--ut-white);
+  color: var(--ut-charcoal);
+  box-shadow: var(--shadow-xl);
+}
+
+@supports (height: 100dvh) {
+  .ui-lightbox {
+    --ui-lightbox-viewport-height: 100dvh;
+  }
+}
+
+/* --ut-charcoal-dark at 78%; written out because older engines do not pass
+   custom properties to ::backdrop. */
+.ui-lightbox::backdrop {
+  background: rgb(29 36 41 / 0.78);
+}
+
+/* Inner rules weigh two classes, so a page rule such as .page-prose p cannot restyle them. */
+.ui-lightbox .ui-lightbox__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+}
+
+.ui-lightbox .ui-lightbox__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.ui-lightbox .ui-lightbox__caption {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  color: var(--ut-charcoal);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--leading-snug);
+}
+
+.ui-lightbox .ui-lightbox__close {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-left: auto;
+  padding: 0;
+  border: 1px solid var(--ut-limestone);
+  border-radius: var(--border-radius-full);
+  background: var(--ut-white);
+  color: var(--ut-charcoal);
+  cursor: pointer;
+}
+
+.ui-lightbox .ui-lightbox__close:hover {
+  border-color: var(--ut-burnt-orange);
+  background: var(--ut-burnt-orange);
+  color: var(--ut-white);
+}
+
+.ui-lightbox .ui-lightbox__media {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  place-items: center;
+  min-height: 0;
+  border-radius: var(--border-radius-md);
+  background: var(--ut-off-white);
+}
+
+/* The box is sized from the image data, not from the file, so the dialog does not
+   jump when the file arrives: as wide as the dialog, the file and the viewport
+   height allow, at the image's own ratio. */
+.ui-lightbox .ui-lightbox__image {
+  display: block;
+  width: min(
+    100%,
+    var(--ui-lightbox-image-width),
+    calc(
+      (var(--ui-lightbox-viewport-height) - var(--ui-lightbox-chrome)) *
+        var(--ui-lightbox-image-ratio)
+    )
+  );
+  height: auto;
+  aspect-ratio: var(--ui-lightbox-image-ratio);
+  margin: 0;
+  object-fit: contain;
+}
+
+.ui-lightbox .ui-lightbox__full {
+  align-self: flex-start;
+  color: var(--ut-burnt-orange-dark);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}

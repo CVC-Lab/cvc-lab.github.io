@@ -7,6 +7,7 @@
   --surface: #ffffff;
   --line: #dce5de;
   --orange: #bf5700;
+  --orange-text: #a04900;
   --orange-soft: #f5ddca;
   --teal: #087f83;
   --teal-soft: #d8eeec;
@@ -22,12 +23,19 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+html.dialog-open {
+  overflow: hidden;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 body {
   margin: 0;
-  overflow-x: hidden;
   font-family:
     Inter,
     ui-sans-serif,
@@ -42,15 +50,39 @@ body {
     radial-gradient(circle at 12% 18%, rgba(191, 87, 0, 0.06), transparent 28%),
     radial-gradient(circle at 86% 28%, rgba(8, 127, 131, 0.06), transparent 30%);
   line-height: 1.55;
+  overflow-wrap: break-word;
 }
 
 img {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 
 a {
   color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+.config-section :focus-visible,
+.site-footer :focus-visible {
+  outline-color: #f4ba79;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 .skip-link {
@@ -69,9 +101,6 @@ a {
 }
 
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -168,7 +197,7 @@ a {
 
 .eyebrow {
   margin: 0 0 0.7rem;
-  color: var(--orange);
+  color: var(--orange-text);
   font-size: 0.82rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -183,9 +212,10 @@ p {
 
 h1 {
   margin-bottom: 1rem;
-  font-size: clamp(2.35rem, 5.2vw, 5.7rem);
-  line-height: 0.98;
+  font-size: clamp(2.1rem, 3.4vw, 3.5rem);
+  line-height: 1.05;
   letter-spacing: 0;
+  text-wrap: balance;
 }
 
 h2 {
@@ -256,7 +286,6 @@ h3 {
   width: 100%;
   border-radius: 8px;
   box-shadow: var(--shadow);
-  animation: heroDrift 8s ease-in-out infinite;
 }
 
 figcaption {
@@ -312,8 +341,8 @@ figcaption {
   align-items: start;
 }
 
-.two-column p,
-.section-heading p {
+.two-column p:not(.eyebrow),
+.section-heading p:not(.eyebrow) {
   color: #405052;
 }
 
@@ -413,7 +442,7 @@ figcaption {
   margin-bottom: 0.8rem;
   border-radius: 6px;
   background: var(--orange-soft);
-  color: var(--orange);
+  color: var(--orange-text);
   font-weight: 850;
 }
 
@@ -502,7 +531,7 @@ figcaption {
   color: #f4ba79;
 }
 
-.config-section .section-heading p,
+.config-section .section-heading p:not(.eyebrow),
 .microcopy {
   color: rgba(255, 255, 255, 0.72);
 }
@@ -516,6 +545,7 @@ figcaption {
 
 .config-controls,
 .config-stage {
+  min-width: 0;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.06);
@@ -554,6 +584,7 @@ figcaption {
 }
 
 .control-stack select {
+  min-width: 0;
   min-height: 2.45rem;
   padding: 0.45rem 0.55rem;
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -588,7 +619,40 @@ figcaption {
   padding: 1rem;
 }
 
+.canvas-frame {
+  position: relative;
+  min-width: 0;
+}
+
+.motion-toggle {
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.6rem;
+  min-height: 2rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.config-stage .motion-toggle {
+  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(16, 25, 29, 0.86);
+  color: white;
+}
+
+.posterior-visual .motion-toggle {
+  position: static;
+  margin-top: 0.6rem;
+}
+
 #configCanvas {
+  display: block;
   width: 100%;
   height: 28rem;
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -616,7 +680,7 @@ figcaption {
 .config-readout span {
   display: block;
   color: rgba(255, 255, 255, 0.62);
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   font-weight: 850;
   text-transform: uppercase;
 }
@@ -741,6 +805,7 @@ input[type='range'] {
 }
 
 #posteriorCanvas {
+  display: block;
   width: 100%;
   height: 18rem;
   border: 1px solid var(--line);
@@ -815,6 +880,15 @@ input[type='range'] {
   cursor: zoom-in;
 }
 
+.gallery-zoom {
+  position: relative;
+  display: block;
+}
+
+.gallery-zoom:focus-visible {
+  outline-offset: -3px;
+}
+
 .gallery-card.large img {
   aspect-ratio: 16 / 7;
 }
@@ -875,6 +949,8 @@ input[type='range'] {
 pre {
   margin: 0;
   overflow-x: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
   padding: 1rem;
   border-radius: 8px;
   background: #172126;
@@ -935,6 +1011,10 @@ dialog img {
   transform: none;
 }
 
+.section.reveal {
+  transform: none;
+}
+
 @keyframes heroDrift {
   0%,
   100% {
@@ -945,7 +1025,9 @@ dialog img {
   }
 }
 
-@media (max-width: 1180px) {
+/* Breakpoints are in em so the layout follows a larger default text size. At the usual 16px:
+   73.75em = 1180px, 68.8125em = 1101px, 56.25em = 900px, 40em = 640px. */
+@media (max-width: 73.75em) {
   .gallery,
   .link-grid,
   .story-steps {
@@ -955,9 +1037,35 @@ dialog img {
   .metric-band {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  .config-theater,
+  .explorer-layout {
+    grid-template-columns: 1fr;
+  }
 }
 
-@media (max-width: 900px) {
+/* The header is sticky only from 1101px, where it fits on one row. */
+@media (min-width: 68.8125em) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .top-nav {
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+  }
+
+  main a,
+  main button,
+  main input,
+  main select {
+    scroll-margin-top: 5rem;
+  }
+}
+
+@media (max-width: 56.25em) {
   .site-header,
   .hero,
   .two-column,
@@ -968,6 +1076,14 @@ dialog img {
   .posterior-visual,
   .citation-box {
     grid-template-columns: 1fr;
+  }
+
+  /* A long word (larger default text on a narrow phone) wraps instead of widening the column;
+     break-word on body does not shrink a grid track's automatic minimum. */
+  .two-column,
+  .config-readout,
+  .citation-box {
+    overflow-wrap: anywhere;
   }
 
   .site-header {
@@ -984,6 +1100,10 @@ dialog img {
     min-height: auto;
   }
 
+  h1 {
+    font-size: clamp(1.9rem, 8.5vw, 2.6rem);
+  }
+
   .hero-visual {
     order: -1;
   }
@@ -993,35 +1113,10 @@ dialog img {
   }
 }
 
-@media (max-width: 640px) {
-  html,
-  body {
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-
+@media (max-width: 40em) {
   .brand {
     min-width: 0;
     width: 100%;
-  }
-
-  .hero,
-  .hero-copy,
-  .hero-visual,
-  .hero-visual img {
-    width: calc(100vw - 2rem);
-    max-width: 100%;
-  }
-
-  h1 {
-    width: calc(100vw - 2rem);
-    max-width: 100%;
-    font-size: clamp(1.9rem, 8.5vw, 2.6rem);
-  }
-
-  .hero-lede {
-    width: calc(100vw - 2rem);
-    max-width: 100%;
   }
 
   .top-nav a {
@@ -1038,6 +1133,12 @@ dialog img {
 
   .gallery-card.large {
     grid-column: span 1;
+  }
+
+  .metric,
+  .fact-grid article,
+  .link-grid a {
+    min-height: 0;
   }
 
   .prob-row {
@@ -1059,11 +1160,21 @@ dialog img {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: no-preference) {
   html {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
   }
 
+  .hero-visual img {
+    animation: heroDrift 8s ease-in-out infinite;
+  }
+
+  html.motion-paused .hero-visual img {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
@@ -1071,5 +1182,20 @@ dialog img {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .site-header {
+    position: static;
+  }
+
+  .motion-toggle {
+    display: none;
   }
 }

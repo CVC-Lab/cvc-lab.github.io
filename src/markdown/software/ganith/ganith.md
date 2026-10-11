@@ -3,7 +3,7 @@ title: "GANITH"
 slug: "/software/ganith"
 ---
 
-![](http://www.cs.utexas.edu/~bajaj/cvc/software/images/ganith_small.gif)
+<p><img src="https://www.cs.utexas.edu/~bajaj/cvc/software/images/ganith_small.gif" alt="" width="512" height="409"></p>
 
 ### Description
 

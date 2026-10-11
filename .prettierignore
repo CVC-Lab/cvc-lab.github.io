@@ -13,3 +13,8 @@ package-lock.json
 yarn.lock
 .gitignore
 .prettierignore
+# Standalone microsites and the markdown corpus are not formatted by Prettier
+static/
+src/markdown/
+# Hand-maintained data whose values must stay byte-for-byte as written
+src/data/publications.yaml

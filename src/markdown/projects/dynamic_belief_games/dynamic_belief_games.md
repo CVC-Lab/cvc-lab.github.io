@@ -4,7 +4,7 @@ slug: '/projects/dynamic-belief-games-archive'
 date: '2024-09-12'
 ---
 
-![Diagram](https://github.com/CVC-Lab/cvc-lab.github.io/releases/download/assets-v1/dynamic_belief_games_diagram.png)
+![Diagram](../../../images/projects/dynamic_belief_games/dynamic_belief_games_diagram.webp)
 ![drone-swarm.jpg](../../../images/projects/dynamic_belief_games/drone-swarm.jpg)
 _Figure: A visual of our DBG gym, demonstrating a drone swarm scenario._
 

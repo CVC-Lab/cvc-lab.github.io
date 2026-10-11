@@ -1,17 +1,18 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { FaChevronLeft, FaChevronRight, FaPause, FaPlay } from 'react-icons/fa'
 import { useCardImage } from '../hooks/useCardImages'
-import hydroVideo from '../videos/hydro6A80.mp4'
-import { FaChevronLeft, FaChevronRight, FaPlay, FaPause } from 'react-icons/fa'
+import { prefersReducedMotion } from '../hooks/motion'
+import SmartLink from './ui/SmartLink'
 import './FeaturedResearch.css'
 
-// Featured projects with their associated videos
+// Slides, in this order, looked up by project tile name. Clips are served from static/media.
 const FEATURED_PROJECTS_DATA = [
   {
     name: 'PHAST',
     video: '/media/phast_monolithic_demo.mp4',
+    poster: '/media/phast_monolithic_demo_poster.jpg',
   },
   {
     name: 'GRL-SNAM',
@@ -19,7 +20,7 @@ const FEATURED_PROJECTS_DATA = [
   },
   {
     name: 'Subsurface Flow Modeling',
-    video: hydroVideo,
+    video: '/media/hydro6A80.mp4',
   },
   {
     name: 'Dynamic Belief Games',
@@ -31,13 +32,20 @@ const FEATURED_PROJECTS_DATA = [
   },
 ]
 
+const playQuietly = video => {
+  const started = video.play()
+  if (started) started.catch(() => {})
+}
+
 const FeaturedResearch = ({ projectTiles }) => {
   const [currentIndex, setCurrentIndex] = React.useState(0)
-  const [isPlaying, setIsPlaying] = React.useState(true)
-  const [isPaused, setIsPaused] = React.useState(false)
+  const [allowMotion, setAllowMotion] = React.useState(false)
+  const [userPaused, setUserPaused] = React.useState(false)
+  const [isHovered, setIsHovered] = React.useState(false)
+  const [hasFocus, setHasFocus] = React.useState(false)
+  const [isVideoPlaying, setIsVideoPlaying] = React.useState(false)
   const videoRef = React.useRef(null)
 
-  // Get featured projects from projectTiles
   const resolveCardImage = useCardImage()
 
   const featuredProjects = React.useMemo(() => {
@@ -50,7 +58,7 @@ const FeaturedResearch = ({ projectTiles }) => {
           ...tile,
           image: tile.image || resolveCardImage(tile.img_name),
           video: featuredData?.video || null,
-          gif: featuredData?.gif || null,
+          poster: featuredData?.poster,
         }
       })
       .sort((a, b) => {
@@ -62,6 +70,8 @@ const FeaturedResearch = ({ projectTiles }) => {
   }, [projectTiles, resolveCardImage])
 
   const currentProject = featuredProjects[currentIndex]
+  const isRotating =
+    allowMotion && !userPaused && !isHovered && !hasFocus && featuredProjects.length > 1
 
   const goToNext = React.useCallback(() => {
     setCurrentIndex(prev => (prev + 1) % featuredProjects.length)
@@ -71,14 +81,13 @@ const FeaturedResearch = ({ projectTiles }) => {
     setCurrentIndex(prev => (prev - 1 + featuredProjects.length) % featuredProjects.length)
   }, [featuredProjects.length])
 
-  const togglePlayPause = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause()
-      } else {
-        videoRef.current.play()
-      }
-      setIsPlaying(!isPlaying)
+  const toggleVideo = () => {
+    const video = videoRef.current
+    if (!video) return
+    if (video.paused) {
+      playQuietly(video)
+    } else {
+      video.pause()
     }
   }
 
@@ -86,29 +95,50 @@ const FeaturedResearch = ({ projectTiles }) => {
   const [timerEpoch, setTimerEpoch] = React.useState(0)
   const resetTimer = React.useCallback(() => setTimerEpoch(epoch => epoch + 1), [])
 
+  React.useEffect(() => {
+    setAllowMotion(!prefersReducedMotion())
+  }, [])
+
   // Auto-rotation: the effect owns the only interval, so pausing always clears it.
   React.useEffect(() => {
-    if (isPaused || featuredProjects.length <= 1) return undefined
+    if (!isRotating) return undefined
     const id = setInterval(goToNext, 3000)
     return () => clearInterval(id)
-  }, [isPaused, goToNext, featuredProjects.length, timerEpoch])
+  }, [isRotating, goToNext, timerEpoch])
+
+  // Slide clips start only when motion is allowed; the button mirrors the element.
+  React.useEffect(() => {
+    const video = videoRef.current
+    if (video && allowMotion) playQuietly(video)
+    setIsVideoPlaying(Boolean(video) && !video.paused)
+  }, [currentIndex, allowMotion])
 
   if (featuredProjects.length === 0) {
     return null
   }
 
-  return (
-    <div className="featured-research">
-      <div className="featured-research-container">
-        <h2 className="featured-research-title">Featured Research</h2>
+  const currentImage = currentProject ? getImage(currentProject.image) : null
 
-        <div
-          className="featured-carousel"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          {/* Navigation - Previous */}
+  return (
+    <section
+      className="featured-research"
+      aria-roledescription="carousel"
+      aria-labelledby="featured-research-title"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setHasFocus(true)}
+      onBlur={event => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setHasFocus(false)
+      }}
+    >
+      <div className="page-container featured-research-container">
+        <h2 id="featured-research-title" className="featured-research-title">
+          Featured Research
+        </h2>
+
+        <div className="featured-carousel">
           <button
+            type="button"
             className="carousel-nav carousel-nav-prev"
             onClick={() => {
               goToPrev()
@@ -116,47 +146,46 @@ const FeaturedResearch = ({ projectTiles }) => {
             }}
             aria-label="Previous project"
           >
-            <FaChevronLeft />
+            <FaChevronLeft aria-hidden="true" />
           </button>
 
-          {/* Main Card */}
-          <div className="featured-card-wrapper">
+          <div className="featured-card-wrapper" aria-live={isRotating ? 'off' : 'polite'}>
             {currentProject && (
               <div className="featured-card-horizontal">
-                {/* Media Section */}
                 <div className="featured-media">
                   {currentProject.video ? (
                     <div className="featured-video-wrapper">
                       <video
+                        key={currentProject.name}
                         ref={videoRef}
                         className="featured-video"
                         src={currentProject.video}
-                        autoPlay
+                        poster={currentProject.poster}
                         muted
                         loop
                         playsInline
+                        tabIndex={-1}
+                        onPlay={() => setIsVideoPlaying(true)}
+                        onPause={() => setIsVideoPlaying(false)}
                       />
                       <button
+                        type="button"
                         className="video-control-btn"
-                        onClick={togglePlayPause}
-                        aria-label={isPlaying ? 'Pause video' : 'Play video'}
+                        onClick={toggleVideo}
+                        aria-label={isVideoPlaying ? 'Pause video' : 'Play video'}
                       >
-                        {isPlaying ? <FaPause /> : <FaPlay />}
+                        {isVideoPlaying ? (
+                          <FaPause aria-hidden="true" />
+                        ) : (
+                          <FaPlay aria-hidden="true" />
+                        )}
                       </button>
-                    </div>
-                  ) : currentProject.gif ? (
-                    <div className="featured-image-wrapper">
-                      <img
-                        src={currentProject.gif}
-                        alt={`${currentProject.name} preview`}
-                        className="featured-image"
-                      />
                     </div>
                   ) : (
                     <div className="featured-image-wrapper">
-                      {getImage(currentProject.image) && (
+                      {currentImage && (
                         <GatsbyImage
-                          image={getImage(currentProject.image)}
+                          image={currentImage}
                           alt={`${currentProject.name} preview`}
                           className="featured-image"
                         />
@@ -165,39 +194,27 @@ const FeaturedResearch = ({ projectTiles }) => {
                   )}
                 </div>
 
-                {/* Content Section */}
                 <div className="featured-content">
                   <span className="featured-badge">Featured</span>
                   <h3 className="featured-project-title">{currentProject.name}</h3>
                   <p className="featured-project-description">{currentProject.description}</p>
                   <div className="featured-tags">
-                    {currentProject.tags.map(tag => (
+                    {(currentProject.tags || []).map(tag => (
                       <span key={tag} className="featured-tag">
                         {tag}
                       </span>
                     ))}
                   </div>
-                  {currentProject.link.startsWith('http') ? (
-                    <a
-                      href={currentProject.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="featured-link"
-                    >
-                      View Project →
-                    </a>
-                  ) : (
-                    <Link to={currentProject.link} className="featured-link">
-                      View Project →
-                    </Link>
-                  )}
+                  <SmartLink to={currentProject.link} className="featured-link">
+                    View Project →
+                  </SmartLink>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Navigation - Next */}
           <button
+            type="button"
             className="carousel-nav carousel-nav-next"
             onClick={() => {
               goToNext()
@@ -205,14 +222,24 @@ const FeaturedResearch = ({ projectTiles }) => {
             }}
             aria-label="Next project"
           >
-            <FaChevronRight />
+            <FaChevronRight aria-hidden="true" />
           </button>
         </div>
 
-        {/* Indicators */}
         <div className="carousel-indicators">
+          {allowMotion && featuredProjects.length > 1 && (
+            <button
+              type="button"
+              className="carousel-toggle"
+              onClick={() => setUserPaused(paused => !paused)}
+              aria-label={userPaused ? 'Start slide rotation' : 'Stop slide rotation'}
+            >
+              {userPaused ? <FaPlay aria-hidden="true" /> : <FaPause aria-hidden="true" />}
+            </button>
+          )}
           {featuredProjects.map((project, index) => (
             <button
+              type="button"
               key={project.name}
               className={`carousel-indicator ${index === currentIndex ? 'active' : ''}`}
               onClick={() => {
@@ -220,11 +247,12 @@ const FeaturedResearch = ({ projectTiles }) => {
                 resetTimer()
               }}
               aria-label={`Go to ${project.name}`}
+              aria-current={index === currentIndex ? 'true' : undefined}
             />
           ))}
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
@@ -235,7 +263,7 @@ FeaturedResearch.propTypes = {
       description: PropTypes.string.isRequired,
       img_name: PropTypes.string.isRequired,
       link: PropTypes.string.isRequired,
-      tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+      tags: PropTypes.arrayOf(PropTypes.string),
       image: PropTypes.object,
     })
   ).isRequired,

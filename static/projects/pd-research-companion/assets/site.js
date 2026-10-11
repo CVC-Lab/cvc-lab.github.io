@@ -41,13 +41,15 @@
   dialog.setAttribute('aria-label', 'Full-resolution scientific figure')
   dialog.innerHTML = [
     '<div class="dialog-toolbar">',
-    '  <span class="dialog-title"></span>',
+    '  <span class="dialog-title" id="figure-dialog-title"></span>',
     '  <div class="dialog-tools">',
     '    <button class="dialog-zoom" type="button" aria-pressed="false">Actual size</button>',
     '    <button class="dialog-close" type="button" aria-label="Close full-resolution figure">&times;</button>',
     '  </div>',
     '</div>',
-    '<div class="dialog-canvas"><img alt="" /></div>',
+    '<div class="dialog-canvas" role="group" aria-labelledby="figure-dialog-title" tabindex="0">',
+    '  <img alt="" />',
+    '</div>',
   ].join('')
   document.body.append(dialog)
 
@@ -56,6 +58,8 @@
   const dialogCanvas = dialog.querySelector('.dialog-canvas')
   const zoomButton = dialog.querySelector('.dialog-zoom')
   const closeButton = dialog.querySelector('.dialog-close')
+  // Safari does not focus a button on click, so the dialog cannot restore focus to it by itself.
+  let opener = null
 
   function closeDialog() {
     dialog.close()
@@ -63,6 +67,7 @@
 
   figureButtons.forEach(button => {
     button.addEventListener('click', () => {
+      opener = button
       const source = button.dataset.figureOpen
       const title = button.dataset.figureTitle || 'Scientific figure'
       dialogTitle.textContent = title
@@ -72,6 +77,7 @@
       zoomButton.setAttribute('aria-pressed', 'false')
       zoomButton.textContent = 'Actual size'
       dialog.showModal()
+      dialogCanvas.scrollTo({ top: 0, left: 0 })
       document.body.classList.add('dialog-open')
       closeButton.focus()
     })
@@ -92,5 +98,7 @@
     document.body.classList.remove('dialog-open')
     dialog.classList.remove('figure-dialog--actual')
     dialogImage.removeAttribute('src')
+    if (opener) opener.focus()
+    opener = null
   })
 })()

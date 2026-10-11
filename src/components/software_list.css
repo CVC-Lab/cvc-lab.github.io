@@ -1,65 +1,45 @@
-@import url('../styles/design-system.css');
-
-.software div,
-.sponsors div {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0 var(--space-lg);
-  width: 100%;
-  max-width: var(--max-width-content);
-  margin: 0 auto;
+.software-page {
+  padding-block: 0 var(--space-3xl);
 }
 
-.software h1,
-.software h2,
-.software ul,
-.software li {
-  margin: 0;
-  padding: 0;
+.software-group {
+  margin: 0 0 var(--space-xl);
 }
 
-.sponsors p {
-  padding: var(--space-sm) 0;
-  color: var(--color-text-secondary);
-  line-height: var(--line-height-relaxed);
+.software-group:last-child {
+  margin-bottom: 0;
 }
 
-.software h1,
-.sponsors h1 {
+.software-group__title {
+  margin: 0 0 var(--space-md);
   color: var(--color-text-primary);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-3xl);
-  width: 100%;
-  text-align: center;
-  padding: var(--space-2xl) 0 var(--space-lg);
-}
-
-.software h2 {
-  color: var(--color-text-primary);
+  font-size: clamp(var(--font-size-lg), 1.1rem + 0.6vw, var(--font-size-xl));
   font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-xl);
-  width: 100%;
-  text-align: left;
-  margin: var(--space-lg) 0 var(--space-md);
+  line-height: var(--line-height-tight);
 }
 
-.software ul,
-.sponsors ul {
-  list-style-type: disc;
-  padding: 0 var(--space-lg);
-  margin: 0 var(--space-lg);
-  width: calc(100% - var(--space-3xl));
-  font-weight: var(--font-weight-normal);
-  font-size: var(--font-size-base);
+.software-list {
+  margin: 0;
+  padding: 0 0 0 1.25rem;
+  list-style: disc outside;
 }
 
-.software li,
-.sponsors li {
-  text-align: left;
-  margin: var(--space-sm) 0;
-  font-weight: var(--font-weight-normal);
-  font-size: var(--font-size-base);
+.software-list__item {
+  margin: 0 0 var(--space-sm);
   color: var(--color-text-secondary);
+  font-size: var(--font-size-base);
   line-height: var(--line-height-relaxed);
+}
+
+.software-list__item:last-child {
+  margin-bottom: 0;
+}
+
+.software-list__link {
+  font-weight: var(--font-weight-bold);
+}
+
+.software-list__link:hover,
+.software-list__link:focus-visible {
+  text-decoration: underline;
 }

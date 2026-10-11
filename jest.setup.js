@@ -1,36 +1,22 @@
 import '@testing-library/jest-dom'
 
-// Mock Gatsby's global __PATH_PREFIX__
+// Gatsby injects this at build time.
 global.__PATH_PREFIX__ = ''
 
-// Mock Gatsby's navigate function
-global.___navigate = jest.fn()
-
-// Mock Gatsby Link component
-jest.mock('gatsby', () => ({
-  ...jest.requireActual('gatsby'),
-  Link: jest.fn().mockImplementation(({ to, ...rest }) =>
-    React.createElement('a', {
-      ...rest,
-      href: to,
-    })
-  ),
-  graphql: jest.fn(),
-  StaticQuery: jest.fn(),
-  useStaticQuery: jest.fn(),
-}))
-
-// Mock window.matchMedia
-Object.defineProperty(window, 'matchMedia', {
-  writable: true,
-  value: jest.fn().mockImplementation(query => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: jest.fn(), // deprecated
-    removeListener: jest.fn(), // deprecated
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
-})
+// jsdom has no matchMedia; components that read motion or width preferences need one. Suites
+// that run in the node environment (server rendering) have no window at all.
+if (typeof window !== 'undefined') {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: jest.fn().mockImplementation(query => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    })),
+  })
+}

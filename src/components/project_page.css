@@ -1,91 +1,290 @@
-@import url('../styles/design-system.css');
+/*
+ * Markdown pages (projects, software, news, seminars, guides). Typography comes from .prose;
+ * this sheet sizes the column and keeps wide markdown output (tables, code, display math,
+ * embeds) inside it.
+ */
 
-.project-page-class h2,
-.project-page-class h3,
-.project-page-class h4,
-.project-page-class p {
-  margin: 0;
-  padding: 0;
+/* The article column is 50rem (800px), the width gatsby-remark-images renders figures at, so
+   text, captions, figures and tables share one left edge. */
+.md-page {
+  --page-max-width: 50rem;
+  padding-block: 0 var(--space-3xl);
 }
 
-.project-page-class h2 {
-  margin-top: var(--space-lg);
-  color: var(--color-text-primary);
+.md-page .post-body {
+  --prose-max-width: none;
+}
+
+/* Markdown output. Keyed on .post-body alone so it also applies inside the AI4PD shell. */
+.post-body {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* Body headings stay below the page title at every width. */
+.post-body h2 {
+  font-size: clamp(1.5rem, 1.25rem + 1vw, 1.875rem);
   font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-2xl);
-  line-height: var(--line-height-tight);
 }
 
-.project-page-class h3 {
-  margin-top: var(--space-xl);
-  color: var(--color-text-primary);
+.post-body h3 {
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
   font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-xl);
-  text-align: left;
 }
 
-.project-page-class h4 {
-  color: var(--color-text-secondary);
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-lg);
-  margin-top: var(--space-md);
+.post-body h4 {
+  font-size: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);
+  font-weight: var(--font-weight-semibold);
 }
 
-.project-page-class p,
-.project-page-class ol,
-.project-page-class li {
-  color: var(--color-text-secondary);
-  margin-top: var(--space-sm);
-  font-weight: var(--font-weight-normal);
+.post-body h5,
+.post-body h6 {
   font-size: var(--font-size-base);
-  line-height: var(--line-height-relaxed);
+  font-weight: var(--font-weight-semibold);
 }
 
-.embedVideo-container {
-  text-align: center;
-  display: block;
-  margin: var(--space-xl) 0;
+.post-body .table-scroll {
+  margin-block: var(--space-lg);
 }
 
-.project-page-projects-grl-snam .post-body table:first-of-type {
+/* Tables used as figure grids: equal columns. :where() keeps the per-page rules below stronger. */
+.post-body :where(.table-scroll:has(img, video)) > table {
   table-layout: fixed;
 }
 
-.project-page-projects-grl-snam .post-body table:first-of-type th:first-child,
-.project-page-projects-grl-snam .post-body table:first-of-type td:first-child {
-  display: none;
+.post-body :where(.table-scroll:has(img, video)) :is(th, td) {
+  padding: var(--spacing-2);
+  border-bottom: 0;
+  vertical-align: top;
 }
 
-.project-page-projects-grl-snam .post-body table:first-of-type th,
-.project-page-projects-grl-snam .post-body table:first-of-type td {
-  width: 33.333%;
-}
-
-.project-page-projects-grl-snam .post-body table:first-of-type .gatsby-resp-image-wrapper {
+.post-body :where(.table-scroll:has(img, video)) .gatsby-resp-image-wrapper {
   width: 100%;
 }
 
+.post-body :where(.table-scroll:has(img, video)) :is(img, video) {
+  margin-bottom: 0;
+}
+
+.post-body .katex-display {
+  max-width: 100%;
+  padding-block: 0.25em;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Long paths and commands in inline code may break anywhere rather than widen a table... */
+.post-body :not(pre) > code {
+  overflow-wrap: anywhere;
+}
+
+/* ...but a token in a table cell (such as $SCRATCH) stays whole; the table scrolls instead. */
+.post-body :is(td, th) > code {
+  overflow-wrap: normal;
+}
+
+/* A table wider than the column scrolls inside its wrapper. MarkdownBody marks the edge that
+   hides more of it (data-fade) and it fades out there, as on .ui-scroll-strip; the scrollbar
+   stays, and the fade lifts while the wrapper has keyboard focus so the ring is drawn whole. */
+.post-body .table-scroll {
+  --table-scroll-fade: 2.5rem;
+}
+
+.post-body .table-scroll[data-fade='end']:not(:focus-visible) {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 calc(100% - var(--table-scroll-fade)),
+    transparent
+  );
+  mask-image: linear-gradient(to right, #000 calc(100% - var(--table-scroll-fade)), transparent);
+}
+
+.post-body .table-scroll[data-fade='start']:not(:focus-visible) {
+  -webkit-mask-image: linear-gradient(
+    to left,
+    #000 calc(100% - var(--table-scroll-fade)),
+    transparent
+  );
+  mask-image: linear-gradient(to left, #000 calc(100% - var(--table-scroll-fade)), transparent);
+}
+
+.post-body .table-scroll[data-fade='both']:not(:focus-visible) {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--table-scroll-fade),
+    #000 calc(100% - var(--table-scroll-fade)),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--table-scroll-fade),
+    #000 calc(100% - var(--table-scroll-fade)),
+    transparent
+  );
+}
+
+/* A link scrolled into view by Tab lands at the faded edge: no fade while one inside has focus. */
+.post-body .table-scroll[data-fade]:has(:focus-visible) {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.post-body :is(img, video, iframe) {
+  max-width: 100%;
+}
+
+.post-body :is(img, video) {
+  height: auto;
+}
+
+.post-body iframe:not(.embedVideo-iframe) {
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-md);
+}
+
+.post-body .embedVideo-container {
+  margin: var(--space-xl) 0;
+}
+
+.post-body .embedVideo-container iframe {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+.post-body > p > .gatsby-resp-image-wrapper {
+  margin-block: var(--space-lg);
+}
+
+.post-body > p > img:only-child {
+  display: block;
+  margin: var(--space-lg) auto;
+}
+
+/* A paragraph of images only (marked by the template) is centred like a lone image. */
+.post-body > p.md-image-row {
+  text-align: center;
+}
+
+/* Stands in for an image from another host while it loads and if it fails (see the template). */
+.post-body .media-unavailable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4rem;
+  margin-block: var(--space-sm);
+  padding: var(--space-sm);
+  border: 1px dashed var(--color-gray-300);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+}
+
+/* For an image with intrinsic width/height the note keeps the image's box (set inline). */
+.post-body .media-unavailable--sized {
+  display: inline-flex;
+  max-width: 100%;
+  min-height: 0;
+  margin-block: 0;
+  vertical-align: top;
+}
+
+.post-body > p > .media-unavailable--sized:first-child:nth-last-child(2) {
+  display: flex;
+  margin: var(--space-lg) auto;
+}
+
+/* An image (or image-only link) held behind its note until it loads. */
+.post-body [data-media-held] {
+  display: none;
+}
+
+/* Without JavaScript a deferred iframe stays empty; its <noscript> copy is shown instead. Nothing
+   updates the image notes either, so the images show as they are. */
+@media (scripting: none) {
+  .post-body iframe[data-src],
+  .post-body [data-media-note] {
+    display: none;
+  }
+
+  .post-body [data-media-held] {
+    display: inline;
+  }
+
+  .post-body > p > [data-media-note]:first-child + img:last-child {
+    display: block;
+    margin: var(--space-lg) auto;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Three-up frames would be about 110px wide: keep them legible and let the wrapper scroll. */
+  .post-body :where(.table-scroll:has(img, video)) > table {
+    min-width: 33rem;
+  }
+
+  /* Narrower gaps between columns, so most data tables fit a phone column without scrolling. */
+  :where(.md-page) .post-body :is(th, td):not(:first-child) {
+    padding-left: var(--spacing-2);
+  }
+
+  :where(.md-page) .post-body :is(th, td):not(:last-child) {
+    padding-right: var(--spacing-2);
+  }
+}
+
+/* Per-page rules. The slug class is project-page-<slug with non-alphanumerics as hyphens>. */
+
+/* Gallery rows authored two images wide (TexMol renders, the neuralode comparison pair). */
+@media (min-width: 769px) {
+  :is(.project-page-software-texmol, .project-page-projects-neuralode)
+    .post-body
+    > p.md-image-row
+    > :is(img, .media-unavailable--sized) {
+    max-width: calc(50% - var(--space-xs));
+    vertical-align: top;
+  }
+}
+
+/* GRL-SNAM figure 1 was authored with an empty leading column; it is the first table. */
+.project-page-projects-grl-snam
+  .post-body
+  > .table-scroll:not(.table-scroll ~ .table-scroll)
+  > table
+  :is(th, td) {
+  width: 33.333%;
+}
+
+.project-page-projects-grl-snam
+  .post-body
+  > .table-scroll:not(.table-scroll ~ .table-scroll)
+  > table
+  :is(th, td):first-child {
+  display: none;
+}
+
+/* Posterior-aware phenotyping: the table is a row of figure cards (stacked on phones). */
 .project-page-projects-posterior-aware-pd-phenotyping .post-body table {
   width: 100%;
   table-layout: fixed;
   border-collapse: separate;
   border-spacing: 1rem;
-  margin-top: var(--space-lg);
-  margin-bottom: var(--space-md);
 }
 
-.project-page-projects-posterior-aware-pd-phenotyping .post-body table th,
-.project-page-projects-posterior-aware-pd-phenotyping .post-body table td {
+.project-page-projects-posterior-aware-pd-phenotyping .post-body table :is(th, td) {
+  padding: 0.85rem;
   border: 1px solid var(--color-gray-200);
   border-radius: var(--radius-md);
-  padding: 0.85rem;
-  vertical-align: top;
   background: var(--color-bg-primary);
   box-shadow: var(--shadow-sm);
+  vertical-align: top;
 }
 
 .project-page-projects-posterior-aware-pd-phenotyping .post-body table th {
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-regular);
 }
 
 .project-page-projects-posterior-aware-pd-phenotyping .post-body table .gatsby-resp-image-wrapper {
@@ -100,50 +299,27 @@
 }
 
 .project-page-projects-posterior-aware-pd-phenotyping .post-body table p {
-  margin-top: 0;
+  margin: 0;
   font-size: var(--font-size-sm);
   line-height: var(--line-height-normal);
 }
 
 @media (max-width: 640px) {
-  .project-page-projects-pathway-anchored-pd-clustering > div {
-    margin-left: 1rem !important;
-    margin-right: 1rem !important;
-    width: calc(100% - 2rem) !important;
-  }
-
-  .project-page-projects-pathway-anchored-pd-clustering .header-subtitle,
-  .project-page-projects-pathway-anchored-pd-clustering .post-body h1 {
-    hyphens: auto;
-    overflow-wrap: anywhere;
-  }
-
-  .project-page-projects-pathway-anchored-pd-clustering .post-body {
-    max-width: 100%;
-    min-width: 0;
-    overflow-wrap: break-word;
-  }
-
-  .project-page-projects-pathway-anchored-pd-clustering .post-body .gatsby-resp-image-wrapper {
-    max-width: 100% !important;
-  }
-
   .project-page-projects-posterior-aware-pd-phenotyping .post-body table,
-  .project-page-projects-posterior-aware-pd-phenotyping .post-body table thead,
-  .project-page-projects-posterior-aware-pd-phenotyping .post-body table tbody,
-  .project-page-projects-posterior-aware-pd-phenotyping .post-body table tr,
-  .project-page-projects-posterior-aware-pd-phenotyping .post-body table th,
-  .project-page-projects-posterior-aware-pd-phenotyping .post-body table td {
+  .project-page-projects-posterior-aware-pd-phenotyping
+    .post-body
+    table
+    :is(thead, tbody, tr, th, td) {
     display: block;
     width: 100%;
+    min-width: 0;
   }
 
   .project-page-projects-posterior-aware-pd-phenotyping .post-body table {
     border-spacing: 0;
   }
 
-  .project-page-projects-posterior-aware-pd-phenotyping .post-body table th,
-  .project-page-projects-posterior-aware-pd-phenotyping .post-body table td {
+  .project-page-projects-posterior-aware-pd-phenotyping .post-body table :is(th, td) {
     margin-top: var(--space-sm);
   }
 }

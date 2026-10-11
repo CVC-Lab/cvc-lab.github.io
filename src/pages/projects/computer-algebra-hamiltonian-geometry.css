@@ -3,29 +3,34 @@
   --cahg-panel: #ffffff;
   --cahg-panel-strong: #f8fbff;
   --cahg-line: rgba(20, 45, 78, 0.14);
+  --cahg-control-line: rgba(20, 45, 78, 0.3);
+  --cahg-control-line-hover: var(--cahg-cyan);
   --cahg-text: #172130;
   --cahg-muted: #536174;
   --cahg-cyan: #007c93;
   --cahg-violet: #6f53c8;
-  --cahg-gold: #9c6b08;
   --cahg-radius: 18px;
   background: var(--cahg-bg);
   color: var(--cahg-text);
   overflow: hidden;
 }
 
-.cahg-page::before {
-  content: none;
+/* Paragraph spacing is set per component on this page. */
+.cahg-page :where(p) {
+  margin: 0;
 }
 
 .cahg-shell {
-  width: min(1180px, calc(100% - 40px));
-  margin: 0 auto;
+  width: min(100% - 2 * var(--page-gutter), var(--page-max-width));
+  margin-inline: auto;
   position: relative;
   z-index: 1;
 }
 
 .cahg-hero {
+  --cahg-control-line: rgba(245, 248, 255, 0.18);
+  --cahg-control-line-hover: rgba(128, 234, 255, 0.58);
+  --focus-ring-color: var(--ut-white);
   min-height: 78vh;
   display: flex;
   align-items: center;
@@ -45,11 +50,15 @@
 
 .cahg-eyebrow {
   margin: 0 0 0.9rem;
-  color: #00a8c6;
+  color: var(--cahg-cyan);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+}
+
+.cahg-hero .cahg-eyebrow {
+  color: #00a8c6;
 }
 
 .cahg-hero h1,
@@ -61,7 +70,7 @@
 
 .cahg-hero h1 {
   max-width: 760px;
-  font-size: clamp(3rem, 7vw, 6.8rem);
+  font-size: clamp(3rem, 4.6vw, 4.5rem);
   line-height: 0.96;
   font-weight: 800;
   color: #f5f8ff;
@@ -89,7 +98,7 @@
   min-height: 46px;
   gap: 0.55rem;
   padding: 0.78rem 1.05rem;
-  border: 1px solid rgba(245, 248, 255, 0.18);
+  border: 1px solid var(--cahg-control-line);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.06);
   color: var(--cahg-text);
@@ -106,9 +115,15 @@
 
 .cahg-button:hover {
   transform: translateY(-2px);
-  border-color: rgba(128, 234, 255, 0.58);
+  border-color: var(--cahg-control-line-hover);
   background: rgba(128, 234, 255, 0.1);
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+}
+
+/* Link buttons keep their text colour; the base a:hover and a:active rules would turn it orange. */
+.cahg-button:hover,
+.cahg-button:active {
+  color: var(--cahg-text);
 }
 
 .cahg-button--primary {
@@ -121,7 +136,6 @@
 }
 
 .cahg-hero-art {
-  min-height: auto;
   position: relative;
   border: 1px solid rgba(153, 225, 255, 0.24);
   border-radius: 18px;
@@ -162,6 +176,7 @@
 }
 
 .cahg-section-heading p:not(.cahg-eyebrow) {
+  margin-top: 1rem;
   color: var(--cahg-muted);
   font-size: 1.04rem;
   line-height: 1.8;
@@ -213,7 +228,7 @@
   border-radius: 10px;
   background: rgba(128, 234, 255, 0.1);
   color: var(--cahg-cyan);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.86rem;
 }
 
@@ -246,10 +261,7 @@
     border-color 180ms ease;
 }
 
-.cahg-system-thumb,
-.cahg-placeholder-image {
-  position: relative;
-  min-height: 150px;
+.cahg-system-thumb {
   margin-bottom: 1rem;
   overflow: hidden;
   border-radius: 14px;
@@ -258,12 +270,11 @@
 }
 
 .cahg-system-thumb img {
-  width: 100%;
-  height: 100%;
-  min-height: 150px;
-  object-fit: cover;
-  object-position: center;
   display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
 }
 
 .cahg-system-card dl {
@@ -274,8 +285,8 @@
 
 .cahg-system-card dt {
   margin-bottom: 0.2rem;
-  color: rgba(128, 234, 255, 0.82);
-  font-size: 0.72rem;
+  color: var(--cahg-cyan);
+  font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -283,34 +294,26 @@
 
 .cahg-system-card dd {
   margin: 0;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
   letter-spacing: 0;
 }
 
+.cahg-system-card sub {
+  font-size: 0.82em;
+}
+
 .cahg-pipeline {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 0.8rem;
-  overflow-x: auto;
-  padding: 0.4rem 0 1rem;
 }
 
 .cahg-pipeline-step {
-  min-width: 164px;
+  min-width: 0;
   position: relative;
   padding: 1rem;
   border-radius: 16px;
-}
-
-.cahg-pipeline-step:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: -0.82rem;
-  width: 0.82rem;
-  height: 2px;
-  background: linear-gradient(90deg, var(--cahg-cyan), var(--cahg-violet));
-  box-shadow: 0 0 18px rgba(128, 234, 255, 0.5);
 }
 
 .cahg-pipeline-step svg {
@@ -324,7 +327,7 @@
 
 .cahg-pipeline-step p {
   margin: 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.78rem;
 }
 
@@ -344,8 +347,9 @@
 .cahg-gallery-card img {
   display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
   background: #07101d;
 }
 
@@ -368,26 +372,30 @@
   border-radius: 24px;
 }
 
-.cahg-idea-tabs {
-  display: grid;
+.cahg-idea-tabs .ui-tabs__list {
   gap: 0.5rem;
 }
 
-.cahg-idea-tabs button {
+.cahg-idea-tabs .ui-tabs__tab {
   width: 100%;
   padding: 0.85rem 0.9rem;
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  border: 1px solid var(--cahg-control-line);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--cahg-panel);
   color: var(--cahg-muted);
-  font: inherit;
+  font-size: 1rem;
   font-weight: 700;
-  text-align: left;
-  cursor: pointer;
+  line-height: 1.5;
 }
 
-.cahg-idea-tabs button.is-active {
-  border-color: rgba(128, 234, 255, 0.5);
+.cahg-idea-tabs .ui-tabs__tab:hover {
+  border-color: var(--cahg-control-line-hover);
+  background: var(--cahg-panel);
+  color: var(--cahg-text);
+}
+
+.cahg-idea-tabs .ui-tabs__tab[aria-selected='true'] {
+  border-color: var(--cahg-cyan);
   background: rgba(128, 234, 255, 0.12);
   color: var(--cahg-text);
 }
@@ -420,7 +428,7 @@
 
 .cahg-code-card code,
 .cahg-citation-card code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-family: var(--font-mono);
 }
 
 .cahg-citation-card {
@@ -435,6 +443,33 @@
   border: 1px solid rgba(20, 45, 78, 0.12);
 }
 
+@media (min-width: 1180px) {
+  .cahg-pipeline-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -0.82rem;
+    width: 0.82rem;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cahg-cyan), var(--cahg-violet));
+    box-shadow: 0 0 18px rgba(128, 234, 255, 0.5);
+  }
+}
+
+@media (min-width: 681px) {
+  .cahg-gallery-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    width: calc(50% - 0.5rem);
+    justify-self: center;
+  }
+}
+
+@media (max-width: 1179.98px) {
+  .cahg-pipeline {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 980px) {
   .cahg-hero__grid,
   .cahg-code-grid,
@@ -442,28 +477,20 @@
     grid-template-columns: 1fr;
   }
 
-  .cahg-hero-art {
-    min-height: 420px;
-  }
-
   .cahg-feature-grid,
   .cahg-system-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .cahg-idea-content {
+    min-height: 0;
+  }
 }
 
-@media (max-width: 680px) {
-  .cahg-shell {
-    width: min(100% - 28px, 1180px);
-  }
-
+@media (max-width: 680.98px) {
   .cahg-hero {
     min-height: auto;
     padding-top: 4rem;
-  }
-
-  .cahg-hero h1 {
-    font-size: 3rem;
   }
 
   .cahg-hero__subtitle,
@@ -477,6 +504,10 @@
     grid-template-columns: 1fr;
   }
 
+  .cahg-pipeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .cahg-actions {
     display: grid;
   }
@@ -486,16 +517,6 @@
   }
 
   .cahg-hero-art {
-    min-height: 340px;
     border-radius: 22px;
-  }
-
-  .cahg-casimir-leaf {
-    width: 126px;
-    height: 126px;
-  }
-
-  .cahg-placeholder-image {
-    min-height: 220px;
   }
 }

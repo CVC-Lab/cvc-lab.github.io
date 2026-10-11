@@ -1,45 +1,21 @@
-const dotenv = require('dotenv')
-
-dotenv.config({
-  path: `.env`,
+// Precedence: real environment variables, then .env.<NODE_ENV>, then .env.
+require('dotenv').config({
+  path: [`.env.${process.env.NODE_ENV || 'development'}`, '.env'],
+  quiet: true,
 })
 
-dotenv.config({
-  path: `.env.${process.env.NODE_ENV || 'development'}`,
-  override: true,
-})
-
-// Import data from separate modules
-const peopleData = require('./src/data/site/people')
-const projectsData = require('./src/data/site/projects')
-const newsData = require('./src/data/site/news')
-const softwareData = require('./src/data/site/software')
-const menuData = require('./src/data/site/menu')
+// Static microsites are not Gatsby pages, so the sitemap plugin cannot see them. List only the
+// ones that are meant to be indexed (the PD research companion pages are noindex).
+const STATIC_SITEMAP_PATHS = ['/projects/posterior-aware-pd-phenotyping-miccai/']
 
 module.exports = {
-  // Parallel query running intermittently loses a page's temp query result during
-  // clean builds ("Couldn't find temp query result for ..."), failing the build.
-  // Serialising query running is cheap for this site; image processing stays parallel.
-  flags: {
-    PARALLEL_QUERY_RUNNING: false,
-  },
-  pathPrefix: '/',
   siteMetadata: {
     title: `Computational Visualization Center`,
-    peopleCards: peopleData,
-    newsTiles: newsData,
-    projectTiles: projectsData,
-    softwareProjects: softwareData,
-    menuLinks: menuData,
     description: `A cross-disciplinary effort to develop and improve the technologies for computational modeling, simulation, analysis, and visualization.`,
     author: `cvc`,
     siteUrl: `https://cvc-lab.github.io/`,
   },
   plugins: [
-    // Using Gatsby Head API instead of react-helmet
-    // `gatsby-plugin-react-helmet`,
-
-    `gatsby-plugin-typescript`,
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -64,6 +40,10 @@ module.exports = {
           `/projects/healthcare-ai/`,
           `/projects/dynamic-belief-games/internal/**`,
         ],
+        resolvePages: ({ allSitePage: { nodes } }) => [
+          ...nodes,
+          ...STATIC_SITEMAP_PATHS.map(path => ({ path })),
+        ],
       },
     },
     {
@@ -71,13 +51,6 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `videos`,
-        path: `${__dirname}/src/videos`,
       },
     },
     `gatsby-transformer-sharp`,
@@ -90,13 +63,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `data`,
-        path: `${__dirname}/src/data/`,
-      },
-    },
-    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
@@ -104,43 +70,33 @@ module.exports = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 800,
-              // Removed the path option as it's not valid for gatsby-remark-images
             },
           },
-          {
-            resolve: 'gatsby-remark-static-images',
-          },
-          {
-            resolve: `gatsby-remark-copy-linked-files`,
-          },
+          `gatsby-remark-copy-linked-files`,
           {
             resolve: `gatsby-remark-katex`,
             options: {
-              // Add any KaTeX options from https://github.com/KaTeX/KaTeX/blob/master/docs/options.md here
               strict: `ignore`,
             },
           },
           {
-            resolve: 'gatsby-remark-embed-video',
+            resolve: `gatsby-remark-embed-video`,
             options: {
-              related: false, //Optional: Will remove related videos from the end of an embedded YouTube video.
-              noIframeBorder: true, //Optional: Disable insertion of <style> border: 0
-              loadingStrategy: 'lazy', //Optional: Enable support for lazy-load offscreen iframes. Default is disabled.
+              related: false,
+              noIframeBorder: true,
+              loadingStrategy: `lazy`,
               urlOverrides: [
                 {
-                  id: 'youtube',
+                  id: `youtube`,
                   embedURL: videoId => `https://www.youtube-nocookie.com/embed/${videoId}`,
                 },
-              ], //Optional: Override URL of a service provider, e.g to enable youtube-nocookie support
-              containerClass: 'embedVideo-container', //Optional: Custom CSS class for iframe container, for multiple classes separate them by space
-              iframeId: false, //Optional: if true, iframe's id will be set to what is provided after 'video:' (YouTube IFrame player API requires iframe id)
+              ],
+              containerClass: `embedVideo-container`,
+              iframeId: false,
             },
           },
         ],
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
 }

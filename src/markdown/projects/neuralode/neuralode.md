@@ -78,9 +78,7 @@ $$
 The projection for the adjoint would be:
 
 $$
-\begin{align*}
 -a(t)^T \frac{\partial f_\theta (z(t))}{\partial z(t)} - \nabla V(a(t)) \frac{\mathrm{ReLU}(- \nabla V(a)^T a(t)^T \frac{\partial f_\theta (z(t))}{\partial z(t)} + \alpha V(a(t)))}{|\nabla V(a)|^2}
-\end{align*}
 $$
 
 ### LyaNet
@@ -107,9 +105,10 @@ The problem will be determining how
 
 ## Dueling Neural ODE Inner and Outer Loop
 
-![Neural_ODE](https://hackmd.io/_uploads/ryfT654N6.png)
+<p><img src="https://hackmd.io/_uploads/ryfT654N6.png" alt="Neural_ODE" width="1388" height="719">
 The inner loop contains the forward and adjoint ODE solves with stability constraints.
 The outer loop focuses on the filtering of gradients, i.e. selection of gradients with highest impact on training.
+</p>
 
 - To enforce stability in the gradient calculations used for updating in the training process.
 
@@ -119,17 +118,17 @@ The outer loop focuses on the filtering of gradients, i.e. selection of gradient
 
 <!-- ![](https://hackmd.io/_uploads/ryRTxse_3.png) -->
 
-![](https://hackmd.io/_uploads/HyyKqWh9n.png)  
+<img src="https://hackmd.io/_uploads/HyyKqWh9n.png" alt="" width="530" height="389"><br>
 Note: PINN is trained for 200000 epochs and the final test loss is shown for reference.
 
 #### Results of training LyaNet to solve spring equation (NYU data). Two types of loss are computed, MSE and Lyapunov, for each the training and testing datasets (top figure). The differences between the training and testing loss (a measure of generalization) is plotted in the bottom figure.
 
-![](https://hackmd.io/_uploads/BkaYEAld2.png)
+<p><img src="https://hackmd.io/_uploads/BkaYEAld2.png" alt="" width="511" height="751"></p>
 
 #### Results of previous model but with controller that removes some gradients
 
-![](https://hackmd.io/_uploads/SkGi66td3.png)
-![](https://hackmd.io/_uploads/r1t1O-iu3.png)
+<p><img src="https://hackmd.io/_uploads/SkGi66td3.png" alt="" width="519" height="741">
+<img src="https://hackmd.io/_uploads/r1t1O-iu3.png" alt="" width="519" height="758"></p>
 
 ## References
 

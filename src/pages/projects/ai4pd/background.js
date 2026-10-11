@@ -1,7 +1,7 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import Ai4pdLayout, { Ai4pdHead, Ai4pdFigure } from '../../../components/ai4pd/Ai4pdLayout'
+import Ai4pdLayout, { Ai4pdHead } from '../../../components/ai4pd/Ai4pdLayout'
+import Ai4pdFigure from '../../../components/ai4pd/Ai4pdFigure'
 import { AI4PD_BASE } from '../../../components/ai4pd/links'
 
 const deepDives = [
@@ -37,7 +37,7 @@ const therapies = [
 const BackgroundPage = () => (
   <Ai4pdLayout section="background">
     <section className="ai4pd-hero">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <p className="ai4pd-eyebrow">Background</p>
         <h1>Parkinson&apos;s disease context</h1>
         <p className="ai4pd-lead">
@@ -49,7 +49,7 @@ const BackgroundPage = () => (
     </section>
 
     <section className="ai4pd-section">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <div className="ai4pd-grid ai4pd-grid--2">
           <div className="ai4pd-prose">
             <h2>Neurobiology in focus</h2>
@@ -77,7 +77,7 @@ const BackgroundPage = () => (
     </section>
 
     <section className="ai4pd-section ai4pd-section--soft">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <div className="ai4pd-prose">
           <h2>Clinical manifestations we model</h2>
         </div>
@@ -117,7 +117,7 @@ const BackgroundPage = () => (
     </section>
 
     <section className="ai4pd-section">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <div className="ai4pd-prose">
           <h2>Therapeutic landscape as of 2025</h2>
         </div>
@@ -129,34 +129,39 @@ const BackgroundPage = () => (
             </article>
           ))}
         </div>
-        <p className="ai4pd-prose" style={{ marginTop: '1.5rem' }}>
-          These interventions are powerful, yet they are prescribed largely on population averages.
-          Our multimodal approach learns which combination, sequence, and timing work best for each
-          individual patient profile.
-        </p>
+        <div className="ai4pd-prose ai4pd-follow">
+          <p>
+            These interventions are powerful, yet they are prescribed largely on population
+            averages. Our multimodal approach learns which combination, sequence, and timing work
+            best for each individual patient profile.
+          </p>
+        </div>
       </div>
     </section>
 
     <section className="ai4pd-section ai4pd-section--soft">
-      <div className="ai4pd-shell ai4pd-prose">
-        <p className="ai4pd-eyebrow">2023 study</p>
-        <h2>Quick and efficient extraction of patient-specific SBR ratios</h2>
-        <p>
-          The program&apos;s imaging thrust grew out of a 2023 study that replaced hours of manual
-          striatal segmentation with SegFormer masks generated in minutes, then used them to extract
-          patient-specific striatal binding ratios from DaTSCAN. The write-up is in four parts:
-        </p>
-        <ul className="ai4pd-list">
-          {deepDives.map(([label, href]) => (
-            <li key={href}>
-              <Link to={href}>{label}</Link>
-            </li>
-          ))}
-        </ul>
-        <p>
-          Reference notebooks and reports are listed on the{' '}
-          <Link to={`${AI4PD_BASE}/resources/`}>resources page</Link>.
-        </p>
+      <div className="page-container">
+        <div className="ai4pd-prose">
+          <p className="ai4pd-eyebrow">2023 study</p>
+          <h2>Quick and efficient extraction of patient-specific SBR ratios</h2>
+          <p>
+            The program&apos;s imaging thrust grew out of a 2023 study that replaced hours of manual
+            striatal segmentation with SegFormer masks generated in minutes, then used them to
+            extract patient-specific striatal binding ratios from DaTSCAN. The write-up is in four
+            parts:
+          </p>
+          <ul className="ai4pd-list">
+            {deepDives.map(([label, href]) => (
+              <li key={href}>
+                <Link to={href}>{label}</Link>
+              </li>
+            ))}
+          </ul>
+          <p>
+            Reference notebooks and reports are listed on the{' '}
+            <Link to={`${AI4PD_BASE}/resources/`}>resources page</Link>.
+          </p>
+        </div>
       </div>
     </section>
   </Ai4pdLayout>
@@ -171,7 +176,3 @@ export const Head = ({ location }) => (
     description="Parkinson's disease context for AI4PD: neurobiology, motor and non-motor manifestations, the 2025 therapeutic landscape, and the 2023 SegFormer study on patient-specific SBR extraction."
   />
 )
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

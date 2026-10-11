@@ -15,7 +15,7 @@ date: '2026-02-19'
 
 ---
 
-<video autoplay muted loop playsinline preload="metadata" poster="/media/phast_monolithic_demo_poster.jpg" src="/media/phast_monolithic_demo.mp4" aria-label="PHAST vs baselines: animated rollouts across 8 physical systems" style="width:100%;height:auto;display:block"></video>
+<video autoplay muted loop playsinline controls preload="metadata" width="1440" height="840" poster="/media/phast_monolithic_demo_poster.jpg" src="/media/phast_monolithic_demo.mp4" aria-label="PHAST vs baselines: animated rollouts across 8 physical systems" style="width:100%;height:auto;display:block"></video>
 
 **100-step open-loop rollouts across 8 physical systems.**
 Blue = PHAST (Known), Green = PHAST (Partial), Red = GRU, Gold = S5, Purple = LinOSS, White = ground truth. PHAST tracks ground truth where baselines diverge.

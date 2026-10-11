@@ -1,257 +1,355 @@
-/* 
- * CVC Lab / Oden Institute at UT Austin
- * Global Styles
+/*
+ * CVC Lab base layer: the only reset and the only element-level rules on the site.
+ * Loaded first (gatsby-browser.js), so component stylesheets win ties.
  */
 
 @import './variables.css';
-/* Libre Franklin is self-hosted via @fontsource (see gatsby-browser.js); no Google Fonts request. */
 
-/* === Base Styles === */
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+* {
   margin: 0;
   padding: 0;
 }
 
 html {
-  font-size: 16px;
-  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scrollbar-gutter: stable;
+}
+
+/* Hash targets and focused controls stop below the sticky header and any sticky sub-bar.
+   This is the only scroll offset on the site: no scroll-padding on html, because WebKit then
+   scrolls the page whenever a control inside a sticky bar is brought into view (a tap, a
+   screen reader). For the same reason the bars themselves (header and drawer, AI4PD sub-nav
+   where it is sticky), the fixed skip link and dialogs get no margin. */
+:where(
+  [id],
+  a[href],
+  area[href],
+  button,
+  input,
+  select,
+  textarea,
+  summary,
+  iframe,
+  audio[controls],
+  video[controls],
+  [tabindex],
+  [contenteditable]
+):where(:not(.site-header, .site-header *, .skip-link, dialog *)) {
+  scroll-margin-top: calc(var(--site-header-height) + var(--page-subnav-height) + 0.75rem);
+}
+
+/* The AI4PD sub-nav is sticky only in this range (ai4pd.css). Below it, it scrolls with the
+   page and its controls keep the margin above. */
+@media (min-width: 769px) and (min-height: 500px) {
+  :where(.ai4pd-nav, .ai4pd-nav *) {
+    scroll-margin-top: 0;
+  }
 }
 
 body {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
   font-family: var(--font-primary);
+  font-size: var(--font-size-base);
   font-weight: var(--font-weight-regular);
-  line-height: var(--leading-normal);
-  color: var(--ut-charcoal);
-  background-color: var(--ut-white);
+  line-height: var(--line-height-normal);
+  overflow-wrap: break-word;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+[hidden] {
+  display: none !important;
+}
+
+/* Headings */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-weight: var(--font-weight-bold);
-  line-height: var(--leading-tight);
-  margin-bottom: var(--spacing-4);
-  color: var(--ut-charcoal);
+  color: inherit;
+  font-family: inherit;
+  line-height: var(--line-height-tight);
+  text-rendering: optimizeLegibility;
 }
 
 h1 {
-  font-size: var(--text-3xl);
+  margin-bottom: var(--space-lg);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: var(--text-2xl);
+  margin-bottom: var(--space-md);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.01em;
 }
 
 h3 {
-  font-size: var(--text-xl);
+  margin-bottom: var(--space-md);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
 }
 
 h4 {
-  font-size: var(--text-lg);
+  margin-bottom: var(--space-sm);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-medium);
 }
 
 h5 {
-  font-size: var(--text-md);
+  margin-bottom: var(--space-sm);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
 }
 
 h6 {
-  font-size: var(--text-base);
+  margin-bottom: var(--space-sm);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
 }
 
+/* Text */
 p {
-  margin-bottom: var(--spacing-4);
+  margin-bottom: var(--space-md);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
 }
 
 a {
-  color: var(--ut-burnt-orange);
+  color: var(--color-primary);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
-a:hover {
-  color: var(--ut-burnt-orange-dark);
+a:hover,
+a:active {
+  color: var(--color-primary-dark);
 }
 
+b,
+strong,
+dt,
+th {
+  font-weight: var(--font-weight-bold);
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Lists. No margin on li: components lay out their own items. */
 ul,
 ol {
-  margin-bottom: var(--spacing-4);
-  padding-left: var(--spacing-6);
+  margin: 0 0 var(--space-md) var(--space-lg);
+  list-style-position: outside;
 }
 
+li > ul,
+li > ol {
+  margin: 0.725rem 0 0.725rem 1.45rem;
+}
+
+dd {
+  margin-bottom: 1.45rem;
+}
+
+/* Media. No margin on img: it leaked into every logo, thumbnail and figure. */
 img {
   max-width: 100%;
   height: auto;
+  border-style: none;
+}
+
+figure {
+  margin-bottom: 1.45rem;
+}
+
+hr {
+  height: 1px;
+  margin-bottom: calc(1.45rem - 1px);
+  border: 0;
+  background: hsla(0, 0%, 0%, 0.2);
+}
+
+blockquote {
+  margin: 0 1.45rem 1.45rem;
+}
+
+/* Code */
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--font-mono);
+}
+
+code,
+kbd,
+samp {
+  font-size: 0.875em;
+}
+
+:not(pre) > code {
+  padding: 0.15em 0.35em;
+  border-radius: 3px;
+  background-color: hsla(0, 0%, 0%, 0.04);
+}
+
+pre {
+  margin-bottom: 1.45rem;
+  padding: 1.45rem;
+  overflow: auto;
+  border-radius: 3px;
+  background: hsla(0, 0%, 0%, 0.04);
+  font-size: var(--font-size-sm);
+  line-height: 1.42;
+  overflow-wrap: normal;
+}
+
+pre code {
+  font-size: inherit;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  margin-bottom: 1.45rem;
+  border-collapse: collapse;
+  font-size: 1rem;
+  line-height: 1.45rem;
+}
+
+td,
+th {
+  padding: 0.725rem 0.96667rem calc(0.725rem - 1px);
+  border-bottom: 1px solid hsla(0, 0%, 0%, 0.12);
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The rule above would otherwise beat the align attribute that markdown tables emit. */
+td[align='center'],
+th[align='center'] {
+  text-align: center;
+}
+
+td[align='right'],
+th[align='right'] {
+  text-align: right;
+}
+
+th:first-child,
+td:first-child {
+  padding-left: 0;
+}
+
+th:last-child,
+td:last-child {
+  padding-right: 0;
+}
+
+/* Forms */
+button,
+input,
+optgroup,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+select {
+  text-transform: none;
 }
 
 button {
   cursor: pointer;
 }
 
-/* === Layout Components === */
-.container {
-  width: 100%;
-  max-width: var(--container-max-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--container-padding);
-  padding-right: var(--container-padding);
+::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
 }
 
-.section {
-  padding-top: var(--section-padding-y);
-  padding-bottom: var(--section-padding-y);
+/* Focus: one ring for the whole site. Components tune it through the tokens only.
+   The white halo keeps the ring visible on the orange header and the charcoal footer. */
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+  box-shadow: 0 0 0 calc(var(--focus-ring-offset) + var(--focus-ring-width) + 2px) var(--ut-white);
 }
 
-.section-title {
-  font-size: var(--text-2xl);
-  color: var(--ut-charcoal);
-  margin-bottom: var(--spacing-2);
+/* Helpers */
+.page-container {
+  width: min(100% - 2 * var(--page-gutter), var(--page-max-width));
+  margin-inline: auto;
 }
 
-.section-subtitle {
-  font-size: var(--text-md);
-  color: var(--ut-medium-gray);
-  margin-bottom: var(--spacing-8);
-  font-weight: var(--font-weight-regular);
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
-/* === Button Styles === */
-.btn {
-  display: inline-block;
-  padding: var(--spacing-2) var(--spacing-4);
-  font-weight: var(--font-weight-medium);
-  text-align: center;
-  border-radius: var(--border-radius-md);
-  transition: all var(--transition-normal);
-  border: none;
-  cursor: pointer;
+/* A table cannot scroll sideways itself; this wrapper (with tabindex="0") does. */
+.table-scroll {
+  max-width: 100%;
+  margin-bottom: 1.45rem;
+  overflow-x: auto;
 }
 
-.btn-primary {
-  background-color: var(--ut-burnt-orange);
-  color: var(--ut-white);
-}
-
-.btn-primary:hover {
-  background-color: var(--ut-burnt-orange-dark);
-  color: var(--ut-white);
-}
-
-.btn-secondary {
-  background-color: var(--ut-charcoal);
-  color: var(--ut-white);
-}
-
-.btn-secondary:hover {
-  background-color: var(--ut-charcoal-dark);
-}
-
-.btn-outline {
-  background-color: transparent;
-  border: 2px solid var(--ut-burnt-orange);
-  color: var(--ut-burnt-orange);
-}
-
-.btn-outline:hover {
-  background-color: var(--ut-burnt-orange);
-  color: var(--ut-white);
-}
-
-/* === Utility Classes === */
-.text-primary {
-  color: var(--ut-burnt-orange);
-}
-
-.text-secondary {
-  color: var(--ut-charcoal);
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.font-light {
-  font-weight: var(--font-weight-light);
-}
-
-.font-normal {
-  font-weight: var(--font-weight-regular);
-}
-
-.font-medium {
-  font-weight: var(--font-weight-medium);
-}
-
-.font-semibold {
-  font-weight: var(--font-weight-semibold);
-}
-
-.font-bold {
-  font-weight: var(--font-weight-bold);
-}
-
-.mb-0 {
+.table-scroll > table {
   margin-bottom: 0;
 }
 
-.mb-1 {
-  margin-bottom: var(--spacing-1);
+/* KaTeX positions its hidden MathML copy absolutely; keep it inside the formula. */
+.katex {
+  position: relative;
 }
 
-.mb-2 {
-  margin-bottom: var(--spacing-2);
-}
-
-.mb-4 {
-  margin-bottom: var(--spacing-4);
-}
-
-.mb-8 {
-  margin-bottom: var(--spacing-8);
-}
-
-.mb-12 {
-  margin-bottom: var(--spacing-12);
-}
-
-.mt-4 {
-  margin-top: var(--spacing-4);
-}
-
-.mt-8 {
-  margin-top: var(--spacing-8);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  h1 {
-    font-size: var(--text-2xl);
-  }
-
-  h2 {
-    font-size: var(--text-xl);
-  }
-
-  h3 {
-    font-size: var(--text-lg);
-  }
-
-  .section {
-    padding-top: var(--spacing-12);
-    padding-bottom: var(--spacing-12);
+/* Motion: honour the OS setting everywhere. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

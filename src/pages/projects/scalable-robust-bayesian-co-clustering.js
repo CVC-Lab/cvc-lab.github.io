@@ -1,8 +1,8 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import { FaBookOpen, FaCopy, FaDownload } from 'react-icons/fa'
 import Layout from '../../components/layout'
 import Seo from '../../components/seo'
+import useCopyText from '../../components/project-pages/useCopyText'
 import './scalable-robust-bayesian-co-clustering.css'
 
 const paperUrl = 'https://arxiv.org/pdf/2504.04079'
@@ -148,19 +148,20 @@ const MatrixSketch = () => {
   )
 }
 
-const ScalableRobustBayesianCoClusteringPage = () => {
-  const [copied, setCopied] = React.useState(false)
+const copyLabel = { idle: 'Copy citation', copied: 'Copied', failed: 'Copy failed' }
+const copyMessage = {
+  idle: '',
+  copied: 'Citation copied to the clipboard.',
+  failed: 'Copying failed. The citation text is selected so you can copy it manually.',
+}
 
-  const copyCitation = async () => {
-    if (typeof navigator === 'undefined' || !navigator.clipboard) return
-    await navigator.clipboard.writeText(citation)
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 1800)
-  }
+const ScalableRobustBayesianCoClusteringPage = () => {
+  const [copyStatus, copyText] = useCopyText()
+  const citationRef = React.useRef(null)
 
   return (
     <Layout headerVariant="compact">
-      <main className="srvcc-page">
+      <div className="srvcc-page">
         <section className="srvcc-hero">
           <div className="srvcc-shell srvcc-hero-grid">
             <div className="srvcc-hero-copy">
@@ -174,7 +175,7 @@ const ScalableRobustBayesianCoClusteringPage = () => {
               </p>
               <div className="srvcc-actions">
                 <a className="srvcc-button srvcc-button--primary" href={paperUrl}>
-                  <FaBookOpen /> Read full paper
+                  <FaBookOpen aria-hidden="true" /> Read full paper
                 </a>
                 <a className="srvcc-button" href={arxivUrl}>
                   arXiv record
@@ -257,14 +258,21 @@ const ScalableRobustBayesianCoClusteringPage = () => {
                 mutual information.
               </p>
             </div>
-            <div className="srvcc-table-wrap">
+            <div
+              className="srvcc-table-wrap"
+              role="region"
+              aria-label="Benchmark results"
+              // Focusable so the table can be scrolled sideways from the keyboard on narrow screens.
+              // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+              tabIndex={0}
+            >
               <table className="srvcc-table">
                 <thead>
                   <tr>
-                    <th>Dataset</th>
-                    <th>SRVCC ACC</th>
-                    <th>SRVCC NMI</th>
-                    <th>Note</th>
+                    <th scope="col">Dataset</th>
+                    <th scope="col">SRVCC ACC</th>
+                    <th scope="col">SRVCC NMI</th>
+                    <th scope="col">Note</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -334,25 +342,34 @@ const ScalableRobustBayesianCoClusteringPage = () => {
                 <p className="srvcc-eyebrow">Resources</p>
                 <h2>Paper and citation</h2>
               </div>
-              <pre>
-                <code>{citation}</code>
+              <pre
+                role="region"
+                aria-label="BibTeX citation"
+                // Focusable so the citation can be scrolled sideways from the keyboard on narrow screens.
+                // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+                tabIndex={0}
+              >
+                <code ref={citationRef}>{citation}</code>
               </pre>
               <div className="srvcc-actions">
                 <button
                   className="srvcc-button srvcc-button--primary"
-                  onClick={copyCitation}
+                  onClick={() => copyText(citation, citationRef.current)}
                   type="button"
                 >
-                  <FaCopy /> {copied ? 'Copied' : 'Copy citation'}
+                  <FaCopy aria-hidden="true" /> {copyLabel[copyStatus]}
                 </button>
                 <a className="srvcc-button" href={paperUrl}>
-                  <FaDownload /> Download PDF
+                  <FaDownload aria-hidden="true" /> Download PDF
                 </a>
+                <span className="visually-hidden" role="status">
+                  {copyMessage[copyStatus]}
+                </span>
               </div>
             </article>
           </div>
         </section>
-      </main>
+      </div>
     </Layout>
   )
 }
@@ -366,7 +383,3 @@ export const Head = ({ location }) => (
     description="A variational co-clustering framework for robust row and column structure discovery in noisy, sparse, and high-dimensional data."
   />
 )
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

@@ -41,6 +41,7 @@ module.exports = [
     img_name: 'projects/Projects_Deep Encoder-Decoder',
     link: '/projects/dedrecon',
     tags: ['Computer Vision', 'Scientific ML'],
+    themes: ['AI for Science'],
     date: '2020-09-01',
   },
   {
@@ -50,6 +51,7 @@ module.exports = [
     img_name: 'project_tiles/video_imputation_crop',
     link: '/projects/video-imputation',
     tags: ['Computer Vision'],
+    themes: ['AI for Science'],
     date: '2021-11-01',
   },
   {
@@ -59,6 +61,7 @@ module.exports = [
     img_name: 'project_tiles/mce_vae',
     link: '/projects/mce-vae',
     tags: ['Scientific ML'],
+    themes: ['AI for Science'],
     date: '2021-11-15',
   },
   {
@@ -68,6 +71,7 @@ module.exports = [
     img_name: 'project_tiles/sample_complexity_2',
     link: '/projects/sample-complexity',
     tags: ['Reinforcement Learning'],
+    themes: ['World Models'],
     date: '2021-09-28',
   },
   {
@@ -77,6 +81,7 @@ module.exports = [
     img_name: 'project_tiles/optimal_control_2',
     link: '/projects/optimal-control',
     tags: ['Scientific ML', 'Reinforcement Learning'],
+    themes: ['World Models'],
     date: '2020-11-11',
   },
   {
@@ -86,6 +91,7 @@ module.exports = [
     img_name: 'project_tiles/adversarial_cloaking_crop',
     link: '/projects/adversarial-cloaking',
     tags: ['Computer Vision', 'Scientific ML'],
+    themes: ['AI for Science'],
     date: '2020-09-01',
   },
   {
@@ -95,6 +101,7 @@ module.exports = [
     img_name: 'project_tiles/isp_crop',
     link: '/projects/camera-isp',
     tags: ['Computer Vision'],
+    themes: ['AI for Science'],
     date: '2020-09-01',
   },
   // {
@@ -113,6 +120,7 @@ module.exports = [
     img_name: 'project_tiles/angstrom',
     link: '/projects/angstrom',
     tags: ['Scientific ML'],
+    themes: ['AI for Science'],
     date: '2020-09-01',
   },
   {
@@ -122,6 +130,7 @@ module.exports = [
     img_name: 'project_tiles/spectre_logo',
     link: '/projects/spectre',
     tags: ['Scientific ML'],
+    themes: ['AI for Science'],
     date: '2020-09-01',
   },
   {
@@ -130,6 +139,7 @@ module.exports = [
     img_name: 'project_tiles/generative_material_logo',
     link: '/projects/generative-material-design',
     tags: ['Scientific ML'],
+    themes: ['AI for Science'],
     date: '2020-09-01',
   },
   // {
@@ -148,6 +158,7 @@ module.exports = [
     img_name: 'project_tiles/search_n_score',
     link: '/projects/search-n-score',
     tags: ['Reinforcement Learning'],
+    themes: ['World Models'],
     date: '2020-09-01',
   },
   {
@@ -157,6 +168,7 @@ module.exports = [
     img_name: 'project_tiles/robust_pinns',
     link: '/projects/robust-pinns',
     tags: ['Scientific ML'],
+    themes: ['AI for Science'],
     date: '2021-10-26',
   },
   {
@@ -165,6 +177,7 @@ module.exports = [
     img_name: 'project_tiles/theoretical_bound',
     link: '/projects/theoretical-bound',
     tags: ['Reinforcement Learning'],
+    themes: ['World Models'],
     date: '2023-08-07',
   },
   {
@@ -174,6 +187,7 @@ module.exports = [
     img_name: 'project_tiles/intelligent_ml',
     link: 'https://cvc-lab.github.io/afc-website/',
     tags: ['Computer Vision'],
+    themes: ['AI for Science'],
     date: '2023-12-01',
   },
   {
@@ -182,6 +196,7 @@ module.exports = [
     img_name: 'project_tiles/dueling_neural_odes',
     link: '/projects/neuralode',
     tags: ['Scientific ML'],
+    themes: ['AI for Science'],
     date: '2023-11-21',
   },
   {
@@ -192,6 +207,7 @@ module.exports = [
     link: '/projects/ai4pd/',
     tags: ['Healthcare AI'],
     themes: ['Healthcare AI'],
+    featuredRank: 3,
     date: '2026-06-12',
   },
   {
@@ -210,6 +226,7 @@ module.exports = [
     img_name: 'projects/Project_Night-time Aerial',
     link: '/projects/aerial-material-segmentation',
     tags: ['Computer Vision'],
+    themes: ['AI for Science'],
     date: '2024-09-12',
   },
   {
@@ -236,7 +253,7 @@ module.exports = [
     name: skiJumperDigitalTwinTitle,
     description:
       'A physics-aware digital twin for phase-dependent ski-jump trajectories, aerodynamic posture, and landing safety.',
-    img_name: 'projects/ski_jumper_digital_twin/ski_jumper_overview',
+    img_name: 'project_tiles/ski_jumper_overview_crop',
     link: '/projects/ski-jumper-digital-twin',
     tags: ['Scientific ML', 'Simulation'],
     themes: ['World Models'],
@@ -249,6 +266,7 @@ module.exports = [
     img_name: 'project_tiles/shastra',
     link: '/projects/shastra',
     tags: ['Scientific ML', 'Computer Vision'],
+    themes: ['AI for Science'],
     date: '2020-09-01',
   },
   {
@@ -258,6 +276,7 @@ module.exports = [
     img_name: 'project_tiles/angstrom',
     link: 'https://web.archive.org/web/20061118080456/http://cvcweb.ices.utexas.edu:80/cvc/projects/DiDi/index.php',
     tags: ['Scientific ML', 'Computer Vision'],
+    themes: ['AI for Science'],
     date: '2004-01-01',
   },
   {
@@ -267,6 +286,7 @@ module.exports = [
     img_name: 'project_tiles/shastra',
     link: 'https://web.archive.org/web/20061118080859/http://cvcweb.ices.utexas.edu:80/cvc/projects/VisualEyes/index.php',
     tags: ['Scientific ML', 'Computer Vision'],
+    themes: ['AI for Science'],
     date: '2004-01-01',
   },
   {
@@ -286,6 +306,8 @@ module.exports = [
     img_name: 'projects/Project_GRL-SNAM',
     link: '/projects/grl-snam',
     tags: ['Reinforcement Learning', 'Scientific ML'],
+    themes: ['World Models'],
+    featuredRank: 2,
     date: '2026-01-01',
   },
   {
@@ -295,6 +317,8 @@ module.exports = [
     img_name: 'project_tiles/phast',
     link: '/projects/phast',
     tags: ['Scientific ML'],
+    themes: ['World Models'],
+    featuredRank: 1,
     date: '2026-02-19',
   },
   {
@@ -393,6 +417,7 @@ module.exports = [
     img_name: 'publications/PUB_Computer Algebra',
     link: '/projects/computer-algebra-hamiltonian-geometry',
     tags: ['Scientific ML'],
+    themes: ['AI for Science'],
     date: '2025-11-15',
   },
   {
@@ -402,6 +427,7 @@ module.exports = [
     img_name: 'publications/PUB_Compositional ELBOs',
     link: '/projects/scalable-robust-bayesian-co-clustering',
     tags: ['Scientific ML'],
+    themes: ['AI for Science'],
     date: '2024-09-12',
   },
   {
@@ -411,6 +437,7 @@ module.exports = [
     img_name: 'projects/Project_Differential and Pointwise Control',
     link: '/projects/differential-and-pointwise-control-rl',
     tags: ['Reinforcement Learning', 'Scientific ML'],
+    themes: ['World Models'],
     date: '2025-12-01',
   },
 ]

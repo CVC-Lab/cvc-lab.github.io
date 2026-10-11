@@ -16,4 +16,4 @@ to obtain quadratic convergence. The technique broadens the scope of the so-call
 error estimates are established over the class of convex quadrilaterals with bounded aspect ratio as well as over the class of convex planar polygons satisfying additional shape regularity conditions to exclude large interior angles and short edges. Numerical evidence is provided on a trapezoidal quadrilateral mesh, previously not amenable to serendipity
 constructions, and applications to adaptive meshing are discussed.
 
-Manuscript can be found from full list of [publications](/publications)
+Manuscript can be found from full list of [publications](/publications/)

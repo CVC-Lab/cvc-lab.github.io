@@ -3,7 +3,7 @@ title: "LBIE"
 slug: "/software/lbie"
 ---
 
-![](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/lbie.1.jpg) ![](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/lbie.2.jpg) ![](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/lbie039.jpg) ![](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/lbie041.jpg)
+<img src="https://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/lbie.1.jpg" alt="" width="429" height="562"> <img src="https://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/lbie.2.jpg" alt="" width="640" height="585"> <img src="https://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/lbie039.jpg" alt="" width="237" height="187"> <img src="https://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/lbie041.jpg" alt="" width="339" height="173">
 
 ### Description
 
@@ -53,49 +53,49 @@ We developed an adaptive boundary and finite element mesher, namely, a Level Set
 
   A cross-section of the adaptive tetrahedral mesh of the heart
 
-  [![Go to larger picture](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/cutaway-thumb.jpg)](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/cutaway.jpg)
+  [<img src="https://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/cutaway-thumb.jpg" alt="Go to larger picture" width="150" height="150">](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/cutaway.jpg)
 
   The view from outside
 
-  [![Go to the interactive viewer](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/miniVolViewer-up.jpg)](/ccv/gallery/runMiniVolViewer.php?dataset=heart_sdf257.c2c)
+  [<img src="https://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/miniVolViewer-up.jpg" alt="Go to the interactive viewer" width="70" height="22">](/ccv/gallery/runMiniVolViewer.php?dataset=heart_sdf257.c2c)
 
-  [![Go to larger picture](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/redheartmesh-thumb.jpg)](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/redheartmesh.jpg)
+  [<img src="https://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/redheartmesh-thumb.jpg" alt="Go to larger picture" width="150" height="150">](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/redheartmesh.jpg)
 
   The wireframe shows the inner structure of the heart
 
-  [![Go to larger picture](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/wireframemesh-thumb.jpg)](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/wireframemesh.jpg)
+  [<img src="https://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/wireframemesh-thumb.jpg" alt="Go to larger picture" width="150" height="150">](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/wireframemesh.jpg)
 
   The result of boundary detection in wireframe, each of the twenty-two components of the heart model is represented by a different color
 
-  [![Go to larger picture](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/boundaryDetection.gif)](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/boundaryDetection.jpg)
+  [<img src="https://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/boundaryDetection.gif" alt="Go to larger picture" width="150" height="150">](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/boundaryDetection.jpg)
 
   A cross section of the adaptive tetrahedral mesh, it is obvious that the valves have the finest mesh, thin structures are identified by the feature sensitive error function, and adaptive meshes are generated to preserve correct topology.
 
-  [![Go to larger picture](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/crossSection.gif)](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/crossSection.jpg)
+  [<img src="https://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/crossSection.gif" alt="Go to larger picture" width="150" height="150">](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/crossSection.jpg)
 
   the aortic valve
 
-  [![Go to larger picture](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/aortic.gif)](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/aortic.jpg)
+  [<img src="https://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/aortic.gif" alt="Go to larger picture" width="150" height="150">](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/aortic.jpg)
 
   the mitral valve
 
-  [![Go to larger picture](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/mitral.gif)](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/mitral.jpg)
+  [<img src="https://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/mitral.gif" alt="Go to larger picture" width="150" height="150">](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/mitral.jpg)
 
   the pulmonary valve
 
-  [![Go to larger picture](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/pulmonary.gif)](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/pulmonary.jpg)
+  [<img src="https://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/pulmonary.gif" alt="Go to larger picture" width="150" height="150">](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/pulmonary.jpg)
 
   the tricuspid valve
 
-  [![Go to larger picture](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/tricuspid.gif)](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/tricuspid.jpg)
+  [<img src="https://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/tricuspid.gif" alt="Go to larger picture" width="150" height="150">](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/tricuspid.jpg)
 
   a cross section of the mitral valve before material layer detection
 
-  [![Go to larger picture](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/pre-detection.gif)](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/pre-detection.jpg)
+  [<img src="https://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/pre-detection.gif" alt="Go to larger picture" width="150" height="150">](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/pre-detection.jpg)
 
   a cross section of the mitral valve after material layer detection
 
-  [![Go to larger picture](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/post-detection.gif)](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLIBE/post-detection.jpg)
+  [<img src="https://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLBIE/post-detection.gif" alt="Go to larger picture" width="150" height="150">](http://www.cs.utexas.edu/%7Ebajaj/cvc/software/imagesLIBE/post-detection.jpg)
 
   **Credits**
 

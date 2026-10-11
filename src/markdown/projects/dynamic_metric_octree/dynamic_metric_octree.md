@@ -132,5 +132,5 @@ Across all applications, our experimental results confirm exponential performanc
 
 ### Related Work at CVC
 
-- [GRL-SNAM: Geometric Reinforcement Learning for Simultaneous Navigation and Mapping](/projects/grl-snam)
-- [Scalable Robust Bayesian Co-Clustering with Compositional ELBOs](/projects/scalable-robust-bayesian-co-clustering)
+- [GRL-SNAM: Geometric Reinforcement Learning for Simultaneous Navigation and Mapping](/projects/grl-snam/)
+- [Scalable Robust Bayesian Co-Clustering with Compositional ELBOs](/projects/scalable-robust-bayesian-co-clustering/)

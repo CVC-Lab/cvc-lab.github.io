@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- noindex is deliberate until both manuscripts have final identifiers; lift it together with a canonical link and sitemap entries. -->
     <meta name="robots" content="noindex, nofollow, noarchive" />
     <meta
       name="description"
@@ -19,6 +20,8 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://cvc-lab.github.io/projects/pd-research-companion/assets/og/companion.jpg" />
     <title>Mechanism-Aware Parkinson Disease Research</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
     <link rel="stylesheet" href="assets/styles.css" />
     <script defer src="assets/site.js"></script>
   </head>
@@ -48,19 +51,23 @@
             is allowed to advance?
           </p>
           <div class="hero-mobile-image">
+            <!-- Hidden above 1240px, where the hero background reuses the full-size file; sizes selects that file there. -->
             <img
-              src="assets/images/concept_multimodal_patient.png"
+              src="assets/images/concept_multimodal_patient.webp"
+              srcset="assets/images/concept_multimodal_patient_1100.webp 1100w, assets/images/concept_multimodal_patient.webp 1672w"
+              sizes="(max-width: 640px) calc(133vw - 40px), (max-width: 1240px) calc(77vw - 30px), 1672px"
               alt="Conceptual adult participant surrounded by clinical examination, DaT-SPECT, wearable gait, biomarker, brain, and longitudinal evidence"
               width="1672"
               height="941"
+              fetchpriority="high"
             />
           </div>
           <p class="authors">Harsh Milind Tirhekar, Priyanshi Yadav, Chandrajit Bajaj</p>
-          <div class="hero-actions" aria-label="Primary research routes">
+          <div class="hero-actions" role="group" aria-label="Primary research routes">
             <a class="button" href="pd-signed-laterality/#patient-evidence">Inspect patient states</a>
             <a class="button button--quiet" href="pd-validity-gates/#patient-evidence">Follow the validity gates</a>
           </div>
-          <div class="status-line" aria-label="Research status">
+          <div class="status-line" role="group" aria-label="Research status">
             <span>Two complementary journal manuscripts</span>
             <span>Data-derived, outcome-blind patient histories</span>
             <span>Research evidence, not a clinical decision tool</span>
@@ -68,7 +75,7 @@
         </div>
         <div class="hero-source-band">
           <div class="shell">
-            <div class="hero-source-key" aria-label="Illustrated multimodal sources">
+            <div class="hero-source-key" role="group" aria-label="Illustrated multimodal sources">
               <span>Clinical examination</span>
               <span>DaT-SPECT</span>
               <span>Wearable gait</span>
@@ -89,20 +96,20 @@
             when it was observed, what it resolves, and what remains uncertain. The work therefore
             follows one explicit sequence.
           </p>
-          <div class="route" aria-label="Research sequence">
-            <div class="route-step">
+          <div class="route" role="list" aria-label="Research sequence">
+            <div class="route-step" role="listitem">
               <strong>1. Observe</strong>
               <span>Keep clinical, imaging, molecular, cognitive, and treatment sources dated and separate.</span>
             </div>
-            <div class="route-step">
+            <div class="route-step" role="listitem">
               <strong>2. Resolve</strong>
               <span>Retain anatomical direction and cross-source disagreement instead of averaging them away.</span>
             </div>
-            <div class="route-step">
+            <div class="route-step" role="listitem">
               <strong>3. Test</strong>
               <span>Use future-only outcomes with participant, site, calendar, and uncertainty challenges.</span>
             </div>
-            <div class="route-step">
+            <div class="route-step" role="listitem">
               <strong>4. Promote or stop</strong>
               <span>Advance only the claim supported by its own biological, predictive, and transport evidence.</span>
             </div>
@@ -135,7 +142,9 @@
               </div>
               <div class="figure-viewport">
                 <img
-                  src="assets/images/pd_research_ladder.png"
+                  src="assets/images/pd_research_ladder.webp"
+                  srcset="assets/images/pd_research_ladder_1200.webp 1200w, assets/images/pd_research_ladder.webp 3082w"
+                  sizes="(max-width: 640px) calc(100vw - 46px), (max-width: 1220px) calc(100vw - 70px), 1150px"
                   alt="Research ladder connecting clinical-state models and biological coordinates through claim-specific validity gates"
                   width="3082"
                   height="1603"

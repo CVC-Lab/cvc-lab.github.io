@@ -1,13 +1,9 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { FaExternalLinkAlt } from 'react-icons/fa'
-import Ai4pdLayout, {
-  Ai4pdHead,
-  Ai4pdFigure,
-  SmartLink,
-  LinkIcon,
-} from '../../../components/ai4pd/Ai4pdLayout'
+import Ai4pdLayout, { Ai4pdHead, LinkIcon } from '../../../components/ai4pd/Ai4pdLayout'
+import Ai4pdFigure from '../../../components/ai4pd/Ai4pdFigure'
+import SmartLink from '../../../components/ui/SmartLink'
 import { AI4PD_BASE, PATIENT_PORTAL_URL, COMPANION_URL } from '../../../components/ai4pd/links'
 
 const portalPoints = [
@@ -58,78 +54,67 @@ const sections = [
     label: 'How the twin works',
     text: 'A structure-preserving digital twin organized by a port-Hamiltonian core, fed by four method thrusts, with modality-specialized agents and evidence arbitration on top.',
     href: `${AI4PD_BASE}/approach/`,
-    kind: 'internal',
   },
   {
     title: 'Clinician workflow',
     label: 'From cohort to one patient',
     text: 'Subgroup discovery, nearest-neighbor placement, and what the treating neurologist actually sees.',
     href: `${AI4PD_BASE}/clinician-workflow/`,
-    kind: 'internal',
   },
   {
     title: 'Evidence',
     label: 'Cohorts, methods, limits',
     text: 'Every study behind the program with its cohorts, effect sizes, and limitations in the authors’ own wording.',
     href: `${AI4PD_BASE}/evidence/`,
-    kind: 'internal',
   },
   {
     title: 'PD Research Companion',
     label: 'Two new manuscripts',
     text: 'Longitudinal validity gates and signed dopaminergic asymmetry, with outcome-blind patient dossiers and every figure at full resolution.',
     href: COMPANION_URL,
-    kind: 'static',
-    image: 'companion',
+    image: 'projects/pd_research_companion/companion_thumbnail',
   },
   {
     title: 'Partners',
     label: 'Validate on your cohort',
     text: 'How engagement works, data-use terms, governance, and what a clinical partner contributes and receives.',
     href: `${AI4PD_BASE}/partners/`,
-    kind: 'internal',
   },
   {
     title: 'Team & resources',
     label: 'People, datasets, documentation',
     text: 'Who builds AI4PD, the core datasets it rests on, and the lab documentation and engagement channels.',
     href: `${AI4PD_BASE}/team/`,
-    kind: 'internal',
   },
 ]
 
 const projectPages = [
   {
     title: 'Posterior-aware motor phenotyping',
-    href: '/projects/posterior-aware-pd-phenotyping',
-    kind: 'internal',
+    href: '/projects/posterior-aware-pd-phenotyping/',
   },
   {
     title: 'MICCAI 2026 accepted paper',
     href: '/projects/posterior-aware-pd-phenotyping-miccai/',
-    kind: 'static',
   },
   {
     title: 'Pathway-anchored PD clustering',
-    href: '/projects/pathway-anchored-pd-clustering',
-    kind: 'internal',
+    href: '/projects/pathway-anchored-pd-clustering/',
   },
   {
     title: 'Integrated precision stratification',
-    href: '/projects/integrated-pd-precision-stratification',
-    kind: 'internal',
+    href: '/projects/integrated-pd-precision-stratification/',
   },
   {
     title: 'SBR extraction study (2023 background)',
     href: `${AI4PD_BASE}/background/`,
-    kind: 'internal',
   },
 ]
 
 const Ai4pdHub = () => (
   <Ai4pdLayout section="overview">
     <section className="ai4pd-hero ai4pd-hero--hub">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <p className="ai4pd-eyebrow">AI4PD &middot; AI for Parkinson&apos;s disease</p>
         <h1>We infer the unseen.</h1>
         <p className="ai4pd-lead">
@@ -140,14 +125,9 @@ const Ai4pdHub = () => (
           average, and every output goes to the physician first.
         </p>
         <div className="ai4pd-actions">
-          <a
-            href={PATIENT_PORTAL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ai4pd-button ai4pd-button--primary"
-          >
+          <SmartLink to={PATIENT_PORTAL_URL} className="ai4pd-button ai4pd-button--primary">
             Open the patient portal <FaExternalLinkAlt aria-hidden="true" />
-          </a>
+          </SmartLink>
           <Link to={`${AI4PD_BASE}/approach/`} className="ai4pd-button ai4pd-button--quiet">
             See how it works
           </Link>
@@ -165,7 +145,7 @@ const Ai4pdHub = () => (
     </section>
 
     <section className="ai4pd-portal" aria-labelledby="ai4pd-portal-title">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <div className="ai4pd-portal__card">
           <div className="ai4pd-portal__intro">
             <p className="ai4pd-eyebrow">Patient portal</p>
@@ -176,14 +156,9 @@ const Ai4pdHub = () => (
               wearable sensor signals rather than a population template.
             </p>
             <div className="ai4pd-actions">
-              <a
-                href={PATIENT_PORTAL_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ai4pd-button ai4pd-button--primary"
-              >
+              <SmartLink to={PATIENT_PORTAL_URL} className="ai4pd-button ai4pd-button--primary">
                 Open the patient portal <FaExternalLinkAlt aria-hidden="true" />
-              </a>
+              </SmartLink>
               <Link
                 to={`${AI4PD_BASE}/clinician-workflow/`}
                 className="ai4pd-button ai4pd-button--quiet"
@@ -208,7 +183,7 @@ const Ai4pdHub = () => (
     </section>
 
     <section className="ai4pd-section ai4pd-section--soft" aria-labelledby="ai4pd-evidence-title">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <div className="ai4pd-section-heading">
           <p className="ai4pd-eyebrow">Evidence to date (retrospective)</p>
           <h2 id="ai4pd-evidence-title">What the analyses show</h2>
@@ -228,7 +203,8 @@ const Ai4pdHub = () => (
               <h3>{item.title}</h3>
               <p>{item.text}</p>
               <Link to={item.href} className="ai4pd-card__link">
-                Details <LinkIcon kind="internal" />
+                Details<span className="visually-hidden">: {item.title}</span>{' '}
+                <LinkIcon to={item.href} />
               </Link>
             </article>
           ))}
@@ -237,16 +213,11 @@ const Ai4pdHub = () => (
     </section>
 
     <section className="ai4pd-section" aria-labelledby="ai4pd-twin-title">
-      <div className="ai4pd-shell">
-        <div className="ai4pd-grid ai4pd-grid--2">
+      <div className="page-container">
+        <div className="ai4pd-grid ai4pd-grid--2 ai4pd-grid--media">
           <div className="ai4pd-prose">
             <p className="ai4pd-eyebrow">How it works</p>
-            <h2
-              id="ai4pd-twin-title"
-              style={{ fontSize: '2.3rem', lineHeight: 1.12, margin: '0 0 0.9rem' }}
-            >
-              A twin a clinician can question
-            </h2>
+            <h2 id="ai4pd-twin-title">A twin a clinician can question</h2>
             <p>
               Underneath those results sits the patient-specific digital twin. Its interpretable
               core is a structured prior for how a patient&apos;s state evolves, with functional
@@ -262,10 +233,11 @@ const Ai4pdHub = () => (
               capability.
             </p>
             <Link to={`${AI4PD_BASE}/approach/`} className="ai4pd-inline-link">
-              Read the full approach <LinkIcon kind="internal" />
+              Read the full approach <LinkIcon to={`${AI4PD_BASE}/approach/`} />
             </Link>
           </div>
           <Ai4pdFigure
+            zoom
             name="ai4pd-architecture-figure1"
             alt="AI4PD architecture: clinical and validation partners feed a Texas-core AI platform that maintains a patient-specific twin and returns clinician-facing guidance"
             caption="Clinical partners and multimodal evidence feed a Texas-core AI platform; the platform maintains a shared patient-specific twin and returns diagnosis, intervention, and follow-up guidance to clinicians."
@@ -275,7 +247,7 @@ const Ai4pdHub = () => (
     </section>
 
     <section className="ai4pd-section ai4pd-section--soft" aria-labelledby="ai4pd-map-title">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <div className="ai4pd-section-heading">
           <p className="ai4pd-eyebrow">One program</p>
           <h2 id="ai4pd-map-title">Where to go next</h2>
@@ -290,28 +262,34 @@ const Ai4pdHub = () => (
             <article key={item.title} className="ai4pd-card">
               {item.image && (
                 <div className="ai4pd-card__image">
-                  <Ai4pdFigure name="projects/pd_research_companion/companion_thumbnail" alt="" />
+                  <Ai4pdFigure
+                    bare
+                    name={item.image}
+                    alt=""
+                    sizes="(min-width: 1101px) 400px, (min-width: 721px) 50vw, 100vw"
+                  />
                 </div>
               )}
               <p className="ai4pd-eyebrow">{item.label}</p>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
-              <SmartLink href={item.href} kind={item.kind} className="ai4pd-card__link">
-                Open <LinkIcon kind={item.kind} />
+              <SmartLink to={item.href} className="ai4pd-card__link">
+                Open<span className="visually-hidden">: {item.title}</span>{' '}
+                <LinkIcon to={item.href} />
               </SmartLink>
             </article>
           ))}
         </div>
 
-        <div className="ai4pd-section-heading" style={{ marginTop: '3rem' }}>
+        <div className="ai4pd-section-heading ai4pd-subsection">
           <p className="ai4pd-eyebrow">Project pages</p>
           <p>Detailed pages for the individual studies, with figures, methods, and citations.</p>
         </div>
-        <ul className="ai4pd-list" style={{ columns: 2, columnGap: '2rem' }}>
+        <ul className="ai4pd-list ai4pd-list--columns">
           {projectPages.map(page => (
             <li key={page.href}>
-              <SmartLink href={page.href} kind={page.kind} className="ai4pd-inline-link">
-                {page.title} <LinkIcon kind={page.kind} />
+              <SmartLink to={page.href} className="ai4pd-inline-link">
+                {page.title} <LinkIcon to={page.href} />
               </SmartLink>
             </li>
           ))}
@@ -320,7 +298,7 @@ const Ai4pdHub = () => (
     </section>
 
     <section className="ai4pd-section ai4pd-section--tight">
-      <div className="ai4pd-shell">
+      <div className="page-container">
         <div className="ai4pd-callout">
           <h2>The evidence layer is the work, and the ask</h2>
           <p>
@@ -355,7 +333,3 @@ export const Head = ({ location }) => (
     description="We infer the unseen: AI4PD is CVC's patient-specific AI program for Parkinson's disease, with a clinician-facing patient portal, a structure-preserving digital twin, and a retrospective evidence base on PPMI and partner cohorts."
   />
 )
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

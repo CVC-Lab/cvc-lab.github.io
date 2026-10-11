@@ -5,80 +5,93 @@ import Navigation from './navigation'
 import { StaticImage } from 'gatsby-plugin-image'
 import './header.css'
 
+// Without JavaScript the menu button cannot open the drawer, so below 1024px (the drawer
+// range in navigation.css) the links sit on a second row of a bar that scrolls with the page.
+const NO_SCRIPT_CSS = `@media (max-width: 1023.98px) {
+  :root { --site-header-height: 0px; }
+  .site-header, .site-header-shadow { position: relative; }
+  .site-header__inner { flex-wrap: wrap; row-gap: 0; }
+  .header-logo-link { display: flex; align-items: center; min-height: 3rem; }
+  .nav-wrapper { display: block; flex: 1 0 100%; }
+  .nav-hamburger { display: none; }
+  .nav-menu {
+    display: block; position: static; width: auto; padding: 0;
+    overflow: visible; background: none; box-shadow: none; border: 0;
+  }
+  .nav-list { flex-direction: row; flex-wrap: wrap; margin-inline: -0.625rem; padding: 0; }
+  .nav-link { padding: var(--spacing-2) 0.625rem; border-bottom: 0; font-size: 0.8125rem; }
+  .nav-link--active { background: none; box-shadow: none; text-decoration: none; }
+  .nav-link::after { display: block; }
+}`
+
+// useLayoutEffect warns during SSR; the height only matters in the browser.
+const useIsomorphicLayoutEffect =
+  typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect
+
 const Header = ({ siteTitle = '', menuLinks = [], variant = 'default' }) => {
-  const isCompact = variant === 'compact'
-  const isNavOnly = variant === 'nav-only'
-  const [isScrolled, setIsScrolled] = React.useState(false)
-  const showExpandedHeader = !isCompact && !isNavOnly && !isScrolled
+  const barRef = React.useRef(null)
 
-  React.useEffect(() => {
-    if (typeof window === 'undefined') {
-      return undefined
+  // Publish the bar's real height for scroll offsets and page-level sticky bars.
+  useIsomorphicLayoutEffect(() => {
+    const bar = barRef.current
+    const root = document.documentElement
+    let published = ''
+    const publish = () => {
+      const next = `${Math.round(bar.getBoundingClientRect().height * 100) / 100}px`
+      if (next === published) return
+      published = next
+      root.style.setProperty('--site-header-height', next)
     }
-
-    const collapseThreshold = 120
-    const expandThreshold = 48
-
-    const updateScrollState = () => {
-      const currentScrollY = window.scrollY
-
-      setIsScrolled(prevIsScrolled => {
-        if (prevIsScrolled) {
-          return currentScrollY > expandThreshold
-        }
-
-        return currentScrollY > collapseThreshold
-      })
+    publish()
+    const observer = window.ResizeObserver ? new window.ResizeObserver(publish) : null
+    observer?.observe(bar)
+    return () => {
+      observer?.disconnect()
+      root.style.removeProperty('--site-header-height')
     }
-
-    updateScrollState()
-    window.addEventListener('scroll', updateScrollState, { passive: true })
-
-    return () => window.removeEventListener('scroll', updateScrollState)
   }, [])
 
   return (
-    <header
-      className={`site-header ${isCompact ? 'site-header--compact' : ''} ${
-        isNavOnly ? 'site-header--nav-only' : ''
-      } ${isScrolled ? 'site-header--scrolled' : ''}`}
-    >
-      <div
-        className={`header-inner ${isCompact ? 'header-inner--compact' : ''} ${
-          isNavOnly ? 'header-inner--nav-only' : ''
-        } ${isScrolled ? 'header-inner--scrolled' : ''}`}
-      >
-        <div className="header-flex-container">
-          <Link to="/" className="header-logo-link">
+    <>
+      <header className="site-header" ref={barRef}>
+        <div className="site-header__inner page-container">
+          <Link
+            to="/"
+            className="header-logo-link"
+            aria-label={`${siteTitle} home, The University of Texas at Austin`}
+          >
             <StaticImage
-              className="headerlogo"
+              className="site-header__logo"
               src="../images/knockout_university_formal_horizontal.png"
               width={280}
               quality={95}
               formats={['auto', 'webp', 'avif']}
-              alt="UT Austin Logo"
+              alt=""
               placeholder="none"
               loading="eager"
+              objectFit="contain"
             />
           </Link>
           <Navigation menuLinks={menuLinks} />
         </div>
-
-        {isCompact ? (
-          <Link to="/" className="site-title-link site-title-link--compact">
-            <div className="site-title site-title--compact">{siteTitle}</div>
-          </Link>
-        ) : showExpandedHeader ? (
-          <>
-            <div className="site-title-wrap">
-              <Link to="/" className="site-title-link">
-                <div className="site-title">{siteTitle}</div>
-              </Link>
-            </div>
-          </>
-        ) : null}
-      </div>
-    </header>
+        <noscript>
+          <style dangerouslySetInnerHTML={{ __html: NO_SCRIPT_CSS }} />
+        </noscript>
+      </header>
+      {variant !== 'nav-only' && (
+        <div
+          className={`site-masthead${variant === 'compact' ? ' site-masthead--compact' : ''}`}
+          aria-hidden="true"
+        >
+          <div className="page-container">
+            <Link to="/" className="site-title" tabIndex={-1}>
+              {siteTitle}
+            </Link>
+          </div>
+        </div>
+      )}
+      <div className="site-header-shadow" aria-hidden="true" />
+    </>
   )
 }
 

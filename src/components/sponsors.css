@@ -1,0 +1,12 @@
+/* Sponsors: each funder is a bold one-line paragraph followed by its list of grants. */
+.sponsors-page {
+  padding-bottom: var(--space-3xl);
+}
+
+.sponsors-body > p {
+  margin: var(--space-lg) 0 var(--space-xs);
+}
+
+.sponsors-body > p:first-child {
+  margin-top: 0;
+}

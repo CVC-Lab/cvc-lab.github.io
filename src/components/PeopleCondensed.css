@@ -1,15 +1,8 @@
 /* Condensed People Section for Homepage */
-@import '../styles/variables.css';
 
 .people-condensed {
   background: var(--ut-white);
-  padding: var(--spacing-10) 0;
-}
-
-.people-condensed-container {
-  max-width: var(--container-max-width);
-  margin: 0 auto;
-  padding: 0 var(--spacing-6);
+  padding: var(--home-section-space, var(--spacing-10)) 0;
 }
 
 .people-condensed-header {
@@ -22,7 +15,7 @@
 }
 
 .people-condensed-title {
-  font-size: var(--text-2xl);
+  font-size: var(--home-section-title-size, var(--text-2xl));
   font-weight: var(--font-weight-bold);
   color: var(--ut-charcoal);
   margin: 0;
@@ -39,12 +32,18 @@
   margin-top: var(--spacing-2);
 }
 
+/* The padding makes a 44px target; the negative margin keeps the header row's height. */
 .people-view-all {
+  display: inline-block;
+  padding-block: 0.75rem;
+  margin-block: -0.75rem;
   font-size: var(--text-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--ut-burnt-orange);
   text-decoration: none;
-  transition: all var(--transition-fast);
+  transition:
+    color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .people-view-all:hover {
@@ -53,36 +52,34 @@
 }
 
 .people-condensed-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--spacing-4) var(--spacing-3);
 }
 
 @media (min-width: 600px) {
   .people-condensed-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--spacing-5) var(--spacing-4);
   }
 }
 
 @media (min-width: 968px) {
   .people-condensed-grid {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: var(--spacing-6) var(--spacing-5);
   }
 }
 
-@media (min-width: 1200px) {
-  .people-condensed-grid {
-    grid-template-columns: repeat(8, 1fr);
-  }
-}
-
-.person-card-condensed {
+.people-condensed .person-card-condensed {
+  margin: 0;
   text-align: center;
 }
 
-.person-image-wrapper {
+.people-condensed .person-image-wrapper {
   width: 80px;
   height: 80px;
   margin: 0 auto var(--spacing-2);
@@ -92,23 +89,24 @@
   background: var(--ut-limestone-light);
 }
 
-.person-image-wrapper img,
-.person-image-wrapper .gatsby-image-wrapper {
+.people-condensed .person-image-wrapper img,
+.people-condensed .person-image-wrapper .gatsby-image-wrapper {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.person-name {
-  font-size: var(--text-xs);
+.people-condensed .person-name {
+  font-size: var(--text-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--ut-charcoal);
   margin: 0 0 2px;
   line-height: var(--leading-tight);
+  overflow-wrap: anywhere;
 }
 
-.person-position {
-  font-size: 10px;
+.people-condensed .person-position {
+  font-size: var(--text-xs);
   color: var(--ut-medium-gray);
   margin: 0;
   line-height: var(--leading-snug);
@@ -125,17 +123,13 @@
   margin: 0;
 }
 
-@media (max-width: 599px) {
-  .person-image-wrapper {
+@media (max-width: 599.98px) {
+  .people-condensed .person-image-wrapper {
     width: 70px;
     height: 70px;
   }
 
-  .person-name {
-    font-size: 11px;
-  }
-
-  .person-position {
-    font-size: 9px;
+  .people-condensed .person-name {
+    font-size: 0.8125rem;
   }
 }

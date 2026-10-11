@@ -1,16 +1,27 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import { FaBookOpen, FaCopy, FaCubes, FaDownload, FaRoute } from 'react-icons/fa'
 import Layout from '../../components/layout'
 import Seo from '../../components/seo'
+import Tabs, { tabPanelProps } from '../../components/ui/Tabs'
+import useCopyText from '../../components/project-pages/useCopyText'
+import heroSrc from '../../images/projects/computer_algebra_hamiltonian_geometry/cahg_hero_1280.webp'
+import phaseSrc from '../../images/projects/computer_algebra_hamiltonian_geometry/cahg_phase_portraits_1280.webp'
+import pipelineSrc from '../../images/projects/computer_algebra_hamiltonian_geometry/cahg_pipeline_1280.webp'
+import casimirSrc from '../../images/projects/computer_algebra_hamiltonian_geometry/cahg_casimir_sphere_1280.webp'
+import metriplecticSrc from '../../images/projects/computer_algebra_hamiltonian_geometry/cahg_metriplectic_1280.webp'
+import geometrySrc from '../../images/projects/computer_algebra_hamiltonian_geometry/cahg_geometry_1280.webp'
+import shareImage from '../../images/projects/computer_algebra_hamiltonian_geometry/cahg_share.jpg'
 import './computer-algebra-hamiltonian-geometry.css'
-const RELEASE_BASE = 'https://github.com/CVC-Lab/cvc-lab.github.io/releases/download/assets-v1'
-const heroFigure = `${RELEASE_BASE}/Computer.Algebra.Meets.Hamiltonian.Geometry_1.png`
-const phaseFigure = `${RELEASE_BASE}/Computer.Algebra.Meets.Hamiltonian.Geometry_2.png`
-const pipelineFigure = `${RELEASE_BASE}/Computer.Algebra.Meets.Hamiltonian.Geometry_3.png`
-const casimirFigure = `${RELEASE_BASE}/Computer.Algebra.Meets.Hamiltonian.Geometry_4.png`
-const metriplecticFigure = `${RELEASE_BASE}/Computer.Algebra.Meets.Hamiltonian.Geometry_5.png`
-const geometryFigure = `${RELEASE_BASE}/Computer.Algebra.Meets.Hamiltonian.Geometry_7.png`
+
+// Display-size WebP copies of the paper figures (the originals are in the assets-v1 release).
+const heroFigure = { src: heroSrc, width: 1280, height: 720 }
+const phaseFigure = { src: phaseSrc, width: 1280, height: 960 }
+const pipelineFigure = { src: pipelineSrc, width: 1280, height: 720 }
+const casimirFigure = { src: casimirSrc, width: 1280, height: 960 }
+const metriplecticFigure = { src: metriplecticSrc, width: 1280, height: 720 }
+const geometryFigure = { src: geometrySrc, width: 1280, height: 720 }
+const heroAlt =
+  'Computer Algebra Meets Hamiltonian Geometry visual summary with symbolic equations, phase portraits, and Casimir leaves'
 
 const paperUrl = 'https://mapletransactions.org/index.php/maple/article/view/24248/18704'
 
@@ -76,7 +87,11 @@ const systems = [
   {
     name: '3D Rigid Body Motion',
     phase: 'SE(3)∗',
-    hamiltonian: 'H = Tᵣₒₜ + Tₜᵣₐₙₛ',
+    hamiltonian: (
+      <>
+        H = T<sub>rot</sub> + T<sub>trans</sub>
+      </>
+    ),
     dynamics: 'Lie-Poisson evolution',
     casimir: 'Momentum invariants',
     image: geometryFigure,
@@ -161,21 +176,24 @@ const citation = `@article{bajaj2026computer_algebra_hamiltonian,
   year    = {2026}
 }`
 
+const ideaTabs = mathIdeas.map(idea => ({ value: idea.title, label: idea.title }))
+
+const copyLabel = { idle: 'Copy Citation', copied: 'Copied', failed: 'Copy failed' }
+const copyMessage = {
+  idle: '',
+  copied: 'Citation copied to the clipboard.',
+  failed: 'Copying failed. The citation text is selected so you can copy it manually.',
+}
+
 const ComputerAlgebraHamiltonianGeometryPage = () => {
   const [activeIdea, setActiveIdea] = React.useState(mathIdeas[0].title)
-  const [copied, setCopied] = React.useState(false)
+  const [copyStatus, copyText] = useCopyText()
+  const citationRef = React.useRef(null)
   const activeIdeaContent = mathIdeas.find(idea => idea.title === activeIdea) || mathIdeas[0]
-
-  const copyCitation = async () => {
-    if (typeof navigator === 'undefined' || !navigator.clipboard) return
-    await navigator.clipboard.writeText(citation)
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 1800)
-  }
 
   return (
     <Layout headerVariant="compact">
-      <main className="cahg-page">
+      <div className="cahg-page">
         <section className="cahg-hero">
           <div className="cahg-shell cahg-hero__grid">
             <div className="cahg-hero__content">
@@ -187,19 +205,16 @@ const ComputerAlgebraHamiltonianGeometryPage = () => {
               </p>
               <div className="cahg-actions">
                 <a className="cahg-button cahg-button--primary" href={paperUrl}>
-                  <FaBookOpen /> Read Paper
+                  <FaBookOpen aria-hidden="true" /> Read Paper
                 </a>
                 <a className="cahg-button" href="#systems">
-                  <FaRoute /> Explore Systems
+                  <FaRoute aria-hidden="true" /> Explore Systems
                 </a>
               </div>
             </div>
 
             <div className="cahg-hero-art">
-              <img
-                src={heroFigure}
-                alt="Computer Algebra Meets Hamiltonian Geometry visual summary with symbolic equations, phase portraits, and Casimir leaves"
-              />
+              <img {...heroFigure} alt={heroAlt} decoding="async" />
             </div>
           </div>
         </section>
@@ -239,7 +254,12 @@ const ComputerAlgebraHamiltonianGeometryPage = () => {
               {systems.map(system => (
                 <article className="cahg-system-card" key={system.name}>
                   <div className="cahg-system-thumb">
-                    <img src={system.image} alt={`${system.name} visual preview`} />
+                    <img
+                      {...system.image}
+                      alt={`${system.name} visual preview`}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
                   <h3>{system.name}</h3>
                   <dl>
@@ -275,7 +295,7 @@ const ComputerAlgebraHamiltonianGeometryPage = () => {
             <div className="cahg-pipeline">
               {pipeline.map(([label, snippet]) => (
                 <article className="cahg-pipeline-step" key={label}>
-                  <FaCubes />
+                  <FaCubes aria-hidden="true" />
                   <h3>{label}</h3>
                   <p>{snippet}</p>
                 </article>
@@ -293,7 +313,7 @@ const ComputerAlgebraHamiltonianGeometryPage = () => {
             <div className="cahg-gallery">
               {galleryItems.map(([image, title, caption]) => (
                 <figure className="cahg-gallery-card" key={title}>
-                  <img src={image} alt={title} loading="lazy" />
+                  <img {...image} alt={title} loading="lazy" decoding="async" />
                   <figcaption>
                     <strong>{title}</strong>
                     <span>{caption}</span>
@@ -311,25 +331,20 @@ const ComputerAlgebraHamiltonianGeometryPage = () => {
               <h2>Compact reference for the structures used in the paper</h2>
             </div>
             <div className="cahg-idea-panel">
-              <div className="cahg-idea-tabs" role="tablist" aria-label="Mathematical ideas">
-                {mathIdeas.map(idea => (
-                  <button
-                    className={idea.title === activeIdea ? 'is-active' : ''}
-                    key={idea.title}
-                    onClick={() => setActiveIdea(idea.title)}
-                    role="tab"
-                    type="button"
-                    aria-selected={idea.title === activeIdea}
-                  >
-                    {idea.title}
-                  </button>
-                ))}
-              </div>
-              <article className="cahg-idea-content">
+              <Tabs
+                label="Mathematical ideas"
+                idBase="cahg-idea"
+                orientation="vertical"
+                className="cahg-idea-tabs"
+                value={activeIdea}
+                onChange={setActiveIdea}
+                items={ideaTabs}
+              />
+              <div className="cahg-idea-content" {...tabPanelProps('cahg-idea', activeIdea)}>
                 <p className="cahg-card-formula">{activeIdeaContent.snippet}</p>
                 <h3>{activeIdeaContent.title}</h3>
                 <p>{activeIdeaContent.body}</p>
-              </article>
+              </div>
             </div>
           </div>
         </section>
@@ -364,25 +379,34 @@ render_phase_portrait()`}</code>
                 <p className="cahg-eyebrow">Citation</p>
                 <h2>Computer Algebra Meets Hamiltonian Geometry</h2>
               </div>
-              <pre>
-                <code>{citation}</code>
+              <pre
+                role="region"
+                aria-label="BibTeX citation"
+                // Focusable so the citation can be scrolled sideways from the keyboard on narrow screens.
+                // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+                tabIndex={0}
+              >
+                <code ref={citationRef}>{citation}</code>
               </pre>
               <div className="cahg-actions">
                 <button
                   className="cahg-button cahg-button--primary"
-                  onClick={copyCitation}
+                  onClick={() => copyText(citation, citationRef.current)}
                   type="button"
                 >
-                  <FaCopy /> {copied ? 'Copied' : 'Copy Citation'}
+                  <FaCopy aria-hidden="true" /> {copyLabel[copyStatus]}
                 </button>
                 <a className="cahg-button" href={paperUrl}>
-                  <FaDownload /> Download Paper
+                  <FaDownload aria-hidden="true" /> Download Paper
                 </a>
+                <span className="visually-hidden" role="status">
+                  {copyMessage[copyStatus]}
+                </span>
               </div>
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </Layout>
   )
 }
@@ -394,9 +418,7 @@ export const Head = ({ location }) => (
     pathname={location.pathname}
     title="Computer Algebra Meets Hamiltonian Geometry"
     description="Symbolic computation for deriving, simplifying, and visualizing Hamiltonian, metriplectic, and Lie-Poisson dynamical systems."
+    image={shareImage}
+    imageAlt={heroAlt}
   />
 )
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

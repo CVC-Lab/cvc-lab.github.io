@@ -1,8 +1,7 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'gatsby'
 import Layout from '../../../../components/layout'
 import Seo from '../../../../components/seo'
+import BackLink from '../../../../components/ui/BackLink'
 import '../../../../components/dbg/dbg-microsite.css'
 
 const viewModes = [
@@ -48,10 +47,8 @@ const DbgGymVisualizationPage = () => (
   <Layout headerVariant="compact">
     <div className="dbg-page">
       <section className="dbg-internal-hero">
-        <div className="dbg-shell">
-          <Link className="dbg-back-link" to="/projects/dynamic-belief-games">
-            ← Back to DBG home
-          </Link>
+        <div className="page-container">
+          <BackLink to="/projects/dynamic-belief-games/">Back to DBG home</BackLink>
           <p className="dbg-internal-hero__meta">Internal Workstream</p>
           <h1>DBG Gym &amp; Visualization Components</h1>
           <p className="dbg-internal-hero__subtitle">
@@ -68,23 +65,23 @@ const DbgGymVisualizationPage = () => (
       </section>
 
       <section className="dbg-section">
-        <div className="dbg-shell">
+        <div className="page-container">
           <div className="dbg-section__intro">
             <p className="dbg-section__eyebrow">Visualization Modes</p>
             <h2>Core views already implied by the deck and layout plan</h2>
           </div>
-          <div className="dbg-meta-grid dbg-meta-grid--three">
+          <ul className="dbg-meta-grid dbg-meta-grid--three">
             {viewModes.map(item => (
-              <article key={item} className="dbg-mini-card">
+              <li key={item} className="dbg-mini-card">
                 <p>{item}</p>
-              </article>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
       <section className="dbg-section dbg-section--alt">
-        <div className="dbg-shell">
+        <div className="page-container">
           <div className="dbg-section__intro">
             <p className="dbg-section__eyebrow">Workstream Scope</p>
             <h2>Digital-twin and visualization components</h2>
@@ -106,7 +103,7 @@ const DbgGymVisualizationPage = () => (
       </section>
 
       <section className="dbg-section">
-        <div className="dbg-shell">
+        <div className="page-container">
           <div className="dbg-section__intro">
             <p className="dbg-section__eyebrow">Assets Needed</p>
             <h2>What this page still needs to become useful internally</h2>
@@ -132,7 +129,3 @@ export const Head = ({ location }) => (
     meta={[{ name: 'robots', content: 'noindex, nofollow' }]}
   />
 )
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

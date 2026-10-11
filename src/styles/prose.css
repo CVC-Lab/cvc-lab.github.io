@@ -1,0 +1,105 @@
+/*
+ * .prose: long-form text (markdown bodies, sponsor and software pages).
+ * Everything after the .prose class sits in :where(), so each rule has the weight of a
+ * single class and any component selector with a class plus an element still wins.
+ */
+
+.prose {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* Measure applies to running text only; headings, figures, tables, code and embeds may
+   use the full width of the container. A container opts out with --prose-max-width: none. */
+.prose > :where(p, ul, ol, dl, blockquote) {
+  max-width: var(--prose-max-width);
+}
+
+/* Headings */
+.prose :where(h2) {
+  margin: 2.5rem 0 0.75rem;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.prose :where(h3) {
+  margin: 2rem 0 0.5rem;
+  font-size: var(--font-size-xl);
+}
+
+.prose :where(h4) {
+  margin: 1.5rem 0 0.5rem;
+  font-size: var(--font-size-lg);
+}
+
+.prose :where(h5, h6) {
+  margin: 1.5rem 0 0.5rem;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Rhythm */
+.prose :where(li, dd) {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.prose :where(li) {
+  margin-bottom: var(--space-sm);
+}
+
+.prose :where(li > p) {
+  margin-bottom: var(--space-sm);
+}
+
+.prose > :where(pre, table, figure, iframe, video, blockquote, .table-scroll) {
+  margin-block: var(--space-lg);
+}
+
+.prose :where(hr) {
+  margin: var(--space-xl) 0;
+}
+
+.prose :where(img) {
+  margin-bottom: var(--space-md);
+}
+
+.prose :where(p, li, blockquote, td, th) :where(:last-child) {
+  margin-bottom: 0;
+}
+
+.prose > :where(:first-child) {
+  margin-top: 0;
+}
+
+/* Links in running text are underlined: colour alone is 1.25:1 against the body text. */
+.prose :where(a:not([class])) {
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.15em;
+}
+
+.prose :where(a:not([class])):hover {
+  text-decoration-thickness: 2px;
+}
+
+.prose :where(a:has(> img)) {
+  text-decoration: none;
+}
+
+/* Blocks */
+.prose :where(blockquote) {
+  margin-inline: 0;
+  padding: var(--spacing-3) var(--spacing-4);
+  border-left: 3px solid var(--color-primary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: var(--color-bg-secondary);
+}
+
+.prose :where(td) {
+  color: var(--color-text-secondary);
+}
+
+.prose :where(img, video, iframe) {
+  max-width: 100%;
+}

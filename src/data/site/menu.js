@@ -3,28 +3,11 @@
  */
 
 module.exports = [
-  {
-    name: 'PROJECTS',
-    link: '/projects',
-  },
-  {
-    name: 'PEOPLE',
-    link: '/people',
-  },
-  {
-    name: 'PUBLICATIONS',
-    link: '/publications',
-  },
-  {
-    name: 'NEWS',
-    link: '/news',
-  },
-  {
-    name: 'SOFTWARE',
-    link: '/software',
-  },
-  {
-    name: 'ABOUT',
-    link: '/#about',
-  },
+  { name: 'Home', link: '/' },
+  { name: 'Projects', link: '/projects/' },
+  { name: 'People', link: '/people/' },
+  { name: 'Publications', link: '/publications/' },
+  { name: 'News', link: '/news/' },
+  { name: 'Software', link: '/software/' },
+  { name: 'About', link: '/#about' },
 ]

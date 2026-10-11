@@ -1,0 +1,49 @@
+/* The scroll padding matches the fade, so an item scrolled into view by keyboard
+   focus stops clear of the faded edge. */
+.ui-scroll-strip {
+  --ui-scroll-strip-fade: 2.5rem;
+
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-padding-inline: var(--ui-scroll-strip-fade);
+  scrollbar-width: none;
+}
+
+.ui-scroll-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.ui-scroll-strip[data-fade='end'] {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 calc(100% - var(--ui-scroll-strip-fade)),
+    transparent
+  );
+  mask-image: linear-gradient(to right, #000 calc(100% - var(--ui-scroll-strip-fade)), transparent);
+}
+
+.ui-scroll-strip[data-fade='start'] {
+  -webkit-mask-image: linear-gradient(
+    to left,
+    #000 calc(100% - var(--ui-scroll-strip-fade)),
+    transparent
+  );
+  mask-image: linear-gradient(to left, #000 calc(100% - var(--ui-scroll-strip-fade)), transparent);
+}
+
+.ui-scroll-strip[data-fade='both'] {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--ui-scroll-strip-fade),
+    #000 calc(100% - var(--ui-scroll-strip-fade)),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--ui-scroll-strip-fade),
+    #000 calc(100% - var(--ui-scroll-strip-fade)),
+    transparent
+  );
+}

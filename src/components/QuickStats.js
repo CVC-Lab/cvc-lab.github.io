@@ -17,12 +17,12 @@ const QuickStats = ({ projectCount, publicationCount, memberCount }) => {
     {
       number: projectCount || '20+',
       label: 'Research Projects',
-      link: '/projects',
+      link: '/projects/',
     },
     {
       number: publicationCount || '100+',
       label: 'Publications',
-      link: '/publications',
+      link: '/publications/',
     },
     {
       number: memberCount || '15+',
@@ -39,7 +39,7 @@ const QuickStats = ({ projectCount, publicationCount, memberCount }) => {
 
   return (
     <section className="quick-stats">
-      <div className="quick-stats-container">
+      <div className="page-container quick-stats-container">
         <div className="stats-row">
           {stats.map((stat, index) => (
             <div key={index} className="stat-item">
@@ -70,7 +70,7 @@ const QuickStats = ({ projectCount, publicationCount, memberCount }) => {
                 {sponsor.name}
               </span>
             ))}
-            <Link to="/sponsors" className="sponsors-more">
+            <Link to="/sponsors/" className="sponsors-more">
               and more →
             </Link>
           </div>

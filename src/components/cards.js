@@ -1,244 +1,213 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Tabs, Tab, Box } from '@mui/material'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage, getSrc } from 'gatsby-plugin-image'
 import { usePersonImage } from '../hooks/usePersonImages'
-import personPlaceholder from '../images/people/placeholder.png'
+import PageHeader from './ui/PageHeader'
+import Tabs, { tabPanelProps } from './ui/Tabs'
+import {
+  prepaintGateScript,
+  readQueryParam,
+  useReleasePrepaintGate,
+  writeQueryParams,
+} from './query-state'
+import { useIsClientRender } from './useIsClientRender'
 import './cards.css'
 
-const TabPanel = props => {
-  const { children, value, index, ...other } = props
+const PLACEHOLDER_IMAGE = 'placeholder.png'
+const TAB_PARAM = 'tab'
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`people-tabpanel-${index}`}
-      aria-labelledby={`people-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 1 }}>
-          <Grid container spacing={4}>
-            {children}
-          </Grid>
-        </Box>
-      )}
-    </div>
-  )
+// Shows the Alumni list instead of the server-rendered Current list on a hard load of
+// ?tab=alumni, until hydration selects the tab (cards.css).
+const GATE_CLASS = 'people-alumni-pending'
+
+export const alumniGateScript = prepaintGateScript(GATE_CLASS, { [TAB_PARAM]: ['alumni'] })
+
+const STATUS_TABS = [
+  { value: 'current', label: 'Current Members' },
+  { value: 'alumni', label: 'Alumni' },
+]
+
+const POSITION_ORDER = [
+  'Director, Principal Investigator',
+  'Researcher',
+  'Research Administrator',
+  'Lead Research Scientist',
+  'Research Fellow from Purdue University',
+  'Postdoctoral Researcher',
+]
+
+// The group heading already says "Undergraduate"/"High School", so those cards omit the role.
+const GROUPS = [
+  { key: 'pi', title: 'Principal Investigator', showRole: true },
+  { key: 'researchers', title: 'Researchers', showRole: true },
+  { key: 'staff', title: 'Staff & Postdocs', showRole: true },
+  { key: 'graduate', title: 'Graduate Students', showRole: true },
+  { key: 'undergraduate', title: 'Undergraduate Students', showRole: false },
+  { key: 'highSchool', title: 'High School Students', showRole: false },
+]
+
+const positionRank = position => {
+  const index = POSITION_ORDER.indexOf(position)
+  return index === -1 ? POSITION_ORDER.length : index
 }
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  value: PropTypes.number.isRequired,
-  index: PropTypes.number.isRequired,
-}
+const byPositionThenName = (a, b) =>
+  positionRank(a.position) - positionRank(b.position) || a.name.localeCompare(b.name)
 
-const sortMembers = members => {
-  const positionOrder = [
-    'Director, Principal Investigator',
-    'Researcher',
-    'Research Administrator',
-    'Lead Research Scientist',
-    'Research Fellow from Purdue University',
-    'Postdoctoral Researcher',
-  ]
+const groupKeyFor = (position = '') => {
+  const lower = position.toLowerCase()
 
-  const comparePositions = (a, b) => {
-    const positionA = positionOrder.indexOf(a.position || a.Position)
-    const positionB = positionOrder.indexOf(b.position || b.Position)
-
-    if (positionA !== positionB) {
-      return positionA - positionB
-    }
-
-    return (a.name || a.Name).localeCompare(b.name || b.Name)
+  if ((lower.includes('graduate') && !lower.includes('undergraduate')) || lower.includes('phd')) {
+    return 'graduate'
   }
-
-  return members.slice().sort(comparePositions)
-}
-
-function renderMembersByTitle(members) {
-  const sortedMembers = sortMembers(members)
-
-  const studentsByTitle = {
-    'Graduate Student': [],
-    'Undergraduate Student': [],
-    'High School Student': [],
+  if (position === 'Undergraduate Student') return 'undergraduate'
+  if (position === 'High School Student') return 'highSchool'
+  if (lower.includes('director') || lower.includes('principal investigator')) return 'pi'
+  if (
+    (lower.includes('researcher') && !lower.includes('postdoctoral')) ||
+    lower.includes('research scientist')
+  ) {
+    return 'researchers'
   }
-
-  const piTiles = []
-  const researcherTiles = []
-  const staffTiles = []
-
-  sortedMembers.forEach(member => {
-    const position = member.position || member.Position
-    const positionLower = position.toLowerCase()
-    if (
-      (positionLower.includes('graduate') && !positionLower.includes('undergraduate')) ||
-      positionLower.includes('phd')
-    ) {
-      studentsByTitle['Graduate Student'].push(member)
-    } else if (position === 'Undergraduate Student') {
-      studentsByTitle['Undergraduate Student'].push(member)
-    } else if (position === 'High School Student') {
-      studentsByTitle['High School Student'].push(member)
-    } else if (
-      positionLower.includes('director') ||
-      positionLower.includes('principal investigator')
-    ) {
-      piTiles.push(member)
-    } else if (
-      (positionLower.includes('researcher') && !positionLower.includes('postdoctoral')) ||
-      positionLower.includes('research scientist')
-    ) {
-      researcherTiles.push(member)
-    } else {
-      staffTiles.push(member)
-    }
-  })
-
-  return (
-    <div className="student-titles">
-      {piTiles.length > 0 && (
-        <>
-          <h3 className="title-header">Principal Investigator</h3>
-          <Grid container spacing={4} sx={{ marginBottom: '2rem' }}>
-            {piTiles.map(people => renderCard(people, true))}
-          </Grid>
-        </>
-      )}
-      {researcherTiles.length > 0 && (
-        <>
-          <h3 className="title-header">Researchers</h3>
-          <Grid container spacing={4} sx={{ marginBottom: '2rem' }}>
-            {researcherTiles.map(people => renderCard(people, true))}
-          </Grid>
-        </>
-      )}
-      {staffTiles.length > 0 && (
-        <>
-          <h3 className="title-header">Staff & Postdocs</h3>
-          <Grid container spacing={4} sx={{ marginBottom: '2rem' }}>
-            {staffTiles.map(people => renderCard(people, true))}
-          </Grid>
-        </>
-      )}
-      <h3 className="title-header">Graduate Students</h3>
-      <Grid container spacing={4} className="title-grid">
-        {studentsByTitle['Graduate Student'].map(people =>
-          renderCard(people, !people.isExactTitle)
-        )}
-      </Grid>
-      <h3 className="title-header">Undergraduate Students</h3>
-      <Grid container spacing={4} className="title-grid">
-        {studentsByTitle['Undergraduate Student'].map(people => renderCard(people, false))}
-      </Grid>
-      {studentsByTitle['High School Student'] &&
-        studentsByTitle['High School Student'].length > 0 && (
-          <>
-            <h3 className="title-header">High School Students</h3>
-            <Grid container spacing={4} className="title-grid">
-              {studentsByTitle['High School Student'].map(people => renderCard(people, false))}
-            </Grid>
-          </>
-        )}
-    </div>
-  )
+  return 'staff'
 }
 
-const AVATAR_STYLE = { width: '125px', height: '125px', borderRadius: '50%' }
+const groupMembers = members => {
+  const grouped = Object.fromEntries(GROUPS.map(group => [group.key, []]))
+  members.forEach(member => grouped[groupKeyFor(member.position)].push(member))
+  GROUPS.forEach(group => grouped[group.key].sort(byPositionThenName))
+  return grouped
+}
 
-// renderCard is a plain function, so the sharp lookup lives in its own component.
-const MemberAvatar = ({ imageName, name, imageFile: providedImageFile }) => {
+const tabFromUrl = () => (readQueryParam(TAB_PARAM) === 'alumni' ? 'alumni' : 'current')
+
+const personShape = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  position: PropTypes.string,
+  image: PropTypes.string,
+  status: PropTypes.oneOf(['current', 'alumni']).isRequired,
+})
+
+const MemberAvatar = ({ image, name }) => {
   const resolvePersonImage = usePersonImage()
-  const imageFile = providedImageFile || resolvePersonImage(imageName)
+  const photo = image && image !== PLACEHOLDER_IMAGE ? resolvePersonImage(image) : null
 
-  if (imageFile && imageFile.childImageSharp) {
+  if (photo) {
     return (
-      <GatsbyImage image={getImage(imageFile)} alt={`${name}'s profile`} style={AVATAR_STYLE} />
+      <GatsbyImage
+        image={getImage(photo)}
+        alt={`Portrait of ${name}`}
+        className="member-card__avatar"
+      />
     )
   }
 
-  return <img src={personPlaceholder} alt={`${name}'s profile`} style={AVATAR_STYLE} />
+  // The silhouette says nothing the name below does not, and 40 people share it: a plain
+  // <img> keeps each of those cards to a few hundred bytes of HTML.
+  const placeholderSrc = getSrc(resolvePersonImage(PLACEHOLDER_IMAGE))
+
+  if (!placeholderSrc) {
+    return <span className="member-card__avatar" aria-hidden="true" />
+  }
+
+  return (
+    <img
+      className="member-card__avatar"
+      src={placeholderSrc}
+      alt=""
+      width="125"
+      height="125"
+      loading="lazy"
+      decoding="async"
+    />
+  )
 }
 
 MemberAvatar.propTypes = {
-  imageName: PropTypes.string.isRequired,
+  image: PropTypes.string,
   name: PropTypes.string.isRequired,
-  imageFile: PropTypes.object,
 }
 
-function renderCard(people, showFullTitle = false) {
-  const name = people.name || people.Name
-  const position = people.position || people.Position
-  const imageName = people.image || people.Image || 'placeholder.png'
+const MemberCard = ({ member, showRole }) => (
+  <li className="member-card">
+    <MemberAvatar image={member.image} name={member.name} />
+    <h3 className="member-card__name">{member.name}</h3>
+    {showRole && member.position && <p className="member-card__role">{member.position}</p>}
+  </li>
+)
 
-  return (
-    <Grid item xs={6} sm={4} md={2} key={name} className="member-grid-item">
-      <div className="Card">
-        <div className="upper-container">
-          <div className="image-container">
-            <MemberAvatar imageName={imageName} name={name} imageFile={people.imageFile} />
-          </div>
-        </div>
-        <div className="lower-container">
-          <h3>{name}</h3>
-          {showFullTitle && <h4>{position}</h4>}
-        </div>
-      </div>
-    </Grid>
-  )
+MemberCard.propTypes = {
+  member: personShape.isRequired,
+  showRole: PropTypes.bool.isRequired,
 }
 
-const Cards = ({ peopleCards }) => {
-  const [value, setValue] = React.useState(0)
+const MemberGroups = ({ members }) => {
+  const grouped = groupMembers(members)
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
+  return GROUPS.filter(group => grouped[group.key].length > 0).map(group => (
+    <section className="people-group" key={group.key}>
+      <h2 className="people-group__title">{group.title}</h2>
+      <ul className="member-grid">
+        {grouped[group.key].map(member => (
+          <MemberCard key={member.name} member={member} showRole={group.showRole} />
+        ))}
+      </ul>
+    </section>
+  ))
+}
+
+MemberGroups.propTypes = {
+  members: PropTypes.arrayOf(personShape).isRequired,
+}
+
+const Cards = ({ peopleCards, locationSearch, locationKey }) => {
+  const isClientRender = useIsClientRender()
+  // On client-side navigation (Back included) the first render already shows the tab in the
+  // URL, so the page has its full height when Gatsby restores the scroll position.
+  const [active, setActive] = React.useState(() => (isClientRender ? tabFromUrl() : 'current'))
+  const [urlApplied, setUrlApplied] = React.useState(isClientRender)
+
+  // After hydration, and when a link leads back to /people/ while this page stays mounted.
+  React.useEffect(() => {
+    setActive(tabFromUrl())
+    setUrlApplied(true)
+  }, [locationSearch, locationKey])
+
+  useReleasePrepaintGate(GATE_CLASS, urlApplied)
+
+  const handleChange = value => {
+    setActive(value)
+    writeQueryParams({ [TAB_PARAM]: value === 'current' ? '' : value })
   }
 
-  // Handle both format of data from GraphQL and from Firebase
-  const currentMembers = peopleCards.filter(
-    person => person.status === 'current' || person.status === true || person.Current === true
-  )
-  const alumniMembers = peopleCards.filter(
-    person => person.status === 'alumni' || person.status === false || person.Current === false
-  )
-
   return (
-    <div className="people-class" id="people">
-      <div className="people-container">
-        <h4 className="header-subtitle">People</h4>
-        <Tabs value={value} onChange={handleChange} aria-label="people categories">
-          <Tab label="Current Members" id="people-tab-0" aria-controls="people-tabpanel-0" />
-          <Tab label="Alumni" id="people-tab-1" aria-controls="people-tabpanel-1" />
-        </Tabs>
-        <TabPanel value={value} index={0}>
-          {renderMembersByTitle(currentMembers)}
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          {renderMembersByTitle(alumniMembers)}
-        </TabPanel>
+    <div className="people-page">
+      <div className="page-container">
+        <PageHeader title="People" />
+        <Tabs
+          label="People categories"
+          idBase="people"
+          value={active}
+          onChange={handleChange}
+          items={STATUS_TABS}
+          className="people-tabs"
+        />
+        <div {...tabPanelProps('people', active)}>
+          {STATUS_TABS.map(({ value }) => (
+            <div key={value} hidden={active !== value} data-status={value}>
+              <MemberGroups members={peopleCards.filter(person => person.status === value)} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
 }
 
 Cards.propTypes = {
-  peopleCards: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      Name: PropTypes.string,
-      position: PropTypes.string,
-      Position: PropTypes.string,
-      status: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-      Current: PropTypes.bool,
-      image: PropTypes.string,
-      Image: PropTypes.string,
-      imageFile: PropTypes.object,
-    })
-  ).isRequired,
+  peopleCards: PropTypes.arrayOf(personShape).isRequired,
+  locationSearch: PropTypes.string,
+  locationKey: PropTypes.string,
 }
 
 export default Cards

@@ -23,7 +23,6 @@
 .patient-first .evidence-section { border-top: 1px solid var(--line); padding-top: 28px; }
 .patient-first .figure { margin-top: 26px; }
 .patient-first .figure-viewport img { width: 100%; height: auto; }
-.patient-first .concept-figure { max-width: 880px; }
 .patient-first .evidence-section h3 { font-family: Arial, sans-serif; font-size: 17px; line-height: 1.45; margin: 0 0 14px; }
 .patient-first :focus-visible { outline: 3px solid #346d70; outline-offset: 4px; }
 .patient-first [hidden] { display: none !important; }
@@ -82,7 +81,6 @@
 .evidence-forecast .evidence-highlight th, .evidence-forecast .evidence-highlight td { font-weight: 700; color: #245b5c; }
 .evidence-range { position: relative; height: 24px; border-bottom: 1px solid #dde2e4; margin: 0 8px; }
 .evidence-range .evidence-dot { top: 8px; }
-.evidence-range .evidence-interval { position: absolute; height: 5px; background: #aebdc3; top: 10px; }
 .evidence-uq { margin: 16px 0; font-size: 14px; }
 .evidence-uq b { font-weight: 600; }
 .evidence-future { margin: 18px 0; padding: 14px 0; border-top: 1px solid #8cabae; border-bottom: 1px solid #8cabae; font-size: 16px; }
@@ -104,7 +102,7 @@
 .patient-first .research-chain { padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
 .research-chain li { border-top: 2px solid #bdcacc; padding-top: 12px; font-size: 14px; }
 .research-chain strong { display: block; color: #14222b; margin: 5px 0; }
-.research-chain small { color: #69767e; }
+.research-chain small { color: #5e6a72; font-size: 12px; }
 @media (max-width: 760px) {
   .patient-first .hero h1 { font-size: 26px; }
   .patient-first .hero { padding-top: 24px; }

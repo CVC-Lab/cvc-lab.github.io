@@ -3,7 +3,7 @@ title: "DPG"
 slug: "/software/dpg"
 ---
 
-![](http://www.cs.utexas.edu/~bajaj/cvc/software/images/DPGDataStruct.jpeg)
+<p><img src="https://www.cs.utexas.edu/~bajaj/cvc/software/images/DPGDataStruct.jpeg" alt="" width="1089" height="723"></p>
 
 ### Description
 
@@ -50,5 +50,5 @@ Installation, usage and programming guidelines for the packages.
 
 ### Example Results
 
-![](http://www.cs.utexas.edu/~bajaj/cvc/software/images/DPGinsert.jpeg) ![](http://www.cs.utexas.edu/~bajaj/cvc/software/images/DPGrange.jpeg)  
-![](http://www.cs.utexas.edu/~bajaj/cvc/software/images/bornSpeedup.jpeg) ![](http://www.cs.utexas.edu/~bajaj/cvc/software/images/bornError.jpeg)
+<img src="https://www.cs.utexas.edu/~bajaj/cvc/software/images/DPGinsert.jpeg" alt="" width="723" height="499"> <img src="https://www.cs.utexas.edu/~bajaj/cvc/software/images/DPGrange.jpeg" alt="" width="711" height="505">  
+<img src="https://www.cs.utexas.edu/~bajaj/cvc/software/images/bornSpeedup.jpeg" alt="" width="1267" height="798"> <img src="https://www.cs.utexas.edu/~bajaj/cvc/software/images/bornError.jpeg" alt="" width="1176" height="800">

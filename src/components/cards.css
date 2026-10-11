@@ -1,140 +1,101 @@
-@import url('../styles/design-system.css');
-
-.MuiGridList-root {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-lg);
+.people-page {
+  padding-block: 0 var(--space-3xl);
 }
 
-.MuiGridListTile-root {
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  background: var(--color-bg-primary);
-  transition: all var(--transition-base);
-  padding: var(--space-md);
+.people-page .people-tabs {
+  margin-bottom: var(--space-lg);
 }
 
-.MuiGridListTile-root:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
+/* Set on <html> by alumniGateScript (cards.js) in the <head> of /people/ for ?tab=alumni: the
+   Alumni list is shown from the first paint, so reload and Back land on the saved offset. The
+   tab strip still marks Current until hydration, so it waits. !important is needed to beat the
+   base [hidden] rule. */
+.people-alumni-pending .people-tabs {
+  visibility: hidden;
 }
 
-.image-container > img {
-  background: var(--color-white);
-  width: 80px;
-  height: 80px;
-  border-radius: var(--radius-full);
-  padding: var(--space-xs);
-  border: 2px solid var(--color-primary);
-  display: block;
-  margin: 0 auto var(--space-sm);
-  object-fit: cover;
+.people-alumni-pending [data-status='current'] {
+  display: none;
 }
 
-/* GatsbyImage renders a wrapper around the <img>, so the frame goes on the
-   wrapper; the wrapper already clips its contents. */
-.image-container .gatsby-image-wrapper {
-  background: var(--color-white);
-  width: 80px;
-  height: 80px;
-  border-radius: var(--radius-full);
-  border: 2px solid var(--color-primary);
-  display: block;
-  margin: 0 auto var(--space-sm);
+.people-alumni-pending [data-status='alumni'][hidden] {
+  display: block !important;
 }
 
-.image-container .gatsby-image-wrapper img {
-  object-fit: cover;
+.people-group {
+  margin: 0 0 var(--space-2xl);
 }
 
-.lower-container {
-  text-align: center;
-  font-family: inherit;
+.people-group:last-child {
+  margin-bottom: 0;
 }
 
-.lower-container h3,
-h4,
-p {
+.people-group__title {
+  margin: 0 0 var(--space-md);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg) var(--space-md);
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
-.lower-container h3 {
-  color: var(--color-text-primary);
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-base);
-  margin-bottom: var(--space-xs);
-}
-
-.lower-container h4 {
-  color: var(--color-text-secondary);
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  margin-bottom: var(--space-sm);
-}
-
-.lower-container p {
+.member-card {
+  min-width: 0;
   margin: 0;
-  color: var(--color-text-muted);
-  font-weight: var(--font-weight-light);
-  font-size: var(--font-size-sm);
   text-align: center;
-  line-height: var(--line-height-relaxed);
 }
 
-.people-class {
-  background: var(--ut-white);
-  padding: var(--spacing-8) 0;
-}
-
-.people-container {
-  margin: 0 auto;
-  max-width: var(--container-max-width);
-  padding: 0 var(--spacing-6);
-}
-
-.header-subtitle {
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 0 0 var(--space-xl);
-}
-
-.member-grid-item {
+/* Two classes on purpose: gatsby-plugin-image's own style element follows the site stylesheet and
+   sets display on .gatsby-image-wrapper-constrained at single-class specificity. */
+.member-card .member-card__avatar {
+  display: block;
+  width: min(125px, 100%);
+  height: auto;
+  aspect-ratio: 1;
+  margin: 0 auto var(--space-sm);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-full);
+  background: var(--color-white);
+  object-fit: cover;
   overflow: hidden;
-  flex: 0 0 50%;
-  max-width: 50%;
 }
 
-.student-titles {
-  padding: 1rem 1rem;
+.member-card__name {
+  margin: 0 0 var(--space-xs);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  overflow-wrap: break-word;
 }
 
-.title-grid {
-  margin-bottom: 2rem;
-}
-
-.title-header {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+.member-card__role {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 @media (min-width: 600px) {
-  .member-grid-item {
-    flex: 0 0 33.3333%;
-    max-width: 33.3333%;
+  .member-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 900px) {
-  .member-grid-item {
-    flex: 0 0 16.6667%;
-    max-width: 16.6667%;
+  .member-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    row-gap: var(--space-xl);
   }
 }

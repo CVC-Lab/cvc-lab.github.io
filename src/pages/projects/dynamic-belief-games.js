@@ -1,5 +1,4 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import Layout from '../../components/layout'
 import Seo from '../../components/seo'
 import DbgProjectHome from '../../components/dbg/DbgProjectHome'
@@ -19,7 +18,3 @@ export const Head = ({ location }) => (
     description="Dynamic Belief Games trains intelligent networking agents in a digital twin for contested mobile ad hoc networks."
   />
 )
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

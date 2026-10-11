@@ -1,14 +1,16 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import Seo from '../../components/seo'
 import DigitalTwinPage from '../../components/project-pages/DigitalTwinPage'
-import pianoHero from '../../images/projects/piano_digital_twin/piano_digital_twin_hero.png'
-import pianoMechanics from '../../images/projects/piano_digital_twin/piano_twin_mechanics.png'
-import pianoCoupledSimulators from '../../images/projects/piano_digital_twin/piano_coupled_simulators.png'
-import pianoThreeTwins from '../../images/projects/piano_digital_twin/piano_three_twins.png'
+import pianoHero from '../../images/projects/piano_digital_twin/piano_digital_twin_hero_1600.webp'
+import pianoShare from '../../images/projects/piano_digital_twin/piano_digital_twin_share.jpg'
+import pianoMechanics from '../../images/projects/piano_digital_twin/piano_twin_mechanics_1200.webp'
+import pianoMechanicsFull from '../../images/projects/piano_digital_twin/piano_twin_mechanics.png'
+import pianoCoupledSimulators from '../../images/projects/piano_digital_twin/piano_coupled_simulators_1300.webp'
+import pianoCoupledSimulatorsFull from '../../images/projects/piano_digital_twin/piano_coupled_simulators.png'
+import pianoThreeTwins from '../../images/projects/piano_digital_twin/piano_three_twins_1300.webp'
+import pianoThreeTwinsFull from '../../images/projects/piano_digital_twin/piano_three_twins.png'
 
 const pianoProject = {
-  slug: 'piano-digital-twin',
   title: 'Piano Digital Twin',
   description:
     'A performer-instrument world model for seeing, hearing, and safely improving expert piano skill.',
@@ -16,6 +18,8 @@ const pianoProject = {
   subtitle:
     'A performer-instrument world model for seeing, hearing, and safely improving expert piano skill.',
   heroImage: pianoHero,
+  heroWidth: 1600,
+  heroHeight: 900,
   heroAlt:
     'Pianist hands on a grand piano with motion trajectories, key mechanics, and acoustic visualization overlays',
   heroCaption:
@@ -54,6 +58,9 @@ const pianoProject = {
   gallery: [
     {
       image: pianoMechanics,
+      width: 1200,
+      height: 800,
+      full: pianoMechanicsFull,
       title: 'A visible instrument mechanism',
       alt: 'Piano key, hammer, string, hand, and acoustic waveform conceptual visualization',
       caption:
@@ -61,6 +68,10 @@ const pianoProject = {
     },
     {
       image: pianoCoupledSimulators,
+      width: 1300,
+      height: 650,
+      full: pianoCoupledSimulatorsFull,
+      fit: 'contain',
       title: 'Four coupled simulators',
       alt: 'Diagram connecting exoskeleton, human, piano, listener, and controller simulators',
       caption:
@@ -68,6 +79,10 @@ const pianoProject = {
     },
     {
       image: pianoThreeTwins,
+      width: 1300,
+      height: 650,
+      full: pianoThreeTwinsFull,
+      fit: 'contain',
       title: 'The first implementation boundary',
       alt: 'Diagram of performer, instrument, listener, and controller coupled digital twins',
       caption:
@@ -134,11 +149,9 @@ export default PianoDigitalTwinPage
 export const Head = ({ location }) => (
   <Seo
     pathname={location.pathname}
-    title="Piano Digital Twin"
-    description="A performer-instrument world model for seeing, hearing, and safely improving expert piano skill."
+    title={pianoProject.title}
+    description={pianoProject.description}
+    image={pianoShare}
+    imageAlt={pianoProject.heroAlt}
   />
 )
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

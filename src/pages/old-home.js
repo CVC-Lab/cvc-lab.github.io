@@ -1,27 +1,34 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
+import { graphql, useStaticQuery } from 'gatsby'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
-import { useSiteMetadata } from '../context/SiteContext'
+import projectTiles from '../data/site/projects'
+import peopleCards from '../data/site/people'
 import FeaturedResearch from '../components/FeaturedResearch'
 import QuickStats from '../components/QuickStats'
 import AboutCondensed from '../components/AboutCondensed'
 import PeopleCondensed from '../components/PeopleCondensed'
 
-const OldHomePage = () => {
-  const { projectTiles, peopleCards } = useSiteMetadata()
+const currentMemberCount = peopleCards.filter(person => person.status === 'current').length
 
-  const projectCount = projectTiles?.length || 0
-  const currentMemberCount =
-    peopleCards?.filter(p => p.status === 'current' || p.status === true || p.Current === true)
-      .length || 0
+const OldHomePage = () => {
+  const { site } = useStaticQuery(graphql`
+    query OldHomeTitle {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
 
   return (
     <Layout>
-      <FeaturedResearch projectTiles={projectTiles || []} />
-      <QuickStats projectCount={projectCount} memberCount={currentMemberCount} />
+      <h1 className="visually-hidden">{site.siteMetadata.title}</h1>
+      <FeaturedResearch projectTiles={projectTiles} />
+      <QuickStats projectCount={projectTiles.length} memberCount={currentMemberCount} />
       <AboutCondensed />
-      <PeopleCondensed peopleCards={peopleCards || []} />
+      <PeopleCondensed peopleCards={peopleCards} />
     </Layout>
   )
 }
@@ -36,7 +43,3 @@ export const Head = ({ location }) => (
     meta={[{ name: 'robots', content: 'noindex, nofollow' }]}
   />
 )
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

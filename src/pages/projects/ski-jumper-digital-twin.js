@@ -1,13 +1,15 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import Seo from '../../components/seo'
 import DigitalTwinPage from '../../components/project-pages/DigitalTwinPage'
-import skiOverview from '../../images/projects/ski_jumper_digital_twin/ski_jumper_overview.png'
-import skiPostureSchedule from '../../images/projects/ski_jumper_digital_twin/ski_posture_schedule.png'
-import skiModelContract from '../../images/projects/ski_jumper_digital_twin/ski_model_contract.png'
+import skiOverview from '../../images/projects/ski_jumper_digital_twin/ski_jumper_overview_1040.webp'
+import skiOverviewFull from '../../images/projects/ski_jumper_digital_twin/ski_jumper_overview.png'
+import skiShare from '../../images/projects/ski_jumper_digital_twin/ski_jumper_share.jpg'
+import skiPostureSchedule from '../../images/projects/ski_jumper_digital_twin/ski_posture_schedule_1040.webp'
+import skiPostureScheduleFull from '../../images/projects/ski_jumper_digital_twin/ski_posture_schedule.png'
+import skiModelContract from '../../images/projects/ski_jumper_digital_twin/ski_model_contract_1040.webp'
+import skiModelContractFull from '../../images/projects/ski_jumper_digital_twin/ski_model_contract.png'
 
 const skiProject = {
-  slug: 'ski-jumper-digital-twin',
   title: 'Ski Jumper Digital Twin',
   description:
     'A physics-aware world model that moves from ski-jump motion capture to phase-dependent trajectory optimization.',
@@ -15,6 +17,9 @@ const skiProject = {
   subtitle:
     'From motion capture to physics-aware simulation, the model optimizes a full body-and-ski trajectory rather than a single pose.',
   heroImage: skiOverview,
+  heroWidth: 1040,
+  heroHeight: 836,
+  heroFit: 'contain',
   heroAlt:
     'Ski jumper digital twin overview showing measurement, skeleton reconstruction, simulation, optimization, and prediction',
   heroCaption:
@@ -53,6 +58,10 @@ const skiProject = {
   gallery: [
     {
       image: skiOverview,
+      width: 1040,
+      height: 836,
+      full: skiOverviewFull,
+      fit: 'contain',
       title: 'Measurement to prediction',
       alt: 'Ski jumper digital twin workflow from measurement through model, simulation, optimization, and prediction',
       caption:
@@ -60,12 +69,20 @@ const skiProject = {
     },
     {
       image: skiPostureSchedule,
+      width: 1040,
+      height: 832,
+      full: skiPostureScheduleFull,
+      fit: 'contain',
       title: 'Posture schedule over time',
       alt: 'Chart of ski-jump body and ski angles across in-run, takeoff, flight, landing preparation, and landing',
       caption: 'Body and ski posture are functions of jump phase, not one fixed optimal angle.',
     },
     {
       image: skiModelContract,
+      width: 1040,
+      height: 800,
+      full: skiModelContractFull,
+      fit: 'contain',
       title: 'The model contract',
       alt: 'Ski-jumper model contract showing state, parameters, inputs, constraints, kinematics, and dynamics',
       caption:
@@ -140,11 +157,9 @@ export default SkiJumperDigitalTwinPage
 export const Head = ({ location }) => (
   <Seo
     pathname={location.pathname}
-    title="Ski Jumper Digital Twin"
-    description="A physics-aware world model that moves from ski-jump motion capture to phase-dependent trajectory optimization."
+    title={skiProject.title}
+    description={skiProject.description}
+    image={skiShare}
+    imageAlt={skiProject.heroAlt}
   />
 )
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

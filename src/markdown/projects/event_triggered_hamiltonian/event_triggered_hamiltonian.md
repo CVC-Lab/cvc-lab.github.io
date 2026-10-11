@@ -131,5 +131,5 @@ In high-dimensional spaces, online gradient-descent variants are often preferred
 
 ### Related Work at CVC
 
-- [Material-Aware Hamiltonian Risk Fields for Safe Navigation](/projects/material-aware-hamiltonian-risk-fields)
-- [PHAST: Port-Hamiltonian Architecture for Structured Temporal Dynamics Forecasting](/projects/phast)
+- [Material-Aware Hamiltonian Risk Fields for Safe Navigation](/projects/material-aware-hamiltonian-risk-fields/)
+- [PHAST: Port-Hamiltonian Architecture for Structured Temporal Dynamics Forecasting](/projects/phast/)

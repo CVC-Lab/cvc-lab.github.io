@@ -1,38 +1,28 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
-import { useSiteMetadata } from '../context/SiteContext'
 import Layout from '../components/layout'
-import Tiles from '../components/tiles'
+import Tiles, { filterGateScript } from '../components/tiles'
 import Seo from '../components/seo'
+import projectTiles from '../data/site/projects'
 
-const ProjectsPage = ({ location }) => {
-  const { projectTiles } = useSiteMetadata()
-
-  return (
-    <Layout>
-      <Tiles
-        projectTiles={projectTiles || []}
-        showAllProjects
-        locationSearch={location?.search || ''}
-      />
-    </Layout>
-  )
-}
-
-ProjectsPage.propTypes = {
-  location: PropTypes.shape({ search: PropTypes.string }),
-}
+const ProjectsPage = ({ location }) => (
+  <Layout>
+    <Tiles
+      projectTiles={projectTiles}
+      locationSearch={location?.search || ''}
+      locationKey={location?.key}
+    />
+  </Layout>
+)
 
 export default ProjectsPage
 
 export const Head = ({ location }) => (
-  <Seo
-    title="Projects"
-    description="Research projects at the Computational Visualization Center"
-    pathname={location.pathname}
-  />
+  <>
+    <Seo
+      title="Projects"
+      description="Research projects at the Computational Visualization Center"
+      pathname={location.pathname}
+    />
+    <script dangerouslySetInnerHTML={{ __html: filterGateScript }} />
+  </>
 )
-
-Head.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-}

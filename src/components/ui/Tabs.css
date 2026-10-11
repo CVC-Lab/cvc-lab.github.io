@@ -1,0 +1,128 @@
+/* Every rule below has the weight of one class (variants and states sit in :where()),
+   so a page restyles tabs with `.its-wrapper .ui-tabs__tab` whatever the bundle order. */
+
+.ui-tabs {
+  /* Room for the global focus ring: outline, offset and the 2px white halo. */
+  --ui-tabs-ring-room: calc(var(--focus-ring-width, 3px) + var(--focus-ring-offset, 2px) + 2px);
+
+  /* Contains the list's negative margin, so this box is exactly the row of tabs. */
+  display: flow-root;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* The strip scrolls, and a scroller clips outlines, so it is padded by the size
+   of the focus ring and pulled back out by the same amount. Not on the end side:
+   a box sticking out there would widen a page whose tabs reach its edge. */
+.ui-tabs__list {
+  display: flex;
+  gap: var(--spacing-1);
+  margin-block: calc(-1 * var(--ui-tabs-ring-room));
+  margin-inline: calc(-1 * var(--ui-tabs-ring-room)) 0;
+  padding: var(--ui-tabs-ring-room);
+}
+
+:where(.ui-tabs--wrap, .ui-tabs--vertical) .ui-tabs__list {
+  overflow: visible;
+  margin: 0;
+  padding: 0;
+}
+
+:where(.ui-tabs--wrap) .ui-tabs__list {
+  flex-wrap: wrap;
+  row-gap: var(--spacing-1);
+}
+
+:where(.ui-tabs--vertical) .ui-tabs__list {
+  flex-direction: column;
+}
+
+.ui-tabs__tab {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  min-height: 44px;
+  margin: 0;
+  padding: var(--spacing-2) var(--spacing-4);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-full);
+  background: transparent;
+  color: var(--ut-charcoal-light);
+  font-family: var(--font-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-tight);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+:where(.ui-tabs--vertical) .ui-tabs__tab {
+  justify-content: flex-start;
+  white-space: normal;
+  text-align: left;
+}
+
+/* A wrapping list cannot scroll, so a label wider than the whole row breaks onto
+   two lines instead of widening the page. Shorter tabs move to the next row first. */
+:where(.ui-tabs--wrap) .ui-tabs__tab {
+  max-width: 100%;
+  white-space: normal;
+  text-align: left;
+}
+
+.ui-tabs__tab:where(:hover) {
+  background: var(--ut-limestone-light);
+  color: var(--ut-charcoal);
+}
+
+.ui-tabs__tab:where([aria-selected='true']) {
+  border-color: var(--ut-limestone-dark);
+  background: var(--ut-limestone-light);
+  color: var(--ut-burnt-orange-dark);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* A tint of the brand colour that works on any surface, where color-mix exists. */
+@supports (color: color-mix(in srgb, red 10%, transparent)) {
+  .ui-tabs__tab:where([aria-selected='true']) {
+    border-color: color-mix(in srgb, var(--ut-burnt-orange) 28%, transparent);
+    background: color-mix(in srgb, var(--ut-burnt-orange) 12%, transparent);
+  }
+}
+
+.ui-tabs__tab:where(:disabled) {
+  background: transparent;
+  color: var(--ut-charcoal-light);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ui-tabs__count {
+  min-width: 1.5rem;
+  padding: 0 var(--spacing-2);
+  border-radius: var(--border-radius-full);
+  background: var(--ut-limestone-light);
+  color: var(--ut-charcoal);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.5rem;
+  text-align: center;
+}
+
+:where(.ui-tabs__tab:hover, .ui-tabs__tab[aria-selected='true']) > .ui-tabs__count {
+  background: var(--ut-white);
+}
+
+@media (forced-colors: active) {
+  .ui-tabs__tab:where([aria-selected='true']) {
+    forced-color-adjust: none;
+    border-color: Highlight;
+    background: Highlight;
+    color: HighlightText;
+  }
+}

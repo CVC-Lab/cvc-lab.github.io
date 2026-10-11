@@ -1,0 +1,27 @@
+.not-found {
+  --page-header-space-top: 0;
+  padding-block: var(--spacing-16);
+  text-align: center;
+}
+
+.not-found__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-2) var(--spacing-6);
+  margin: var(--spacing-6) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.not-found__links li {
+  margin: 0;
+}
+
+.not-found__links a {
+  display: inline-block;
+  padding-block: var(--spacing-2);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}

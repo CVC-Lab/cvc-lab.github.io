@@ -5,9 +5,12 @@ import { FaArrowDown, FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import Layout from '../layout'
 import './digital-twin-project.css'
 
+// fit: 'cover' (default, photographs) crops to the frame; 'contain' shows a diagram whole.
+const withFit = (base, fit) => (fit === 'contain' ? `${base} ${base}--contain` : base)
+
 const DigitalTwinPage = ({ project }) => (
   <Layout headerVariant="compact">
-    <main className={`dt-page dt-page--${project.slug}`}>
+    <div className="dt-page">
       <section className="dt-hero">
         <div className="dt-shell dt-hero__grid">
           <div className="dt-hero__copy">
@@ -18,14 +21,20 @@ const DigitalTwinPage = ({ project }) => (
               <a className="dt-button dt-button--primary" href="#overview">
                 Explore the twin <FaArrowDown aria-hidden="true" />
               </a>
-              <Link className="dt-button" to="/projects?theme=world-models">
+              <Link className="dt-button" to="/projects/?theme=world-models">
                 <FaArrowLeft aria-hidden="true" /> World Models
               </Link>
             </div>
             <p className="dt-source">{project.sourceNote}</p>
           </div>
-          <figure className="dt-hero__figure">
-            <img src={project.heroImage} alt={project.heroAlt} />
+          <figure className={withFit('dt-hero__figure', project.heroFit)}>
+            <img
+              src={project.heroImage}
+              width={project.heroWidth}
+              height={project.heroHeight}
+              alt={project.heroAlt}
+              decoding="async"
+            />
             <figcaption>{project.heroCaption}</figcaption>
           </figure>
         </div>
@@ -59,9 +68,17 @@ const DigitalTwinPage = ({ project }) => (
           </div>
           <div className="dt-gallery">
             {project.gallery.map(item => (
-              <figure className="dt-gallery__item" key={item.title}>
-                <a href={item.image} target="_blank" rel="noreferrer">
-                  <img src={item.image} alt={item.alt} loading="lazy" />
+              <figure className={withFit('dt-gallery__item', item.fit)} key={item.title}>
+                <a href={item.full} target="_blank" rel="noopener noreferrer">
+                  <img
+                    src={item.image}
+                    width={item.width}
+                    height={item.height}
+                    alt={item.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span className="visually-hidden"> (opens the full-size image in a new tab)</span>
                 </a>
                 <figcaption>
                   <strong>{item.title}</strong>
@@ -80,10 +97,15 @@ const DigitalTwinPage = ({ project }) => (
             <h2>{project.workflowTitle}</h2>
             <p>{project.workflowIntro}</p>
           </div>
-          <div className="dt-process" role="list" aria-label={`${project.title} workflow`}>
+          <div
+            className="dt-process"
+            role="list"
+            aria-label={`${project.title} workflow`}
+            style={{ '--dt-process-columns': project.process.length }}
+          >
             {project.process.map((step, index) => (
               <article className="dt-process__step" key={step.title} role="listitem">
-                <span className="dt-process__index">0{index + 1}</span>
+                <span className="dt-process__index">{String(index + 1).padStart(2, '0')}</span>
                 <h3>{step.title}</h3>
                 <p>{step.body}</p>
                 {index < project.process.length - 1 && (
@@ -127,23 +149,27 @@ const DigitalTwinPage = ({ project }) => (
             <h2>{project.closingTitle}</h2>
             <p>{project.closingBody}</p>
           </div>
-          <Link className="dt-button dt-button--primary" to="/projects?theme=world-models">
+          <Link className="dt-button dt-button--primary" to="/projects/?theme=world-models">
             Browse World Models <FaArrowRight aria-hidden="true" />
           </Link>
         </div>
       </section>
-    </main>
+    </div>
   </Layout>
 )
 
+const fit = PropTypes.oneOf(['cover', 'contain'])
+
 DigitalTwinPage.propTypes = {
   project: PropTypes.shape({
-    slug: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     eyebrow: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired,
     heroImage: PropTypes.string.isRequired,
+    heroWidth: PropTypes.number.isRequired,
+    heroHeight: PropTypes.number.isRequired,
+    heroFit: fit,
     heroAlt: PropTypes.string.isRequired,
     heroCaption: PropTypes.string.isRequired,
     sourceNote: PropTypes.string.isRequired,
@@ -153,7 +179,18 @@ DigitalTwinPage.propTypes = {
     features: PropTypes.arrayOf(PropTypes.object).isRequired,
     galleryTitle: PropTypes.string.isRequired,
     galleryIntro: PropTypes.string.isRequired,
-    gallery: PropTypes.arrayOf(PropTypes.object).isRequired,
+    gallery: PropTypes.arrayOf(
+      PropTypes.shape({
+        image: PropTypes.string.isRequired,
+        width: PropTypes.number.isRequired,
+        height: PropTypes.number.isRequired,
+        full: PropTypes.string.isRequired,
+        fit,
+        title: PropTypes.string.isRequired,
+        alt: PropTypes.string.isRequired,
+        caption: PropTypes.string.isRequired,
+      })
+    ).isRequired,
     workflowTitle: PropTypes.string.isRequired,
     workflowIntro: PropTypes.string.isRequired,
     process: PropTypes.arrayOf(PropTypes.object).isRequired,

@@ -1,0 +1,24 @@
+/* A page on a dark or tinted surface sets --back-link-color and
+   --back-link-hover-color on a wrapper instead of restyling the link. */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  min-height: 44px;
+  color: var(--back-link-color, var(--ut-burnt-orange));
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-tight);
+  text-decoration: none;
+}
+
+/* :active too: the base `a:active` rule would otherwise outweigh .back-link. */
+.back-link:hover,
+.back-link:active {
+  color: var(--back-link-hover-color, var(--ut-burnt-orange-dark));
+}
+
+.back-link:hover .back-link__label {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}

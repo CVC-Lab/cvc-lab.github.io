@@ -1,127 +1,74 @@
-/* Header Component Styling */
-@import '../styles/variables.css';
-
+/* A constant-height sticky bar (logo + primary nav). The site title sits in
+   .site-masthead, a normal-flow band that scrolls away under the bar. */
 .site-header {
+  --focus-ring-color: var(--ut-white);
   position: sticky;
   top: 0;
-  z-index: 1100;
-  width: 100%;
-  padding: var(--spacing-4) var(--spacing-6);
+  z-index: var(--z-header);
   background: var(--ut-burnt-orange);
-  box-shadow: var(--shadow-md);
-  transition:
-    padding 180ms ease,
-    box-shadow 180ms ease;
 }
 
-.site-header--compact {
-  padding: var(--spacing-3) var(--spacing-6);
-}
-
-.site-header--nav-only {
-  padding: var(--spacing-3) var(--spacing-6);
-}
-
-.site-header--scrolled {
-  padding: var(--spacing-3) var(--spacing-6);
-  box-shadow: var(--shadow-lg);
-}
-
-.header-inner {
-  margin: 0 auto;
-  max-width: var(--container-max-width);
-  padding-bottom: var(--spacing-2);
-  transition: padding-bottom 180ms ease;
-}
-
-.header-inner--compact {
-  padding-bottom: var(--spacing-2);
-}
-
-.header-inner--nav-only {
-  padding-bottom: 0;
-}
-
-.header-inner--scrolled {
-  padding-bottom: 0;
-}
-
-.header-flex-container {
+.site-header__inner {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  /* 4rem is also the --site-header-height default in variables.css */
+  min-height: 4rem;
+  /* Keeps a second row of links (enlarged text, navigation.css) off the bar's edges. */
+  padding-block: var(--spacing-2);
 }
 
 .header-logo-link {
-  flex-shrink: 0;
+  flex: 0 1 280px;
+  min-width: 0;
+  line-height: 0;
 }
 
-.site-title-link {
-  color: var(--ut-white);
-  text-decoration: none;
-  padding: 0;
-  margin: 0;
+.site-masthead {
+  background: var(--ut-burnt-orange);
 }
 
-.site-title-link--compact {
-  display: inline-flex;
-  margin-top: var(--spacing-3);
-}
-
+/* The band's vertical space is the link's own padding, so the whole band height is its target. */
 .site-title {
-  padding-bottom: 0;
-  font-size: clamp(1.9rem, 2.8vw, 3rem);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: -0.02em;
-  margin: 0;
+  display: block;
+  width: fit-content;
+  padding-block: var(--spacing-1) var(--spacing-4);
   color: var(--ut-white);
+  font-size: clamp(1.0625rem, 0.5rem + 2.8vw, 1.875rem);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+  text-decoration: none;
 }
 
-.site-title--compact {
-  padding-bottom: 0;
-  font-size: var(--text-xl);
+.site-title:hover,
+.site-title:active {
+  color: var(--ut-white);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.site-masthead--compact .site-title {
+  padding-block: 0 var(--spacing-3);
+  font-size: clamp(1rem, 0.5rem + 2.4vw, 1.5rem);
   letter-spacing: -0.01em;
 }
 
-@media (max-width: 768px) {
-  .site-header {
-    padding: var(--spacing-3) var(--spacing-4);
-  }
-
-  .site-header--compact {
-    padding: var(--spacing-3) var(--spacing-4);
-  }
-
-  .site-header--nav-only {
-    padding: var(--spacing-3) var(--spacing-4);
-  }
-
-  .header-inner {
-    padding-bottom: var(--spacing-2);
-  }
-
-  .header-inner--compact {
-    padding-bottom: var(--spacing-1);
-  }
-
-  .site-title {
-    font-size: var(--text-2xl);
-    padding-bottom: 0;
-  }
-
-  .site-title--compact {
-    font-size: var(--text-lg);
-    padding-bottom: 0;
-  }
+/* One shadow for both states: under the masthead at the top of the page,
+   stuck under the bar once the masthead has scrolled away. */
+.site-header-shadow {
+  position: sticky;
+  top: var(--site-header-height);
+  z-index: calc(var(--z-header) - 1);
+  height: 0;
+  pointer-events: none;
 }
 
-@media (max-width: 600px) {
-  .header-flex-container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .headerlogo {
-    margin-top: var(--spacing-4);
-  }
+.site-header-shadow::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: var(--spacing-2);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0));
 }
