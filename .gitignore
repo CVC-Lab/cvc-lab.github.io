@@ -56,8 +56,6 @@ typings/
 .env.local
 .env.development
 .env.production
-# Keep the example file
-!.env.example
 
 # gatsby files
 .cache/

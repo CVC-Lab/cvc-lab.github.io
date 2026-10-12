@@ -5,7 +5,6 @@ This is the official website for the Computational Visualization Center (CVC) at
 ## Table of Contents
 
 - [Installation](#installation)
-- [Environment](#environment)
 - [Development](#development)
 - [Scripts](#scripts)
 - [Build and Deployment](#build-and-deployment)
@@ -36,15 +35,6 @@ This is the official website for the Computational Visualization Center (CVC) at
    ```
 
 3. Python 3 is needed only for the PD companion tests.
-
-## Environment
-
-The only variable is `GATSBY_INTERNAL_LINKS_PASSWORD`, the password for the client-side gate on `/internal/`. Copy `.env.example` to `.env` and set it there.
-
-- It is not a secret. Gatsby inlines every `GATSBY_`-prefixed variable into the public JavaScript bundle, so anyone can read it from the deployed site. Do not reuse a password that protects anything else.
-- The gate is a convenience screen only: the gated pages are still published as static files.
-- If the variable is unset or empty at build time, `/internal/` stays locked for everyone and the build prints a warning.
-- Precedence: a variable set in the shell wins, then `.env.<NODE_ENV>` (for example `.env.development` for `npm run develop`, `.env.production` for `npm run build`), then `.env`.
 
 ## Development
 
@@ -97,13 +87,12 @@ npm run deploy
 ├── static/              # Served as is: robots.txt, favicon.ico, media/, papers/, projects/<static microsites>
 ├── scripts/             # PD companion scripts (Python)
 ├── tests/               # Jest suites
-├── docs/                # How to add content
+├── docs/                # How to add content; archive/ keeps the text of pages taken off the site
 ├── gatsby-*.js          # Gatsby configuration
 ├── eslint.config.js     # ESLint (flat config)
 ├── jest.config.js       # Jest
 ├── .prettierrc          # Prettier
-├── .nvmrc               # Node version
-└── .env.example         # Environment template
+└── .nvmrc               # Node version
 ```
 
 ## Static Microsites
@@ -131,6 +120,8 @@ See the documentation in the `docs/` folder:
 - [Adding Projects](docs/ADDPROJECT.md)
 - [Adding Publications](docs/ADDPUBLICATION.md)
 - [Adding Software](docs/ADDSOFTWARE.md)
+
+The site has no internal or password-protected pages. The text of the ones it used to have is kept in [docs/archive/](docs/archive/README.md) and is not built into the site.
 
 ## Contributing
 

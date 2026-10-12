@@ -79,19 +79,6 @@ const resources = [
   },
 ]
 
-const workstreams = [
-  {
-    title: 'Systems & Protocols',
-    body: 'Radio simulation, PIN control overlays, SDR and AR integration, cyber-autonomy baselines, and cross-repo engineering work.',
-    to: '/projects/dynamic-belief-games/internal/systems-protocols/',
-  },
-  {
-    title: 'DBG Gym & Visualization',
-    body: '3D simulation, digital-twin views, terrain/material controls, and interactive scenario visualization.',
-    to: '/projects/dynamic-belief-games/internal/dbg-gym-visualization/',
-  },
-]
-
 const DbgMicrosite = () => (
   <div className="dbg-page">
     <section className="dbg-hero">
@@ -360,34 +347,6 @@ const DbgMicrosite = () => (
               <li>For research opportunities, contact Ryan Farell or Chandrajit Bajaj directly.</li>
             </ul>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section className="dbg-section dbg-section--alt">
-      <div className="page-container">
-        <div className="dbg-section__intro">
-          <p className="dbg-section__eyebrow">Internal Workstreams</p>
-          <h2>Convenience-gated collaborator pages for engineering progress and visual systems</h2>
-          <p>
-            These internal pages are intended for active collaborators reviewing implementation,
-            visualization, validation, and current engineering progress. They are hidden behind a
-            lightweight password prompt for convenience only, not strong access control.
-          </p>
-        </div>
-        <div className="dbg-card-grid dbg-card-grid--two">
-          {workstreams.map(item => (
-            <article key={item.title} className="dbg-card dbg-workstream-card">
-              <div className="dbg-workstream-card__header">
-                <p className="dbg-workstream-card__badge">Locked internal page</p>
-              </div>
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-              <SmartLink className="dbg-text-link" to={item.to}>
-                Enter protected page
-              </SmartLink>
-            </article>
-          ))}
         </div>
       </div>
     </section>

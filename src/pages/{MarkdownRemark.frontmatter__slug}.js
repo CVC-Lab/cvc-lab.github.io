@@ -713,7 +713,6 @@ const KATEX_FONTS = [katexMain, katexMath]
 export const Head = ({ data, location }) => {
   const { frontmatter, html, parent } = data.markdownRemark
   const dir = (parent && parent.relativeDirectory) || ''
-  const gated = dir.split('/')[0] === 'internal'
   const inAi4pd = dir.startsWith('projects/ai4pd')
   const title =
     inAi4pd && !/^AI4PD\b/.test(frontmatter.title)
@@ -722,12 +721,7 @@ export const Head = ({ data, location }) => {
 
   return (
     <>
-      <Seo
-        title={title}
-        description={gated ? '' : describe(html)}
-        pathname={location.pathname}
-        meta={gated ? [{ name: 'robots', content: 'noindex, nofollow' }] : []}
-      />
+      <Seo title={title} description={describe(html)} pathname={location.pathname} />
       {html.includes('class="katex') &&
         KATEX_FONTS.map(href => (
           <link

@@ -10,7 +10,6 @@ const SITE_ORIGIN = /^https?:\/\/cvc-lab\.github\.io(?=[/?#]|$)/i
 export const STATIC_PREFIXES = [
   '/projects/pd-research-companion/',
   '/projects/posterior-aware-pd-phenotyping-miccai/',
-  '/projects/dynamic-belief-games/DBG_progress/',
   '/papers/',
   '/media/',
   '/static/',

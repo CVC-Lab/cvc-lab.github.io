@@ -10,8 +10,6 @@ import '@fontsource/libre-franklin/latin-700-italic.css'
 import '@fontsource/libre-franklin/latin-800.css'
 import './src/styles/global.css'
 import './src/styles/prose.css'
-import React from 'react'
-import { PasswordProvider, ProtectedRoute } from './src/components/password-protect/PasswordContext'
 
 // Gatsby restores scroll itself, from the offset it saves for each history entry under the
 // entry's key (sessionStorage "@@scroll|<path>|<key>"). Every entry here has a key in its state
@@ -258,14 +256,4 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
       window.addEventListener(type, releaseFocus, { capture: true, signal })
     )
   })
-}
-
-// Wrap the app with the password provider
-export const wrapRootElement = ({ element }) => {
-  return <PasswordProvider>{element}</PasswordProvider>
-}
-
-// Wrap the page element with the protected route
-export const wrapPageElement = ({ element, props }) => {
-  return <ProtectedRoute {...props}>{element}</ProtectedRoute>
 }

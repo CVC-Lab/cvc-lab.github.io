@@ -76,7 +76,6 @@
   "homepage": "https://cvc-lab.github.io/",
   "dependencies": {
     "@fontsource/libre-franklin": "^5.2.6",
-    "dotenv": "^17.2.2",
     "gatsby": "^5.16.1",
     "gatsby-plugin-image": "^3.16.0",
     "gatsby-plugin-manifest": "^5.16.0",

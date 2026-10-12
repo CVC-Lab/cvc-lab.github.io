@@ -1,6 +1,12 @@
----
-title: "Internal Links"
-slug: "/internal"
+# Internal Links (archived)
+
+> Archived copy of the page that was published at `/internal/` on cvc-lab.github.io, behind the
+> site's password prompt. It was removed from the website on 2026-10-12; see
+> [README.md](README.md).
+>
+> Everything below the line is the page source exactly as it was published. Parts of it sit
+> inside HTML comments, which GitHub hides in the rendered view: open the raw file to see them.
+
 ---
 
 Internal Links 2021-2022

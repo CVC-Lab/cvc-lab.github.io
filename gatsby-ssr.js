@@ -2,7 +2,6 @@ import React from 'react'
 import franklin400 from '@fontsource/libre-franklin/files/libre-franklin-latin-400-normal.woff2'
 import franklin700 from '@fontsource/libre-franklin/files/libre-franklin-latin-700-normal.woff2'
 import franklin800 from '@fontsource/libre-franklin/files/libre-franklin-latin-800-normal.woff2'
-import { PasswordProvider, ProtectedRoute } from './src/components/password-protect/PasswordContext'
 
 // Every route gets a language attribute, including pages that export no Head. The two faces
 // that carry body text and headings are preloaded; the URLs are the ones the stylesheet uses.
@@ -49,14 +48,4 @@ export const onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) =>
   const firstStyle = rest.findIndex(element => element && element.type === 'style')
   rest.splice(firstStyle < 0 ? rest.length : firstStyle, 0, ...early)
   replaceHeadComponents(rest)
-}
-
-// Wrap the app with the password provider
-export const wrapRootElement = ({ element }) => {
-  return <PasswordProvider>{element}</PasswordProvider>
-}
-
-// Wrap the page element with the protected route
-export const wrapPageElement = ({ element, props }) => {
-  return <ProtectedRoute {...props}>{element}</ProtectedRoute>
 }

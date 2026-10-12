@@ -10,22 +10,13 @@ const {
 // Plain-HTML microsites under static/projects/ (one index.html per directory). The same list
 // lives in STATIC_PREFIXES (src/components/ui/SmartLink.js); indexable ones are also in
 // STATIC_SITEMAP_PATHS (gatsby-config.js).
-const STATIC_MICROSITES = [
-  'pd-research-companion',
-  'posterior-aware-pd-phenotyping-miccai',
-  'dynamic-belief-games/DBG_progress',
-]
+const STATIC_MICROSITES = ['pd-research-companion', 'posterior-aware-pd-phenotyping-miccai']
 
 exports.onPreInit = ({ reporter }) => {
   const [major, minor] = process.versions.node.split('.').map(Number)
   if (major < 22 || (major === 22 && minor < 14) || major >= 26) {
     reporter.warn(
       `Node ${process.versions.node} is outside the range this site supports (>=22.14 <26). Run "nvm use" (see .nvmrc).`
-    )
-  }
-  if (!process.env.GATSBY_INTERNAL_LINKS_PASSWORD) {
-    reporter.warn(
-      'GATSBY_INTERNAL_LINKS_PASSWORD is not set: /internal/ will stay locked for everyone in this build'
     )
   }
 }

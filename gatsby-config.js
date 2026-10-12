@@ -1,9 +1,3 @@
-// Precedence: real environment variables, then .env.<NODE_ENV>, then .env.
-require('dotenv').config({
-  path: [`.env.${process.env.NODE_ENV || 'development'}`, '.env'],
-  quiet: true,
-})
-
 // Static microsites are not Gatsby pages, so the sitemap plugin cannot see them. List only the
 // ones that are meant to be indexed (the PD research companion pages are noindex).
 const STATIC_SITEMAP_PATHS = ['/projects/posterior-aware-pd-phenotyping-miccai/']
@@ -32,14 +26,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
-        excludes: [
-          `/internal/`,
-          `/internal/**`,
-          `/password-protect/`,
-          `/old-home/`,
-          `/projects/healthcare-ai/`,
-          `/projects/dynamic-belief-games/internal/**`,
-        ],
+        excludes: [`/old-home/`, `/projects/healthcare-ai/`],
         resolvePages: ({ allSitePage: { nodes } }) => [
           ...nodes,
           ...STATIC_SITEMAP_PATHS.map(path => ({ path })),

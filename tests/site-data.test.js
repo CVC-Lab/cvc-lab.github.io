@@ -13,6 +13,16 @@ const routes = knownRoutes()
 const resolves = link => routes.has(normalizeRoute(link)) || staticExists(link)
 const duplicates = values => values.filter((value, index) => values.indexOf(value) !== index)
 
+describe('routes', () => {
+  // The public site has no internal or password-prompted pages; their text is in docs/archive/.
+  test('no route has an internal or password-protect segment', () => {
+    const found = [...routes].filter(route =>
+      /(^|\/)(internal|password-protect)(\/|$)/i.test(route)
+    )
+    expect(found).toEqual([])
+  })
+})
+
 describe('projects data', () => {
   test('every project has the fields the tiles render', () => {
     expect(projects.length).toBeGreaterThan(0)
