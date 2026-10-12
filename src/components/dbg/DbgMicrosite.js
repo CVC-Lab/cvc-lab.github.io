@@ -57,13 +57,7 @@ const validationPoints = [
   'This makes DBG more credible as a training and testing framework for deployment-oriented networking decisions.',
 ]
 
-const resources = [
-  {
-    title: 'Project archive',
-    description: 'The earlier project page, kept for reference.',
-    to: '/projects/dynamic-belief-games-archive/',
-    cta: 'Open archive',
-  },
+const contacts = [
   {
     title: 'Ryan Farell',
     description: 'Co-Principal Investigator and main technical contact for current DBG work.',
@@ -84,7 +78,7 @@ const DbgMicrosite = () => (
       <div className="page-container dbg-hero__grid">
         <div className="dbg-hero__content">
           <BackLink to="/projects/dynamic-belief-games/">Back to DBG home</BackLink>
-          <p className="dbg-eyebrow">Project Microsite</p>
+          <p className="dbg-eyebrow">Project Overview</p>
           <h1>Dynamic Belief Games</h1>
           <p className="dbg-hero__subtitle">
             Training predictive intelligent networking agents for contested mobile ad hoc networks.
@@ -149,7 +143,7 @@ const DbgMicrosite = () => (
       <div className="page-container dbg-section__split">
         <div>
           <p className="dbg-section__eyebrow">How DBG Works</p>
-          <h2>Separate the framework, the agents, and the platform</h2>
+          <h2>The framework, the agents, and the platform</h2>
           <p>
             Dynamic Belief Games is the training and decision framework. PIN agents are the learned
             networking agents. DBG Gym is the digital twin used to train, test, and compare policies
@@ -212,9 +206,8 @@ const DbgMicrosite = () => (
           <p className="dbg-section__eyebrow">Validation</p>
           <h2>Ground the digital twin in real-world RF behavior</h2>
           <p>
-            The project is not positioned as simulation only. The validation layer is intended to
-            compare digital-twin assumptions against field measurements and testbed-informed radio
-            behavior.
+            The project is not simulation only. The validation layer is intended to compare
+            digital-twin assumptions against field measurements and testbed-informed radio behavior.
           </p>
           <ul className="dbg-bullet-list">
             {validationPoints.map(item => (
@@ -286,20 +279,19 @@ const DbgMicrosite = () => (
     <section className="dbg-section dbg-section--alt">
       <div className="page-container">
         <div className="dbg-section__intro">
-          <p className="dbg-section__eyebrow">Resources</p>
-          <h2>Resources and contacts</h2>
+          <p className="dbg-section__eyebrow">Contact</p>
+          <h2>Project contacts</h2>
           <p>
-            The project archive holds the earlier project page. For research opportunities or
-            technical conversations, reach the project leads directly.
+            For research opportunities or technical conversations, reach the project leads directly.
           </p>
         </div>
-        <div className="dbg-card-grid dbg-card-grid--three">
-          {resources.map(resource => (
-            <article key={resource.title} className="dbg-card dbg-resource-card">
-              <h3>{resource.title}</h3>
-              <p>{resource.description}</p>
-              <SmartLink className="dbg-text-link" to={resource.to}>
-                {resource.cta}
+        <div className="dbg-card-grid dbg-card-grid--two">
+          {contacts.map(contact => (
+            <article key={contact.title} className="dbg-card dbg-resource-card">
+              <h3>{contact.title}</h3>
+              <p>{contact.description}</p>
+              <SmartLink className="dbg-text-link" to={contact.to}>
+                {contact.cta}
               </SmartLink>
             </article>
           ))}
@@ -310,8 +302,8 @@ const DbgMicrosite = () => (
     <section className="dbg-section">
       <div className="page-container">
         <div className="dbg-section__intro">
-          <p className="dbg-section__eyebrow">Team and Contact</p>
-          <h2>Leadership, contributors, and project continuity</h2>
+          <p className="dbg-section__eyebrow">Team</p>
+          <h2>Leadership and contributors</h2>
         </div>
         <div className="dbg-team-groups">
           <div>

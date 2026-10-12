@@ -7,16 +7,19 @@ Text of pages that used to be published on cvc-lab.github.io and were taken down
 | [internal-links.md](internal-links.md)               | `/internal/`                                                     | 2026-10-12 |
 | [dbg-systems-protocols.md](dbg-systems-protocols.md) | `/projects/dynamic-belief-games/internal/systems-protocols/`     | 2026-10-12 |
 | [dbg-gym-visualization.md](dbg-gym-visualization.md) | `/projects/dynamic-belief-games/internal/dbg-gym-visualization/` | 2026-10-12 |
+| [dbg-project-page.md](dbg-project-page.md)           | `/projects/dynamic-belief-games-archive/`                        | 2026-10-12 |
 
 `internal-links.md` is kept exactly as it was published, so Prettier skips it (`.prettierignore`).
 
 ## Why they were removed
 
-The three pages sat behind a password prompt that ran in the browser. The prompt was a convenience screen, not access control: the pages were still published as static files. The public site now has no internal pages and no password prompt, and it needs no `.env` file.
+The first three pages sat behind a password prompt that ran in the browser. The prompt was a convenience screen, not access control: the pages were still published as static files. The public site now has no internal pages and no password prompt, and it needs no `.env` file.
+
+The fourth is the DBG project page from 2024. The DBG overview page replaced it; its hiring section described three staff positions that have since closed.
 
 ## Where the original code is
 
-The last commit that contains the pages, the prompt and its tests is `40de5739`:
+The last commit that contains the three internal pages, the prompt and its tests is `40de5739`:
 
 - `src/markdown/internal/internal.md`
 - `src/pages/projects/dynamic-belief-games/internal/`
@@ -24,3 +27,5 @@ The last commit that contains the pages, the prompt and its tests is `40de5739`:
 - `tests/password-gate.test.js` and `tests/password-gate.ssr.test.js`
 
 `git show 40de5739:<path>` prints any of the files.
+
+The DBG project page was last on the site in `3b812621`, as `src/markdown/projects/dynamic_belief_games/dynamic_belief_games.md`.

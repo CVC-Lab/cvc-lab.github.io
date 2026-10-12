@@ -298,9 +298,6 @@ const HOME = { to: '/', label: 'Home' }
 // no /seminars/ or /guides/ index to go back to. A software sub-page returns to the page
 // of its own directory (softwareParents in the page query).
 function backTarget(dir, pathname, softwarePages) {
-  if (dir.startsWith('projects/dynamic_belief_games')) {
-    return { to: '/projects/dynamic-belief-games/', label: 'Dynamic Belief Games' }
-  }
   const section = dir.split('/')[0]
   if (section === 'software') {
     const parentPath = pathname.replace(/[^/]+\/?$/, '')

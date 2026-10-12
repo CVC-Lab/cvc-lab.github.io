@@ -1,13 +1,12 @@
----
-title: 'Dynamic Belief Games (Archive)'
-slug: '/projects/dynamic-belief-games-archive'
-date: '2024-09-12'
----
+# Dynamic Belief Games: earlier project page (archived)
 
-_This is the earlier Dynamic Belief Games project page, kept for reference. For the current project, see the [project overview](/projects/dynamic-belief-games/overview/)._
+> Archived text of the page that was published at `/projects/dynamic-belief-games-archive/` on
+> cvc-lab.github.io. It was the DBG project page from 2024 and was removed from the website on
+> 2026-10-12, when the DBG overview page (`/projects/dynamic-belief-games/overview/`) replaced
+> it; see [README.md](README.md).
 
-![Diagram](../../../images/projects/dynamic_belief_games/dynamic_belief_games_diagram.webp)
-![drone-swarm.jpg](../../../images/projects/dynamic_belief_games/drone-swarm.jpg)
+![Diagram](../../src/images/projects/dynamic_belief_games/dynamic_belief_games_diagram.webp)
+![drone-swarm.jpg](../../src/images/projects/dynamic_belief_games/drone-swarm.jpg)
 _Figure: A visual of our DBG gym, demonstrating a drone swarm scenario._
 
 ## What are we trying to do?
