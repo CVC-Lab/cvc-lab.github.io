@@ -12,6 +12,7 @@ const FACULTY_POSITIONS = [
   'Lead Research Scientist',
   'Research Administrator',
   'Research Fellow from Purdue University',
+  'Postdoctoral Research Fellow',
   'Postdoctoral Researcher',
 ]
 

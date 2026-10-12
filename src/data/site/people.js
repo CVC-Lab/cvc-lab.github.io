@@ -13,8 +13,9 @@ module.exports = [
   {
     name: 'Ryan Farell',
     image: 'ryan.png',
-    position: 'Researcher',
+    position: 'Postdoctoral Research Fellow in Computer Science',
     status: 'current',
+    url: 'https://www.cs.utexas.edu/people/faculty-researchers/ryan-farell',
   },
   {
     name: 'Laura Lansing',

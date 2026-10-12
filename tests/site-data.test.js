@@ -101,6 +101,14 @@ describe('people data', () => {
       .map(person => person.image)
     expect(missing).toEqual([])
   })
+
+  test('every profile link is an https URL', () => {
+    const broken = people
+      .filter(person => person.url !== undefined)
+      .filter(person => !/^https:\/\/\S+$/.test(person.url))
+      .map(person => person.name)
+    expect(broken).toEqual([])
+  })
 })
 
 describe('software data', () => {

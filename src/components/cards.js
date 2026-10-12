@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { GatsbyImage, getImage, getSrc } from 'gatsby-plugin-image'
 import { usePersonImage } from '../hooks/usePersonImages'
 import PageHeader from './ui/PageHeader'
+import SmartLink from './ui/SmartLink'
 import Tabs, { tabPanelProps } from './ui/Tabs'
 import {
   prepaintGateScript,
@@ -86,6 +87,7 @@ const personShape = PropTypes.shape({
   position: PropTypes.string,
   image: PropTypes.string,
   status: PropTypes.oneOf(['current', 'alumni']).isRequired,
+  url: PropTypes.string,
 })
 
 const MemberAvatar = ({ image, name }) => {
@@ -131,7 +133,9 @@ MemberAvatar.propTypes = {
 const MemberCard = ({ member, showRole }) => (
   <li className="member-card">
     <MemberAvatar image={member.image} name={member.name} />
-    <h3 className="member-card__name">{member.name}</h3>
+    <h3 className="member-card__name">
+      {member.url ? <SmartLink to={member.url}>{member.name}</SmartLink> : member.name}
+    </h3>
     {showRole && member.position && <p className="member-card__role">{member.position}</p>}
   </li>
 )

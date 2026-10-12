@@ -77,6 +77,16 @@
   overflow-wrap: break-word;
 }
 
+/* A name with a profile page (url in people.js). The padding keeps the link 24px tall. */
+.member-card__name a {
+  display: inline-block;
+  padding-block: 2px;
+}
+
+.member-card__name a:hover {
+  text-decoration: underline;
+}
+
 .member-card__role {
   margin: 0;
   color: var(--color-text-secondary);

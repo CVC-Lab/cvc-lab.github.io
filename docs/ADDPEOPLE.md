@@ -10,6 +10,7 @@
      image: 'file_name.png', // file name inside src/images/people
      position: 'PhD Student',
      status: 'current', // 'current' or 'alumni'; it selects the tab on /people/
+     url: 'https://...', // optional profile page; the name on /people/ links to it
    },
    ```
 
