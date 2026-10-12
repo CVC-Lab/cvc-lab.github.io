@@ -102,17 +102,21 @@
   letter-spacing: -0.03em;
 }
 
-.dbg-home-hero__content > p:last-child,
+.dbg-home-hero__lede,
 .dbg-home-stack p:not(.dbg-home-eyebrow) {
   margin: 0;
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.75;
 }
 
-.dbg-home-hero__content > p:last-child {
+.dbg-home-hero__lede {
   max-width: 42rem;
   margin-top: var(--space-xl);
   font-size: clamp(1.05rem, 1.5vw, 1.28rem);
+}
+
+.dbg-home-hero__actions {
+  margin-top: var(--space-xl);
 }
 
 .dbg-home-visual {

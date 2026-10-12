@@ -4,6 +4,8 @@ slug: '/projects/dynamic-belief-games-archive'
 date: '2024-09-12'
 ---
 
+_This is the earlier Dynamic Belief Games project page, kept for reference. For the current project, see the [project overview](/projects/dynamic-belief-games/overview/)._
+
 ![Diagram](../../../images/projects/dynamic_belief_games/dynamic_belief_games_diagram.webp)
 ![drone-swarm.jpg](../../../images/projects/dynamic_belief_games/drone-swarm.jpg)
 _Figure: A visual of our DBG gym, demonstrating a drone swarm scenario._
@@ -32,6 +34,8 @@ Our approach involves developing and training AI-based PIN agents within the Dyn
 
 ## Hiring Opportunities
 
+_This section was written in fall 2024. The three staff positions described below are no longer posted on the UT jobs site. For current opportunities, email Ryan Farell or Chandrajit Bajaj at the addresses below._
+
 Our Dynamic Belief Games (DBG) project was recently funded for three years, and we welcome candidates from various disciplines, including Mathematics, Physics, Computational Science, and Computer Science. We’re flexible with options for:
 
 1. Students interested in potentially continuing towards a Math Ph.D.
@@ -49,17 +53,14 @@ Candidates with knowledge of cooperating/non-cooperating stochastic processes an
 ### Postdoctoral Fellow
 
 This role involves working on cutting-edge AI networking technologies under the guidance of Prof. Chandrajit Bajaj at the University of Texas at Austin. The position focuses on the development of PIN agents and advanced AI techniques for real-time decision-making in dynamic networks.
-[Apply Here](https://utaustin.wd1.myworkdayjobs.com/en-US/UTstaff/job/Postdoctoral-Fellow_R_00033359)
 
 ### Software Engineer
 
 Join our team to contribute to the development of advanced software solutions for AI-driven network optimization. This position will involve designing, implementing, and testing software systems for scalable, secure communication networks.
-[Apply Here](https://utaustin.wd1.myworkdayjobs.com/en-US/UTstaff/job/AUSTIN-TX/Software-Engineer_R_00033287?q=computer+science)
 
 ### IT Network Security Specialist
 
 We are seeking a security specialist to ensure the integrity and security of our AI-optimized networks. This role will involve managing network infrastructure and developing security protocols for predictive communication systems.
-[Apply Here](https://utaustin.wd1.myworkdayjobs.com/en-US/UTstaff/job/AUSTIN-TX/IT-Network-Security-Specialist_R_00033229?q=computer+science)
 
 ### Announcement
 
@@ -72,7 +73,7 @@ This project is funded by the Army.
 ## People
 
 - Chandrajit Bajaj (Principal Investigator) [(website)](https://www.cs.utexas.edu/~bajaj/cvc/index.shtml)
-- Ryan Farell (Lead Research Scientist) [(website)](https://rfarell.github.io/index.html)
+- Ryan Farell (Co-Principal Investigator) [(website)](https://rfarell.github.io/index.html)
 - Andrew Farell
 - Logan Kronforst
 - Brian Kim

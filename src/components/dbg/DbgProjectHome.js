@@ -1,5 +1,6 @@
 import * as React from 'react'
 import BackLink from '../ui/BackLink'
+import SmartLink from '../ui/SmartLink'
 import { useVideoPlayback } from '../../hooks/useVideoPlayback'
 import './dbg-microsite.css'
 // WebP derivatives; the full-size originals live in the assets-v1 GitHub release.
@@ -21,11 +22,19 @@ const DbgProjectHome = () => {
             <BackLink to="/projects/">Back to all projects</BackLink>
             <p className="dbg-home-eyebrow">Dynamic Belief Games</p>
             <h1>Predictive networking for contested mobile missions.</h1>
-            <p>
+            <p className="dbg-home-hero__lede">
               DBG trains intelligent networking agents inside a digital-twin environment so mobile
               ad hoc networks can reason about terrain, interference, route choice, and mission risk
               before deployment.
             </p>
+            <div className="dbg-home-hero__actions">
+              <SmartLink
+                className="dbg-button dbg-button--primary"
+                to="/projects/dynamic-belief-games/overview/"
+              >
+                Read the project overview
+              </SmartLink>
+            </div>
           </div>
 
           <div className="dbg-home-visual">

@@ -60,14 +60,13 @@ const validationPoints = [
 const resources = [
   {
     title: 'Project archive',
-    description:
-      'Reference the earlier project-page text while the new microsite is being developed.',
+    description: 'The earlier project page, kept for reference.',
     to: '/projects/dynamic-belief-games-archive/',
     cta: 'Open archive',
   },
   {
     title: 'Ryan Farell',
-    description: 'Lead research scientist and main technical contact for current DBG work.',
+    description: 'Co-Principal Investigator and main technical contact for current DBG work.',
     to: 'mailto:ryan.farell@utexas.edu',
     cta: 'Email Ryan',
   },
@@ -290,9 +289,8 @@ const DbgMicrosite = () => (
           <p className="dbg-section__eyebrow">Resources</p>
           <h2>Resources and contacts</h2>
           <p>
-            The project archive holds the earlier project-page text while the microsite is being
-            developed. For research opportunities or technical conversations, reach the project
-            leads directly.
+            The project archive holds the earlier project page. For research opportunities or
+            technical conversations, reach the project leads directly.
           </p>
         </div>
         <div className="dbg-card-grid dbg-card-grid--three">
