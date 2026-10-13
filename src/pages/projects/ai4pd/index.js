@@ -5,6 +5,7 @@ import Ai4pdLayout, { Ai4pdHead, LinkIcon } from '../../../components/ai4pd/Ai4p
 import Ai4pdFigure from '../../../components/ai4pd/Ai4pdFigure'
 import SmartLink from '../../../components/ui/SmartLink'
 import { AI4PD_BASE, PATIENT_PORTAL_URL, COMPANION_URL } from '../../../components/ai4pd/links'
+import patientFigure from '../../../images/projects/ai4pd/ai4pd-multimodal-patient.webp'
 
 const portalPoints = [
   {
@@ -72,7 +73,6 @@ const sections = [
     label: 'Two new manuscripts',
     text: 'Longitudinal validity gates and signed dopaminergic asymmetry, with outcome-blind patient dossiers and every figure at full resolution.',
     href: COMPANION_URL,
-    image: 'projects/pd_research_companion/companion_thumbnail',
   },
   {
     title: 'Partners',
@@ -114,33 +114,49 @@ const projectPages = [
 const Ai4pdHub = () => (
   <Ai4pdLayout section="overview">
     <section className="ai4pd-hero ai4pd-hero--hub">
-      <div className="page-container">
-        <p className="ai4pd-eyebrow">AI4PD &middot; AI for Parkinson&apos;s disease</p>
-        <h1>We infer the unseen.</h1>
-        <p className="ai4pd-lead">
-          Parkinson&apos;s reaches well beyond tremor, and the evidence about any one patient
-          arrives scattered across clinic visits, imaging, biomarkers, wearables, genetics, and the
-          health record. AI4PD assembles that evidence into one living, uncertainty-aware model of
-          the patient, so that clinicians work from the individual record rather than the population
-          average, and every output goes to the physician first.
-        </p>
-        <div className="ai4pd-actions">
-          <SmartLink to={PATIENT_PORTAL_URL} className="ai4pd-button ai4pd-button--primary">
-            Open the patient portal <FaExternalLinkAlt aria-hidden="true" />
-          </SmartLink>
-          <Link to={`${AI4PD_BASE}/approach/`} className="ai4pd-button ai4pd-button--quiet">
-            See how it works
-          </Link>
+      <div className="page-container ai4pd-hero__grid">
+        <div className="ai4pd-hero__copy">
+          <p className="ai4pd-eyebrow">AI4PD &middot; AI for Parkinson&apos;s disease</p>
+          <h1>We infer the unseen.</h1>
+          <p className="ai4pd-lead">
+            Parkinson&apos;s reaches well beyond tremor, and the evidence about any one patient
+            arrives scattered across clinic visits, imaging, biomarkers, wearables, genetics, and
+            the health record. AI4PD assembles that evidence into one living, uncertainty-aware
+            model of the patient, and every output goes to the physician first.
+          </p>
+          <div className="ai4pd-actions">
+            <SmartLink to={PATIENT_PORTAL_URL} className="ai4pd-button ai4pd-button--primary">
+              Open the patient portal <FaExternalLinkAlt aria-hidden="true" />
+            </SmartLink>
+            <Link to={`${AI4PD_BASE}/approach/`} className="ai4pd-button ai4pd-button--quiet">
+              See how it works
+            </Link>
+          </div>
         </div>
-        <ul className="ai4pd-status" aria-label="Program status">
-          <li>Retrospective evidence base</li>
-          <li>Decision support only</li>
-          <li>Seeking prospective validation partners</li>
-        </ul>
-        <p className="ai4pd-trust">
-          Oden Institute &middot; The University of Texas at Austin &middot; CVC Lab &middot; TACC
-          infrastructure &middot; Supported by the Michael J. Fox Foundation
-        </p>
+        <figure className="ai4pd-figure ai4pd-hero__figure">
+          <img
+            src={patientFigure}
+            width={1004}
+            height={931}
+            alt="A patient surrounded by the evidence AI4PD combines: brain imaging, a clinic exam, a wearable ankle sensor trace, a biospecimen vial, a brain model, a walking sequence, and a timeline of visits"
+            decoding="async"
+          />
+          <figcaption>
+            Concept illustration: imaging, the clinic exam, wearable gait signals, biospecimens, and
+            repeated visits, assembled into one model of one patient.
+          </figcaption>
+        </figure>
+        <div className="ai4pd-hero__meta">
+          <ul className="ai4pd-status" aria-label="Program status">
+            <li>Retrospective evidence base</li>
+            <li>Decision support only</li>
+            <li>Seeking prospective validation partners</li>
+          </ul>
+          <p className="ai4pd-trust">
+            Oden Institute &middot; The University of Texas at Austin &middot; CVC Lab &middot; TACC
+            infrastructure &middot; Supported by the Michael J. Fox Foundation
+          </p>
+        </div>
       </div>
     </section>
 
@@ -260,16 +276,6 @@ const Ai4pdHub = () => (
         <div className="ai4pd-grid">
           {sections.map(item => (
             <article key={item.title} className="ai4pd-card">
-              {item.image && (
-                <div className="ai4pd-card__image">
-                  <Ai4pdFigure
-                    bare
-                    name={item.image}
-                    alt=""
-                    sizes="(min-width: 1101px) 400px, (min-width: 721px) 50vw, 100vw"
-                  />
-                </div>
-              )}
               <p className="ai4pd-eyebrow">{item.label}</p>
               <h3>{item.title}</h3>
               <p>{item.text}</p>

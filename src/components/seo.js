@@ -9,10 +9,10 @@ import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 
 const DEFAULT_IMAGE = {
-  path: '/og-image.jpg',
+  path: '/cvc-projects-share.jpg',
   width: 1200,
   height: 630,
-  alt: 'Members of the Computational Visualization Center',
+  alt: 'Figures from four CVC projects: the piano digital twin, Parkinson’s motor states, the ski jumper digital twin, and subsurface flow modeling',
 }
 
 function Seo({

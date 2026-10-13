@@ -53,8 +53,8 @@ const AboutCondensed = () => (
       </div>
       <div className="about-condensed-photo-wrapper">
         <StaticImage
-          src="../images/cvc_group photo.jpeg"
-          alt="Computational Visualization Center group"
+          src="../images/cvc_projects_banner.jpg"
+          alt="Figures from four CVC projects: the piano digital twin, Parkinson’s motor states, the ski jumper digital twin, and subsurface flow modeling"
           className="about-condensed-photo"
           layout="constrained"
           width={900}

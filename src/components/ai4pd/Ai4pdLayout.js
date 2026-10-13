@@ -7,6 +7,7 @@ import Seo from '../seo'
 import SmartLink, { resolveLink } from '../ui/SmartLink'
 import { useScrollStrip } from '../ui/useScrollStrip'
 import { AI4PD_NAV, AI4PD_BASE, PATIENT_PORTAL_URL, CONTACT_EMAIL } from './links'
+import ai4pdShare from '../../images/projects/ai4pd/ai4pd_share.jpg'
 import './ai4pd.css'
 
 const SECTIONS = AI4PD_NAV.map(item => item.key).concat(['background'])
@@ -88,8 +89,20 @@ Ai4pdLayout.propTypes = {
 
 export default Ai4pdLayout
 
-/** Head for an AI4PD page: title suffixed with the program name, canonical from location. */
-export const Ai4pdHead = ({ title, description, location, image, imageAlt }) => (
+const SHARE_ALT =
+  'A patient surrounded by the evidence AI4PD combines: brain imaging, a clinic exam, a wearable gait signal, a biospecimen, and a timeline of visits'
+
+/**
+ * Head for an AI4PD page: title suffixed with the program name, canonical from location.
+ * Link previews show the program figure unless the page names its own image.
+ */
+export const Ai4pdHead = ({
+  title,
+  description,
+  location,
+  image = ai4pdShare,
+  imageAlt = SHARE_ALT,
+}) => (
   <Seo
     title={title ? `${title} | AI4PD` : 'AI4PD: AI for Parkinson’s disease'}
     description={description}

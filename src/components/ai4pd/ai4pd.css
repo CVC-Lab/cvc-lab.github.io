@@ -189,6 +189,32 @@
   font-size: 4.25rem;
 }
 
+/* Hub hero: the copy beside the program figure, status and affiliations under both. */
+.ai4pd-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 2rem 3rem;
+  align-items: center;
+}
+
+.ai4pd-hero__copy .ai4pd-actions {
+  margin-bottom: 0;
+}
+
+.ai4pd-hero__grid .ai4pd-hero__figure {
+  margin: 0;
+}
+
+.ai4pd-hero__figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ai4pd-hero__meta {
+  grid-column: 1 / -1;
+}
+
 .ai4pd-lead {
   max-width: 780px;
   margin: 0 0 2rem;
@@ -537,18 +563,6 @@
 .ai4pd-card__link:hover,
 .ai4pd-inline-link:hover {
   color: var(--ut-burnt-orange-dark);
-}
-
-/* The thumbnail sets its own height: nothing is cropped. */
-.ai4pd-card__image {
-  margin: -1.35rem -1.35rem 1rem;
-  overflow: hidden;
-  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
-  background: var(--ut-limestone-light);
-}
-
-.ai4pd-card__image .gatsby-image-wrapper {
-  display: block;
 }
 
 /* ---------- patient portal highlight ---------- */
@@ -1084,6 +1098,14 @@
   .ai4pd-grid--media,
   .ai4pd-figure-row {
     grid-template-columns: 1fr;
+  }
+
+  .ai4pd-hero__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ai4pd-hero__figure {
+    max-width: 34rem;
   }
 
   .ai4pd-figure-row .ai4pd-figure:first-child {
